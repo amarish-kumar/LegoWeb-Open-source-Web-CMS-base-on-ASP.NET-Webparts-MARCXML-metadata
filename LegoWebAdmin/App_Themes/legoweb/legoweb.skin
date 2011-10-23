@@ -1,0 +1,14 @@
+<asp:image runat="server" Imageurl="images/Prev.gif" skinid="Prev" />  
+<asp:image runat="server" Imageurl="images/PrevOff.gif" skinid="PrevOff" />
+<asp:image runat="server" Imageurl="images/Next.gif" skinid="Next" />  
+<asp:image runat="server" Imageurl="images/NextOff.gif" skinid="NextOff" />
+<asp:image runat="server" Imageurl="images/First.gif" skinid="First" />  
+<asp:image runat="server" Imageurl="images/FirstOff.gif" skinid="FirstOff" />
+<asp:image runat="server" Imageurl="images/Last.gif" skinid="Last" />  
+<asp:image runat="server" Imageurl="images/LastOff.gif" skinid="LastOff" />
+
+<asp:image runat="server" Imageurl="images/tick.png" skinid="Tick" />
+<asp:image runat="server" Imageurl="images/publish_x.png" skinid="Stop" />
+<asp:image runat="server" Imageurl="images/menu/en.gif" skinid="en" />
+<asp:image runat="server" Imageurl="images/menu/vi.gif" skinid="vi" />
+

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<record>
+	<leader>00000nam#a2200000ui#4500</leader>
+  <controlfield tag="001">MetaContentID</controlfield>
+	<controlfield tag="002">CategoryId</controlfield>
+	<controlfield tag="003">IsPublic</controlfield>
+  <controlfield tag="004">PublicStartDate</controlfield>
+  <controlfield tag="005">PublicEndDate</controlfield>
+  <controlfield tag="006">AllowRoles</controlfield>
+  <controlfield tag="007">LanguageCode</controlfield>
+  <controlfield tag="008">DenyRoles</controlfield>
+	<datafield tag="245" ind1=" " ind2=" ">
+		<subfield code="a">Tiêu đề</subfield>
+	</datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="h">Chiều cao</subfield>
+    <subfield code="w">Chiều rộng</subfield>
+  </datafield>
+  <datafield tag="856" ind1=" " ind2=" ">
+		<subfield code="u">Flash URL</subfield>
+	</datafield>		
+</record>

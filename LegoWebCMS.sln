@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LegoWebSite", "LegoWebSite", "{7DEC5259-1945-4DAF-A0A6-15DC35EDC6B7}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "2.0"
+		Debug.AspNetCompiler.VirtualPath = "/LegoWebSite"
+		Debug.AspNetCompiler.PhysicalPath = "LegoWebSite\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\LegoWebSite\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/LegoWebSite"
+		Release.AspNetCompiler.PhysicalPath = "LegoWebSite\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\LegoWebSite\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1744"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LegoWebAdmin", "LegoWebAdmin", "{E3896D3B-E586-458C-A222-82738548E7EA}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "2.0"
+		Debug.AspNetCompiler.VirtualPath = "/LegoWebAdmin"
+		Debug.AspNetCompiler.PhysicalPath = "LegoWebAdmin\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\LegoWebAdmin\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/LegoWebAdmin"
+		Release.AspNetCompiler.PhysicalPath = "LegoWebAdmin\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\LegoWebAdmin\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1745"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LegoWebFiles", "LegoWebFiles", "{1EAE640A-331F-4A90-ABF3-A6F6739DE253}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "2.0"
+		Debug.AspNetCompiler.VirtualPath = "/LegoWebFiles"
+		Debug.AspNetCompiler.PhysicalPath = "LegoWebFiles\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\LegoWebFiles\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/LegoWebFiles"
+		Release.AspNetCompiler.PhysicalPath = "LegoWebFiles\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\LegoWebFiles\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "2820"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DEC5259-1945-4DAF-A0A6-15DC35EDC6B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DEC5259-1945-4DAF-A0A6-15DC35EDC6B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3896D3B-E586-458C-A222-82738548E7EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3896D3B-E586-458C-A222-82738548E7EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EAE640A-331F-4A90-ABF3-A6F6739DE253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EAE640A-331F-4A90-ABF3-A6F6739DE253}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

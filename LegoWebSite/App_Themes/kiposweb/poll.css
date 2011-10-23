@@ -1,0 +1,70 @@
+﻿
+/* POLL */
+
+.poll-question
+{
+    background: none repeat scroll 0 0 #CCFFFF;
+    border: 1px solid #FFCCFF;
+    color: #333366;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.questionList
+{
+	background-color: #66CCFF;
+    color: #333333;
+    font-size: 9pt;
+    margin-top: 10px;
+    padding: 0;
+    width: 100%;
+}
+
+.poll-total
+{
+	background: #CCFFCC;
+	color: #333333;
+	border: solid 1px #333333;
+	padding: 5px;
+	margin-bottom: 10px;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight:bold;
+}
+.poll-result
+{
+	margin:0 auto;
+	padding: 2px 5px;
+	color: #333333;
+}
+.poll-chart
+{
+	background:#555555;
+    height: 15px;
+    margin: 0;
+    padding: 5px;
+    vertical-align: middle;
+}
+.mWarn, .mInfo
+{
+	line-height: 30px;
+	height: 30px;
+	background: #FFE7E5 url('images/warn.gif' ) no-repeat 10px center;
+	border-top: 1px solid #D14437;
+	border-bottom: 1px solid #D14437;
+	margin: 0px 0px 12px;
+	padding: 0px 0px 1px 32px;
+}
+
+.mInfo
+{
+	background: #FDFFD9 url('images/info.gif' ) no-repeat 10px center;
+	border-top: 1px solid #F4CE66;
+	border-bottom: 1px solid #F4CE66;
+}
+
+.mWarn a, .mInfo a
+{
+	color: #444;
+}

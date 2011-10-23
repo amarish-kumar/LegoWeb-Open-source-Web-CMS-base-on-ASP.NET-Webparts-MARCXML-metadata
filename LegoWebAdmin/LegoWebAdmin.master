@@ -1,0 +1,54 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="LegoWebAdmin.master.cs" Inherits="LegoWebAdmin_Master" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>LEGOWEB - BACKEND</title>
+    <link href="App_Themes/legoweb.ico" rel="shortcut icon" type="image/x-icon" />
+     
+<!--[if IE 7]>
+<link href="App_Themes/ie7.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+ 
+<!--[if lte IE 6]>
+<link href="App_Themes/ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+    
+    <script src="AdminTools/JavaScripts/joomla.javascript.js" type="text/javascript"></script>
+    <script src="AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>
+    <script src="AdminTools/JavaScripts/index.js" type="text/javascript"></script>
+    <script src="AdminTools/JavaScripts/menu.js" type="text/javascript"></script>
+    
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body id="minwidth-body">
+    <form id="form1" runat="server"> 
+    <div id="border-top" class="h_green">
+		<div>
+			<div>
+				<span class="title">KIPOS - QUẢN TRỊ WEB</span>
+			</div>
+		</div>
+	</div>
+    
+    <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+    
+    </asp:ContentPlaceHolder>
+    
+  
+	<div id="border-bottom">
+	<div>
+	<div>
+	</div>
+	</div>
+	</div>
+	<div id="footer">
+	    <p class="copyright">
+		    <a href="http://www.legoweb.org" target="_blank"> Copyright &copy;HIENDAI SOFTWARE COMPANY 2004-2011</a>
+	    </p>
+    </div>  
+    </form>
+</body>
+</html>
