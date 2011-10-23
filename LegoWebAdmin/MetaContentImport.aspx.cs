@@ -32,7 +32,7 @@ public partial class MetaContentImport : System.Web.UI.Page
         }
         //chuyển đổi địa chỉ URL sang Physycal
         string sFileURL = txtFileName.Text;
-        string sFileName= sFileURL.Replace(System.Configuration.ConfigurationManager.AppSettings["FCKeditor:UserFilesVirtuaPath"],System.Configuration.ConfigurationManager.AppSettings["FCKeditor:UserFilesPhysicalPath"]);
+        string sFileName= sFileURL.Replace(System.Configuration.ConfigurationManager.AppSettings["FCKeditor:UserFilesVirtuaPath"],System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"]);
         sFileName = sFileName.Replace("/", "\\");
         if (!System.IO.File.Exists(sFileName))
         {
@@ -138,7 +138,7 @@ public partial class MetaContentImport : System.Web.UI.Page
         }
         //chuyển đổi địa chỉ URL sang Physycal
         string sFileURL = txtFileName.Text;
-        string sFileName= sFileURL.Replace(System.Configuration.ConfigurationManager.AppSettings["FCKeditor:UserFilesVirtuaPath"],System.Configuration.ConfigurationManager.AppSettings["FCKeditor:UserFilesPhysicalPath"]);
+        string sFileName= sFileURL.Replace(System.Configuration.ConfigurationManager.AppSettings["FCKeditor:UserFilesVirtuaPath"],System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"]);
         sFileName = sFileName.Replace("/", "\\");
         if (!System.IO.File.Exists(sFileName))
         {

@@ -663,6 +663,7 @@ public partial class UserControls_MetaContentAddUpdate : System.Web.UI.UserContr
                 }
                 NTEXT_Value.ToolbarCanCollapse = true;
                 NTEXT_Value.ToolbarStartExpanded = false;
+                NTEXT_Value.DefaultLanguage = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
             }
         }
         catch (Exception ex)

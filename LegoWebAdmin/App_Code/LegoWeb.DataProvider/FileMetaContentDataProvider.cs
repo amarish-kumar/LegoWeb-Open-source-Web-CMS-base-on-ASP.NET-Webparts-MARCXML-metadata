@@ -23,7 +23,7 @@ namespace LegoWeb.DataProvider
         public static CRecord get_DataRecord(String sCategory, string sID)
         {
             CRecords myRecs = new CRecords();
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -69,7 +69,7 @@ namespace LegoWeb.DataProvider
         public static CRecords get_DataRecords(String sCategory)
         {
             CRecords myRecs = new CRecords();
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -84,7 +84,7 @@ namespace LegoWeb.DataProvider
         {
             CRecords myRecs = new CRecords();
             CRecords retRecs = new CRecords();
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -112,7 +112,7 @@ namespace LegoWeb.DataProvider
 
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -135,7 +135,7 @@ namespace LegoWeb.DataProvider
             CRecords myRecs = new CRecords();
             CRecords retRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -166,7 +166,7 @@ namespace LegoWeb.DataProvider
             CRecords myRecs = new CRecords();
             CRecords retRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -205,7 +205,7 @@ namespace LegoWeb.DataProvider
             addRecord.Controlfields.Controlfield("005").Value = DateTime.Now.ToLongDateString();
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -247,7 +247,7 @@ namespace LegoWeb.DataProvider
 
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -287,7 +287,7 @@ namespace LegoWeb.DataProvider
         {
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -308,7 +308,7 @@ namespace LegoWeb.DataProvider
         {
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -330,7 +330,7 @@ namespace LegoWeb.DataProvider
         {
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -352,7 +352,7 @@ namespace LegoWeb.DataProvider
         {
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
