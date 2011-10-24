@@ -1,0 +1,682 @@
+/* CCSTheme v 3.x */
+/* General */
+
+
+
+.HeaderGreenapple {
+	width: 100%;
+	}
+
+.HeaderGreenapple th { 
+	font-family: Tahoma; font-size: 110%; font-weight: bold; text-align: left;
+	padding: 3px;
+	background-image: url('Images/HeaderBg.gif'); color: #ffffff;
+	width: 100%;
+	white-space: nowrap;
+	}
+
+.HeaderGreenapple a:link { 
+	color: #ffffff;
+	}
+
+.HeaderGreenapple a:visited { 
+	color: #ffffff;
+	}
+
+.HeaderGreenapple a:hover, .CaptionGreenapple a:active { 
+	color: #ffffff; text-decoration: none;
+	}
+
+.HeaderLeftGreenapple { 
+	background-image: url('Images/HeaderLeft.gif');
+	}
+
+.HeaderRightGreenapple { 
+	background-image: url('Images/HeaderRight.gif');
+	}
+
+.HeaderLeftGreenapple img{
+	width: 4px;
+	}
+
+.HeaderRightGreenapple img{
+	width: 9px;
+	}
+
+
+/* Grid Options */
+.GridGreenapple { 
+	border: 1px solid #3c964b; border-left: 0px;
+	width: 100%;
+	}
+
+.CaptionGreenapple th { 
+	font-family: Tahoma; font-size: 80%; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-top: 1px solid #3c964b; border-left: 1px solid #3c964b; border-bottom: 1px solid #3c964b;
+	background-image: url('Images/CaptionBg.gif'); color: #000000;
+	white-space: nowrap;
+	}
+
+.CaptionGreenapple td { 
+	font-family: Tahoma; font-size: 80%; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-top: 1px solid #3c964b; border-left: 1px solid #3c964b; border-bottom: 1px solid #3c964b;
+	background-image: url('Images/CaptionBg.gif'); color: #000000;
+	white-space: nowrap;
+	}
+
+.CaptionGreenapple a:link { 
+	color: #000000;
+	}
+
+.CaptionGreenapple a:visited { 
+	color: #000000;
+	}
+
+.CaptionGreenapple a:hover, .CaptionGreenapple a:active { 
+	color: #ff0000;
+	}
+
+.CaptionGreenapple img {
+	margin: 2px; 
+	vertical-align: middle;
+	}
+
+.CaptionGreenapple input {
+	vertical-align: middle;
+	}
+
+.RowGreenapple th { 
+	font-family: Tahoma; font-size: 80%; font-weight: normal; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	background-color: #fffcf2; color: #000000;
+	white-space: nowrap;
+	color: #000000;
+	}
+
+.RowGreenapple td { 
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	vertical-align: top;
+	background-color: #fffcf2; 
+	color: #000000;
+	}
+
+.RowGreenapple a:link { 
+	color: #0033cc;
+	}
+
+.RowGreenapple a:visited { 
+	color: #840000;
+	}
+
+.RowGreenapple a:hover, .RowGreenapple a:active { 
+	color: #ff0000;
+	}
+
+.SeparatorGreenapple{
+	color: #3c964b;
+	}
+
+.SeparatorGreenapple td{
+	height: 1px;
+	}
+
+
+.AltRowGreenapple th { 
+	font-family: Tahoma; font-size: 80%; font-weight: normal; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	background-color: #fffcf2; color: #000000;
+	white-space: nowrap;
+	color: #000000;
+	}
+
+.AltRowGreenapple td { 
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	vertical-align: top;
+	background-color: #ecf7e4; 
+	color: #000000;
+	}
+
+.AltRowGreenapple a:link { 
+	color: #0033cc;
+	}
+
+.AltRowGreenapple a:visited { 
+	color: #840000;
+	}
+
+.AltRowGreenapple a:hover, .AltRowGreenapple a:active { 
+	color: #ff0000;
+	}
+
+.NoRecordsGreenapple td { 
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	background-color: #fffcf2; 
+	color: #000000;
+	vertical-align: top;
+	}
+
+.FooterGreenapple td { 
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #3c964b; border-left: 1px solid #3c964b;
+	background-image: url('Images/CaptionBg.gif'); color: #000000;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	color: #000000;
+	}
+
+.FooterGreenapple a:link { 
+	color: #0033cc;
+	}
+
+.FooterGreenapple a:visited { 
+	color: #840000;
+	}
+
+.FooterGreenapple a:hover, .FooterGreenapple a:active { 
+	color: #ff0000;
+	}
+
+.FooterGreenapple img {
+	margin: 2px; 
+	vertical-align: middle;
+	}
+
+.FooterGreenapple input {
+	margin: 2px;
+	vertical-align: middle;
+	}
+
+/* Record Options */
+.RecordGreenapple { 
+	border: 1px solid #3c964b; border-left: 0px;
+	width: 100%;
+	}
+
+.ErrorGreenapple td { 
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #3c964b; border-left: 1px solid #3c964b; border-bottom: 1px solid #3c964b;
+	color: #FF0000;
+	vertical-align: top;
+	background-color: #fffcf2; 
+	}
+
+.ControlsGreenapple th { 
+	font-family: Tahoma; font-size: 80%; font-weight: normal; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	background-color: #fffcf2; color: #000000;
+	white-space: nowrap;
+	color: #000000;
+	}
+
+.ControlsGreenapple td { 
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	vertical-align: top;
+	background-color: #fffcf2; 
+	color: #000000;
+	}
+
+.BottomGreenapple td { 
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #3c964b; border-left: 1px solid #3c964b;
+	background-image: url('Images/CaptionBg.gif'); color: #000000;
+	text-align: right;
+	vertical-align: middle;
+	white-space: nowrap;
+	color: #000000;
+	}
+
+.BottomGreenapple a:link { 
+	color: #0033cc;
+	}
+
+.BottomGreenapple a:visited { 
+	color: #840000;
+	}
+
+.BottomGreenapple a:hover, .CaptionGreenapple a:active { 
+	color: #ff0000;
+	}
+
+.BottomGreenapple img {
+	margin: 2px;
+	vertical-align: middle; 
+	}
+
+.BottomGreenapple input {
+	margin: 2px;
+	vertical-align: middle;
+	}
+
+/* Report */
+.GroupCaptionGreenapple th{
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	white-space: nowrap;
+	text-align: left; 
+	vertical-align: top;
+	font-weight: bold;
+	background-color: #ecf7e4; 
+	color: #000000;
+	}
+
+.GroupCaptionGreenapple td{
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	vertical-align: top;
+	font-weight: bold;
+	background-color: #fffcf2; 
+	color: #000000;
+	}
+
+.GroupCaptionGreenapple a:link {
+	color: #000000;
+	}
+
+.GroupCaptionGreenapple a:visited{
+	color: #000000;
+	}
+
+.GroupCaptionGreenapple a:hover, .GroupCaptionGreenapple a:active{
+	color: #ff0000;
+	}
+
+.GroupFooterGreenapple td{
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #3c964b; border-left: 1px solid #3c964b;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background-color: #fff3c9; 
+	color: #000000;
+	}
+
+.GroupFooterGreenapple a:link {
+	color: #0033cc;
+	}
+
+.GroupFooterGreenapple a:visited{
+	color: #840000;
+	}
+
+.GroupFooterGreenapple a:hover, .GroupFooterGreenapple a:active{
+	color: #ff0000;
+	}
+
+.GroupFooterGreenapple img {
+	margin: 2px; 
+	vertical-align: middle;
+	}
+
+.GroupFooterGreenapple input {
+	margin: 2px;
+	vertical-align: middle;
+	}
+
+.SubTotalGreenapple td{
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	vertical-align: top;
+	font-weight: bold;
+	background-color: #ecf7e4; 
+	color: #000000;
+	border-bottom: 2px solid #3c964b;
+	}
+
+.SubTotalGreenapple a:link {
+	color: #0033cc;
+	}
+
+.SubTotalGreenapple a:visited{
+	color: #840000;
+	}
+
+.SubTotalGreenapple a:hover, .SubTotalGreenapple a:active{
+	color: #ff0000;
+	}
+
+.TotalGreenapple td{
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	vertical-align: top;
+	white-space: nowrap;
+	font-weight: bold;
+	background-color: #ecf7e4; 
+	color: #000000;
+	}
+
+.TotalGreenapple a:link {
+	color: #0033cc;
+	}
+
+.TotalGreenapple a:visited{
+	color: #840000;
+	}
+
+.TotalGreenapple a:hover, .TotalGreenapple a:active{
+	color: #ff0000;
+	}
+
+/* Form Options */
+.ButtonGreenapple { 
+	background-color: #3c964b; color: #ffffff; border-left: solid 1px #EDEDED; border-top: solid 1px #EDEDED; border-right: solid 1px #848284; border-bottom: solid 1px #848284; padding: 2px; font-weight: bold; font-size: 85%; font-family: Tahoma;
+	}
+
+/* Calendar */
+
+.CalendarGreenapple { 
+	border: 1px solid #3c964b;
+	width: 100%;
+	}
+
+.CalendarWeekdayNameGreenapple{
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #3c964b; border-left: 1px solid #3c964b; border-bottom: 1px solid #3c964b;
+	text-align: center; 
+	vertical-align: top;
+	white-space: nowrap;
+	background-color: #ecf7e4; 
+	color: #000000;
+	}
+
+.CalendarWeekdayNameGreenapple a:link {
+	color: #0033cc;
+	}
+
+.CalendarWeekdayNameGreenapple a:visited{
+	color: #840000;
+	}
+
+.CalendarWeekdayNameGreenapple a:hover, .CalendarWeekdayNameGreenapple a:active{
+	color: #ff0000;
+	}
+
+.CalendarWeekendNameGreenapple{
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #3c964b; border-left: 1px solid #3c964b; border-bottom: 1px solid #3c964b;
+	white-space: nowrap;
+	text-align: center; 
+	vertical-align: top;
+	background-color: #ecf7e4;	
+	color: #000000;
+	}
+
+.CalendarWeekendNameGreenapple a:link {
+	color: #000000;
+	}
+
+.CalendarWeekendNameGreenapple a:visited{
+	color: #000000;
+	}
+
+.CalendarWeekendNameGreenapple a:link, .CalendarWeekendNameGreenapple a:visited{
+	color: #ff0000;
+	}
+
+/* Calendar Day */
+.CalendarDayGreenapple{
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	text-align: center;
+	background-color: #fffcf2;	
+	color: #000000;
+	}
+
+.CalendarDayGreenapple a:link {
+	color: #0033cc;
+	}
+
+.CalendarDayGreenapple a:visited{
+	color: #840000;
+	}
+
+.CalendarDayGreenapple a:hover, .CalendarDayGreenapple a:active{
+	color: #ff0000;
+	}
+
+/* Calendar Weekend */
+.CalendarWeekendGreenapple{
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	text-align: center;
+	background-color: #ecf7e4;	
+	color: #000000;
+	}
+
+.CalendarWeekendGreenapple a:link {
+	color: #0033cc;
+	}
+
+.CalendarWeekendGreenapple a:visited{
+	color: #840000;
+	}
+
+.CalendarWeekendGreenapple a:hover, .CalendarWeekendGreenapple a:active{
+	color: #ff0000;
+	}
+
+/* Calendar Today */
+.CalendarTodayGreenapple {
+	font-family: Tahoma; font-size: 80%;
+	padding: 1px;
+	border: 2px solid #3c964b; border-right: 1px solid #3c964b;
+	text-align: center;
+	background-color: #fffcf2;	
+	color: #000000;
+	}
+
+.CalendarTodayGreenapple a:link {
+	color: #0033cc;
+	}
+
+.CalendarTodayGreenapple a:visited{
+	color: #840000;
+	}
+
+.CalendarTodayGreenapple a:hover, .CalendarTodayGreenapple a:active {
+	color: #ff0000;
+	}
+
+/* Calendar Weekend Today */
+.CalendarWeekendTodayGreenapple {
+	font-family: Tahoma; font-size: 80%;
+	padding: 1px;
+	border: 2px solid #3c964b; border-right: 1px solid #3c964b;
+	text-align: center;
+	background-color: #ecf7e4;	
+	color: #000000;
+	}
+
+.CalendarWeekendTodayGreenapple a:link {
+	color: #0033cc;
+	}
+
+.CalendarWeekendTodayGreenapple a:visited{
+	color: #840000;
+	}
+
+.CalendarWeekendTodayGreenapple a:hover, .CalendarWeekendTodayGreenapple a:active{
+	color: #ff0000;
+	}
+
+/* Calendar Other Month's Day */
+.CalendarOtherMonthDayGreenapple{
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	text-align: center;
+	background-color: #fffcf2;	
+	color: #3c964b;
+	}
+
+.CalendarOtherMonthDayGreenapple a:link {
+	color: #3c964b;
+	}
+
+.CalendarOtherMonthDayGreenapple a:visited{
+	color: #3c964b;
+	}
+
+.CalendarOtherMonthDayGreenapple a:hover, .CalendarOtherMonthDayGreenapple a:active{
+	color: #ff0000;
+	}
+
+/* Calendar Other Month's Today */
+.CalendarOtherMonthTodayGreenapple {
+	font-family: Tahoma; font-size: 80%;
+	padding: 1px;
+	border: 2px solid #3c964b; border-right: 1px solid #3c964b;
+	text-align: center;
+	background-color: #fffcf2;	
+	color: #3c964b;
+	}
+
+.CalendarOtherMonthTodayGreenapple a:link {
+	color: #3c964b;
+	}
+
+.CalendarOtherMonthTodayGreenapple a:visited{
+	color: #3c964b;
+	}
+
+.CalendarOtherMonthTodayGreenapple a:hover, .CalendarOtherMonthTodayGreenapple a:active{
+	color: #ff0000;
+	}
+
+/* Calendar Other Month's Weekend */
+.CalendarOtherMonthWeekendGreenapple {
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	text-align: center;
+	background-color: #ecf7e4;	
+	color: #3c964b;
+	}
+
+.CalendarOtherMonthWeekendGreenapple a:link {
+	color: #3c964b;
+	}
+
+.CalendarOtherMonthWeekendGreenapple a:visited{
+	color: #3c964b;
+	}
+
+.CalendarOtherMonthWeekendGreenapple a:hover, .CalendarOtherMonthWeekendGreenapple a:active{
+	color: #ff0000;
+	}
+
+/* Calendar Other Month's Weekend Today */
+.CalendarOtherMonthWeekendTodayGreenapple {
+	font-family: Tahoma; font-size: 80%;
+	padding: 1px;
+	border: 2px solid #3c964b; border-right: 1px solid #3c964b;
+	text-align: center;
+	color: #3c964b;
+	background-color: #ecf7e4;	
+	}
+
+.CalendarOtherMonthWeekendTodayGreenapple a:link {
+	color: #3c964b;
+	}
+
+.CalendarOtherMonthWeekendTodayGreenapple a:visited{
+	color: #3c964b;
+	}
+
+.CalendarOtherMonthWeekendTodayGreenapple a:hover, .CalendarOtherMonthWeekendTodayGreenapple a:active{
+	color: #ff0000;
+	}
+
+/* Calendar Selected Day (for DatePicker) */
+.CalendarSelectedDayGreenapple{
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	border-left: 1px solid #3c964b;
+	background-color: #fff3c9;
+	color: #000000;
+	text-align: center;
+	font-weight: bold;
+	}
+
+.CalendarSelectedDayGreenapple a:link {
+	color: #000000;
+	}
+
+.CalendarSelectedDayGreenapple a:visited{
+	color: #000000;
+	}
+
+.CalendarSelectedDayGreenapple a:hover, .CalendarSelectedDayGreenapple a:active{
+	color: #ff0000;
+	}
+
+/* Calendar Navigator */
+.CalendarNavigatorGreenapple {
+	font-family: Tahoma; font-size: 80%;
+	padding: 3px;
+	background-image: url('Images/CaptionBg.gif'); color: #000000;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	color: #000000;
+	}
+
+.CalendarNavigatorGreenapple a:link {
+	color: #0033cc;
+	}
+
+.CalendarNavigatorGreenapple a:visited{
+	color: #840000;
+	}
+
+.CalendarNavigatorGreenapple a:hover, .CalendarNavigatorGreenapple a:active{
+	color: #ff0000;
+	}
+
+.CalendarNavigatorGreenapple img{
+	margin: 2px;
+	vertical-align: middle; 	
+	}
+
+/* Calendar Extra */
+.CalendarEventGreenapple{
+	font-size: 80%;
+	text-align: left;
+	}
+
+.CalendarEventGreenapple a:link {
+	color: #0033cc;
+	}
+
+.CalendarEventGreenapple a:visited{
+	color: #840000;
+	}
+
+.CalendarEventGreenapple a:hover, .CalendarEventGreenapple a:active{
+	color: #ff0000;
+	}

@@ -105,11 +105,7 @@ public partial class MetaContentExport : System.Web.UI.Page
     {
         Response.Redirect("ControlPanel.aspx");
     }
-    protected override void OnInit(EventArgs e)
-    {
-        CultureUtility.SetThreadCulture();
-        base.OnInit(e);
-    }
+
     protected void radioFilterType_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (radioFilterType.SelectedValue == "0")
@@ -151,6 +147,10 @@ public partial class MetaContentExport : System.Web.UI.Page
             metaContentRepeater.DataBind();
         }
     }
-
+    protected override void OnInit(EventArgs e)
+    {
+        CultureUtility.SetThreadCulture();
+        base.OnInit(e);
+    }
 
 }

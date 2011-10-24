@@ -4,22 +4,25 @@
 <%@ Register src="UserControls/MetaContentAddUpdate.ascx" tagname="MetaContentAddUpdate" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-
+        <script language="javascript" type="text/javascript">
+            var locale = '<%=System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower()%>';
+        </script>
        <script language="JavaScript" src='AdminTools/DatePicker.js' type="text/javascript" charset="utf-8"></script>
         <script language="JavaScript" type="text/javascript">
-        //End Include Common JSFunctions
+        
+            //End Include Common JSFunctions
 
-        //Date Picker Object Definitions @1-E6DE1018
-        var myDatePicker = new Object(); 
-        myDatePicker.format           = "ShortDate";
-        myDatePicker.style            = "../App_Themes/Calendar/Style.css";
-        myDatePicker.relativePathPart = "";
-        myDatePicker.themeVersion     = "3.0";
+            //Date Picker Object Definitions @1-E6DE1018
+            var myDatePicker = new Object();
+            myDatePicker.format = "ShortDate";
+            myDatePicker.style = "../App_Themes/Calendar/Style.css";
+            myDatePicker.relativePathPart = "";
+            myDatePicker.themeVersion = "3.0";
 
-        //End Date Picker Object Definitions	
+            //End Date Picker Object Definitions	
 
 
-        //End CCS script
+            //End CCS script
         </script>
     
 </asp:Content>

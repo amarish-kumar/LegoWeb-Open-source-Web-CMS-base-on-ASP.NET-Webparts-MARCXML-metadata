@@ -19,9 +19,5 @@ public partial class LegoWebAdmin_Master : System.Web.UI.MasterPage
         }
 
     }
-    protected override void OnInit(EventArgs e)
-    {
-        CultureUtility.SetThreadCulture();
-        base.OnInit(e);
-    }
+
 }

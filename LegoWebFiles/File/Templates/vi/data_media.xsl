@@ -4,49 +4,49 @@
     <xsl:apply-templates></xsl:apply-templates>
   </xsl:template>
   <xsl:template match="record">
-    <xsl:variable name="FlashTitle" select="datafield[@tag=245]/subfield[@code='a']/text()">
+    <xsl:variable name="MediaTitle" select="datafield[@tag=245]/subfield[@code='a']/text()">
     </xsl:variable>
-    <xsl:variable name="FlashWidth" select="datafield[@tag=300]/subfield[@code='w']/text()">
+    <xsl:variable name="MediaWidth" select="datafield[@tag=300]/subfield[@code='w']/text()">
     </xsl:variable>
-    <xsl:variable name="FlashHeight" select="datafield[@tag=300]/subfield[@code='h']/text()">
+    <xsl:variable name="MediaHeight" select="datafield[@tag=300]/subfield[@code='h']/text()">
     </xsl:variable>
-    <xsl:variable name="FlashSource" select="datafield[@tag=856]/subfield[@code='u']/text()">
+    <xsl:variable name="MediaSource" select="datafield[@tag=856]/subfield[@code='u']/text()">
     </xsl:variable>           
  <center>
    <xsl:choose>
-     <xsl:when test="contains($FlashSource,'.jpg')">
+     <xsl:when test="contains($MediaSource,'.jpg')">
        <img>
          <xsl:attribute name="src">
-           <xsl:value-of select="$FlashSource" />
+           <xsl:value-of select="$MediaSource" />
          </xsl:attribute>
        </img>
      </xsl:when>
-     <xsl:when test="contains($FlashSource,'.png')">
+     <xsl:when test="contains($MediaSource,'.png')">
        <img>
          <xsl:attribute name="src">
-           <xsl:value-of select="$FlashSource" />
+           <xsl:value-of select="$MediaSource" />
          </xsl:attribute>
        </img>
      </xsl:when>
-     <xsl:when test="contains($FlashSource,'.gif')">
+     <xsl:when test="contains($MediaSource,'.gif')">
        <img>
          <xsl:attribute name="src">
-           <xsl:value-of select="$FlashSource" />
+           <xsl:value-of select="$MediaSource" />
          </xsl:attribute>
        </img>
      </xsl:when>
 
-     <xsl:when test="contains($FlashSource,'.swf')">
+     <xsl:when test="contains($MediaSource,'.swf')">
        <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" id="flashControl" align="middle" border="0">
          <xsl:attribute name="width">
-           <xsl:value-of select="$FlashWidth" />
+           <xsl:value-of select="$MediaWidth" />
          </xsl:attribute>
          <xsl:attribute name="height">
-           <xsl:value-of select="$FlashHeight" />
+           <xsl:value-of select="$MediaHeight" />
          </xsl:attribute>
          <param name="movie">
            <xsl:attribute name="value">
-             <xsl:value-of select="$FlashSource" />
+             <xsl:value-of select="$MediaSource" />
            </xsl:attribute>
          </param>
          <param name="quality" value="high" />
@@ -54,13 +54,13 @@
          <param name="bgcolor" value="#ffffff" />
          <embed quality="high" bgcolor="#ffffff" wmode="transparent" name="flashControl" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
            <xsl:attribute name="width">
-             <xsl:value-of select="$FlashWidth" />
+             <xsl:value-of select="$MediaWidth" />
            </xsl:attribute>
            <xsl:attribute name="height">
-             <xsl:value-of select="$FlashHeight" />
+             <xsl:value-of select="$MediaHeight" />
            </xsl:attribute>
            <xsl:attribute name="src">
-             <xsl:value-of select="$FlashSource" />
+             <xsl:value-of select="$MediaSource" />
            </xsl:attribute>
          </embed>
        </object>

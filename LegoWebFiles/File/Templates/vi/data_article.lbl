@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <record>
-  <leader>00000nam#a2200000ui#4500</leader>
+  <leader>########################</leader>
   <controlfield tag="001" type="NUMBER">MetaContentID</controlfield>
   <controlfield tag="002" type="NUMBER">CategoryID</controlfield>
   <controlfield tag="003" type="BOOLEAN">IsPublic</controlfield>
-  <controlfield tag="004" type="NUMBER">DestinationId</controlfield>
-  <controlfield tag="005" type="NUMBER">ServiceId</controlfield>
-  <controlfield tag="006" type="NUMBER">AdvertismentGroup</controlfield>
-  <controlfield tag="007" type="TEXT"></controlfield>
-  <controlfield tag="008" type="TEXT">LanguageCode</controlfield>
+  <controlfield tag="004" type="TEXT">CreatedDate</controlfield>
+  <controlfield tag="005" type="TEXT">ModifiedDate</controlfield>
+  <controlfield tag="006" type="TEXT">Creator</controlfield>
+  <controlfield tag="007" type="TEXT">Modifier</controlfield>
+  <controlfield tag="008" type="TEXT">LangCode</controlfield>
+  <controlfield tag="009" type="TEXT">AccessLevel</controlfield>
   <datafield tag="100" ind1=" " ind2=" ">
     <subfield code="a" type="TEXT">Tác giả</subfield>
   </datafield>

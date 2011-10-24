@@ -120,11 +120,7 @@ public partial class MetaContentImport : System.Web.UI.Page
     {
         Response.Redirect("ControlPanel.aspx");
     }
-    protected override void OnInit(EventArgs e)
-    {
-        CultureUtility.SetThreadCulture();
-        base.OnInit(e);
-    }
+
     protected void btnAnalyzeData_Click(object sender, EventArgs e)
     {
         divDefaultCategory.Visible = false;
@@ -237,5 +233,11 @@ public partial class MetaContentImport : System.Web.UI.Page
     {
         ViewState["metaContentManagerPageNumber"] = 1;
         load_dropCategories();
+    }
+
+    protected override void OnInit(EventArgs e)
+    {
+        CultureUtility.SetThreadCulture();
+        base.OnInit(e);
     }
 }

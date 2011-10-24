@@ -5,7 +5,9 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    
+        <script src="AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>
+    <script src="AdminTools/JavaScripts/index.js" type="text/javascript"></script>
+    <script src="AdminTools/JavaScripts/menu.js" type="text/javascript"></script>
     <script type = "text/javascript" language = "javascript"> 
 
     function ValidateNumerTextBox(i) 

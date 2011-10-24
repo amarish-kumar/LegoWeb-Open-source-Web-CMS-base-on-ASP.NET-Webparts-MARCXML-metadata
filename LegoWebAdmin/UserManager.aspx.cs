@@ -36,4 +36,9 @@ public partial class LegoWebAdmin_UserManager : System.Web.UI.Page
     {
         Response.Redirect("UserAddNew.aspx");
     }
+    protected override void OnInit(EventArgs e)
+    {
+        CultureUtility.SetThreadCulture();
+        base.OnInit(e);
+    }
 }

@@ -1,22 +1,29 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <record>
-	<leader>00000nam#a2200000ui#4500</leader>
-  <controlfield tag="001">MetaContentID</controlfield>
-	<controlfield tag="002">CategoryId</controlfield>
-	<controlfield tag="003">IsPublic</controlfield>
-  <controlfield tag="004">PublicStartDate</controlfield>
-  <controlfield tag="005">PublicEndDate</controlfield>
-  <controlfield tag="006">AllowRoles</controlfield>
-  <controlfield tag="007">LanguageCode</controlfield>
-  <controlfield tag="008">DenyRoles</controlfield>
+  <leader>########################</leader>
+  <controlfield tag="001" type="NUMBER">MetaContentID</controlfield>
+  <controlfield tag="002" type="NUMBER">CategoryID</controlfield>
+  <controlfield tag="003" type="BOOLEAN">IsPublic</controlfield>
+  <controlfield tag="004" type="TEXT">CreatedDate</controlfield>
+  <controlfield tag="005" type="TEXT">ModifiedDate</controlfield>
+  <controlfield tag="006" type="TEXT">Creator</controlfield>
+  <controlfield tag="007" type="TEXT">Modifier</controlfield>
+  <controlfield tag="008" type="TEXT">LangCode</controlfield>
+  <controlfield tag="009" type="TEXT">AccessLevel</controlfield>
 	<datafield tag="245" ind1=" " ind2=" ">
-		<subfield code="a">Tiêu đề</subfield>
+		<subfield code="a" type="TEXT">Tiêu đề</subfield>
+    <subfield code="b" type="TEXT">Mô tả</subfield>
+    <subfield code="u" type="TEXT">Ảnh đại diện</subfield>
 	</datafield>
   <datafield tag="300" ind1=" " ind2=" ">
-    <subfield code="h">Chiều cao</subfield>
-    <subfield code="w">Chiều rộng</subfield>
+    <subfield code="h" type="NUMBER">Chiều cao</subfield>
+    <subfield code="w" type="NUMBER">Chiều rộng</subfield>
   </datafield>
   <datafield tag="856" ind1=" " ind2=" ">
-		<subfield code="u">Flash URL</subfield>
+    <subfield code="0" type="NUMBER">2</subfield>
+    <subfield code="3" type="TEXT">Tên</subfield>
+    <subfield code="a" type="TEXT">Chú thích</subfield>
+    <subfield code="u" type="TEXT">Nguồn tệp</subfield>
+    <subfield code="l" type="TEXT">Liên kết</subfield>
 	</datafield>		
 </record>

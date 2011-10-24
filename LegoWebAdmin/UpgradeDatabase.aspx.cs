@@ -18,11 +18,7 @@ public partial class UpgradeDatabase : System.Web.UI.Page
             }
         }
     }
-    protected override void OnInit(EventArgs e)
-    {
-        CultureUtility.SetThreadCulture();
-        base.OnInit(e);
-    }
+
     protected void btnRun_Click(object sender, EventArgs e)
     {
         errorMessage.Text = "";
@@ -34,5 +30,10 @@ public partial class UpgradeDatabase : System.Web.UI.Page
         {
             errorMessage.Text ="Lỗi thực thi:" + ex.Message + " " + ex.InnerException;
         }
+    }
+    protected override void OnInit(EventArgs e)
+    {
+        CultureUtility.SetThreadCulture();
+        base.OnInit(e);
     }
 }

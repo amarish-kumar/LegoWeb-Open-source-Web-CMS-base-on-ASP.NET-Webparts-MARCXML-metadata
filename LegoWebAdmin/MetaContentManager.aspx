@@ -4,7 +4,9 @@
 <%@ Register src="UserControls/MetaContentManager.ascx" tagname="MetaContentManager" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-
+    <script src="AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>
+    <script src="AdminTools/JavaScripts/index.js" type="text/javascript"></script>
+    <script src="AdminTools/JavaScripts/menu.js" type="text/javascript"></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
