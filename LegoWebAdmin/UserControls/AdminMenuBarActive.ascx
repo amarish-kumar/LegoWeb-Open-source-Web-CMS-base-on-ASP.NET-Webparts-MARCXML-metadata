@@ -34,34 +34,23 @@
 
 <li class="node"><a><%=Resources.strings.mnuMenus_Text%></a>
 <ul>
-<li><a class="icon-16-article" href="MetaContentManagerTree.aspx?section_id=1">Quản lý nội dung</a>
-<ul>
-<li><a class="icon-16-article" href="MetaContentManager.aspx?section_id=1">Quản lý tin bài</a></li>
-<li><a class="icon-16-component" href="MetaContentManager.aspx?section_id=2">Quản lý dữ liệu khác</a></li>
-</ul>
-</li>
+<li><a class="icon-16-menumgr" href="MenuTypeManager.aspx"><%=Resources.strings.mnuiMenuTypes_Text%></a></li>
 <li class="separator"><span></span></li>
-<li><a class="icon-16-static" href="CategoryManager.aspx?section_id=1">Chuyên mục tin bài</a></li>
-<li><a class="icon-16-module" href="CategoryManager.aspx?section_id=2">Chuyên mục dữ liệu khác</a></li>
-<li><a class="icon-16-module" href="ForumManager.aspx">Quản lý diễn đàn</a></li>
-<li class="separator"><span></span></li>
-<li><a class="icon-16-menumgr" href="MenuManager.aspx?menu_type_id=1">Quản lý trình đơn</a></li>
-<li><a class="icon-16-menumgr" href="MenuTypeManager.aspx">Danh mục trình đơn</a></li>
-<li class="separator"><span></span></li>
+<asp:Literal ID="menunames" runat="server"></asp:Literal>
 </ul>
 </li>
 <li class="node"><a><%=Resources.strings.mnuCategories_Text%></a>
 <ul>
-<li><a class="icon-16-static" href="PatronTypeDefination.aspx">Các loại độc giả</a></li>
+<li><a class="icon-16-section" href="SectionManager.aspx"><%=Resources.strings.mnuiSections_Text%></a></li>
 <li class="separator"><span></span></li>
-<li><a class="icon-16-static" href="PatronStatusDefination.aspx">Tình trạng hạn chế độc giả</a></li>
-<li><a class="icon-16-static" href="FineTypeDefination.aspx">Các khoản phí</a></li>
+<asp:Literal ID="sectionnames" runat="server"></asp:Literal>
 </ul>
 </li>
 <li class="node"><a><%=Resources.strings.mnuContents_Text%></a>
 <ul>
-<li><a class="icon-16-module" href="DMDCollectionManager.aspx">Các bộ sưu tập</a></li>
-<li><a class="icon-16-static" href="DMDCategoryManager.aspx">Chuyên đề thư viện</a></li>
+<li><a class="icon-16-article" href="MetaContentManagerTree.aspx"><%=Resources.strings.mnuiContentManager_Text%></a></li>
+<li class="separator"><span></span></li>
+<asp:Literal ID="contentsections" runat="server"></asp:Literal>
 </ul>
 </li>
 <li class="node"><a><%=Resources.strings.mnuTools_Text%></a>

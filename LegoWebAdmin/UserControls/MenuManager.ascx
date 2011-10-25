@@ -1,15 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="MenuManager.ascx.cs" Inherits="UserControls_MenuManager" %>
 <%@Register TagPrefix="CC" Namespace="LegoWeb.Controls"%>
 
-<table width="100%" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td align="right" valign="middle"><b> Trình đơn:</b></td>
-<td align="left" valign="middle" style="width:200px"><asp:dropdownlist ID="dropMenuTypes" runat="server" oninit="dropMenuTypes_Init" AutoPostBack="true" OnSelectedIndexChanged="dropMenuTypes_SelectedIndexChanged"></asp:dropdownlist></td>
-</tr>
-</tbody>
-</table>
-
 <table class="adminlist" cellspacing="1">   									
 					<asp:repeater id="menuManagerRepeater" runat="server" OnItemCommand="menuManagerDataCommand" OnItemDataBound="menuManagerItemDataBound">
 							<HeaderTemplate>
@@ -18,7 +9,7 @@
 							<th width="2%" class="title">#</th>
 							<th width="3%" class="title">
 							<asp:CheckBox ID="chkSelectAll" Checked="false" AutoPostBack="true" runat="server" OnCheckedChanged="chkSelectAll_CheckedChanged" /></th>
-							<th class="title">ID</th>							
+							<th class="title" align="left">ID</th>							
 							<th class="title">Tiêu đề Việt</th>
 							<th class="title">Tiêu đề Anh</th>
 							<th class="title">Liên kết URL</th>

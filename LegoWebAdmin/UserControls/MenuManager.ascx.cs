@@ -14,7 +14,7 @@ using LegoWeb.Controls;
 public partial class UserControls_MenuManager : System.Web.UI.UserControl
 {
     protected MenuDataProvider _menuManagerData;
-
+    protected int _menu_type_id=0;
     public enum SortFields { Default };
 
     protected void Page_Load(object sender, EventArgs e)
@@ -26,7 +26,7 @@ public partial class UserControls_MenuManager : System.Web.UI.UserControl
 
                 CommonUtility.InitializeGridParameters(ViewState, "menuManager", typeof(SortFields), 1, 100);
                 ViewState["menuManagerPageNumber"] = 1;
-                ViewState["menuManagerPageSize"] =int.Parse(Session["PageSize"]!=null?Session["PageSize"].ToString():"10");                    
+                ViewState["menuManagerPageSize"] =int.Parse(Session["PageSize"]!=null?Session["PageSize"].ToString():"50");                    
                 menuManagerBind();
             }
         }
@@ -50,19 +50,24 @@ public partial class UserControls_MenuManager : System.Web.UI.UserControl
         DropDownList dropDisplay = ((DropDownList)menuManagerRepeater.Controls[menuManagerRepeater.Controls.Count - 1].Controls[0].FindControl("dropRecordPerPage"));
         if (dropDisplay != null)
         {
-            dropDisplay.SelectedValue = Session["PageSize"] != null ? Session["PageSize"].ToString() : "10";
+            dropDisplay.SelectedValue = Session["PageSize"] != null ? Session["PageSize"].ToString() : "50";
         }
     }
     private void menuManagerBind()
     {
         try
         {
+            if (CommonUtility.GetInitialValue("menu_type_id", null) != null)
+            {
+                _menu_type_id = int.Parse(CommonUtility.GetInitialValue("menu_type_id", "0").ToString());
+            }
+
             int outPageCount = 0;
             _menuManagerData.PageNumber = Convert.ToInt16(ViewState["menuManagerPageNumber"]);
             _menuManagerData.RecordsPerPage = (int)ViewState["menuManagerPageSize"];
-            _menuManagerData.get_Search_Count(out outPageCount,0,0,int.Parse(this.dropMenuTypes.SelectedValue.ToString()));
+            _menuManagerData.get_Search_Count(out outPageCount, 0, 0, _menu_type_id);
             ViewState["menuManagerPageCount"] = outPageCount;
-            menuManagerRepeater.DataSource = _menuManagerData.get_Search_Current_Page(0, 0, int.Parse(this.dropMenuTypes.SelectedValue.ToString()), "&nbsp;&nbsp;&nbsp;");
+            menuManagerRepeater.DataSource = _menuManagerData.get_Search_Current_Page(0, 0, _menu_type_id, "&nbsp;&nbsp;&nbsp;");
             menuManagerRepeater.DataBind();
 
             if (menuManagerRepeater.Controls.Count > 1)
@@ -81,10 +86,14 @@ public partial class UserControls_MenuManager : System.Web.UI.UserControl
     }
     private void menuManagerPageBind()
     {
+        if (CommonUtility.GetInitialValue("menu_type_id", null) != null)
+        {
+            _menu_type_id = int.Parse(CommonUtility.GetInitialValue("menu_type_id", "0").ToString());
+        }
             _menuManagerData.PageNumber = Convert.ToInt16(ViewState["menuManagerPageNumber"]);
             _menuManagerData.RecordsPerPage = (int)ViewState["menuManagerPageSize"];
             _menuManagerData.PageCount = (int)ViewState["menuManagerPageCount"];
-            menuManagerRepeater.DataSource = _menuManagerData.get_Search_Current_Page(0, 0, int.Parse(this.dropMenuTypes.SelectedValue.ToString()), "&nbsp;&nbsp;&nbsp;");
+            menuManagerRepeater.DataSource = _menuManagerData.get_Search_Current_Page(0, 0, _menu_type_id, "&nbsp;&nbsp;&nbsp;");
             menuManagerRepeater.DataBind();
             if (menuManagerRepeater.Controls.Count > 1)
             {
@@ -254,8 +263,11 @@ public partial class UserControls_MenuManager : System.Web.UI.UserControl
     }
     public void AddNew_Menu()
     {
-        string sMenuTypeId = this.dropMenuTypes.SelectedValue.ToString();
-        string sParentMenuId = "0";
+        if (CommonUtility.GetInitialValue("menu_type_id", null) != null)
+        {
+            _menu_type_id = int.Parse(CommonUtility.GetInitialValue("menu_type_id", "0").ToString());
+        }
+        int parent_menu_id = 0;
         for (int i = 0; i < this.menuManagerRepeater.Items.Count; i++)
         {
             CheckBox cbRow = ((CheckBox)menuManagerRepeater.Items[i].FindControl("chkSelect"));
@@ -264,34 +276,22 @@ public partial class UserControls_MenuManager : System.Web.UI.UserControl
                 TextBox txtMenuId = (TextBox)menuManagerRepeater.Items[i].FindControl("txtMenuId");
                 if (txtMenuId != null)
                 {
-                    sParentMenuId = txtMenuId.Text;
+                    parent_menu_id =int.Parse( txtMenuId.Text);
                 }
             }
         }
-        if (sParentMenuId != "0" && sMenuTypeId == "0")
+        if (parent_menu_id != 0 && _menu_type_id == 0)
         {
-            DataTable catData = LegoWeb.BusLogic.Menus.get_MENU_BY_ID(int.Parse(sParentMenuId)).Tables[0];
-            sMenuTypeId = catData.Rows[0]["MENU_TYPE_ID"].ToString();
+            DataTable catData = LegoWeb.BusLogic.Menus.get_MENU_BY_ID(parent_menu_id).Tables[0];
+            _menu_type_id = int.Parse( catData.Rows[0]["MENU_TYPE_ID"].ToString());
         }
-        Response.Redirect("MenuAddUpdate.aspx?menu_type_id=" + sMenuTypeId +"&parent_menu_id=" + sParentMenuId);
+        Response.Redirect("MenuAddUpdate.aspx?menu_type_id=" + _menu_type_id.ToString() +"&parent_menu_id=" + parent_menu_id.ToString());
     }
     override protected void OnInit(EventArgs e)
     {
         _menuManagerData = new MenuDataProvider();
     }
 
-    protected void dropMenuTypes_Init(object sender, EventArgs e)
-    {
-        DataTable secData = LegoWeb.BusLogic.MenuTypes.get_Search_Page(1, 100).Tables[0];
-        this.dropMenuTypes.DataTextField = "MENU_TYPE_VI_TITLE";
-        this.dropMenuTypes.DataValueField = "MENU_TYPE_ID";
-        this.dropMenuTypes.DataSource = secData;
-        this.dropMenuTypes.DataBind();
-        if (CommonUtility.GetInitialValue("menu_type_id", null) != null)
-        {
-            this.dropMenuTypes.SelectedValue = CommonUtility.GetInitialValue("menu_type_id", null).ToString();
-        }
-    }
     protected void dropMenuTypes_SelectedIndexChanged(object sender, EventArgs e)
     {
         ViewState["menuManagerPageNumber"] = 1;
