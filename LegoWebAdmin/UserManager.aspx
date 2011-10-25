@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="UserManager.aspx.cs" Inherits="LegoWebAdmin_UserManager" Title="KIPOSADMIN: Quản lý người dùng" %>
-<%@ Register src="UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
-<%@ Register src="UserControls/UserManager.ascx" tagname="UserManager" tagprefix="uc3" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="UserManager.aspx.cs" Inherits="LegoWebAdmin_UserManager" Title="User manager" %>
+<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="LgwUserControls/UserManager.ascx" tagname="UserManager" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <script src="AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>
@@ -34,10 +34,10 @@
 <table class="toolbar"><tr>
 <td class="button" id="toolbar-delete">
 <asp:LinkButton ID="linkDeleteButton" class="toolbar" runat="server" 
-        onclick="linkDeleteButton_Click" OnClientClick="return confirm('Bạn thực sự muốn xóa các tài khoản được chọn?')">
+        onclick="linkDeleteButton_Click" OnClientClick="return confirm('Are you sure to remove selected users?')">
 <span class="icon-32-delete" title="Delete">
 </span>
-Xóa
+<%=Resources.strings.btnDelete_Text%>
 </asp:LinkButton>
 </td>
 
@@ -46,7 +46,7 @@ Xóa
         onclick="linkEditButton_Click">
 <span class="icon-32-edit" title="Edit">
 </span>
-Sửa
+<%=Resources.strings.btnEdit_Text%>
 </asp:LinkButton>
 </td>
 
@@ -55,7 +55,7 @@ Sửa
         onclick="linkNewButton_Click">
 <span class="icon-32-new" title="New">
 </span>
-Thêm
+<%=Resources.strings.btnAdd_Text%>
 </asp:LinkButton>
 </td>
 
@@ -63,14 +63,14 @@ Thêm
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Trợ giúp">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text%>
 </a>
 </td>
 
 </tr></table>
 </div>
 				<div class="header icon-48-user">
-Quản trị người dùng
+<%=Resources.strings.UserManager_Text%>
 </div>
 
 				<div class="clr"></div>

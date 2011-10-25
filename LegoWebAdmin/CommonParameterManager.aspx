@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="CommonParameterManager.aspx.cs" Inherits="Administrator_CommonParameterManager" Title="KIPOSADMIN: Tham số hệ thống" %>
-<%@ Register src="UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
-<%@ Register src="UserControls/CommonParameterManager.ascx" tagname="CommonParameterManager" tagprefix="uc3" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="CommonParameterManager.aspx.cs" Inherits="Administrator_CommonParameterManager" Title="System parameters" %>
+<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="LgwUserControls/CommonParameterManager.ascx" tagname="CommonParameterManager" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <script src="AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>
@@ -35,10 +35,10 @@
 <table class="toolbar"><tr>
 <td class="button" id="toolbar-delete">
 <asp:LinkButton ID="linkDeleteButton" class="toolbar" runat="server" 
-        onclick="linkDeleteButton_Click" OnClientClick="return confirm('Bạn thực sự muốn xóa các trình đơn được chọn?')">
+        onclick="linkDeleteButton_Click" OnClientClick="return confirm('Are you sure to remove selected items?')">
 <span class="icon-32-delete" title="Delete">
 </span>
-Xóa
+<%=Resources.strings.btnDelete_Text %>
 </asp:LinkButton>
 </td>
 
@@ -47,7 +47,7 @@ Xóa
         onclick="linkEditButton_Click">
 <span class="icon-32-edit" title="Edit">
 </span>
-Sửa
+<%=Resources.strings.btnEdit_Text %>
 </asp:LinkButton>
 </td>
 
@@ -56,7 +56,7 @@ Sửa
         onclick="linkNewButton_Click">
 <span class="icon-32-new" title="New">
 </span>
-Thêm
+<%=Resources.strings.btnAdd_Text %>
 </asp:LinkButton>
 </td>
 
@@ -64,14 +64,14 @@ Thêm
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Trợ giúp">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text %>
 </a>
 </td>
 
 </tr></table>
 </div>
 <div class="header icon-48-config">
-Cấu hình tham số hệ thống
+<%=Resources.strings.SystemParameters_Text %>
 </div>
 
 				<div class="clr"></div>

@@ -1,11 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MetaContentExport.aspx.cs" Inherits="MetaContentExport" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MetaContentExport.aspx.cs" Inherits="MetaContentExport" Title="Metadata Exports" %>
 
-<%@ Register src="UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-        <script src="AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>
+    <script src="AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>
     <script src="AdminTools/JavaScripts/index.js" type="text/javascript"></script>
     <script src="AdminTools/JavaScripts/menu.js" type="text/javascript"></script>
     <script type = "text/javascript" language = "javascript"> 
@@ -50,9 +50,9 @@
 <td class="button" id="toolbar-export">
 <asp:LinkButton ID="linkExportButton" class="toolbar" runat="server" 
         onclick="linkExportButton_Click">
-<span class="icon-32-export" title="Xuất khẩu dữ liệu">
+<span class="icon-32-export" title="Export metadata">
 </span>
-Chấp nhận
+<%=Resources.strings.btnExports_Text %>
 </asp:LinkButton>
 </td>
  
@@ -61,7 +61,7 @@ Chấp nhận
         onclick="linkCancelButton_Click">
         <span class="icon-32-cancel" title="Cancel">
 </span>
-Bỏ qua
+<%=Resources.strings.btnCancel_Text %>
 </asp:LinkButton>
 </td>
 
@@ -69,14 +69,14 @@ Bỏ qua
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Trợ giúp">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text %>
 </a>
 </td>
 
 </tr></table>
 </div>
 				<div class="header icon-48-archive">
-Xuất khẩu dữ liệu web
+<%=Resources.strings.MetadataExports_Text %>
 </div>
 
 				<div class="clr"></div>
@@ -99,17 +99,15 @@ Xuất khẩu dữ liệu web
 			<div class="m">
 																	
 					<fieldset class="adminform">
-		                <legend>Đặt lọc dữ liệu xuất khẩu:</legend>		                
+		                <legend><%=Resources.strings.FilterCriteria_Text%>:</legend>		                
 		                <table cellpadding="2" cellspacing="2" width="600px" border="0">
                         <tbody>
                         <tr>
-                        <td align="right" valign="middle" style="width:100px"><b> Kiểu đặt lọc:</b></td>
+                        <td align="right" valign="middle" style="width:100px"><b> <%=Resources.strings.FilterType_Text%>:</b></td>
                         <td>
 		                    <asp:RadioButtonList ID="radioFilterType" runat="server" 
                                 RepeatDirection="Horizontal" AutoPostBack="True" 
                                 onselectedindexchanged="radioFilterType_SelectedIndexChanged">
-		                    <asp:ListItem Value="0" Text="Theo chuyên mục" Selected="True"></asp:ListItem>
-		                    <asp:ListItem Value="1" Text="Theo mã số" Selected="False"></asp:ListItem>
 		                    </asp:RadioButtonList>                        
                         </td>
 		                </tr>
@@ -119,11 +117,11 @@ Xuất khẩu dữ liệu web
 		                <table cellpadding="2" cellspacing="2" width="600px" border="0">
 		                <tbody >
 		                <tr>		                
-                        <td align="right" valign="middle" style="width:100px"><b> Vùng thông tin:</b></td>
-                        <td align="left" valign="middle" style="width:200px"><asp:dropdownlist ID="dropSections" runat="server" oninit="dropSections_Init" AutoPostBack="true" OnSelectedIndexChanged="dropSections_SelectedIndexChanged"></asp:dropdownlist></td>
-                        <td align="right" valign="middle" style="width:100px"><b> Chuyên mục:</b></td>
+                        <td align="right" valign="middle" style="width:100px"><b><%=Resources.strings.Section_Text %>:</b></td>
+                        <td align="left" valign="middle" style="width:200px"><asp:dropdownlist ID="dropSections" runat="server"  AutoPostBack="true" OnSelectedIndexChanged="dropSections_SelectedIndexChanged"></asp:dropdownlist></td>
+                        <td align="right" valign="middle" style="width:100px"><b> <%=Resources.strings.Category_Text %>:</b></td>
                         <td align="left" valign="middle">
-                            <asp:dropdownlist ID="dropCategories" runat="server" AutoPostBack="true" oninit="dropCategories_Init"></asp:dropdownlist></td>
+                            <asp:dropdownlist ID="dropCategories" runat="server" AutoPostBack="true" ></asp:dropdownlist></td>
                         </tr>
                         </tbody>
                         </table>
@@ -133,11 +131,11 @@ Xuất khẩu dữ liệu web
 		                <table cellpadding="2" cellspacing="2" width="600px" border="0">
 		                <tbody>
 		                <tr>		                
-                        <td align="right" valign="middle" style="width:100px"><b>Mã số từ:</b></td>
+                        <td align="right" valign="middle" style="width:100px"><b><%=Resources.strings.FromID_Text %>:</b></td>
                         <td align="left" valign="middle" style="width:150px">
                         <asp:TextBox ID="txtFromId" runat="server" style="text-align:right;" ></asp:TextBox>
                         </td>
-                        <td align="right" valign="middle" style="width:100px"><b>đến:</b></td>
+                        <td align="right" valign="middle" style="width:100px"><b><%=Resources.strings.ToID_Text %>:</b></td>
                         <td align="left" valign="middle">
                         <asp:TextBox ID="txtToId" runat="server" style="text-align:right;" ></asp:TextBox>
                         </td>
@@ -145,11 +143,11 @@ Xuất khẩu dữ liệu web
                         <tr>
                         <td colspan="2">
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtFromId"
-                        ErrorMessage="Chỉ được nhập số" ValidationExpression="^\d+$" ValidationGroup="check"></asp:RegularExpressionValidator>                        
+                        ErrorMessage="Only number accepted" ValidationExpression="^\d+$" ValidationGroup="check"></asp:RegularExpressionValidator>                        
                         </td>
                         <td colspan="2">
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtToId"
-                        ErrorMessage="Chỉ được nhập số" ValidationExpression="^\d+$" ValidationGroup="check"></asp:RegularExpressionValidator>                        
+                        ErrorMessage="Only number accepted" ValidationExpression="^\d+$" ValidationGroup="check"></asp:RegularExpressionValidator>                        
                         </td>
                         </tr>
                         </tbody>
@@ -159,8 +157,8 @@ Xuất khẩu dữ liệu web
 		                <table cellpadding="2" cellspacing="2" width="600px" border="0">
 		                <tbody>
 		                <tr>		                
-                        <td  colspan="4" align="right" valign="middle"><asp:Button ID="btnShow" 
-                                runat="server" Text="Xem kết quả" onclick="btnShow_Click" /></td>
+                        <td  colspan="4" align="right" valign="middle"><asp:Button ID="btnShowResults" 
+                                runat="server" Text="Show results" onclick="btnShowResults_Click" /></td>
                         </tr>
                         </tbody>
                         </table>                        
@@ -173,13 +171,13 @@ Xuất khẩu dữ liệu web
 							<tr>
 							<th width="2%" class="title">#</th>
 							<th class="title">ID</th>							
-							<th class="title">Tiêu đề</th>
-							<th class="title">Ngôn ngữ</th>
-							<th class="title">Công bố</th>
-							<th class="title">Chuyên mục</th>
-							<th class="title">User</th>
-							<th class="title">Cập nhật</th>	
-							<th class="title">Lượt</th>							
+							<th class="title"><%=Resources.strings.Title_Text %></th>
+							<th class="title"><%=Resources.strings.Language_Text %></th>
+							<th class="title"><%=Resources.strings.IsPublic_Text %></th>
+							<th class="title"><%=Resources.strings.Category_Text %></th>
+							<th class="title"><%=Resources.strings.UserName_Text %></th>
+							<th class="title"><%=Resources.strings.Update_Text%></th>	
+							<th class="title"><%=Resources.strings.Hit_Text %></th>							
 							</tr>
 							</thead>
 							<tbody>

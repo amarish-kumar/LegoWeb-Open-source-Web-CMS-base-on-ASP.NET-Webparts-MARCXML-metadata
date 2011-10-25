@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MediaManager.aspx.cs" Inherits="LegoWebAdmin_MediaManager" Title="KIPOSADMIN: Quản lý tệp tin" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MediaManager.aspx.cs" Inherits="LegoWebAdmin_MediaManager" Title="Media manager" %>
 <%@ Register Assembly="CKFinder" Namespace="CKFinder" TagPrefix="CKFinder" %>
-<%@ Register src="UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <script src="AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>
@@ -33,17 +33,17 @@
 				<div class="toolbar" id="toolbar">
 <table class="toolbar"><tr>
 <td class="button" id="toolbar-help">
-<a href="#" onclick="popupWindow('http://help.joomla.org/index2.php?option=com_content&amp;task=findkey&amp;tmpl=component;1&amp;keyref=screen.mediamanager.15', 'Help', 640, 480, 1)" class="toolbar">
-<span class="icon-32-help" title="Trợ giúp">
+<a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
+<span class="icon-32-help" title="<%=Resources.strings.btnHelp_Text %>">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text %>
 </a>
 </td>
 
 </tr></table>
 </div>
 				<div class="header icon-48-mediamanager">
-Quản lý tệp tin
+<%=Resources.strings.MediaManager_Text %>
 </div>
 
 				<div class="clr"></div>

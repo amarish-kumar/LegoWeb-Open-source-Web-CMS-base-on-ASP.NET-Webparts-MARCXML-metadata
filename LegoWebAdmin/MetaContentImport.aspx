@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MetaContentImport.aspx.cs" Inherits="MetaContentImport" %>
+﻿<%@ Page Title="Metadata imports" Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MetaContentImport.aspx.cs" Inherits="MetaContentImport" %>
 
-<%@ Register src="UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
     	<%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
     <%@ Register Assembly="CKFinder" Namespace="CKFinder" TagPrefix="CKFinder" %>
 
@@ -64,9 +64,9 @@
 <td class="button" id="toolbar-import">
 <asp:LinkButton ID="linkImportContentButton" class="toolbar" runat="server" 
         onclick="linkImportContentButton_Click">
-<span class="icon-32-save" title="Nhập khẩu dữ liệu">
+<span class="icon-32-save" title="Imports metadata">
 </span>
-Nhập khẩu
+<%=Resources.strings.btnImports_Text %>
 </asp:LinkButton>
 </td>
  
@@ -75,22 +75,22 @@ Nhập khẩu
         onclick="linkCancelButton_Click">
         <span class="icon-32-cancel" title="Cancel">
 </span>
-Bỏ qua
+<%=Resources.strings.btnCancel_Text %>
 </asp:LinkButton>
 </td>
 
 <td class="button" id="toolbar-help">
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
-<span class="icon-32-help" title="Trợ giúp">
+<span class="icon-32-help" title="Help">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text %>
 </a>
 </td>
 
 </tr></table>
 </div>
 				<div class="header icon-48-install">
-Nhập khẩu dữ liệu web
+<%=Resources.strings.MetadataImports_Text %>
 </div>
 
 				<div class="clr"></div>
@@ -113,19 +113,19 @@ Nhập khẩu dữ liệu web
 			<div class="m">
 			
 			    <fieldset class="adminform">
-		         <legend>Nhập khẩu dữ liệu web:</legend>											
-                <table cellpadding="2" cellspacing="2" width="650px" border="0">
+		         <legend><%=Resources.strings.Source_Text %></legend>											
+                <table cellpadding="2" cellspacing="2" width="800px" border="0">
                 <tbody>
                 <tr>
-                <td align="right" valign="middle" style="width:100px"><b>Tệp tin(*.xml):</b></td>
+                <td align="right" valign="middle" style="width:150px"><b><%=Resources.strings.MetadataFile_Text%>:</b></td>
                 <td valign="middle" style="width:305px">
-                <asp:TextBox ID="txtFileName" runat="server" Width="350px"></asp:TextBox>                     
+                <asp:TextBox ID="txtFileName" runat="server" Width="450px"></asp:TextBox>                     
                 </td>
                 <td valign="middle" align="left">
-                    <asp:Button ID="btnFileBrowse" OnClientClick="BrowseServer();" Text="Chọn tệp" 
-                        runat="server" onclick="btnFileBrowse_Click" />
-                    <asp:Button ID="btnAnalyzeData" Text="Phân tích" runat="server" 
-                        onclick="btnAnalyzeData_Click" />
+                    <asp:Button ID="btnBrowse" OnClientClick="BrowseServer();" Text="Browse" 
+                        runat="server" onclick="btnBrowse_Click" />
+                    <asp:Button ID="btnAnalyse" Text="Analyse" runat="server" 
+                        onclick="btnAnalyse_Click" />
                 </td>
                 </tr>
                 <tr>
@@ -143,27 +143,24 @@ Nhập khẩu dữ liệu web
                 
                 <div id="divDefaultCategory" runat="server" visible="false">
                 <fieldset class="adminform">
-		         <legend>Tham số nhập khẩu:</legend>		         
+		         <legend><%=Resources.strings.ImportParams_Text %>:</legend>		         
 		        
 		                <table cellpadding="2" cellspacing="2" width="700px" border="0">
 		                <tbody >
 		                <tr>		                
-                        <td align="right" valign="middle" style="width:150px"><b> Vùng tin mặc định:</b></td>
-                        <td align="left" valign="middle" style="width:200px"><asp:dropdownlist ID="dropSections" runat="server" oninit="dropSections_Init" AutoPostBack="true" OnSelectedIndexChanged="dropSections_SelectedIndexChanged"></asp:dropdownlist></td>
-                        <td align="right" valign="middle" style="width:150px"><b> Chuyên mục mặc định:</b></td>
+                        <td align="right" valign="middle" style="width:150px"><b><%=Resources.strings.DefaultSection_Text %>:</b></td>
+                        <td align="left" valign="middle" style="width:200px"><asp:dropdownlist ID="dropSections" runat="server"  AutoPostBack="true" OnSelectedIndexChanged="dropSections_SelectedIndexChanged"></asp:dropdownlist></td>
+                        <td align="right" valign="middle" style="width:150px"><b> <%=Resources.strings.DefaultCategory_Text %>:</b></td>
                         <td align="left" valign="middle">
-                            <asp:dropdownlist ID="dropCategories" runat="server" AutoPostBack="true" oninit="dropCategories_Init"></asp:dropdownlist></td>
+                            <asp:dropdownlist ID="dropCategories" runat="server" AutoPostBack="true"></asp:dropdownlist></td>
                         </tr>
                         <tr>
                         <td align="right" valign="middle" style="width:150px">
-                        <b>Kiểu nhập khẩu:</b>
+                        <b><%=Resources.strings.ImportTypes_Text %>:</b>
                         </td>
                         <td colspan="3">
-                            <asp:RadioButtonList ID="radioImportOptions" runat="server" 
+                            <asp:RadioButtonList ID="radioImportTypes" runat="server" 
                                 RepeatDirection="Horizontal">
-		                    <asp:ListItem Value="0" Text="Thêm mới (mã số mới)" Selected="True"></asp:ListItem>
-		                    <asp:ListItem Value="1" Text="Bỏ qua nếu trùng mã số" Selected="False"></asp:ListItem>
-		                    <asp:ListItem Value="2" Text="Ghi đè nếu trùng mã số" Selected="False"></asp:ListItem>
 		                    </asp:RadioButtonList>     
 		                 </td>                      
                         </tr>
@@ -173,8 +170,6 @@ Nhập khẩu dữ liệu web
                         </td>
                         <td colspan="3">
                             <asp:RadioButtonList ID="radioForceToDefaultCategory" runat="server" RepeatDirection="Horizontal">
-		                    <asp:ListItem Value="0" Text="Tự động vào Chuyên mục " Selected="True"></asp:ListItem>
-		                    <asp:ListItem Value="1" Text="Bắt buộc vào Chuyên mục mặc định" Selected="False"></asp:ListItem>
 		                    </asp:RadioButtonList>     
 		                 </td>                      
                         </tr>

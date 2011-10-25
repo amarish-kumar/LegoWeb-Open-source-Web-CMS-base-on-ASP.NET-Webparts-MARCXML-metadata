@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="UserAddNew.aspx.cs" Inherits="LegoWebAdmin_UserAddNew" Title="KIPOSADMIN: Thêm mới người dùng" %>
-<%@ Register src="UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
-<%@ Register src="UserControls/UserAddNew.ascx" tagname="UserAddNew" tagprefix="uc3" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="UserAddNew.aspx.cs" Inherits="LegoWebAdmin_UserAddNew" Title="Add new user" %>
+<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="LgwUserControls/UserAddNew.ascx" tagname="UserAddNew" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 
@@ -36,7 +36,7 @@
         onclick="linkSaveButton_Click" ValidationGroup="UserInfo" CausesValidation="true">
 <span class="icon-32-save" title="Save">
 </span>
-Chấp nhận
+<%=Resources.strings.btnSave_Text %>
 </asp:LinkButton>
 </td>
  
@@ -46,7 +46,7 @@ Chấp nhận
         onclick="linkCancelButton_Click" ValidationGroup="UserInfo" CausesValidation="false">
         <span class="icon-32-cancel" title="Cancel">
 </span>
-Bỏ qua
+<%=Resources.strings.btnCancel_Text %>
 </asp:LinkButton>
 </td>
  
@@ -54,7 +54,7 @@ Bỏ qua
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Trợ giúp">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text %>
 </a>
 </td>
  
@@ -62,7 +62,7 @@ Trợ giúp
 
 </div>
 				<div class="header icon-48-user">
-Người dùng: [Thêm mới]
+<%=Resources.strings.AddUser_Text %>
 </div>
 
 				<div class="clr"></div>

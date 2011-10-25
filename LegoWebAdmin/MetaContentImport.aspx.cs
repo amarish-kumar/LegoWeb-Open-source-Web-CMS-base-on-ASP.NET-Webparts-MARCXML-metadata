@@ -13,6 +13,39 @@ public partial class MetaContentImport : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            btnBrowse.Text = Resources.strings.btnBrowse_Text;
+            btnAnalyse.Text = Resources.strings.btnAnalyse_Text;
+            ListItem item = new ListItem();
+            item.Text = String.Format("<span style='width:50px'>{0}</span>", Resources.strings.Append_Text);
+            item.Value = "0";
+            item.Selected = true;
+            radioImportTypes.Items.Add(item);
+            item = new ListItem();
+            item.Text = String.Format("<span style='width:50px'>{0}</span>", Resources.strings.SkipIfDuplicatedID_Text);
+            item.Value = "1";
+            radioImportTypes.Items.Add(item);
+            item = new ListItem();
+            item.Text = String.Format("<span style='width:50px'>{0}</span>", Resources.strings.OverWriteIfDuplicatedID_Text);
+            item.Value = "2";
+            radioImportTypes.Items.Add(item);
+            //load force to default category
+
+            item = new ListItem();
+            item.Text = String.Format("<span style='width:50px'>{0}</span>", Resources.strings.AutoDetectCategory_Text);
+            item.Value = "0";
+            item.Selected = true;
+            radioForceToDefaultCategory.Items.Add(item);
+
+            item = new ListItem();
+            item.Text = String.Format("<span style='width:50px'>{0}</span>", Resources.strings.ForceToDefaultCategory_Text);
+            item.Value = "1";
+            radioForceToDefaultCategory.Items.Add(item);
+
+
+
+            load_dropSections();
+            load_dropCategories();
+
             if (!Roles.IsUserInRole("ADMINISTRATORS"))
             {
                 Response.Redirect("ErrorMessage.aspx?ErrorMessage='Bạn không có quyền truy cập vào tính năng này!'");
@@ -32,7 +65,7 @@ public partial class MetaContentImport : System.Web.UI.Page
         }
         //chuyển đổi địa chỉ URL sang Physycal
         string sFileURL = txtFileName.Text;
-        string sFileName= sFileURL.Replace(System.Configuration.ConfigurationManager.AppSettings["FCKeditor:UserFilesVirtuaPath"],System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"]);
+        string sFileName= sFileURL.Replace(System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesVirtuaPath"],System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"]);
         sFileName = sFileName.Replace("/", "\\");
         if (!System.IO.File.Exists(sFileName))
         {
@@ -56,7 +89,7 @@ public partial class MetaContentImport : System.Web.UI.Page
             myRec.load_Xml(myRecs.Record(i).OuterXml);
             Int32 iID = String.IsNullOrEmpty(myRecs.Record(i).Controlfields.Controlfield("001").Value) ? 0 : Int32.Parse(myRecs.Record(i).Controlfields.Controlfield("001").Value);
             Int32 iCatID = String.IsNullOrEmpty(myRecs.Record(i).Controlfields.Controlfield("002").Value) ? 0 : Int32.Parse(myRecs.Record(i).Controlfields.Controlfield("002").Value);            
-            switch (radioImportOptions.SelectedValue)
+            switch (radioImportTypes.SelectedValue)
             { 
                 case "0"://append
                     myRec.Controlfields.Controlfield("001").Value = "0";
@@ -121,7 +154,7 @@ public partial class MetaContentImport : System.Web.UI.Page
         Response.Redirect("ControlPanel.aspx");
     }
 
-    protected void btnAnalyzeData_Click(object sender, EventArgs e)
+    protected void btnAnalyse_Click(object sender, EventArgs e)
     {
         divDefaultCategory.Visible = false;
         DataTable contentTable = create_ContentTable();
@@ -134,7 +167,7 @@ public partial class MetaContentImport : System.Web.UI.Page
         }
         //chuyển đổi địa chỉ URL sang Physycal
         string sFileURL = txtFileName.Text;
-        string sFileName= sFileURL.Replace(System.Configuration.ConfigurationManager.AppSettings["FCKeditor:UserFilesVirtuaPath"],System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"]);
+        string sFileName= sFileURL.Replace(System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesVirtuaPath"],System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"]);
         sFileName = sFileName.Replace("/", "\\");
         if (!System.IO.File.Exists(sFileName))
         {
@@ -166,7 +199,7 @@ public partial class MetaContentImport : System.Web.UI.Page
         metaContentRepeater.DataBind();
 
     }
-    protected void btnFileBrowse_Click(object sender, EventArgs e)
+    protected void btnBrowse_Click(object sender, EventArgs e)
     {
 
     }
@@ -200,10 +233,10 @@ public partial class MetaContentImport : System.Web.UI.Page
     }
 
 
-    protected void dropSections_Init(object sender, EventArgs e)
+    protected void load_dropSections()
     {
         DataTable secData = LegoWeb.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
-        this.dropSections.DataTextField = "SECTION_VI_TITLE";
+        this.dropSections.DataTextField = "SECTION_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE";
         this.dropSections.DataValueField = "SECTION_ID";
         this.dropSections.DataSource = secData;
         this.dropSections.DataBind();
@@ -214,16 +247,7 @@ public partial class MetaContentImport : System.Web.UI.Page
     {
         this.dropCategories.Items.Clear();
         DataTable catData = LegoWeb.BusLogic.Categories.get_Search_Page(0, 0, this.dropSections.SelectedValue != null ? int.Parse(this.dropSections.SelectedValue.ToString()) : 0, " - ", 1, 100).Tables[0];
-        this.dropCategories.DataTextField = "CATEGORY_VI_TITLE";
-        this.dropCategories.DataValueField = "CATEGORY_ID";
-        this.dropCategories.DataSource = catData;
-        this.dropCategories.DataBind();
-    }
-
-    protected void dropCategories_Init(object sender, EventArgs e)
-    {
-        DataTable catData = LegoWeb.BusLogic.Categories.get_Search_Page(0, 0, this.dropSections.SelectedValue != null ? int.Parse(this.dropSections.SelectedValue.ToString()) : 0, " - ", 1, 100).Tables[0];
-        this.dropCategories.DataTextField = "CATEGORY_VI_TITLE";
+        this.dropCategories.DataTextField = "CATEGORY_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() +  "_TITLE";
         this.dropCategories.DataValueField = "CATEGORY_ID";
         this.dropCategories.DataSource = catData;
         this.dropCategories.DataBind();

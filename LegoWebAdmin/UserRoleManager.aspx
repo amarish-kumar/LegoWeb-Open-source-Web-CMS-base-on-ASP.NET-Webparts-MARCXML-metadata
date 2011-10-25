@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="UserRoleManager.aspx.cs" Inherits="KiposWebAdmin_UserRoleManager" Title="KIPOSADMIN: Quản lý vai trò người dùng" %>
-<%@ Register src="UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
-<%@ Register src="UserControls/UserRoleManager.ascx" tagname="UserRoleManager" tagprefix="uc3" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="UserRoleManager.aspx.cs" Inherits="KiposWebAdmin_UserRoleManager" Title="User role manager" %>
+<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="LgwUserControls/UserRoleManager.ascx" tagname="UserRoleManager" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <script src="AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>
@@ -38,15 +38,15 @@
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Trợ giúp">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text %>
 </a>
 </td>
 
 </tr></table>
 </div>
 
-                <div class='header icon-48-info'>
-                    Quản lý vai trò sử dụng
+                <div class='header icon-48-user'>
+                   <%=Resources.strings.UserRoleManager_Text %>
                 </div>
 
 

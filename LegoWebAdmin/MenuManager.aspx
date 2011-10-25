@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MenuManager.aspx.cs" Inherits="LegoWebAdmin_MenuManager" Title="KIPOSADMIN: Quản lý trình đơn" %>
-<%@ Register src="UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
-<%@ Register src="UserControls/MenuManager.ascx" tagname="MenuManager" tagprefix="uc3" %>
+<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="LgwUserControls/MenuManager.ascx" tagname="MenuManager" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <script src="AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>

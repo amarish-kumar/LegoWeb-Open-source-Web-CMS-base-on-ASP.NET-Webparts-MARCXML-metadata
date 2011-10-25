@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MetaContentAddUpdate.aspx.cs" Inherits="Administrator_MetaContentAddUpdate" Title="KIPOSADMIN: Biên tập nội dung web" ValidateRequest="false" %>
-<%@ Register src="UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
-<%@ Register src="UserControls/MetaContentAddUpdate.ascx" tagname="MetaContentAddUpdate" tagprefix="uc3" %>
+<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="LgwUserControls/MetaContentAddUpdate.ascx" tagname="MetaContentAddUpdate" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
         <script language="javascript" type="text/javascript">
