@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MenuManager.aspx.cs" Inherits="LegoWebAdmin_MenuManager" Title="KIPOSADMIN: Quản lý trình đơn" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MenuManager.aspx.cs" Inherits="LegoWebAdmin_MenuManager" Title="Menu details manager" %>
 <%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
 <%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
 <%@ Register src="LgwUserControls/MenuManager.ascx" tagname="MenuManager" tagprefix="uc3" %>
@@ -39,7 +39,7 @@
         onclick="linkPublishButton_Click">
 <span class="icon-32-publish" title="Publish">
 </span>
-Công bố
+<%=Resources.strings.btnPublish_Text %>
 </asp:LinkButton>
 </td>
  
@@ -48,7 +48,7 @@ Công bố
         onclick="linkUnPublishButton_Click">
 <span class="icon-32-unpublish" title="Unpublish">
 </span>
-Hạn chế
+<%=Resources.strings.btnUnPublish_Text %>
 </asp:LinkButton>
 </td>
 
@@ -58,7 +58,7 @@ Hạn chế
         onclick="linkDeleteButton_Click" OnClientClick="return confirm('Bạn thực sự muốn xóa các tài khoản được chọn?')">
 <span class="icon-32-delete" title="Delete">
 </span>
-Xóa
+<%=Resources.strings.btnDelete_Text %>
 </asp:LinkButton>
 </td>
 
@@ -67,7 +67,7 @@ Xóa
         onclick="linkEditButton_Click">
 <span class="icon-32-edit" title="Edit">
 </span>
-Sửa
+<%=Resources.strings.btnEdit_Text %>
 </asp:LinkButton>
 </td>
 
@@ -76,7 +76,7 @@ Sửa
         onclick="linkNewButton_Click">
 <span class="icon-32-new" title="New">
 </span>
-Thêm
+<%=Resources.strings.btnAdd_Text %>
 </asp:LinkButton>
 </td>
 
@@ -84,14 +84,14 @@ Thêm
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Trợ giúp">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text %>
 </a>
 </td>
 
 </tr></table>
 </div>
-				<div class="header icon-48-menu">
-Quản lý trình đơn
+<div class="header icon-48-menu">
+<asp:Literal ID="litMenuTypeName" runat="server"></asp:Literal>
 </div>
 
 				<div class="clr"></div>

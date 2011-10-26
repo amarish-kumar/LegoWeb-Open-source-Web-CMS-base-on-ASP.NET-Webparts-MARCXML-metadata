@@ -19,7 +19,18 @@ public partial class LegoWebAdmin_MenuManager : System.Web.UI.Page
         {
             if (!Roles.IsUserInRole("ADMINISTRATORS"))
             {
-                Response.Redirect("ErrorMessage.aspx?ErrorMessage='Bạn không có quyền truy cập vào tính năng này!'");
+                Response.Redirect("ErrorMessage.aspx?ErrorMessage='You are not authorized update menu details!'");
+            }
+            if (CommonUtility.GetInitialValue("menu_type_id", null) != null)
+            {
+                DataTable MenuTypeTbl = LegoWeb.BusLogic.MenuTypes.get_MenuType_By_ID(int.Parse(CommonUtility.GetInitialValue("menu_type_id", null).ToString())).Tables[0];
+                if(MenuTypeTbl.Rows.Count>0)
+                {
+                    litMenuTypeName.Text = String.Format("[{0}] {1}", MenuTypeTbl.Rows[0]["MENU_TYPE_ID"].ToString(), MenuTypeTbl.Rows[0]["MENU_TYPE_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"].ToString());
+                }else
+                {
+                    litMenuTypeName.Text="Error: No menu info";
+                }
             }
         }
     }

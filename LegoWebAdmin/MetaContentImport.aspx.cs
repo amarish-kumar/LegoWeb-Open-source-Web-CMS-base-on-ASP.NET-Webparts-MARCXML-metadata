@@ -48,7 +48,7 @@ public partial class MetaContentImport : System.Web.UI.Page
 
             if (!Roles.IsUserInRole("ADMINISTRATORS"))
             {
-                Response.Redirect("ErrorMessage.aspx?ErrorMessage='Bạn không có quyền truy cập vào tính năng này!'");
+                Response.Redirect("ErrorMessage.aspx?ErrorMessage='You are not authorized to import metadata!'");
             }
         }
     }
@@ -59,7 +59,7 @@ public partial class MetaContentImport : System.Web.UI.Page
         if (String.IsNullOrEmpty(txtFileName.Text))
         {
             litErrorMessage.Visible = true;
-            litErrorMessage.Text = "Bạn cần chọn tệp dữ liệu nguồn!";
+            litErrorMessage.Text = "You must select a metadata source file!";
             txtFileName.Focus();
             return;            
         }
@@ -70,7 +70,7 @@ public partial class MetaContentImport : System.Web.UI.Page
         if (!System.IO.File.Exists(sFileName))
         {
             litErrorMessage.Visible = true;
-            litErrorMessage.Text = "Tệp dữ liệu không tồn tại!";
+            litErrorMessage.Text = "source file does not exist!";
             return;
         }
         else
@@ -147,7 +147,7 @@ public partial class MetaContentImport : System.Web.UI.Page
             }
         }
         litErrorMessage.Visible = true;
-        litErrorMessage.Text = String.Format("Nhập khẩu {0} bản ghi, bỏ qua {1}!.",myRecs.Count.ToString(), iSkipCount.ToString());
+        litErrorMessage.Text = String.Format("Imports successfully {0} records, skips {1}!.",myRecs.Count.ToString(), iSkipCount.ToString());
     }
     protected void linkCancelButton_Click(object sender, EventArgs e)
     {
@@ -161,7 +161,7 @@ public partial class MetaContentImport : System.Web.UI.Page
         if (String.IsNullOrEmpty(txtFileName.Text))
         {
             litErrorMessage.Visible = true;
-            litErrorMessage.Text = "Bạn cần chọn tệp dữ liệu nguồn!";
+            litErrorMessage.Text = "You must select a metadata source file!";
             txtFileName.Focus();
             return;            
         }
@@ -172,7 +172,7 @@ public partial class MetaContentImport : System.Web.UI.Page
         if (!System.IO.File.Exists(sFileName))
         {
             litErrorMessage.Visible = true;
-            litErrorMessage.Text = "Tệp dữ liệu không tồn tại!";
+            litErrorMessage.Text = "Physical file does not exist!";
             return;
         }
         else

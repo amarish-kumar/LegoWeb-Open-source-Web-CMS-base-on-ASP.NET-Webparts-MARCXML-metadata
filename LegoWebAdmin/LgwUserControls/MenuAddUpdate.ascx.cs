@@ -13,6 +13,30 @@ public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
+
+            //load listbox Browser Navigation
+               //            <asp:ListItem Value="0" Text="Mở bình thường" Selected="True"></asp:ListItem>
+               //<asp:ListItem Value="1" Text="Mở trong cửa sổ mới"></asp:ListItem>
+               //<asp:ListItem Value="2" Text="Mở trong cửa sổ mới và không có thanh di chuyển"></asp:ListItem>
+            ListItem item = new ListItem();
+            item.Value = "0";
+            item.Text = Resources.strings.ParentWindowWithBrowserNavigation_Text;
+            item.Selected = true;
+            listBoxBrowserNavigation.Items.Add(item);
+
+            item = new ListItem();
+            item.Value = "1";
+            item.Text = Resources.strings.NewWindowWithBrowserNavigation_Text;
+            item.Selected = true;
+            listBoxBrowserNavigation.Items.Add(item);
+
+            item = new ListItem();
+            item.Value = "2";
+            item.Text = Resources.strings.NewWindowWithoutBrowserNavigation_Text;
+            item.Selected = true;
+            listBoxBrowserNavigation.Items.Add(item);
+
+
             if (CommonUtility.GetInitialValue("menu_id") != null)
             {
                 DataSet CatData = LegoWeb.BusLogic.Menus.get_MENU_BY_ID(int.Parse(CommonUtility.GetInitialValue("menu_id").ToString()));
@@ -46,7 +70,7 @@ public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
     protected void load_MenuTypes(int iSelectedMenuTypeId)
     {
         DataTable secData = LegoWeb.BusLogic.MenuTypes.get_Search_Page(1, 100).Tables[0];
-        this.dropMenuTypes.DataTextField = "MENU_TYPE_VI_TITLE";
+        this.dropMenuTypes.DataTextField = "MENU_TYPE_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE";
         this.dropMenuTypes.DataValueField = "MENU_TYPE_ID";
         this.dropMenuTypes.DataSource = secData;
         this.dropMenuTypes.DataBind();
@@ -63,7 +87,7 @@ public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
     protected void load_ParentMenus(int iMenuTypeId,int iSelectedParentMenuId)
     {
         DataTable catData = LegoWeb.BusLogic.Menus.get_Search_Page(0, 0, 0, " - ", 1, 100).Tables[0];
-        //để tránh việc chọn chính nó là cha của nó hoặc chọn con nó là cha của nó - chưa triệt để được chỉ xử lý được các trường hợp trực tiếp
+        //only avoid some case round parent-child relation not completely
         if (this.txtMenuID.Text != "")
         {
             for (int i = 0; i < catData.Rows.Count - 1; i++)
@@ -77,15 +101,15 @@ public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
         }
         DataRow dr = catData.NewRow();
         dr["MENU_ID"] = "0";
-        dr["MENU_VI_TITLE"] = "<< Mức gốc >>";
+        dr["MENU_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper()  + "_TITLE"] =String.Format("<< {0} >>",Resources.strings.RootLevel_Text);
         catData.Rows.Add(dr);
 
         for(int i=0; i<catData.Rows.Count;i++)                
         {
-            catData.Rows[i]["MENU_VI_TITLE"] = ((int)catData.Rows[i]["MENU_ID"]).ToString() + " " + catData.Rows[i]["MENU_VI_TITLE"].ToString();        
+            catData.Rows[i]["MENU_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() +  "_TITLE"] = ((int)catData.Rows[i]["MENU_ID"]).ToString() + " " + catData.Rows[i]["MENU_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"].ToString();        
         }
 
-        this.dropParentMenus.DataTextField = "MENU_VI_TITLE";
+        this.dropParentMenus.DataTextField = "MENU_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() +  "_TITLE";
         this.dropParentMenus.DataValueField = "MENU_ID";
         this.dropParentMenus.DataSource = catData;
         this.dropParentMenus.DataBind();
@@ -105,7 +129,7 @@ public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
         {
             if (LegoWeb.BusLogic.Menus.is_MenuItem_Exist(int.Parse(txtMenuID.Text)))
             {
-                errorMessage.Text = "Mã Mục trình đơn đã tồn tại!.";
+                errorMessage.Text = "ID is existed!.";
                 txtMenuID.Focus();
                 return;
             }

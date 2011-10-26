@@ -27,11 +27,11 @@
 
 	<div class="col" style="width:600px">
 		<fieldset class="adminform">
-		<legend>Menu Details</legend>
+		<legend><%=Resources.strings.Details_Text %></legend>
 			<table class="admintable" cellspacing="1" width="100%">
 			<tbody>
         <tr>
-            <td width="150px" class="key"><label for="name">Mã:</label></td>
+            <td width="150px" class="key"><label for="name"><%=Resources.strings.ID_Text%>:</label></td>
             <td>
                 <asp:TextBox ID="txtMenuID" runat="server" MaxLength="10"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="MenuIDRequired" runat="server" ControlToValidate="txtMenuID" ErrorMessage="Bạn chưa nhập mã mục trình đơn!"
@@ -41,23 +41,22 @@
             </td>
         </tr>
         <tr>
-            <td class="key"><label for="name">Trình đơn:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.MenuType_Text %>:</label></td>
             <td>
                 <asp:DropDownList ID="dropMenuTypes" runat="server" OnSelectedIndexChanged="dropMenuTypes_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
             </td>
         </tr>
         
         <tr>
-            <td class="key"><label for="name">Mã cha:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.ParentID_Text %>:</label></td>
             <td valign="middle">
                 <asp:DropDownList ID="dropParentMenus" runat="server"></asp:DropDownList>
-                <i>(tất cả các mục trình đơn trong các nhóm trình đơn)</i>
             </td>
         </tr>
         
         
         <tr>
-            <td class="key"><label for="name">Tên tiếng Việt:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.VietnameseTitle_Text %>:</label></td>
             <td>
                 <asp:TextBox ID="txtMenuViTitle" runat="server" Width="90%"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="MenuViTitleRequired" runat="server" ControlToValidate="txtMenuViTitle" ErrorMessage="Bạn chưa nhập Vùng thông tin!"
@@ -65,39 +64,36 @@
             </td>
         </tr>
         <tr>
-            <td class="key"><label for="name">Tên tiếng Anh:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.EnglishTitle_Text %>:</label></td>
             <td>
                 <asp:TextBox ID="txtMenuEnTitle" runat="server" Width="90%"></asp:TextBox>
             </td>
         </tr>
         
         <tr>
-            <td class="key"><label for="name">Link URL:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.Link_Text %>:</label></td>
             <td>            
                 <asp:TextBox ID="txtLinkUrl" runat="server" Width="90%"></asp:TextBox>    
             </td>
         </tr>
         <tr style="height:100px">
-            <td class="key"><label for="name">Ảnh đại diện:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.ThumbImage_Text %>:</label></td>
             <td>
                 <asp:Image id="ImageMenuImageUrl" style="max-height:100px; max-width:150px" ImageUrl="" runat="server" />
                 <asp:HiddenField ID="HiddenMenuImageUrl" runat="server" Value=""/>
-                <a href="javascript:BrowseServer();">Chọn ảnh</a>
+                <a href="javascript:BrowseServer();"><%=Resources.strings.btnBrowse_Text %></a>
             </td>
         </tr> 
          <tr>
-            <td class="key"><label for="name">Công bố:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.IsPublic_Text %>:</label></td>
             <td>
                 <asp:RadioButton ID="radioIsPublic" GroupName="Public" runat="server" Text="Có" Checked="true"/> &nbsp; <asp:RadioButton ID="radioIsNotPublic" GroupName="Public" runat="server" Text="Không"/>
             </td>
         </tr>           
         <tr>
-            <td class="key"><label for="name">Cách mở Link:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.OpenIn_Text %>:</label></td>
             <td>
                <asp:ListBox ID="listBoxBrowserNavigation" runat="server">
-               <asp:ListItem Value="0" Text="Mở bình thường" Selected="True"></asp:ListItem>
-               <asp:ListItem Value="1" Text="Mở trong cửa sổ mới"></asp:ListItem>
-               <asp:ListItem Value="2" Text="Mở trong cửa sổ mới và không có thanh di chuyển"></asp:ListItem>
                </asp:ListBox>
             </td>
         </tr>           

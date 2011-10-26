@@ -10,10 +10,10 @@
 							<th width="3%" class="title">
 							<asp:CheckBox ID="chkSelectAll" Checked="false" AutoPostBack="true" runat="server" OnCheckedChanged="chkSelectAll_CheckedChanged" /></th>
 							<th class="title" align="left">ID</th>							
-							<th class="title">Tiêu đề Việt</th>
-							<th class="title">Tiêu đề Anh</th>
-							<th class="title">Liên kết URL</th>
-							<th class "title">Công bố</th>
+							<th class="title"><%=Resources.strings.VietnameseTitle_Text %></th>
+							<th class="title"><%=Resources.strings.EnglishTitle_Text%></th>
+							<th class="title"><%=Resources.strings.Link_Text %></th>
+							<th class "title"><%=Resources.strings.IsPublic_Text %></th>
 							<th class="title">							
 							<asp:LinkButton ID="linkOrderUp" runat="server" OnClick="linkOrderUp_OnClick">
 							<span class="icon-16-uparrow">
@@ -24,7 +24,7 @@
 							</span>
 							</asp:LinkButton>							
 							</th>
-							<th class="title">Trình đơn</th>
+							<th class="title"><%=Resources.strings.MenuType_Text%></th>
 							</tr>
 							</thead>
 							<tbody>
@@ -101,7 +101,7 @@
 							<tfoot>					
 							<tr>		
 							<td colspan="3" align="center">
-							    Trình bày:
+							    <%=Resources.strings.Display_Text %>:
 			                    <asp:DropDownList ID="dropRecordPerPage" runat="server" AutoPostBack="true" OnInit="dropRecordPerPage_OnInit" OnSelectedIndexChanged="dropRecordPerPage_SelectedIndexChanged">
 							        <asp:ListItem Value="5" Text="5"></asp:ListItem>
 							        <asp:ListItem Value="10" Text="10"></asp:ListItem>

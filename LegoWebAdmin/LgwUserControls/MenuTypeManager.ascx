@@ -5,13 +5,14 @@
 							<HeaderTemplate>
 							<thead>
 							<tr>
-							<th width="5%" class="title">#</th>
-							<th width="5%" class="title">
+							<th width="20px" class="title">#</th>
+							<th width="20px" class="title">
 							<asp:CheckBox ID="chkSelectAll" Checked="false" AutoPostBack="true" runat="server" OnCheckedChanged="chkSelectAll_CheckedChanged" /></th>
-							<th width="10%" class="title">ID</th>							
-							<th width="25%" class="title">Tên trình đơn</th>
-							<th width="25%" class="title">Tên (TA)</th>
-							<th width="40%" class="title">Mô tả</th>
+							<th width="20px" class="title"><%=Resources.strings.ID_Text %></th>							
+							<th width="200px" class="title"><%=Resources.strings.VietnameseTitle_Text %></th>
+							<th width="200px" class="title"><%=Resources.strings.EnglishTitle_Text %></th>
+							<th width="70px" class="title"><%=Resources.strings.MenuItems_Text %></th>
+							<th class="title"><%=Resources.strings.Description_Text %></th>
 							</tr>
 							</thead>
 							<tbody>
@@ -29,10 +30,13 @@
                                 <%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID")%>                             
                                 </td>
                                 <td align="left">                                
-                                <a href="MenuTypeAddUpdate.aspx?menutype_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_VI_TITLE")%></a>                                
+                                <a href="MenuTypeAddUpdate.aspx?menu_type_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_VI_TITLE")%></a>                                
                                 </td>
                                 <td align="left">                                
-                                <a href="MenuTypeAddUpdate.aspx?menutype_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_EN_TITLE")%></a>                                
+                                <a href="MenuTypeAddUpdate.aspx?menu_type_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_EN_TITLE")%></a>                                
+                                </td>
+                                <td align="center">
+                                <a class="icon-16-menuitem" href="MenuManager.aspx?menu_type_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><span class="icon-16-menuitem"></span></a>                                
                                 </td>
                                 <td align="left">                                
                                 <%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_DESCRIPTION")%>                 
@@ -52,14 +56,17 @@
                                 <%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID")%>                             
                                 </td>
                                 <td align="left">                                
-                                <a href="MenuTypeAddUpdate.aspx?menutype_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_VI_TITLE")%></a>                                
+                                <a href="MenuTypeAddUpdate.aspx?menu_type_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_VI_TITLE")%></a>                                
                                 </td>
                                 <td align="left">                                
-                                <a href="MenuTypeAddUpdate.aspx?menutype_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_EN_TITLE")%></a>                                
-                                </td>                                
+                                <a href="MenuTypeAddUpdate.aspx?menu_type_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_EN_TITLE")%></a>                                
+                                </td>
+                                <td align="center">
+                                <a class="icon-16-menuitem" href="MenuManager.aspx?menu_type_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><span class="icon-16-menuitem"></span></a>                                         
+                                </td>
                                 <td align="left">                                
                                 <%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_DESCRIPTION")%>                 
-                                </td>                                                                
+                                </td>
                             </tr>                            
 							</AlternatingItemTemplate>
 							<FooterTemplate>
@@ -67,7 +74,7 @@
 							<tfoot>					
 							<tr>																					
 							<td colspan="3" align="center">
-							    Trình bày:
+							    <%=Resources.strings.Display_Text %>:
 			                    <asp:DropDownList ID="dropRecordPerPage" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropRecordPerPage_SelectedIndexChanged">
 							        <asp:ListItem Value="5" Text="5"></asp:ListItem>
 							        <asp:ListItem Value="10" Text="10"></asp:ListItem>
@@ -79,7 +86,7 @@
 							        <asp:ListItem Value="100" Text="100"></asp:ListItem>
 							    </asp:DropDownList> 
 							 </td>							
-							 <td colspan="3" align="center">	
+							 <td colspan="4" align="center">	
 							 &nbsp;			
 							<div runat="server" id="divNavigator" visible="<%#_menutypeManagerData.PageCount>1%>" >									
 									<CC:Navigator id="NavigatorNavigator" MaxPage="<%#_menutypeManagerData.PageCount%>" PageNumber="<%#_menutypeManagerData.PageNumber%>" runat="server">
