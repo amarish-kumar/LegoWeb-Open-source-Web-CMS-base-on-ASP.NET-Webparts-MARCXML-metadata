@@ -24,7 +24,7 @@ public partial class UpgradeDatabase : System.Web.UI.Page
         errorMessage.Text = "";
         try
         {
-            LegoWeb.BusLogic.UpgradeDatabase.run_SQLScript(txtSqlScripts.Text);
+            LegoWebAdmin.BusLogic.UpgradeDatabase.run_SQLScript(txtSqlScripts.Text);
         }
         catch (Exception ex)
         {

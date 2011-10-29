@@ -191,7 +191,7 @@
                                 <%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID")%>                             
                                 </td>
                                 <td align="left">                                
-                                <a href="MetaContentAddUpdate.aspx?meta_content_id=<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID") %>"><%# DataBinder.Eval(Container.DataItem, "META_CONTENT_TITLE")%></a>                                
+                                <a href="MetaContentEditor.aspx?meta_content_id=<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID") %>"><%# DataBinder.Eval(Container.DataItem, "META_CONTENT_TITLE")%></a>                                
                                 </td>
                                 <td align="center">                                
                                 <%# DataBinder.Eval(Container.DataItem, "LANG_CODE")%>                                
@@ -222,7 +222,7 @@
                                 <%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID")%>                             
                                 </td>
                                 <td align="left">                                
-                                <a href="MetaContentAddUpdate.aspx?meta_content_id=<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID") %>"><%# DataBinder.Eval(Container.DataItem, "META_CONTENT_TITLE")%></a>                                
+                                <a href="MetaContentEditor.aspx?meta_content_id=<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID") %>"><%# DataBinder.Eval(Container.DataItem, "META_CONTENT_TITLE")%></a>                                
                                 </td>
                                 <td align="center">                                
                                 <%# DataBinder.Eval(Container.DataItem, "LANG_CODE")%>                                

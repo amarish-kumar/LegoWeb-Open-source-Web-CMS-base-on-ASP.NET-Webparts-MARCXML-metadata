@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="MenuManager.ascx.cs" Inherits="LgwUserControls_MenuManager" %>
-<%@Register TagPrefix="CC" Namespace="LegoWeb.Controls"%>
+<%@Register TagPrefix="CC" Namespace="LegoWebAdmin.Controls"%>
 
 <table class="adminlist" cellspacing="1">   									
 					<asp:repeater id="menuManagerRepeater" runat="server" OnItemCommand="menuManagerDataCommand" OnItemDataBound="menuManagerItemDataBound">

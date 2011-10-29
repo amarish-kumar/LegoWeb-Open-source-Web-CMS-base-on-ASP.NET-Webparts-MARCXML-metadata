@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.IO;
 using System.Web.Security;
-using LegoWeb.DataProvider;
+using LegoWebAdmin.DataProvider;
 
 public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserControl
 {
@@ -14,15 +14,32 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
     {
         if (!IsPostBack)
         {
+            //load admin level
+            ListItem item = new ListItem();
+            item.Text = Resources.strings.Any_Text;
+            item.Value = "0";
+            item.Selected = true;
+            dropAdminLevels.Items.Add(item);
+
+            item = new ListItem();
+            item.Text = Resources.strings.Specified_Text;
+            item.Value = "1";
+            dropAdminLevels.Items.Add(item);
+
+            radioApplyChilrenNodes.Text = Resources.strings.Yes_Text;
+            radioNotApplyChilrenNodes.Text = Resources.strings.No_Text;
+
+
             if (CommonUtility.GetInitialValue("category_id") != null)
             {
-                DataSet CatData = LegoWeb.BusLogic.Categories.get_CATEGORY_BY_ID(int.Parse(CommonUtility.GetInitialValue("category_id").ToString()));
+                DataSet CatData = LegoWebAdmin.BusLogic.Categories.get_CATEGORY_BY_ID(int.Parse(CommonUtility.GetInitialValue("category_id").ToString()));
                 if (CatData.Tables[0].Rows.Count > 0)
                 {
                     this.txtCategoryID.Text = CatData.Tables[0].Rows[0]["CATEGORY_ID"].ToString();
                     this.txtCategoryID.Enabled = false;
                     this.txtCategoryViTitle.Text = CatData.Tables[0].Rows[0]["CATEGORY_VI_TITLE"].ToString();
                     this.txtCategoryEnTitle.Text = CatData.Tables[0].Rows[0]["CATEGORY_EN_TITLE"].ToString();
+                    this.txtCategoryAlias.Text = CatData.Tables[0].Rows[0]["CATEGORY_ALIAS"].ToString();
                     this.dpTemplateNames.SelectedValue = CatData.Tables[0].Rows[0]["CATEGORY_TEMPLATE_NAME"].ToString();
                     this.radioIsPublic.Checked =(bool)CatData.Tables[0].Rows[0]["IS_PUBLIC"];
                     this.radioIsNotPublic.Checked = !(bool)CatData.Tables[0].Rows[0]["IS_PUBLIC"];
@@ -39,7 +56,7 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
                     {
                         cblRoles.Visible = true;
                         //get roles in formation 
-                        string[] accessRoles = LegoWeb.BusLogic.Categories.get_ADMIN_ROLES((int)CatData.Tables[0].Rows[0]["CATEGORY_ID"]);
+                        string[] accessRoles = LegoWebAdmin.BusLogic.Categories.get_ADMIN_ROLES((int)CatData.Tables[0].Rows[0]["CATEGORY_ID"]);
                         if (accessRoles != null && accessRoles.Length > 0)
                         {
                             for (int i = 0; i < accessRoles.Length; i++)
@@ -62,7 +79,7 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
                     int iMenuTypeId = 0;
                     if (iMenuId > 0)//get MenuTypeId of MenuId
                     {
-                        iMenuTypeId = int.Parse(LegoWeb.BusLogic.Menus.get_MENU_BY_ID(iMenuId).Tables[0].Rows[0]["MENU_TYPE_ID"].ToString());
+                        iMenuTypeId = int.Parse(LegoWebAdmin.BusLogic.Menus.get_MENU_BY_ID(iMenuId).Tables[0].Rows[0]["MENU_TYPE_ID"].ToString());
                         load_MenuTypes(iMenuTypeId);
                         load_LinkMenus(iMenuTypeId, iMenuId);
                     }
@@ -85,8 +102,8 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
     }
     protected void load_Sections(int iSelectedSectionId)
     {
-        DataTable secData = LegoWeb.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
-        this.dropSections.DataTextField = "SECTION_VI_TITLE";
+        DataTable secData = LegoWebAdmin.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
+        this.dropSections.DataTextField = "SECTION_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() +"_TITLE";
         this.dropSections.DataValueField = "SECTION_ID";
         this.dropSections.DataSource = secData;
         this.dropSections.DataBind();
@@ -102,7 +119,7 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
     }
     protected void load_ParentCategories(int iSectionId,int iSelectedParentCategoryId)
     {
-        DataTable catData = LegoWeb.BusLogic.Categories.get_Search_Page(0, 0, iSectionId, " - ", 1, 100).Tables[0];
+        DataTable catData = LegoWebAdmin.BusLogic.Categories.get_Search_Page(0, 0, iSectionId, " - ", 1, 100).Tables[0];
         //để tránh việc chọn chính nó là cha của nó hoặc chọn con nó là cha của nó - chưa triệt để được chỉ xử lý được các trường hợp trực tiếp
         if (this.txtCategoryID.Text != "")
         {
@@ -117,13 +134,13 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
         }
         DataRow dr = catData.NewRow();
         dr["CATEGORY_ID"] = "0";
-        dr["CATEGORY_VI_TITLE"] = "<< Mức gốc >>";
+        dr["CATEGORY_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"] =String.Format( "<< {0} >>",Resources.strings.RootLevel_Text);
         catData.Rows.Add(dr);
         for (int i = 0; i < catData.Rows.Count; i++)
         {
-            catData.Rows[i]["CATEGORY_VI_TITLE"] = ((int)catData.Rows[i]["CATEGORY_ID"]).ToString() + " " + catData.Rows[i]["CATEGORY_VI_TITLE"].ToString();
+            catData.Rows[i]["CATEGORY_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"] = ((int)catData.Rows[i]["CATEGORY_ID"]).ToString() + " " + catData.Rows[i]["CATEGORY_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"].ToString();
         }
-        this.dropParentCategories.DataTextField = "CATEGORY_VI_TITLE";
+        this.dropParentCategories.DataTextField = "CATEGORY_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE";
         this.dropParentCategories.DataValueField = "CATEGORY_ID";
         this.dropParentCategories.DataSource = catData;
         this.dropParentCategories.DataBind();
@@ -140,9 +157,9 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
     public void Save_CategoryRecord()
     {
         //check if insert dublicated id
-        if ((CommonUtility.GetInitialValue("category_id",null) == null) && LegoWeb.BusLogic.Categories.is_CATEGORY_ID_EXIST(int.Parse(txtCategoryID.Text)))
+        if ((CommonUtility.GetInitialValue("category_id",null) == null) && LegoWebAdmin.BusLogic.Categories.is_CATEGORY_ID_EXIST(int.Parse(txtCategoryID.Text)))
         {
-            errorMessage.Text = "Mã bị trùng với Chuyên mục đã tồn tại!";
+            errorMessage.Text = "ID already existed!";
             return;
         }
         int iAdminLevel=int.Parse(dropAdminLevels.SelectedValue.ToString());
@@ -159,10 +176,14 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
             }
         }
 
-        LegoWeb.BusLogic.Categories.addUpdate_CATEGORY(int.Parse(txtCategoryID.Text),int.Parse("0" + this.dropParentCategories.SelectedValue.ToString()), int.Parse("0" + this.dropSections.SelectedValue.ToString()), txtCategoryViTitle.Text, txtCategoryEnTitle.Text, dpTemplateNames.SelectedValue.ToString(),HiddenCategoryImageUrl.Value,int.Parse("0" + dropLinkMenus.SelectedValue.ToString()),radioIsPublic.Checked, iAdminLevel,sAdminRoles);
+        if (String.IsNullOrEmpty(txtCategoryAlias.Text))
+        {
+            txtCategoryAlias.Text = CommonUtility.convert_TitleToAlias(txtCategoryViTitle.Text);
+        }
+        LegoWebAdmin.BusLogic.Categories.addUpdate_CATEGORY(int.Parse(txtCategoryID.Text),int.Parse("0" + this.dropParentCategories.SelectedValue.ToString()), int.Parse("0" + this.dropSections.SelectedValue.ToString()), txtCategoryViTitle.Text, txtCategoryEnTitle.Text,txtCategoryAlias.Text, dpTemplateNames.SelectedValue.ToString(),HiddenCategoryImageUrl.Value,int.Parse("0" + dropLinkMenus.SelectedValue.ToString()),radioIsPublic.Checked, iAdminLevel,sAdminRoles);
         if (radioApplyChilrenNodes.Checked)//áp dụng cho node con
         {
-            LegoWeb.BusLogic.Categories.apply_ADMIN_ROLES_TO_CHILREN(int.Parse(txtCategoryID.Text), iAdminLevel, sAdminRoles);    
+            LegoWebAdmin.BusLogic.Categories.apply_ADMIN_ROLES_TO_CHILREN(int.Parse(txtCategoryID.Text), iAdminLevel, sAdminRoles);    
         }
         Response.Redirect("CategoryManager.aspx?section_id=" + this.dropSections.SelectedValue.ToString());
     }
@@ -172,13 +193,13 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
     }
     protected void load_MenuTypes(int iSelectedMenuTypeId)
     {
-        DataTable mnutypeData = LegoWeb.BusLogic.MenuTypes.get_Search_Page(1, 100).Tables[0];
+        DataTable mnutypeData = LegoWebAdmin.BusLogic.MenuTypes.get_Search_Page(1, 100).Tables[0];
         DataRow row = mnutypeData.NewRow();
-        row["MENU_TYPE_VI_TITLE"] = "<< Chọn trình đơn >>";
+        row["MENU_TYPE_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"] =String.Format("<< {0} >>",Resources.strings.SelectMenu_Text);
         row["MENU_TYPE_ID"] = 0;
         mnutypeData.Rows.Add(row);
 
-        this.dropMenuTypes.DataTextField = "MENU_TYPE_VI_TITLE";
+        this.dropMenuTypes.DataTextField = "MENU_TYPE_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE";
         this.dropMenuTypes.DataValueField = "MENU_TYPE_ID";
         this.dropMenuTypes.DataSource = mnutypeData;
         this.dropMenuTypes.DataBind();
@@ -221,17 +242,17 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
 
     protected void load_LinkMenus(int iMenuTypeId, int iSelectedLinkMenuId)
     {
-        DataTable mnuData = LegoWeb.BusLogic.Menus.get_Search_Page(0, 0, iMenuTypeId, " - ", 1, 100).Tables[0];
+        DataTable mnuData = LegoWebAdmin.BusLogic.Menus.get_Search_Page(0, 0, iMenuTypeId, " - ", 1, 100).Tables[0];
 
         DataRow dr = mnuData.NewRow();
         dr["MENU_ID"] = "0";
-        dr["MENU_VI_TITLE"] = "<< Chọn mục trình đơn nếu có >>";
+        dr["MENU_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"] =String.Format("<< {0} >>",Resources.strings.SelectMenuItem_Text);
         mnuData.Rows.Add(dr);
         for (int i = 0; i < mnuData.Rows.Count; i++)
         {
-            mnuData.Rows[i]["MENU_VI_TITLE"] = ((int)mnuData.Rows[i]["MENU_ID"]).ToString() + " " + mnuData.Rows[i]["MENU_VI_TITLE"].ToString();
+            mnuData.Rows[i]["MENU_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"] = ((int)mnuData.Rows[i]["MENU_ID"]).ToString() + " " + mnuData.Rows[i]["MENU_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"].ToString();
         }
-        this.dropLinkMenus.DataTextField = "MENU_VI_TITLE";
+        this.dropLinkMenus.DataTextField = "MENU_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE";
         this.dropLinkMenus.DataValueField = "MENU_ID";
         this.dropLinkMenus.DataSource = mnuData;
         this.dropLinkMenus.DataBind();

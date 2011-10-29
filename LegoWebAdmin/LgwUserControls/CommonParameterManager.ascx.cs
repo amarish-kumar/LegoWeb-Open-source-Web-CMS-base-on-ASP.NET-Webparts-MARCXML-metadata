@@ -8,8 +8,8 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-using LegoWeb.DataProvider;
-using LegoWeb.Controls;
+using LegoWebAdmin.DataProvider;
+using LegoWebAdmin.Controls;
 
 public partial class LgwUserControls_CommonParameterManager : System.Web.UI.UserControl
 {
@@ -128,7 +128,7 @@ public partial class LgwUserControls_CommonParameterManager : System.Web.UI.User
                 TextBox txtCommonParameterName = (TextBox)commonparameterManagerRepeater.Items[i].FindControl("txtCommonParameterName");
                 if (txtCommonParameterName != null)
                 {
-                    LegoWeb.BusLogic.CommonParameters.remove_PARAMETER(txtCommonParameterName.Text);
+                    LegoWebAdmin.BusLogic.CommonParameters.remove_PARAMETER(txtCommonParameterName.Text);
                 }
             }
         }

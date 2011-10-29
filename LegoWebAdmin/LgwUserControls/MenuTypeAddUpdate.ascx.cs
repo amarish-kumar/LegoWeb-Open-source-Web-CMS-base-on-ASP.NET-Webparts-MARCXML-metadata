@@ -5,7 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.IO;
-using LegoWeb.DataProvider;
+using LegoWebAdmin.DataProvider;
 
 public partial class LgwUserControls_MenuTypeAddUpdate : System.Web.UI.UserControl
 {
@@ -15,7 +15,7 @@ public partial class LgwUserControls_MenuTypeAddUpdate : System.Web.UI.UserContr
         {
             if (CommonUtility.GetInitialValue("menu_type_id") != null)
             {
-                DataSet SecData = LegoWeb.BusLogic.MenuTypes.get_MenuType_By_ID(int.Parse(CommonUtility.GetInitialValue("menu_type_id").ToString()));
+                DataSet SecData = LegoWebAdmin.BusLogic.MenuTypes.get_MenuType_By_ID(int.Parse(CommonUtility.GetInitialValue("menu_type_id").ToString()));
                 if (SecData.Tables[0].Rows.Count > 0)
                 {
                     this.txtMenuTypeID.Text = SecData.Tables[0].Rows[0]["MENU_TYPE_ID"].ToString();
@@ -33,14 +33,14 @@ public partial class LgwUserControls_MenuTypeAddUpdate : System.Web.UI.UserContr
         if (CommonUtility.GetInitialValue("menu_type_id", null) == null)
         {
             //verify duplicate if add new
-            if (LegoWeb.BusLogic.MenuTypes.is_MenuType_Exist(int.Parse(txtMenuTypeID.Text)))
+            if (LegoWebAdmin.BusLogic.MenuTypes.is_MenuType_Exist(int.Parse(txtMenuTypeID.Text)))
             {
                 errorMessage.Text = "ID is existed!";
                 txtMenuTypeID.Focus();
                 return false;
             }
         }
-        LegoWeb.BusLogic.MenuTypes.addUpdate_MenuType(int.Parse(txtMenuTypeID.Text), txtMenuTypeViTitle.Text,txtMenuTypeEnTitle.Text, txtMenuTypeDescription.Text);
+        LegoWebAdmin.BusLogic.MenuTypes.addUpdate_MenuType(int.Parse(txtMenuTypeID.Text), txtMenuTypeViTitle.Text,txtMenuTypeEnTitle.Text, txtMenuTypeDescription.Text);
         return true;
     }
 }

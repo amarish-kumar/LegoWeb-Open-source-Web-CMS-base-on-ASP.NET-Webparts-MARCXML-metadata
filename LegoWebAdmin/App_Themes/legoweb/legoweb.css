@@ -616,6 +616,51 @@ a img.calendar {
 	vertical-align: middle;
 }
 
+
+#system-message {
+    margin-bottom: 10px;
+    padding: 0;
+}
+#system-message dt {
+    font-weight: bold;
+}
+#system-message dd {
+    font-weight: bold;
+    margin: 0;
+    text-indent: 30px;
+}
+#system-message dd ul {
+    border-bottom: 3px solid #84A7DB;
+    border-top: 3px solid #84A7DB;
+    color: #0055BB;
+    list-style: none outside none;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+#system-message dt.message {
+    display: none;
+}
+#system-message dd.message {
+}
+#system-message dt.error {
+    display: none;
+}
+#system-message dd.error ul {
+    background-color: #E6C0C0;
+    border-bottom: 3px solid #DE7A7B;
+    border-top: 3px solid #DE7A7B;
+    color: #CC0000;
+}
+#system-message dt.notice {
+    display: none;
+}
+#system-message dd.notice ul {
+    background: none repeat scroll 0 0 #EFE7B8;
+    border-bottom: 3px solid #F0DC7E;
+    border-top: 3px solid #F0DC7E;
+    color: #CC0000;
+}
+
 /* System Standard Messages */
 #system-message dd.message ul { background: #C3D2E5 url(images/notice-info.png) 4px center no-repeat;}
 

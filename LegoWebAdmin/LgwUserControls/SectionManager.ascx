@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SectionManager.ascx.cs" Inherits="LgwUserControls_SectionManager" %>
-<%@Register TagPrefix="CC" Namespace="LegoWeb.Controls"%>
+<%@Register TagPrefix="CC" Namespace="LegoWebAdmin.Controls"%>
 <table class="adminlist" cellspacing="1">   									
 					<asp:repeater id="sectionManagerRepeater" runat="server" OnItemCommand="sectionManagerDataCommand" OnItemDataBound="sectionManagerItemDataBound">
 							<HeaderTemplate>
@@ -8,9 +8,10 @@
 							<th width="2%" class="title">#</th>
 							<th width="3%" class="title">
 							<asp:CheckBox ID="chkSelectAll" Checked="false" AutoPostBack="true" runat="server" OnCheckedChanged="chkSelectAll_CheckedChanged" /></th>
-							<th class="title">ID</th>							
-							<th class="title">Tên tiếng Việt</th>
-							<th class="title">Tên tiếng Anh</th>
+							<th class="title"><%=Resources.strings.ID_Text %></th>							
+							<th class="title"><%=Resources.strings.VietnameseTitle_Text %></th>
+							<th class="title"><%=Resources.strings.EnglishTitle_Text %></th>
+							<th class="title"><%=Resources.strings.Details_Text %></th>
 							</tr>
 							</thead>
 							<tbody>
@@ -33,6 +34,9 @@
                                 <td align="left">                                
                                 <%# DataBinder.Eval(Container.DataItem, "SECTION_EN_TITLE")%>                 
                                 </td>
+                                <td align="center">
+                                <a href="CategoryManager.aspx?section_id=<%# DataBinder.Eval(Container.DataItem, "SECTION_ID") %>"><span class="icon-16-details"></span></a>                                
+                                </td>
                             </tr>
 							</ItemTemplate>
 							<AlternatingItemTemplate>
@@ -53,14 +57,17 @@
                                 <td align="left">                                
                                 <%# DataBinder.Eval(Container.DataItem, "SECTION_EN_TITLE")%>                 
                                 </td>
+                                <td align="center">
+                                <a href="CategoryManager.aspx?section_id=<%# DataBinder.Eval(Container.DataItem, "SECTION_ID") %>"><span class="icon-16-details"></span></a>                                
+                                </td>                                
                             </tr>                            
 							</AlternatingItemTemplate>
 							<FooterTemplate>
 							</tbody>		
 							<tfoot>					
 							<tr>																					
-							<td colspan="3" align="center">
-							    Trình bày:
+							<td colspan="4" align="center">
+							    <%=Resources.strings.Display_Text %>:
 			                    <asp:DropDownList ID="dropRecordPerPage" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropRecordPerPage_SelectedIndexChanged">
 							        <asp:ListItem Value="5" Text="5"></asp:ListItem>
 							        <asp:ListItem Value="10" Text="10"></asp:ListItem>

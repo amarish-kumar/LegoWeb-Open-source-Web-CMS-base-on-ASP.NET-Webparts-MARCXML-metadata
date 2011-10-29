@@ -8,8 +8,8 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-using LegoWeb.DataProvider;
-using LegoWeb.Controls;
+using LegoWebAdmin.DataProvider;
+using LegoWebAdmin.Controls;
 
 public partial class LgwUserControls_MenuTypeManager : System.Web.UI.UserControl
 {
@@ -127,7 +127,7 @@ public partial class LgwUserControls_MenuTypeManager : System.Web.UI.UserControl
                 TextBox txtMenuTypeId = (TextBox)menutypeManagerRepeater.Items[i].FindControl("txtMenuTypeId");
                 if (txtMenuTypeId != null)
                 {
-                    LegoWeb.BusLogic.MenuTypes.remove_MenuType(int.Parse(txtMenuTypeId.Text));
+                    LegoWebAdmin.BusLogic.MenuTypes.remove_MenuType(int.Parse(txtMenuTypeId.Text));
                 }
             }
         }

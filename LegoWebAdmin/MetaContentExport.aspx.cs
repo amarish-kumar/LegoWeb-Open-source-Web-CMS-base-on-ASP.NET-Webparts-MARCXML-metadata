@@ -36,7 +36,7 @@ public partial class MetaContentExport : System.Web.UI.Page
     }
     protected void load_dropSections()
     {
-        DataTable secData = LegoWeb.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
+        DataTable secData = LegoWebAdmin.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
         this.dropSections.DataTextField = "SECTION_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE";
         this.dropSections.DataValueField = "SECTION_ID";
         this.dropSections.DataSource = secData;
@@ -47,7 +47,7 @@ public partial class MetaContentExport : System.Web.UI.Page
     protected void load_dropCategories()
     {
         this.dropCategories.Items.Clear();
-        DataTable catData = LegoWeb.BusLogic.Categories.get_Search_Page(0, 0, this.dropSections.SelectedValue != null ? int.Parse(this.dropSections.SelectedValue.ToString()) : 0, " - ", 1, 100).Tables[0];
+        DataTable catData = LegoWebAdmin.BusLogic.Categories.get_Search_Page(0, 0, this.dropSections.SelectedValue != null ? int.Parse(this.dropSections.SelectedValue.ToString()) : 0, " - ", 1, 100).Tables[0];
         this.dropCategories.DataTextField = "CATEGORY_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE";
         this.dropCategories.DataValueField = "CATEGORY_ID";
         this.dropCategories.DataSource = catData;
@@ -67,11 +67,11 @@ public partial class MetaContentExport : System.Web.UI.Page
         {
             int iFromID = String.IsNullOrEmpty(txtFromId.Text) ? 0 : int.Parse(txtFromId.Text);
             int iToID = String.IsNullOrEmpty(txtToId.Text) ? 0 : int.Parse(txtToId.Text);
-            DataTable tbData = LegoWeb.BusLogic.MetaContents.get_META_CONTENT_BY_ID(iFromID, iToID).Tables[0];
+            DataTable tbData = LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_BY_ID(iFromID, iToID).Tables[0];
 
             for (int i = 0; i < tbData.Rows.Count; i++)
             {
-                string sXmlContent = LegoWeb.BusLogic.MetaContents.get_META_CONTENT_MARCXML(Int16.Parse(tbData.Rows[i]["META_CONTENT_ID"].ToString()), true);
+                string sXmlContent = LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_MARCXML(Int16.Parse(tbData.Rows[i]["META_CONTENT_ID"].ToString()), 1);
                 myRec.load_Xml(sXmlContent);
                 exRecs.Add(myRec);
             }
@@ -89,11 +89,11 @@ public partial class MetaContentExport : System.Web.UI.Page
                 iCategoryID = int.Parse(dropCategories.SelectedValue.ToString());
             }
 
-            DataTable tbData = LegoWeb.BusLogic.MetaContents.get_META_CONTENT_BY_CATEGORY_ID(iCategoryID, iSectionID).Tables[0];
+            DataTable tbData = LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_BY_CATEGORY_ID(iCategoryID, iSectionID).Tables[0];
 
             for (int i = 0; i < tbData.Rows.Count; i++)
             {
-                string sXmlContent = LegoWeb.BusLogic.MetaContents.get_META_CONTENT_MARCXML(Int16.Parse(tbData.Rows[i]["META_CONTENT_ID"].ToString()), true);
+                string sXmlContent = LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_MARCXML(Int16.Parse(tbData.Rows[i]["META_CONTENT_ID"].ToString()), 1);
                 myRec.load_Xml(sXmlContent);
                 exRecs.Add(myRec);
             }
@@ -132,7 +132,7 @@ public partial class MetaContentExport : System.Web.UI.Page
         {
             int iFromID = String.IsNullOrEmpty(txtFromId.Text) ? 0 : int.Parse(txtFromId.Text);
             int iToID = String.IsNullOrEmpty(txtToId.Text) ? 0 : int.Parse(txtToId.Text);
-            DataSet data = LegoWeb.BusLogic.MetaContents.get_META_CONTENT_BY_ID(iFromID, iToID);
+            DataSet data = LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_BY_ID(iFromID, iToID);
             metaContentRepeater.DataSource = data;
             metaContentRepeater.DataBind();
         }
@@ -148,7 +148,7 @@ public partial class MetaContentExport : System.Web.UI.Page
             {
                 iCategoryID = int.Parse(dropCategories.SelectedValue.ToString());
             }
-            DataSet data = LegoWeb.BusLogic.MetaContents.get_META_CONTENT_BY_CATEGORY_ID(iCategoryID, iSectionID);
+            DataSet data = LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_BY_CATEGORY_ID(iCategoryID, iSectionID);
             metaContentRepeater.DataSource = data;
             metaContentRepeater.DataBind();
         }

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="MetaContentPreview.ascx.cs" Inherits="LgwUserControls_MetaContentPreview" %>
-<%@Register TagPrefix="CC" Namespace="LegoWeb.Controls"%>
+<%@Register TagPrefix="CC" Namespace="LegoWebAdmin.Controls"%>
 
 <table width="100%" cellpadding="2" cellspacing="2">
 <tbody>

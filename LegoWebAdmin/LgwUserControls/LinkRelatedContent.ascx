@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="LinkRelatedContent.ascx.cs" Inherits="LgwUserControls_LinkRelatedContent" %>
-<%@Register TagPrefix="CC" Namespace="LegoWeb.Controls"%>
+<%@Register TagPrefix="CC" Namespace="LegoWebAdmin.Controls"%>
 
 
 <table width="100%" cellpadding="2" cellspacing="2">
@@ -45,7 +45,7 @@
                                 <%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID")%>                             
                                 </td>
                                 <td align="left">                                                                
-                                <a href="MetaContentAddUpdate.aspx?meta_content_id=<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID") %>"><asp:label ID="labelMetaContentTitle" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_TITLE")%>'/></a>                                
+                                <a href="MetaContentEditor.aspx?meta_content_id=<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID") %>"><asp:label ID="labelMetaContentTitle" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_TITLE")%>'/></a>                                
                                 </td>
                                 <td align="left">                                
                                 <%# DataBinder.Eval(Container.DataItem, "CATEGORY_VI_TITLE")%>                                
@@ -65,7 +65,7 @@
                                 <%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID")%>                             
                                 </td>
                                 <td align="left">                                                                
-                                <a href="MetaContentAddUpdate.aspx?meta_content_id=<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID") %>"><asp:label ID="labelMetaContentTitle" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_TITLE")%>'/></a>                                
+                                <a href="MetaContentEditor.aspx?meta_content_id=<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID") %>"><asp:label ID="labelMetaContentTitle" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_TITLE")%>'/></a>                                
                                 </td>
                                 <td align="left">                                
                                 <%# DataBinder.Eval(Container.DataItem, "CATEGORY_VI_TITLE")%>                                

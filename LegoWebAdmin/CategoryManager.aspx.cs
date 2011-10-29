@@ -18,36 +18,22 @@ public partial class KiposWebAdmin_CategoryManager : System.Web.UI.Page
         if (!IsPostBack)
         {
 
-                if (!Roles.IsUserInRole("ADMINISTRATORS"))
-                {
-                    Response.Redirect("ErrorMessage.aspx?ErrorMessage='Bạn không có quyền truy cập vào tính năng này!'");
-                }
+            if (!Roles.IsUserInRole("ADMINISTRATORS"))
+            {
+                Response.Redirect("ErrorMessage.aspx?ErrorMessage='You are not authorized to manage categories!'");
+            }
 
             if (CommonUtility.GetInitialValue("section_id", null)!=null)
             {
                 int section_id = int.Parse(CommonUtility.GetInitialValue("section_id", null).ToString());
-                switch (section_id)
-                { 
-                    case 1:
-                        this.literalIconTitle.Text=@"<div class='header icon-48-content'>
-                                                      Chuyên mục tin bài         
-                                                     </div>";
-
-                         break;
-                    case 2:
-                         this.literalIconTitle.Text = @"<div class='header icon-48-module'>
-                                                      Chuyên mục dữ liêu khác        
-                                                     </div>";
-
-                         break;
-                    case 3:
-                         this.literalIconTitle.Text = @"<div class='header icon-48-archive'>
-                                                      Các loại thư mục         
-                                                     </div>";
-
-                         break;
+                DataTable secTable = LegoWebAdmin.BusLogic.Sections.get_Section_By_ID(section_id).Tables[0];
+                if (secTable.Rows.Count > 0)
+                {
+                    litSectionName.Text = String.Format("[{0}] {1}", secTable.Rows[0]["SECTION_ID"].ToString(), secTable.Rows[0]["SECTION_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"].ToString());
+                }else
+                {
+                    litSectionName.Text="No section was selected!";
                 }
-
             }
         }
     }

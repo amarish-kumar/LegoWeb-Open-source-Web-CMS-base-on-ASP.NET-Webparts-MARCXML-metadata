@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="SectionManager.aspx.cs" Inherits="Administrator_SectionManager" Title="KIPOSADMIN: Danh mục vùng nội dung" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="SectionManager.aspx.cs" Inherits="Administrator_SectionManager" Title="Section manager" %>
 <%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
 <%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
 <%@ Register src="LgwUserControls/SectionManager.ascx" tagname="SectionManager" tagprefix="uc3" %>
@@ -35,10 +35,10 @@
 <table class="toolbar"><tr>
 <td class="button" id="toolbar-delete">
 <asp:LinkButton ID="linkDeleteButton" class="toolbar" runat="server" 
-        onclick="linkDeleteButton_Click" OnClientClick="return confirm('Bạn thực sự muốn xóa các tài khoản được chọn?')">
+        onclick="linkDeleteButton_Click" OnClientClick="return confirm('Are you sure to remove selected items?')">
 <span class="icon-32-delete" title="Delete">
 </span>
-Xóa
+<%=Resources.strings.btnDelete_Text %>
 </asp:LinkButton>
 </td>
 
@@ -47,7 +47,7 @@ Xóa
         onclick="linkEditButton_Click">
 <span class="icon-32-edit" title="Edit">
 </span>
-Sửa
+<%=Resources.strings.btnEdit_Text %>
 </asp:LinkButton>
 </td>
 
@@ -56,22 +56,22 @@ Sửa
         onclick="linkNewButton_Click">
 <span class="icon-32-new" title="New">
 </span>
-Thêm
+<%=Resources.strings.btnAdd_Text %>
 </asp:LinkButton>
 </td>
 
 <td class="button" id="toolbar-help">
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
-<span class="icon-32-help" title="Trợ giúp">
+<span class="icon-32-help" title="Help">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text %>
 </a>
 </td>
 
 </tr></table>
 </div>
 <div class="header icon-48-sections">
-Phân vùng nội dung
+<%=Resources.strings.SectionManager_Text %>
 </div>
 
 				<div class="clr"></div>

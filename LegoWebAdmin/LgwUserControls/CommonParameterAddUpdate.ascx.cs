@@ -5,7 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.IO;
-using LegoWeb.DataProvider;
+using LegoWebAdmin.DataProvider;
 
 public partial class LgwUserControls_CommonParameterAddUpdate : System.Web.UI.UserControl
 {
@@ -15,7 +15,7 @@ public partial class LgwUserControls_CommonParameterAddUpdate : System.Web.UI.Us
         {
             if (CommonUtility.GetInitialValue("parameter_name") != null)
             {
-                DataSet ParamData = LegoWeb.BusLogic.CommonParameters.get_LEGOWEB_COMMON_PARAMETER(CommonUtility.GetInitialValue("parameter_name").ToString());
+                DataSet ParamData = LegoWebAdmin.BusLogic.CommonParameters.get_LEGOWEB_COMMON_PARAMETER(CommonUtility.GetInitialValue("parameter_name").ToString());
                 if (ParamData.Tables[0].Rows.Count > 0)
                 {
                     this.txtCommonParameterName.Text = ParamData.Tables[0].Rows[0]["PARAMETER_NAME"].ToString();
@@ -31,6 +31,6 @@ public partial class LgwUserControls_CommonParameterAddUpdate : System.Web.UI.Us
 
     public void Save_CommonParameterRecord()
     {
-        LegoWeb.BusLogic.CommonParameters.addudp_LEGOWEB_COMMON_PARAMETER(txtCommonParameterName.Text,int.Parse(dropPraramType.SelectedValue), txtCommonParameterViValue.Text, txtCommonParameterEnValue.Text, txtCommonParameterDescription.Text);
+        LegoWebAdmin.BusLogic.CommonParameters.addudp_LEGOWEB_COMMON_PARAMETER(txtCommonParameterName.Text,int.Parse(dropPraramType.SelectedValue), txtCommonParameterViValue.Text, txtCommonParameterEnValue.Text, txtCommonParameterDescription.Text);
     }
 }

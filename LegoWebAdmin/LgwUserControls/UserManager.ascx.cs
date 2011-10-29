@@ -9,8 +9,8 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-using LegoWeb.DataProvider;
-using LegoWeb.Controls;
+using LegoWebAdmin.DataProvider;
+using LegoWebAdmin.Controls;
 
 public partial class LgwUserControls_UserManager : System.Web.UI.UserControl
 {

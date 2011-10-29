@@ -10,7 +10,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 
-using LegoWeb.DataProvider;
+using LegoWebAdmin.DataProvider;
 
 public partial class LgwUserControls_UserUpdate : System.Web.UI.UserControl
 {

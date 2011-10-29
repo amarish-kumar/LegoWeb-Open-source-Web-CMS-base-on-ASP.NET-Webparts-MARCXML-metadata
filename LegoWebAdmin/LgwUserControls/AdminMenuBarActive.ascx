@@ -39,23 +39,14 @@
 <asp:Literal ID="menunames" runat="server"></asp:Literal>
 </ul>
 </li>
-<li class="node"><a><%=Resources.strings.mnuCategories_Text%></a>
+<li class="node"><a><%=Resources.strings.mnuContents_Text%></a>
 <ul>
+<li><a class="icon-16-article" href="MetaContentManager.aspx"><%=Resources.strings.mnuiContentManager_Text%></a></li>
+<li><a class="icon-16-trash" href="MetaContentTrash.aspx"><%=Resources.strings.mnuiTrashManager_Text%></a></li>
+<li class="separator"><span></span></li>
 <li><a class="icon-16-section" href="SectionManager.aspx"><%=Resources.strings.mnuiSections_Text%></a></li>
 <li class="separator"><span></span></li>
 <asp:Literal ID="sectionnames" runat="server"></asp:Literal>
-</ul>
-</li>
-<li class="node"><a><%=Resources.strings.mnuContents_Text%></a>
-<ul>
-<li><a class="icon-16-article" href="MetaContentManagerTree.aspx"><%=Resources.strings.mnuiContentManager_Text%></a></li>
-<li class="separator"><span></span></li>
-<asp:Literal ID="contentsections" runat="server"></asp:Literal>
-</ul>
-</li>
-<li class="node"><a><%=Resources.strings.mnuTools_Text%></a>
-<ul>
-<li><a class="icon-16-module" href="ItemClassDefination.aspx">Phân loại đầu mục</a></li>
 </ul>
 </li>
 <li class="node"><a><%=Resources.strings.mnuHelp_Text%></a>

@@ -8,13 +8,13 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-using LegoWeb.DataProvider;
-using LegoWeb.Controls;
+using LegoWebAdmin.DataProvider;
+using LegoWebAdmin.Controls;
 
 public partial class LgwUserControls_CategoryManager : System.Web.UI.UserControl
 {
     protected CategoryDataProvider _categoryManagerData;
-
+    protected int _section_id = 0;
     public enum SortFields { Default };
 
     protected void Page_Load(object sender, EventArgs e)
@@ -26,7 +26,7 @@ public partial class LgwUserControls_CategoryManager : System.Web.UI.UserControl
 
                 CommonUtility.InitializeGridParameters(ViewState, "categoryManager", typeof(SortFields), 1, 100);
                 ViewState["categoryManagerPageNumber"] = 1;
-                ViewState["categoryManagerPageSize"] = int.Parse(Session["PageSize"] != null ? Session["PageSize"].ToString() : "10");   
+                ViewState["categoryManagerPageSize"] = int.Parse(Session["PageSize"] != null ? Session["PageSize"].ToString() : "50");   
                 categoryManagerBind();                
             }
         }
@@ -59,12 +59,13 @@ public partial class LgwUserControls_CategoryManager : System.Web.UI.UserControl
     {
         try
         {
+            _section_id = int.Parse(CommonUtility.GetInitialValue("section_id", "0").ToString());
             int outPageCount = 0;
             _categoryManagerData.PageNumber = Convert.ToInt16(ViewState["categoryManagerPageNumber"]);
             _categoryManagerData.RecordsPerPage = (int)ViewState["categoryManagerPageSize"];
-            _categoryManagerData.get_Search_Count(out outPageCount,0,0,int.Parse(this.dropSections.SelectedValue.ToString()));
+            _categoryManagerData.get_Search_Count(out outPageCount,0,0,_section_id);
             ViewState["categoryManagerPageCount"] = outPageCount;
-            categoryManagerRepeater.DataSource = _categoryManagerData.get_Search_Current_Page(0, 0, int.Parse(this.dropSections.SelectedValue.ToString()), "&nbsp;&nbsp;&nbsp;");
+            categoryManagerRepeater.DataSource = _categoryManagerData.get_Search_Current_Page(0, 0, _section_id, "&nbsp;&nbsp;&nbsp;");
             categoryManagerRepeater.DataBind();
 
             if (categoryManagerRepeater.Controls.Count > 1)
@@ -83,10 +84,11 @@ public partial class LgwUserControls_CategoryManager : System.Web.UI.UserControl
     }
     private void categoryManagerPageBind()
     {
+            _section_id = int.Parse(CommonUtility.GetInitialValue("section_id", "0").ToString());
             _categoryManagerData.PageNumber = Convert.ToInt16(ViewState["categoryManagerPageNumber"]);
             _categoryManagerData.RecordsPerPage = (int)ViewState["categoryManagerPageSize"];
             _categoryManagerData.PageCount = (int)ViewState["categoryManagerPageCount"];
-            categoryManagerRepeater.DataSource = _categoryManagerData.get_Search_Current_Page(0, 0, int.Parse(this.dropSections.SelectedValue.ToString()), "&nbsp;&nbsp;&nbsp;");
+            categoryManagerRepeater.DataSource = _categoryManagerData.get_Search_Current_Page(0, 0, _section_id, "&nbsp;&nbsp;&nbsp;");
             categoryManagerRepeater.DataBind();
             if (categoryManagerRepeater.Controls.Count > 1)
             {
@@ -149,7 +151,7 @@ public partial class LgwUserControls_CategoryManager : System.Web.UI.UserControl
                 if (txtCategoryId != null)
                 {
                     iCategoryId = int.Parse(txtCategoryId.Text);
-                    LegoWeb.BusLogic.Categories.moveUp_CATEGORY(iCategoryId);
+                    LegoWebAdmin.BusLogic.Categories.moveUp_CATEGORY(iCategoryId);
                 }
             }
         }
@@ -175,7 +177,7 @@ public partial class LgwUserControls_CategoryManager : System.Web.UI.UserControl
                 TextBox txtCategoryId = (TextBox)categoryManagerRepeater.Items[i].FindControl("txtCategoryId");
                 if (txtCategoryId != null)
                 {
-                    LegoWeb.BusLogic.Categories.moveDown_CATEGORY(int.Parse(txtCategoryId.Text));
+                    LegoWebAdmin.BusLogic.Categories.moveDown_CATEGORY(int.Parse(txtCategoryId.Text));
                 }
             }
         }
@@ -200,7 +202,7 @@ public partial class LgwUserControls_CategoryManager : System.Web.UI.UserControl
                 TextBox txtCategoryId = (TextBox)categoryManagerRepeater.Items[i].FindControl("txtCategoryId");
                 if (txtCategoryId != null)
                 {
-                    LegoWeb.BusLogic.Categories.remove_CATEGORY(int.Parse(txtCategoryId.Text));
+                    LegoWebAdmin.BusLogic.Categories.remove_CATEGORY(int.Parse(txtCategoryId.Text));
                 }
             }
         }
@@ -216,7 +218,7 @@ public partial class LgwUserControls_CategoryManager : System.Web.UI.UserControl
                 TextBox txtCategoryId = (TextBox)categoryManagerRepeater.Items[i].FindControl("txtCategoryId");
                 if (txtCategoryId != null)
                 {
-                    LegoWeb.BusLogic.Categories.publish_CATEGORY(int.Parse(txtCategoryId.Text),true);
+                    LegoWebAdmin.BusLogic.Categories.publish_CATEGORY(int.Parse(txtCategoryId.Text),true);
                 }
             }
         }
@@ -232,7 +234,7 @@ public partial class LgwUserControls_CategoryManager : System.Web.UI.UserControl
                 TextBox txtCategoryId = (TextBox)categoryManagerRepeater.Items[i].FindControl("txtCategoryId");
                 if (txtCategoryId != null)
                 {
-                    LegoWeb.BusLogic.Categories.publish_CATEGORY(int.Parse(txtCategoryId.Text), false);
+                    LegoWebAdmin.BusLogic.Categories.publish_CATEGORY(int.Parse(txtCategoryId.Text), false);
                 }
             }
         }
@@ -256,8 +258,8 @@ public partial class LgwUserControls_CategoryManager : System.Web.UI.UserControl
     }
     public void AddNew_Category()
     {
-        string sSectionId = this.dropSections.SelectedValue.ToString();
-        string sParentCategoryId = "0";
+        _section_id = int.Parse(CommonUtility.GetInitialValue("section_id", "0").ToString());
+        int parent_category_id = 0;
         for (int i = 0; i < this.categoryManagerRepeater.Items.Count; i++)
         {
             CheckBox cbRow = ((CheckBox)categoryManagerRepeater.Items[i].FindControl("chkSelect"));
@@ -266,37 +268,20 @@ public partial class LgwUserControls_CategoryManager : System.Web.UI.UserControl
                 TextBox txtCategoryId = (TextBox)categoryManagerRepeater.Items[i].FindControl("txtCategoryId");
                 if (txtCategoryId != null)
                 {
-                    sParentCategoryId = txtCategoryId.Text;
+                    parent_category_id =int.Parse( txtCategoryId.Text);
                 }
             }
         }
-        if (sParentCategoryId != "0" && sSectionId == "0")
+        if (parent_category_id >0 && _section_id==0)
         {
-            DataTable catData = LegoWeb.BusLogic.Categories.get_CATEGORY_BY_ID(int.Parse(sParentCategoryId)).Tables[0];
-            sSectionId = catData.Rows[0]["SECTION_ID"].ToString();
+            DataTable catData = LegoWebAdmin.BusLogic.Categories.get_CATEGORY_BY_ID(parent_category_id).Tables[0];
+            _section_id =int.Parse( catData.Rows[0]["SECTION_ID"].ToString());
         }
-        Response.Redirect("CategoryAddUpdate.aspx?section_id=" + sSectionId +"&parent_category_id=" + sParentCategoryId);
+        Response.Redirect("CategoryAddUpdate.aspx?section_id=" + _section_id.ToString() +"&parent_category_id=" + parent_category_id.ToString());
     }
     override protected void OnInit(EventArgs e)
     {
         _categoryManagerData = new CategoryDataProvider();
     }
 
-    protected void dropSections_Init(object sender, EventArgs e)
-    {
-        DataTable secData = LegoWeb.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
-        this.dropSections.DataTextField = "SECTION_VI_TITLE";
-        this.dropSections.DataValueField = "SECTION_ID";
-        this.dropSections.DataSource = secData;
-        this.dropSections.DataBind();
-        if (CommonUtility.GetInitialValue("section_id", null) != null)
-        {
-            this.dropSections.SelectedValue = CommonUtility.GetInitialValue("section_id", null).ToString();
-        }
-    }
-    protected void dropSections_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        ViewState["categoryManagerPageNumber"] = 1;
-        categoryManagerBind();
-    }
 }

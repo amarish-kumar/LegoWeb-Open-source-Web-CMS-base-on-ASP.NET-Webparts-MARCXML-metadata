@@ -23,7 +23,7 @@ public partial class LegoWebAdmin_MenuManager : System.Web.UI.Page
             }
             if (CommonUtility.GetInitialValue("menu_type_id", null) != null)
             {
-                DataTable MenuTypeTbl = LegoWeb.BusLogic.MenuTypes.get_MenuType_By_ID(int.Parse(CommonUtility.GetInitialValue("menu_type_id", null).ToString())).Tables[0];
+                DataTable MenuTypeTbl = LegoWebAdmin.BusLogic.MenuTypes.get_MenuType_By_ID(int.Parse(CommonUtility.GetInitialValue("menu_type_id", null).ToString())).Tables[0];
                 if(MenuTypeTbl.Rows.Count>0)
                 {
                     litMenuTypeName.Text = String.Format("[{0}] {1}", MenuTypeTbl.Rows[0]["MENU_TYPE_ID"].ToString(), MenuTypeTbl.Rows[0]["MENU_TYPE_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"].ToString());

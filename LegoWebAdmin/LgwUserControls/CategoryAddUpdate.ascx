@@ -28,28 +28,28 @@
 
 	<div class="col" style="width:600px">
 		<fieldset class="adminform">
-		<legend>Chi tiết</legend>
+		<legend><%=Resources.strings.Details_Text %></legend>
 			<table class="admintable" cellspacing="1" width="100%">
 			<tbody>
         <tr>
-            <td width="150px" class="key"><label for="name">Mã:</label></td>
+            <td width="150px" class="key"><label for="name"><%=Resources.strings.ID_Text %>:</label></td>
             <td>
                 <asp:TextBox ID="txtCategoryID" runat="server" MaxLength="10"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="CategoryIDRequired" runat="server" ControlToValidate="txtCategoryID" ErrorMessage="Bạn chưa nhập mã vùng thông tin!"
-                     ToolTip="Chưa nhập Category ID." Display="Dynamic" SetFocusOnError="true" ValidationGroup="CategoryInfo">*</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="CategoryIDValidator" runat="server" ControlToValidate="txtCategoryID"  ErrorMessage="Bạn chỉ được nhập vào một số nguyên" 
-                    ToolTip="Bạn chỉ được nhập vào một số nguyên" ValidationExpression="\d*" SetFocusOnError="true" ValidationGroup="CategoryInfo">*</asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="CategoryIDRequired" runat="server" ControlToValidate="txtCategoryID" ErrorMessage="ID is required!"
+                     ToolTip="ID is required!" Display="Dynamic" SetFocusOnError="true" ValidationGroup="CategoryInfo">*</asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="CategoryIDValidator" runat="server" ControlToValidate="txtCategoryID"  ErrorMessage="Only numbers are accepted!" 
+                    ToolTip="Only numbers are accepted!" ValidationExpression="\d*" SetFocusOnError="true" ValidationGroup="CategoryInfo">*</asp:RegularExpressionValidator>
             </td>
         </tr>
         <tr>
-            <td class="key"><label for="name">Khu vực:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.Section_Text %>:</label></td>
             <td>
                 <asp:DropDownList ID="dropSections" runat="server" OnSelectedIndexChanged="dropSections_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
             </td>
         </tr>
         
         <tr>
-            <td class="key"><label for="name">Mã cha:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.ParentID_Text %>:</label></td>
             <td>
                 <asp:DropDownList ID="dropParentCategories" runat="server"></asp:DropDownList>
             </td>
@@ -57,51 +57,54 @@
         
         
         <tr>
-            <td class="key"><label for="name">Tên tiếng Việt:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.VietnameseTitle_Text %>:</label></td>
             <td>
                 <asp:TextBox ID="txtCategoryViTitle" runat="server" Width="90%"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="CategoryViTitleRequired" runat="server" ControlToValidate="txtCategoryViTitle" ErrorMessage="Bạn chưa nhập Vùng thông tin!"
-                     ToolTip="Chưa nhập tên Vùng thông tin." Display="Dynamic" SetFocusOnError="true" ValidationGroup="CategoryInfo">*</asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="CategoryViTitleRequired" runat="server" ControlToValidate="txtCategoryViTitle" ErrorMessage="Title/name is required!"
+                     ToolTip="Title/name is required!" Display="Dynamic" SetFocusOnError="true" ValidationGroup="CategoryInfo">*</asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
-            <td class="key"><label for="name">Tên tiếng Anh:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.VietnameseValue_Text%>:</label></td>
             <td>
                 <asp:TextBox ID="txtCategoryEnTitle" runat="server" Width="90%"></asp:TextBox>
             </td>
         </tr>
-        
         <tr>
-            <td class="key"><label for="name">Khuôn mẫu:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.Alias_Text%>:</label></td>
+            <td>
+                <asp:TextBox ID="txtCategoryAlias" runat="server" Width="90%"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="key"><label for="name"><%=Resources.strings.Template_Text %>:</label></td>
             <td>            
             <asp:DropDownList ID="dpTemplateNames" runat="server" 
                     oninit="dpTemplateNames_Init" ></asp:DropDownList>            
             </td>
         </tr>
         <tr>
-            <td class="key"><label for="name">Công bố:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.IsPublic_Text %>:</label></td>
             <td>
                 <asp:RadioButton ID="radioIsPublic" GroupName="Public" runat="server" Text="Có" Checked="true"/> &nbsp; <asp:RadioButton ID="radioIsNotPublic" GroupName="Public" runat="server" Text="Không"/>
             </td>
         </tr>           
         <tr style="height:100px">
-            <td class="key"><label for="name">Ảnh đại diện:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.ThumbImage_Text %>:</label></td>
             <td>
                 <asp:Image id="ImageCategoryImageUrl" style="max-height:100px; max-width:150px" ImageUrl="" runat="server" />
                 <asp:HiddenField ID="HiddenCategoryImageUrl" runat="server" Value=""/>
-                <a href="javascript:BrowseServer();">Chọn ảnh</a>
+                <a href="javascript:BrowseServer();"><%=Resources.strings.btnBrowse_Text %></a>
             </td>
         </tr>  
         
         <tr>            
             <td class="key">
-                <label for="name">Nhóm quản trị:</label>
+                <label for="name"><%=Resources.strings.AdminRoles_Text %>:</label>
             </td>
             <td>
                 <asp:DropDownList ID="dropAdminLevels" runat="server" AutoPostBack="True" 
                     onselectedindexchanged="dropAdminLevels_SelectedIndexChanged">
-                    <asp:ListItem Value="0" Text="Bất kỳ"></asp:ListItem>
-                    <asp:ListItem Value="1" Text="Chỉ định"></asp:ListItem>
                 </asp:DropDownList><br />
                 <asp:CheckBoxList ID="cblRoles" runat="server" oninit="cblRoles_Init" Visible="false">
                 
@@ -110,28 +113,28 @@
         </tr>   
         <tr>
              <td class="key">
-                <label for="name">Áp dụng cho mức con:</label>
+                <label for="name"><%=Resources.strings.ApplyToChildren_Text %>:</label>
             </td>
             <td>
-                    <asp:RadioButton ID="radioApplyChilrenNodes" GroupName="ApplyChilrenNodes" runat="server" Text="Có"/> &nbsp; <asp:RadioButton ID="radioNotApplyChilrenNodes" GroupName="ApplyChilrenNodes" runat="server" Text="Không" Checked="true"/>
+                    <asp:RadioButton ID="radioApplyChilrenNodes" GroupName="ApplyChilrenNodes" runat="server" Text="Yes"/> &nbsp; <asp:RadioButton ID="radioNotApplyChilrenNodes" GroupName="ApplyChilrenNodes" runat="server" Text="No" Checked="true"/>
             </td>                                           
         </tr>        
         
         <tr>
             <td>
             </td>
-            <td class="key"><label for="name">Liên kết trình đơn:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.LinkToMenu_Text %>:</label></td>
         </tr>
         
         <tr>
-            <td class="key"><label for="name">Trình đơn:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.Menu_Text%>:</label></td>
             <td>
                 <asp:DropDownList ID="dropMenuTypes" runat="server" OnSelectedIndexChanged="dropMenuTypes_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
             </td>
         </tr>
         
         <tr>
-            <td class="key"><label for="name">Mục trình đơn:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.MenuItem_Text%>:</label></td>
             <td>
                 <asp:DropDownList ID="dropLinkMenus" runat="server"></asp:DropDownList>
             </td>

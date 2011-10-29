@@ -8,35 +8,35 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-using LegoWeb.DataProvider;
-using LegoWeb.Controls;
-
+using LegoWebAdmin.DataProvider;
+/// <summary>
+    /// Webpart hiển thị chuyên mục nội dung theo hình cây
+    /// </summary>
 public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserControl
 {
     protected MetaContentDataProvider _metaContentManagerData;
-
     public enum SortFields { Default };
 
     protected void Page_Load(object sender, EventArgs e)
     {
         try
-        {
+        {            
             if (!IsPostBack)
             {
+                Session["CATEGORY_PATH_VALUE"] = null;
+                load_dropSections();
                 if (CommonUtility.GetInitialValue("section_id", null) != null)
                 {
-                    this.dropSections.SelectedValue = CommonUtility.GetInitialValue("section_id", null).ToString();
-                    load_dropCategories();
+                    this.dropSections.SelectedValue = CommonUtility.GetInitialValue("section_id", null).ToString();                    
                 }
-                if (CommonUtility.GetInitialValue("category_id", null) != null)
-                {
-                    this.dropCategories.SelectedValue = CommonUtility.GetInitialValue("category_id", null).ToString();
-                }
+                loadCategoryTree();
+
                 CommonUtility.InitializeGridParameters(ViewState, "metaContentManager", typeof(SortFields), 1, 100);
                 ViewState["metaContentManagerPageNumber"] = 1;
-                ViewState["metaContentManagerPageSize"] = int.Parse(Session["PageSize"] != null ? Session["PageSize"].ToString() : "10"); 
-                metaContentManagerBind();
+                ViewState["metaContentManagerPageSize"] = int.Parse(Session["PageSize"] != null ? Session["PageSize"].ToString() : "10");
+                CategoryTree_SelectedNodeChanged(null, null);
             }
+
         }
         catch (Exception ex)
         {
@@ -60,9 +60,16 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
             int outPageCount = 0;
             _metaContentManagerData.PageNumber = Convert.ToInt16(ViewState["metaContentManagerPageNumber"]);
             _metaContentManagerData.RecordsPerPage = (int)ViewState["metaContentManagerPageSize"];
-            _metaContentManagerData.get_Admin_Search_Count(out outPageCount, int.Parse(this.dropSections.SelectedValue != null ? this.dropSections.SelectedValue.ToString() : "0"), int.Parse(string.IsNullOrEmpty(this.dropCategories.SelectedValue)!=true?this.dropCategories.SelectedValue.ToString():"0"));
+            int category_id = 0;
+            if (CategoryTree.SelectedNode != null)
+            {
+                TreeNode node = CategoryTree.SelectedNode;
+                category_id = int.Parse(node.Value);
+            }
+
+            _metaContentManagerData.get_Admin_Search_Count(out outPageCount, int.Parse(this.dropSections.SelectedValue != null ? this.dropSections.SelectedValue.ToString() : "0"), category_id);
             ViewState["metaContentManagerPageCount"] = outPageCount;
-            metaContentManagerRepeater.DataSource = _metaContentManagerData.get_Admin_Search_Current_Page(int.Parse(this.dropSections.SelectedValue != null ? this.dropSections.SelectedValue.ToString() : "0"), int.Parse(string.IsNullOrEmpty(this.dropCategories.SelectedValue) != true ? this.dropCategories.SelectedValue.ToString() : "0"));
+            metaContentManagerRepeater.DataSource = _metaContentManagerData.get_Admin_Search_Current_Page(int.Parse(this.dropSections.SelectedValue != null ? this.dropSections.SelectedValue.ToString() : "0"), category_id);
             metaContentManagerRepeater.DataBind();
 
             if (metaContentManagerRepeater.Controls.Count > 1)
@@ -81,19 +88,19 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
     }
     private void metaContentManagerPageBind()
     {
-            _metaContentManagerData.PageNumber = Convert.ToInt16(ViewState["metaContentManagerPageNumber"]);
-            _metaContentManagerData.RecordsPerPage = (int)ViewState["metaContentManagerPageSize"];
-            _metaContentManagerData.PageCount = (int)ViewState["metaContentManagerPageCount"];
-            metaContentManagerRepeater.DataSource = _metaContentManagerData.get_Admin_Search_Current_Page(int.Parse(this.dropSections.SelectedValue != null ? this.dropSections.SelectedValue.ToString() : "0"), int.Parse(string.IsNullOrEmpty(this.dropCategories.SelectedValue) != true ? this.dropCategories.SelectedValue.ToString() : "0"));
-            metaContentManagerRepeater.DataBind();
-            if (metaContentManagerRepeater.Controls.Count > 1)
+        _metaContentManagerData.PageNumber = Convert.ToInt16(ViewState["metaContentManagerPageNumber"]);
+        _metaContentManagerData.RecordsPerPage = (int)ViewState["metaContentManagerPageSize"];
+        _metaContentManagerData.PageCount = (int)ViewState["metaContentManagerPageCount"];
+        metaContentManagerRepeater.DataSource = _metaContentManagerData.get_Admin_Search_Current_Page(int.Parse(this.dropSections.SelectedValue != null ? this.dropSections.SelectedValue.ToString() : "0"), int.Parse(CategoryTree.SelectedValue));
+        metaContentManagerRepeater.DataBind();
+        if (metaContentManagerRepeater.Controls.Count > 1)
+        {
+            DropDownList dropDisplay = ((DropDownList)metaContentManagerRepeater.Controls[metaContentManagerRepeater.Controls.Count - 1].Controls[0].FindControl("dropRecordPerPage"));
+            if (dropDisplay != null)
             {
-                DropDownList dropDisplay = ((DropDownList)metaContentManagerRepeater.Controls[metaContentManagerRepeater.Controls.Count - 1].Controls[0].FindControl("dropRecordPerPage"));
-                if (dropDisplay != null)
-                {
-                    dropDisplay.SelectedValue = ViewState["metaContentManagerPageSize"].ToString();
-                }
+                dropDisplay.SelectedValue = ViewState["metaContentManagerPageSize"].ToString();
             }
+        }
     }
     protected void metaContentManagerDataCommand(Object Sender, RepeaterCommandEventArgs e)
     {
@@ -137,9 +144,8 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
 
     protected void linkOrderUp_OnClick(object sender, EventArgs e)
     {
-        ltErrorMessage.Text = "";
-        int iMetaContentId = 0;
 
+        int iMetaContentId = 0;
         for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
         {
             CheckBox cbRow = ((CheckBox)metaContentManagerRepeater.Items[i].FindControl("chkSelect"));
@@ -149,30 +155,29 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
                 if (txtMetaContentId != null)
                 {
                     iMetaContentId = int.Parse(txtMetaContentId.Text);
-                    int iCategoryId = LegoWeb.BusLogic.MetaContents.get_META_CONTENT_CATEGORY_ID(iMetaContentId);
+                    int iCategoryId = LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_CATEGORY_ID(iMetaContentId);
                     if (!is_UserCanUpdateContent(iCategoryId))
                     {
-                        ltErrorMessage.Text = "Bạn không có quyền thay đổi nội dung chuyên mục này!";
-                        return;
+                        throw new Exception("You are not authorized to update this content!");
                     }
-                    LegoWeb.BusLogic.MetaContents.moveUp_META_CONTENT(iMetaContentId);
+                    LegoWebAdmin.BusLogic.MetaContents.moveUp_META_CONTENT(iMetaContentId);
                 }
             }
         }
         metaContentManagerPageBind();
         for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
         {
-                TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
-                if (txtMetaContentId != null && txtMetaContentId.Text == iMetaContentId.ToString())
-                {
-                    CheckBox cbRow = ((CheckBox)metaContentManagerRepeater.Items[i].FindControl("chkSelect"));
-                    cbRow.Checked = true;
-                }            
+            TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
+            if (txtMetaContentId != null && txtMetaContentId.Text == iMetaContentId.ToString())
+            {
+                CheckBox cbRow = ((CheckBox)metaContentManagerRepeater.Items[i].FindControl("chkSelect"));
+                cbRow.Checked = true;
+            }
         }
     }
     protected void linkOrderDown_OnClick(object sender, EventArgs e)
     {
-        ltErrorMessage.Text = "";
+
         int iMetaContentId = 0;
         for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
         {
@@ -183,13 +188,12 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
                 if (txtMetaContentId != null)
                 {
                     iMetaContentId = int.Parse(txtMetaContentId.Text);
-                    int iCategoryId = LegoWeb.BusLogic.MetaContents.get_META_CONTENT_CATEGORY_ID(iMetaContentId);
+                    int iCategoryId = LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_CATEGORY_ID(iMetaContentId);
                     if (!is_UserCanUpdateContent(iCategoryId))
                     {
-                        ltErrorMessage.Text = "Bạn không có quyền thay đổi nội dung chuyên mục này!";
-                        return;
+                        throw new Exception("You are not authorized to update this content!");
                     }
-                    LegoWeb.BusLogic.MetaContents.moveDown_META_CONTENT(int.Parse(txtMetaContentId.Text));
+                    LegoWebAdmin.BusLogic.MetaContents.moveDown_META_CONTENT(iMetaContentId);
                 }
             }
         }
@@ -206,7 +210,7 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
     }
     public void Remove_SelectedContents()
     {
-        ltErrorMessage.Text = "";
+
         int iMetaContentId = 0;
         for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
         {
@@ -217,13 +221,15 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
                 if (txtMetaContentId != null)
                 {
                     iMetaContentId = int.Parse(txtMetaContentId.Text);
-                    int iCategoryId = LegoWeb.BusLogic.MetaContents.get_META_CONTENT_CATEGORY_ID(iMetaContentId);
+                    int iCategoryId = LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_CATEGORY_ID(iMetaContentId);
                     if (!is_UserCanUpdateContent(iCategoryId))
                     {
-                        ltErrorMessage.Text = "Bạn không có quyền thay đổi nội dung chuyên mục này!";
-                        return;
+                        
+                        throw new Exception( "You are not authorized to update this content!");
+                        
                     }
-                    LegoWeb.BusLogic.MetaContents.remove_META_CONTENTS(int.Parse(txtMetaContentId.Text));
+                    LegoWebAdmin.BusLogic.MetaContents.movetrash_META_CONTENTS(iMetaContentId);
+
                 }
             }
         }
@@ -231,7 +237,7 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
     }
     public void Publish_SelectedContents()
     {
-        ltErrorMessage.Text = "";
+
         int iMetaContentId = 0;
         for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
         {
@@ -242,13 +248,12 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
                 if (txtMetaContentId != null)
                 {
                     iMetaContentId = int.Parse(txtMetaContentId.Text);
-                    int iCategoryId = LegoWeb.BusLogic.MetaContents.get_META_CONTENT_CATEGORY_ID(iMetaContentId);
+                    int iCategoryId = LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_CATEGORY_ID(iMetaContentId);
                     if (!is_UserCanUpdateContent(iCategoryId))
                     {
-                        ltErrorMessage.Text = "Bạn không có quyền thay đổi nội dung chuyên mục này!";
-                        return;
+                        throw new Exception("You are not authorized to update this content!");
                     }
-                    LegoWeb.BusLogic.MetaContents.publish_META_CONTENTS(int.Parse(txtMetaContentId.Text),true);
+                    LegoWebAdmin.BusLogic.MetaContents.publish_META_CONTENTS(iMetaContentId, true);
                 }
             }
         }
@@ -256,7 +261,7 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
     }
     public void UnPublish_SelectedContents()
     {
-        ltErrorMessage.Text = "";
+
         int iMetaContentId = 0;
         for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
         {
@@ -267,13 +272,12 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
                 if (txtMetaContentId != null)
                 {
                     iMetaContentId = int.Parse(txtMetaContentId.Text);
-                    int iCategoryId = LegoWeb.BusLogic.MetaContents.get_META_CONTENT_CATEGORY_ID(iMetaContentId);
+                    int iCategoryId = LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_CATEGORY_ID(iMetaContentId);
                     if (!is_UserCanUpdateContent(iCategoryId))
                     {
-                        ltErrorMessage.Text = "Bạn không có quyền thay đổi nội dung chuyên mục này!";
-                        return;
+                        throw new Exception( "You are not authorized to update this content!");
                     }
-                    LegoWeb.BusLogic.MetaContents.publish_META_CONTENTS(int.Parse(txtMetaContentId.Text), false);
+                    LegoWebAdmin.BusLogic.MetaContents.publish_META_CONTENTS(iMetaContentId, false);
                 }
             }
         }
@@ -282,7 +286,7 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
 
     public void Edit_SelectedContent()
     {
-        ltErrorMessage.Text = "";
+
         int iMetaContentId = 0;
         for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
         {
@@ -293,13 +297,12 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
                 if (txtMetaContentId != null)
                 {
                     iMetaContentId = int.Parse(txtMetaContentId.Text);
-                    int iCategoryId = LegoWeb.BusLogic.MetaContents.get_META_CONTENT_CATEGORY_ID(iMetaContentId);
+                    int iCategoryId = LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_CATEGORY_ID(iMetaContentId);
                     if (!is_UserCanUpdateContent(iCategoryId))
                     {
-                        ltErrorMessage.Text = "Bạn không có quyền thay đổi nội dung chuyên mục này!";
-                        return;
+                        throw new Exception( "You are not authorized to update this content!");
                     }
-                    Response.Redirect("MetaContentAddUpdate.aspx?meta_content_id=" + iMetaContentId.ToString());
+                    Response.Redirect("MetaContentEditor.aspx?meta_content_id=" + iMetaContentId.ToString());
                 }
             }
         }
@@ -307,60 +310,142 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
     public void AddNew_Content()
     {
         string sSectionId = this.dropSections.SelectedValue.ToString();
-        string sCategoryId = this.dropCategories.SelectedValue.ToString();
+        string sCategoryId = CategoryTree.SelectedValue;
         if (!is_UserCanUpdateContent(int.Parse(sCategoryId)))
         {
-            ltErrorMessage.Text = "Bạn không có quyền thay đổi nội dung chuyên mục này!";
-            return;
+            throw new Exception( "You are not authorized to update content in this category!");
         }
-        Response.Redirect("MetaContentAddUpdate.aspx?section_id=" + sSectionId + "&category_id=" + sCategoryId);
+        Response.Redirect("MetaContentEditor.aspx?section_id=" + sSectionId + "&category_id=" + sCategoryId);
     }
     override protected void OnInit(EventArgs e)
     {
         _metaContentManagerData = new MetaContentDataProvider();
     }
 
-    protected void dropSections_Init(object sender, EventArgs e)
+    protected void load_dropSections()
     {
-        DataTable secData = LegoWeb.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];        
-        this.dropSections.DataTextField = "SECTION_VI_TITLE";
+        DataTable secData = LegoWebAdmin.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
+        this.dropSections.DataTextField = "SECTION_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE";
         this.dropSections.DataValueField = "SECTION_ID";
         this.dropSections.DataSource = secData;
         this.dropSections.DataBind();
 
     }
-    
-    protected void load_dropCategories()
-    {
-        this.dropCategories.Items.Clear();
-        DataTable catData = LegoWeb.BusLogic.Categories.get_Search_Page(0, 0, this.dropSections.SelectedValue!=null?int.Parse(this.dropSections.SelectedValue.ToString()):0, " - ", 1, 100).Tables[0];
-        this.dropCategories.DataTextField = "CATEGORY_VI_TITLE";
-        this.dropCategories.DataValueField = "CATEGORY_ID";
-        this.dropCategories.DataSource = catData;
-        this.dropCategories.DataBind();
-    }
-    
     protected void dropSections_SelectedIndexChanged(object sender, EventArgs e)
     {
-        ltErrorMessage.Text = "";
         ViewState["metaContentManagerPageNumber"] = 1;
-        load_dropCategories();
+        loadCategoryTree();
         metaContentManagerBind();
+    }
+    protected void CategoryTree_SelectedNodeChanged(object sender, EventArgs e)
+    {
+
+        ViewState["metaContentManagerPageNumber"] = 1;
+        string sID = this.CategoryTree.SelectedNode.Value;
+        if (sID != string.Empty)
+        {
+            Session["CATEGORY_PATH_VALUE"] = this.CategoryTree.SelectedNode.ValuePath;
+            Session["CATEGORY_PATH_TEXT"] = get_Current_Path_Text();
+            DataSet CatData = LegoWebAdmin.BusLogic.Categories.get_CATEGORY_BY_ID(int.Parse(sID));
+            if (CatData.Tables[0].Rows.Count > 0)
+            {
+                int iAdminLevel = int.Parse(CatData.Tables[0].Rows[0]["ADMIN_LEVEL"].ToString());
+                ltCategoryInfo.Text = String.Format(Resources.strings.CategoryInfo_Text, Session["CATEGORY_PATH_TEXT"].ToString(), iAdminLevel == 0 ? Resources.strings.Any_Text : CatData.Tables[0].Rows[0]["ADMIN_ROLES"].ToString());
+            }
+            else
+            {
+                ltCategoryInfo.Text = String.Format(Resources.strings.CategoryInfo_Text, Session["CATEGORY_PATH_TEXT"].ToString(),"");
+            }
+        }
+        metaContentManagerBind();        
     }
 
-    protected void dropCategories_SelectedIndexChanged(object sender, EventArgs e)
+    public void loadCategoryTree()
     {
-        ltErrorMessage.Text = "";
-        ViewState["metaContentManagerPageNumber"] = 1;
-        metaContentManagerBind();
+        string sTreeXml = LegoWebAdmin.BusLogic.Categories.get_CATEGORY_TREE_XML(0, int.Parse(dropSections.SelectedValue.ToString()));
+        sTreeXml = sTreeXml.Replace("(0)", "");
+        CategoryXmlData.Data = "<category><category CATEGORY_ID=\"0\" PARENT_CATEGORY_ID=\"0\" CATEGORY_VI_TITLE=\"Tất cả\" CATEGORY_EN_TITLE=\"All\" />" + sTreeXml + "</category>";
+        this.CategoryTree.DataBindings[0].ValueField = "CATEGORY_ID";
+        this.CategoryTree.DataBindings[0].TextField = "CATEGORY_" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "_TITLE";
+        this.CategoryTree.DataBind();
+
+        if (CommonUtility.GetInitialValue("category_id", null) != null)
+        {
+            int icatid = int.Parse(CommonUtility.GetInitialValue("category_id", null).ToString());
+            string sTreeValuePath = icatid.ToString();
+            DataTable catTable = LegoWebAdmin.BusLogic.Categories.get_CATEGORY_BY_ID(icatid).Tables[0];
+            if (catTable.Rows.Count > 0)
+            {
+                icatid = int.Parse(catTable.Rows[0]["PARENT_CATEGORY_ID"].ToString());
+                while (icatid > 0)
+                {
+                    sTreeValuePath = icatid.ToString() + "/" + sTreeValuePath;
+                    catTable = LegoWebAdmin.BusLogic.Categories.get_CATEGORY_BY_ID(icatid).Tables[0];
+                    icatid = int.Parse(catTable.Rows[0]["PARENT_CATEGORY_ID"].ToString());
+                }
+                Session["CATEGORY_PATH_VALUE"] = sTreeValuePath;
+            }
+        }
+
+       if (Session["CATEGORY_PATH_VALUE"] != null && Session["CATEGORY_PATH_VALUE"].ToString() != String.Empty)
+        {
+            string sID = Session["CATEGORY_PATH_VALUE"].ToString();
+            string[] cIDs = sID.Split('/');
+            TreeNode myNode = null;
+            string findValue = "";
+            if (cIDs.Length == 1)
+            {
+                myNode = this.CategoryTree.FindNode(sID);
+                if (myNode != null)
+                {
+                    myNode.Select();
+                }
+            }
+            else if (cIDs.Length > 1)
+            {
+                for (int i = 0; i <= cIDs.Length - 1; i++)
+                {
+                    findValue += ((i > 0 ? "/" : "") + cIDs[i]);
+                    myNode = this.CategoryTree.FindNode(findValue);
+                    if (myNode != null)
+                    {
+                        if (i < (cIDs.Length - 1))
+                        {
+                            myNode.Expand();
+                        }
+                        else
+                        {
+                            myNode.Select();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            TreeNode myNode = null;
+            myNode = this.CategoryTree.FindNode("0");
+            if (myNode != null)
+            {
+                myNode.Select();
+            }
+        }
     }
-    protected void dropCategories_Init(object sender, EventArgs e)
+    protected string get_Current_Path_Text()
     {
-        DataTable catData = LegoWeb.BusLogic.Categories.get_Search_Page(0, 0, this.dropSections.SelectedValue != null ? int.Parse(this.dropSections.SelectedValue.ToString()) : 0, " - ", 1, 100).Tables[0];
-        this.dropCategories.DataTextField = "CATEGORY_VI_TITLE";
-        this.dropCategories.DataValueField = "CATEGORY_ID";
-        this.dropCategories.DataSource = catData;
-        this.dropCategories.DataBind();
+        string sPathText = "";
+        TreeNode node = this.CategoryTree.SelectedNode;
+        sPathText = node.Text;
+        TreeNode pNode = node.Parent;
+        while (pNode != null)
+        {
+            sPathText = pNode.Text + "/" + sPathText;
+            node = pNode;
+            pNode = node.Parent;
+        }
+        return sPathText;
+
     }
 
     /// <summary>
@@ -371,7 +456,7 @@ public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserCont
     public static bool is_UserCanUpdateContent(int iCATEGORY_ID)
     {
         bool isUserCan = true;
-        DataTable catTable = LegoWeb.BusLogic.Categories.get_CATEGORY_BY_ID(iCATEGORY_ID).Tables[0];
+        DataTable catTable = LegoWebAdmin.BusLogic.Categories.get_CATEGORY_BY_ID(iCATEGORY_ID).Tables[0];
         int iAdminLevel = int.Parse(catTable.Rows[0]["ADMIN_LEVEL"].ToString());
         if (iAdminLevel > 0)
         {

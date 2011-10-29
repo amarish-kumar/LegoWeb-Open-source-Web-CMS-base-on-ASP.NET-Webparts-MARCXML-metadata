@@ -21,12 +21,12 @@
     <div id="border-top" class="h_green">
 		<div>
 			<div>
-				<span class="title">KIPOS</span>
+				<span class="title">LEGOWEB</span>
 			</div>
 		</div>
 	</div>
     
-    	<div id="content-box">
+    	<div id="content-box">    	
 		<div class="padding">
 			<div id="element-box" class="login">
 				<div class="t">
@@ -35,8 +35,16 @@
 					</div>
 				</div>
 				<div class="m">
+							<span>
+			  <asp:LinkButton id="btnSelectEnglish" runat="server" OnClick="en_Click">
+		            <asp:image ID="EnglishFlag" runat="server" skinid="en"  />
+		        </asp:LinkButton>
+		        <asp:LinkButton id="btnSelectVietnamese" runat="server" OnClick="vi_Click">
+		            <asp:image ID="VietnameseFlag" runat="server" skinid="vi"  />
+		        </asp:LinkButton>
+		    </span>
  
-					<h1>KIPOS Quản trị Web</h1>
+					<h1><%=Resources.strings.AdministrationLogin_Text %></h1>
 					
 							<div id="section-box">
 			<div class="t">
@@ -45,7 +53,7 @@
 		 		</div>
 	 		</div>
 			<div class="m">
-			
+
                 <asp:Login ID="Login1" runat="server">
                     <LayoutTemplate>
                         <table border="0" cellpadding="2" cellspacing="2" 
@@ -55,12 +63,12 @@
                                     <table border="0" cellpadding="2" cellspacing="2">
                                         <tr>
                                             <td align="center" colspan="2">
-                                                Đăng nhập</td>
+                                                Login</td>
                                         </tr>
                                         <tr>
                                             <td align="right">
                                                 <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName" 
-                                                    CssClass="modlgn_username">Người dùng:</asp:Label>
+                                                    CssClass="modlgn_username">User name:</asp:Label>
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="UserName" runat="server" CssClass="inputbox"></asp:TextBox>
@@ -72,7 +80,7 @@
                                         <tr>
                                             <td align="right">
                                                 <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" 
-                                                    CssClass="modlgn_passwd">Mật khẩu:</asp:Label>
+                                                    CssClass="modlgn_passwd">Password:</asp:Label>
                                             </td>
                                             <td>
                                                 <asp:TextBox ID="Password" runat="server" CssClass="inputbox" 
@@ -84,7 +92,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <asp:CheckBox ID="RememberMe" runat="server" Text="Ghi nhớ tôi lần sau." />
+                                                <asp:CheckBox ID="RememberMe" runat="server" Text="Remember me next time." />
                                             </td>
                                         </tr>
                                         <tr>
@@ -94,7 +102,7 @@
                                         </tr>
                                         <tr>
                                             <td align="right" colspan="2">
-                                                <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Đăng nhập" 
+                                                <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Login" 
                                                     ValidationGroup="Login1" />
                                             </td>
                                         </tr>
@@ -115,9 +123,9 @@
 			</div>
 		</div>
 		
-					<p> Sử dụng người dùng và mật khẩu hợp lệ để truy cập vào chức năng Quản trị phía sau.</p>
+					<p> <%=Resources.strings.LoginGuide_Text %></p>
 					<p>
-						<a href="Default.aspx">Trở về Trang chủ</a>
+						<a href="Default.aspx"><%=Resources.strings.ReturnHomePage_Text %></a>
 					</p>
 					<div id="lock"></div>
 					<div class="clr"></div>

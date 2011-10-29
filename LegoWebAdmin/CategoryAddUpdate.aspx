@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="CategoryAddUpdate.aspx.cs" Inherits="KiposWebAdmin_CategoryAddUpdate" Title="KIPOSADMIN:Cập nhật Chuyên mục" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="CategoryAddUpdate.aspx.cs" Inherits="KiposWebAdmin_CategoryAddUpdate" Title="Add/update category" %>
 <%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
 <%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
 <%@ Register src="LgwUserControls/CategoryAddUpdate.ascx" tagname="CategoryAddUpdate" tagprefix="uc3" %>
@@ -41,7 +41,7 @@
         onclick="linkSaveButton_Click" ValidationGroup="CategoryInfo" CausesValidation="true">
 <span class="icon-32-save" title="Save">
 </span>
-Chấp nhận
+<%=Resources.strings.btnSave_Text %>
 </asp:LinkButton>
 </td>
  
@@ -51,23 +51,23 @@ Chấp nhận
         onclick="linkCancelButton_Click" ValidationGroup="CategoryInfo" CausesValidation="false">
         <span class="icon-32-cancel" title="Cancel">
 </span>
-Bỏ qua
+<%=Resources.strings.btnCancel_Text %>
 </asp:LinkButton>
 </td>
  
 <td class="button" id="toolbar-help">
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
-<span class="icon-32-help" title="Trợ giúp">
+<span class="icon-32-help" title="Help">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text %>
 </a>
 </td>
  
 </tr></table>
 
 </div>
-				<div class="header icon-48-user">
-<asp:Label ID="labelSectionTitle" runat="server"></asp:Label>:[Thêm/Sửa]
+<div class="header icon-48-categories">
+<asp:Literal ID="litCategoryAddUpdate" runat="server"></asp:Literal>
 </div>
 
 				<div class="clr"></div>

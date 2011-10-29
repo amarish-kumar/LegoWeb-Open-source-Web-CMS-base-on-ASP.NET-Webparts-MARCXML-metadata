@@ -23,7 +23,7 @@ public partial class LegoWebAdmin_MetaContentPreview : System.Web.UI.Page
     }
     protected void linkEditButton_Click(object sender, EventArgs e)
     {
-        Response.Redirect("MetaContentAddUpdate.aspx");
+        Response.Redirect("MetaContentEditor.aspx");
     }
     protected void linkCancelButton_Click(object sender, EventArgs e)
     {

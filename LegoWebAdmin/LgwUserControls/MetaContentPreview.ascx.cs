@@ -10,9 +10,9 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 using System.IO;
-using LegoWeb.DataProvider;
+using LegoWebAdmin.DataProvider;
 using MarcXmlParserEx;
-using LegoWeb.Controls;
+using LegoWebAdmin.Controls;
 
 public partial class LgwUserControls_MetaContentPreview : System.Web.UI.UserControl
 {
@@ -28,9 +28,9 @@ public partial class LgwUserControls_MetaContentPreview : System.Web.UI.UserCont
                 {
                     int iMetaContentId = Int32.Parse(CommonUtility.GetInitialValue("meta_content_id", null).ToString());
                     _MetaContentObject = new ContentEditorDataHelper();
-                    string sXmlData =LegoWeb.BusLogic.MetaContents.get_META_CONTENT_MARCXML(iMetaContentId,true);
+                    string sXmlData =LegoWebAdmin.BusLogic.MetaContents.get_META_CONTENT_MARCXML(iMetaContentId,1);
                     _MetaContentObject.load_Xml(sXmlData);
-                    dpTemplateNames.SelectedValue = LegoWeb.BusLogic.Categories.get_CATEGORY_TEMPLATE_NAME(_MetaContentObject.CategoryID);
+                    dpTemplateNames.SelectedValue = LegoWebAdmin.BusLogic.Categories.get_CATEGORY_TEMPLATE_NAME(_MetaContentObject.CategoryID);
                     Session["METADATA"] = _MetaContentObject.OuterXml;
                     preview_MetaContent();
                 }
@@ -38,7 +38,7 @@ public partial class LgwUserControls_MetaContentPreview : System.Web.UI.UserCont
                 {
                     _MetaContentObject = new ContentEditorDataHelper();
                     _MetaContentObject.load_Xml(Session["METADATA"].ToString());
-                    dpTemplateNames.SelectedValue = LegoWeb.BusLogic.Categories.get_CATEGORY_TEMPLATE_NAME(_MetaContentObject.CategoryID);
+                    dpTemplateNames.SelectedValue = LegoWebAdmin.BusLogic.Categories.get_CATEGORY_TEMPLATE_NAME(_MetaContentObject.CategoryID);
                     preview_MetaContent();
                 }
             }
@@ -55,7 +55,7 @@ public partial class LgwUserControls_MetaContentPreview : System.Web.UI.UserCont
         _MetaContentObject = new ContentEditorDataHelper();
         _MetaContentObject.load_Xml(Session["METADATA"].ToString());
 
-        string sTemplateName = LegoWeb.DataProvider.FileTemplateDataProvider.get_XsltTemplateFile(dpTemplateNames.SelectedValue);
+        string sTemplateName = LegoWebAdmin.DataProvider.FileTemplateDataProvider.get_XsltTemplateFile(dpTemplateNames.SelectedValue);
         this.divPreviewer.InnerHtml=_MetaContentObject.XsltFile_Transform(sTemplateName);
     }
     public void Delete_PreviewRecord()
@@ -66,7 +66,7 @@ public partial class LgwUserControls_MetaContentPreview : System.Web.UI.UserCont
 
         if (_MetaContentObject.MetaContentID > 0)
         {
-            LegoWeb.BusLogic.MetaContents.remove_META_CONTENTS(_MetaContentObject.MetaContentID);
+            LegoWebAdmin.BusLogic.MetaContents.movetrash_META_CONTENTS(_MetaContentObject.MetaContentID);
         }
         Session["METADATA"] = null;
         Response.Redirect("MetaContentManager.aspx");

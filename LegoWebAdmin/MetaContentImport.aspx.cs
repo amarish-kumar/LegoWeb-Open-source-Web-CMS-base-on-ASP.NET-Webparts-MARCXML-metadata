@@ -96,7 +96,7 @@ public partial class MetaContentImport : System.Web.UI.Page
                     switch (radioForceToDefaultCategory.SelectedValue)
                     { 
                         case "0"://auto detech category id
-                            if (!LegoWeb.BusLogic.Categories.is_CATEGORY_ID_EXIST(iCatID))
+                            if (!LegoWebAdmin.BusLogic.Categories.is_CATEGORY_ID_EXIST(iCatID))
                             {
                                 myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
                             }                            
@@ -105,15 +105,15 @@ public partial class MetaContentImport : System.Web.UI.Page
                             myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
                             break;
                     }
-                    LegoWeb.BusLogic.MetaContents.save_META_CONTENTS_XML(myRec.OuterXml, this.Page.User.Identity.Name);
+                    LegoWebAdmin.BusLogic.MetaContents.save_META_CONTENTS_XML(myRec.OuterXml, this.Page.User.Identity.Name);
                     break;
                 case "1"://skip if ID exsist
-                    if (!LegoWeb.BusLogic.MetaContents.is_META_CONTENTS_EXIST(iID))
+                    if (!LegoWebAdmin.BusLogic.MetaContents.is_META_CONTENTS_EXIST(iID))
                     {
                         switch (radioForceToDefaultCategory.SelectedValue)
                         {
                             case "0"://auto detech category id
-                                if (!LegoWeb.BusLogic.Categories.is_CATEGORY_ID_EXIST(iCatID))
+                                if (!LegoWebAdmin.BusLogic.Categories.is_CATEGORY_ID_EXIST(iCatID))
                                 {
                                     myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
                                 }
@@ -122,7 +122,7 @@ public partial class MetaContentImport : System.Web.UI.Page
                                 myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
                                 break;
                         }
-                        LegoWeb.BusLogic.MetaContents.save_META_CONTENTS_XML(myRec.OuterXml, this.Page.User.Identity.Name);
+                        LegoWebAdmin.BusLogic.MetaContents.save_META_CONTENTS_XML(myRec.OuterXml, this.Page.User.Identity.Name);
                     }
                     else
                     {
@@ -133,7 +133,7 @@ public partial class MetaContentImport : System.Web.UI.Page
                     switch (radioForceToDefaultCategory.SelectedValue)
                     {
                         case "0"://auto detech category id
-                            if (!LegoWeb.BusLogic.Categories.is_CATEGORY_ID_EXIST(iCatID))
+                            if (!LegoWebAdmin.BusLogic.Categories.is_CATEGORY_ID_EXIST(iCatID))
                             {
                                 myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
                             }
@@ -142,7 +142,7 @@ public partial class MetaContentImport : System.Web.UI.Page
                             myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
                             break;
                     }
-                    LegoWeb.BusLogic.MetaContents.save_META_CONTENTS_XML(myRec.OuterXml, this.Page.User.Identity.Name);
+                    LegoWebAdmin.BusLogic.MetaContents.save_META_CONTENTS_XML(myRec.OuterXml, this.Page.User.Identity.Name);
                     break;
             }
         }
@@ -235,7 +235,7 @@ public partial class MetaContentImport : System.Web.UI.Page
 
     protected void load_dropSections()
     {
-        DataTable secData = LegoWeb.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
+        DataTable secData = LegoWebAdmin.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
         this.dropSections.DataTextField = "SECTION_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE";
         this.dropSections.DataValueField = "SECTION_ID";
         this.dropSections.DataSource = secData;
@@ -246,7 +246,7 @@ public partial class MetaContentImport : System.Web.UI.Page
     protected void load_dropCategories()
     {
         this.dropCategories.Items.Clear();
-        DataTable catData = LegoWeb.BusLogic.Categories.get_Search_Page(0, 0, this.dropSections.SelectedValue != null ? int.Parse(this.dropSections.SelectedValue.ToString()) : 0, " - ", 1, 100).Tables[0];
+        DataTable catData = LegoWebAdmin.BusLogic.Categories.get_Search_Page(0, 0, this.dropSections.SelectedValue != null ? int.Parse(this.dropSections.SelectedValue.ToString()) : 0, " - ", 1, 100).Tables[0];
         this.dropCategories.DataTextField = "CATEGORY_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() +  "_TITLE";
         this.dropCategories.DataValueField = "CATEGORY_ID";
         this.dropCategories.DataSource = catData;

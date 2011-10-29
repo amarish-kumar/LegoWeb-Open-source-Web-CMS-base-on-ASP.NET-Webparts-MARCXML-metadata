@@ -1,4 +1,5 @@
-﻿--Last modified 22-09-2011 add some new fields LEGOWEB_CATEGORIES.ADMIN_LEVEL, LEGOWEB_CATEGORIES.ADMIN_ROLES, LEGOWEB_META_CONTENTS.LEADER
+﻿--Modified 28-10-2011 add some new ALIAS fields
+--Modified 22-09-2011 add some new fields LEGOWEB_CATEGORIES.ADMIN_LEVEL, LEGOWEB_CATEGORIES.ADMIN_ROLES, LEGOWEB_META_CONTENTS.LEADER
 
 SET ANSI_NULLS ON
 GO
@@ -29,6 +30,7 @@ CREATE TABLE [dbo].[LEGOWEB_CATEGORIES](
 	[SECTION_ID] [int] NOT NULL DEFAULT 0,
 	[CATEGORY_VI_TITLE] [nvarchar](250) NOT NULL DEFAULT ('Tên Chuyên Mục'),	
 	[CATEGORY_EN_TITLE] [nvarchar](250) NULL DEFAULT ('Category Title'),	
+	[CATEGORY_ALIAS] [nvarchar](250) NULL,
 	[CATEGORY_TEMPLATE_NAME] [nvarchar](50) NULL DEFAULT ('data_article'),--tintuc.kinhte
 	[CATEGORY_IMAGE_URL] [nvarchar](250) NULL,
 	[MENU_ID] [int] NOT NULL DEFAULT 0,
@@ -52,9 +54,10 @@ CREATE TABLE [dbo].[LEGOWEB_META_CONTENTS](
 	[LEADER] [nvarchar] (24) DEFAULT ('                        '),-- 24 ky tu theo tieu chuan MARC phuc vu mo rong cac thuoc tinh quan tri cua META_CONTENT
 	[LANG_CODE]   [nvarchar](3) NULL DEFAULT ('vie'),
 	[META_CONTENT_TITLE] [nvarchar](250) NULL,
+	[META_CONTENT_ALIAS] [nvarchar](250) NULL,
 	[ORDER_NUMBER] int DEFAULT (0),	
 	[READ_COUNT] [int] DEFAULT 0,
-	[IS_PUBLIC]   [bit] NULL DEFAULT ((0)),	
+	[RECORD_STATUS] smallint DEFAULT ((0)),	
 	[ACCESS_LEVEL] smallint DEFAULT 0,
 	[ACCESS_ROLES] [nvarchar](100) NULL,
 	[CREATED_DATE] [datetime] NULL DEFAULT (getdate()),

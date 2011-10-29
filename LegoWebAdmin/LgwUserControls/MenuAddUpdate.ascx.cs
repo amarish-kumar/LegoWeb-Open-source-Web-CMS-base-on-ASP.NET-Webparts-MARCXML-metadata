@@ -5,7 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.IO;
-using LegoWeb.DataProvider;
+using LegoWebAdmin.DataProvider;
 
 public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
 {
@@ -39,7 +39,7 @@ public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
 
             if (CommonUtility.GetInitialValue("menu_id") != null)
             {
-                DataSet CatData = LegoWeb.BusLogic.Menus.get_MENU_BY_ID(int.Parse(CommonUtility.GetInitialValue("menu_id").ToString()));
+                DataSet CatData = LegoWebAdmin.BusLogic.Menus.get_MENU_BY_ID(int.Parse(CommonUtility.GetInitialValue("menu_id").ToString()));
                 if (CatData.Tables[0].Rows.Count > 0)
                 {
                     this.txtMenuID.Text = CatData.Tables[0].Rows[0]["MENU_ID"].ToString();
@@ -69,7 +69,7 @@ public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
     }
     protected void load_MenuTypes(int iSelectedMenuTypeId)
     {
-        DataTable secData = LegoWeb.BusLogic.MenuTypes.get_Search_Page(1, 100).Tables[0];
+        DataTable secData = LegoWebAdmin.BusLogic.MenuTypes.get_Search_Page(1, 100).Tables[0];
         this.dropMenuTypes.DataTextField = "MENU_TYPE_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE";
         this.dropMenuTypes.DataValueField = "MENU_TYPE_ID";
         this.dropMenuTypes.DataSource = secData;
@@ -86,7 +86,7 @@ public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
     }
     protected void load_ParentMenus(int iMenuTypeId,int iSelectedParentMenuId)
     {
-        DataTable catData = LegoWeb.BusLogic.Menus.get_Search_Page(0, 0, 0, " - ", 1, 100).Tables[0];
+        DataTable catData = LegoWebAdmin.BusLogic.Menus.get_Search_Page(0, 0, 0, " - ", 1, 100).Tables[0];
         //only avoid some case round parent-child relation not completely
         if (this.txtMenuID.Text != "")
         {
@@ -127,14 +127,14 @@ public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
     {
         if (CommonUtility.GetInitialValue("menu_id", null) == null)
         {
-            if (LegoWeb.BusLogic.Menus.is_MenuItem_Exist(int.Parse(txtMenuID.Text)))
+            if (LegoWebAdmin.BusLogic.Menus.is_MenuItem_Exist(int.Parse(txtMenuID.Text)))
             {
                 errorMessage.Text = "ID is existed!.";
                 txtMenuID.Focus();
                 return;
             }
         }
-        LegoWeb.BusLogic.Menus.addUpdate_MENU(int.Parse(txtMenuID.Text),int.Parse("0" + this.dropParentMenus.SelectedValue.ToString()), int.Parse("0" + this.dropMenuTypes.SelectedValue.ToString()), txtMenuViTitle.Text, txtMenuEnTitle.Text,txtLinkUrl.Text,HiddenMenuImageUrl.Value,int.Parse(this.listBoxBrowserNavigation.SelectedValue.ToString()),radioIsPublic.Checked);
+        LegoWebAdmin.BusLogic.Menus.addUpdate_MENU(int.Parse(txtMenuID.Text),int.Parse("0" + this.dropParentMenus.SelectedValue.ToString()), int.Parse("0" + this.dropMenuTypes.SelectedValue.ToString()), txtMenuViTitle.Text, txtMenuEnTitle.Text,txtLinkUrl.Text,HiddenMenuImageUrl.Value,int.Parse(this.listBoxBrowserNavigation.SelectedValue.ToString()),radioIsPublic.Checked);
         Response.Redirect("MenuManager.aspx?menu_type_id=" + dropMenuTypes.SelectedValue.ToString());
     }
 

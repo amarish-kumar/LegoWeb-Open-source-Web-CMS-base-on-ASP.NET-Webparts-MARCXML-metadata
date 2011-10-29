@@ -8,8 +8,8 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-using LegoWeb.DataProvider;
-using LegoWeb.Controls;
+using LegoWebAdmin.DataProvider;
+using LegoWebAdmin.Controls;
 
 public partial class LgwUserControls_MenuManager : System.Web.UI.UserControl
 {
@@ -156,7 +156,7 @@ public partial class LgwUserControls_MenuManager : System.Web.UI.UserControl
                 if (txtMenuId != null)
                 {
                     iMenuId = int.Parse(txtMenuId.Text);
-                    LegoWeb.BusLogic.Menus.moveUp_MENU(iMenuId);
+                    LegoWebAdmin.BusLogic.Menus.moveUp_MENU(iMenuId);
                 }
             }
         }
@@ -182,7 +182,7 @@ public partial class LgwUserControls_MenuManager : System.Web.UI.UserControl
                 TextBox txtMenuId = (TextBox)menuManagerRepeater.Items[i].FindControl("txtMenuId");
                 if (txtMenuId != null)
                 {
-                    LegoWeb.BusLogic.Menus.moveDown_MENU(int.Parse(txtMenuId.Text));
+                    LegoWebAdmin.BusLogic.Menus.moveDown_MENU(int.Parse(txtMenuId.Text));
                 }
             }
         }
@@ -207,7 +207,7 @@ public partial class LgwUserControls_MenuManager : System.Web.UI.UserControl
                 TextBox txtMenuId = (TextBox)menuManagerRepeater.Items[i].FindControl("txtMenuId");
                 if (txtMenuId != null)
                 {
-                    LegoWeb.BusLogic.Menus.remove_MENU(int.Parse(txtMenuId.Text));
+                    LegoWebAdmin.BusLogic.Menus.remove_MENU(int.Parse(txtMenuId.Text));
                 }
             }
         }
@@ -223,7 +223,7 @@ public partial class LgwUserControls_MenuManager : System.Web.UI.UserControl
                 TextBox txtMenuId = (TextBox)menuManagerRepeater.Items[i].FindControl("txtMenuId");
                 if (txtMenuId != null)
                 {
-                    LegoWeb.BusLogic.Menus.publish_MENU(int.Parse(txtMenuId.Text),true);
+                    LegoWebAdmin.BusLogic.Menus.publish_MENU(int.Parse(txtMenuId.Text),true);
                 }
             }
         }
@@ -239,7 +239,7 @@ public partial class LgwUserControls_MenuManager : System.Web.UI.UserControl
                 TextBox txtMenuId = (TextBox)menuManagerRepeater.Items[i].FindControl("txtMenuId");
                 if (txtMenuId != null)
                 {
-                    LegoWeb.BusLogic.Menus.publish_MENU(int.Parse(txtMenuId.Text), false);
+                    LegoWebAdmin.BusLogic.Menus.publish_MENU(int.Parse(txtMenuId.Text), false);
                 }
             }
         }
@@ -282,7 +282,7 @@ public partial class LgwUserControls_MenuManager : System.Web.UI.UserControl
         }
         if (parent_menu_id != 0 && _menu_type_id == 0)
         {
-            DataTable catData = LegoWeb.BusLogic.Menus.get_MENU_BY_ID(parent_menu_id).Tables[0];
+            DataTable catData = LegoWebAdmin.BusLogic.Menus.get_MENU_BY_ID(parent_menu_id).Tables[0];
             _menu_type_id = int.Parse( catData.Rows[0]["MENU_TYPE_ID"].ToString());
         }
         Response.Redirect("MenuAddUpdate.aspx?menu_type_id=" + _menu_type_id.ToString() +"&parent_menu_id=" + parent_menu_id.ToString());

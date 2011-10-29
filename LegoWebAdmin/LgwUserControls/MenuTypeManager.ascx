@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="MenuTypeManager.ascx.cs" Inherits="LgwUserControls_MenuTypeManager" %>
-<%@Register TagPrefix="CC" Namespace="LegoWeb.Controls"%>
+<%@Register TagPrefix="CC" Namespace="LegoWebAdmin.Controls"%>
 <table class="adminlist" cellspacing="1">   									
 					<asp:repeater id="menutypeManagerRepeater" runat="server" OnItemCommand="menutypeManagerDataCommand" OnItemDataBound="menutypeManagerItemDataBound">
 							<HeaderTemplate>
@@ -36,7 +36,7 @@
                                 <a href="MenuTypeAddUpdate.aspx?menu_type_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_EN_TITLE")%></a>                                
                                 </td>
                                 <td align="center">
-                                <a class="icon-16-menuitem" href="MenuManager.aspx?menu_type_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><span class="icon-16-menuitem"></span></a>                                
+                                <a class="icon-16-details" href="MenuManager.aspx?menu_type_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><span class="icon-16-details"></span></a>                                
                                 </td>
                                 <td align="left">                                
                                 <%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_DESCRIPTION")%>                 
@@ -62,7 +62,7 @@
                                 <a href="MenuTypeAddUpdate.aspx?menu_type_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_EN_TITLE")%></a>                                
                                 </td>
                                 <td align="center">
-                                <a class="icon-16-menuitem" href="MenuManager.aspx?menu_type_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><span class="icon-16-menuitem"></span></a>                                         
+                                <a class="icon-16-details" href="MenuManager.aspx?menu_type_id=<%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_ID") %>"><span class="icon-16-details"></span></a>                                         
                                 </td>
                                 <td align="left">                                
                                 <%# DataBinder.Eval(Container.DataItem, "MENU_TYPE_DESCRIPTION")%>                 

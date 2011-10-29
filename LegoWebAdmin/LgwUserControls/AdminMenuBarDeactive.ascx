@@ -17,12 +17,8 @@
             </li>
             <li class="disabled"><a><%=Resources.strings.mnuMenus_Text%></a>
             </li>   
-            <li class="disabled"><a><%=Resources.strings.mnuCategories_Text%></a>
-            </li>                     
             <li class="disabled"><a><%=Resources.strings.mnuContents_Text%></a>
-            </li>                                 
-            <li class="disabled"><a><%=Resources.strings.mnuTools_Text%></a>
-            </li>                                 
+            </li>                                                               
             <li class="disabled"><a><%=Resources.strings.mnuHelp_Text%></a>
             </li>                                             
             </ul>

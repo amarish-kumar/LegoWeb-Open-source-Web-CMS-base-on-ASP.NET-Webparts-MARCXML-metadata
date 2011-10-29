@@ -5,7 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.IO;
-using LegoWeb.DataProvider;
+using LegoWebAdmin.DataProvider;
 
 public partial class LgwUserControls_SectionAddUpdate : System.Web.UI.UserControl
 {
@@ -16,7 +16,7 @@ public partial class LgwUserControls_SectionAddUpdate : System.Web.UI.UserContro
 
             if (CommonUtility.GetInitialValue("section_id") != null)
             {
-                DataSet SecData = LegoWeb.BusLogic.Sections.get_Section_By_ID(int.Parse(CommonUtility.GetInitialValue("section_id").ToString()));
+                DataSet SecData = LegoWebAdmin.BusLogic.Sections.get_Section_By_ID(int.Parse(CommonUtility.GetInitialValue("section_id").ToString()));
                 if (SecData.Tables[0].Rows.Count > 0)
                 {
                     this.txtSectionID.Text = SecData.Tables[0].Rows[0]["SECTION_ID"].ToString();
@@ -24,13 +24,11 @@ public partial class LgwUserControls_SectionAddUpdate : System.Web.UI.UserContro
                     this.txtSectionEnTitle.Text = SecData.Tables[0].Rows[0]["SECTION_EN_TITLE"].ToString();
                 }
             }
-
-
         }
     }
 
     public void Save_SectionRecord()
     {
-        LegoWeb.BusLogic.Sections.add_Update(int.Parse(txtSectionID.Text), txtSectionViTitle.Text, txtSectionEnTitle.Text);
+        LegoWebAdmin.BusLogic.Sections.add_Update(int.Parse(txtSectionID.Text), txtSectionViTitle.Text, txtSectionEnTitle.Text);
     }
 }

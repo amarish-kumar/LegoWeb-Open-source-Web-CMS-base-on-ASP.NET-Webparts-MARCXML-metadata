@@ -10,7 +10,7 @@
 							<HeaderTemplate>
 							<thead>
 							<tr>
-							<th class="title"><%=Resources.strings.No_Text %></th>
+							<th class="title"><%=Resources.strings.Line_Text %></th>
 							<th class="title"><%=Resources.strings.Role_Text %></th>		
 							<th class="title"><%=Resources.strings.Command_Text %></th>						
 							</tr>

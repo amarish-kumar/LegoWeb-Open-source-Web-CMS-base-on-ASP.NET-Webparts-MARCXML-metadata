@@ -8,8 +8,8 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-using LegoWeb.DataProvider;
-using LegoWeb.Controls;
+using LegoWebAdmin.DataProvider;
+using LegoWebAdmin.Controls;
 using MarcXmlParserEx;
 
 public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserControl
@@ -139,7 +139,7 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
                 if (txtMetaContentId != null)
                 {
                     iMetaContentId = int.Parse(txtMetaContentId.Text);
-                    LegoWeb.BusLogic.Categories.moveUp_CATEGORY(iMetaContentId);
+                    LegoWebAdmin.BusLogic.Categories.moveUp_CATEGORY(iMetaContentId);
                 }
             }
         }
@@ -165,7 +165,7 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
                 TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
                 if (txtMetaContentId != null)
                 {
-                    LegoWeb.BusLogic.Categories.moveDown_CATEGORY(int.Parse(txtMetaContentId.Text));
+                    LegoWebAdmin.BusLogic.Categories.moveDown_CATEGORY(int.Parse(txtMetaContentId.Text));
                 }
             }
         }
@@ -190,7 +190,7 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
                 TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
                 if (txtMetaContentId != null)
                 {
-                    LegoWeb.BusLogic.MetaContents.remove_META_CONTENTS(int.Parse(txtMetaContentId.Text));
+                    LegoWebAdmin.BusLogic.MetaContents.movetrash_META_CONTENTS(int.Parse(txtMetaContentId.Text));
                 }
             }
         }
@@ -206,7 +206,7 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
                 TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
                 if (txtMetaContentId != null)
                 {
-                    LegoWeb.BusLogic.Categories.publish_CATEGORY(int.Parse(txtMetaContentId.Text), true);
+                    LegoWebAdmin.BusLogic.Categories.publish_CATEGORY(int.Parse(txtMetaContentId.Text), true);
                 }
             }
         }
@@ -222,7 +222,7 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
                 TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
                 if (txtMetaContentId != null)
                 {
-                    LegoWeb.BusLogic.Categories.publish_CATEGORY(int.Parse(txtMetaContentId.Text), false);
+                    LegoWebAdmin.BusLogic.Categories.publish_CATEGORY(int.Parse(txtMetaContentId.Text), false);
                 }
             }
         }
@@ -239,7 +239,7 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
                 TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
                 if (txtMetaContentId != null)
                 {
-                    Response.Redirect("MetaContentAddUpdate.aspx?meta_content_id=" + txtMetaContentId.Text);
+                    Response.Redirect("MetaContentEditor.aspx?meta_content_id=" + txtMetaContentId.Text);
                 }
             }
         }
@@ -248,7 +248,7 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
     {
         string sSectionId = this.dropSections.SelectedValue.ToString();
         string sCategoryId = this.dropCategories.SelectedValue.ToString();
-        Response.Redirect("MetaContentAddUpdate.aspx?section_id=" + sSectionId + "&category_id=" + sCategoryId);
+        Response.Redirect("MetaContentEditor.aspx?section_id=" + sSectionId + "&category_id=" + sCategoryId);
     }
     override protected void OnInit(EventArgs e)
     {
@@ -257,7 +257,7 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
 
     protected void dropSections_Init(object sender, EventArgs e)
     {
-        DataTable secData = LegoWeb.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
+        DataTable secData = LegoWebAdmin.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
         DataRow dr = secData.NewRow();
         dr["SECTION_ID"] = 0;
         dr["SECTION_VI_TITLE"] = "--Chọn vùng tin--";
@@ -271,7 +271,7 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
 
     protected void load_dropCategories(int iSectionId)
     {
-        DataTable catData = LegoWeb.BusLogic.Categories.get_Search_Page(0, 0, iSectionId, " - ", 1, 100).Tables[0];
+        DataTable catData = LegoWebAdmin.BusLogic.Categories.get_Search_Page(0, 0, iSectionId, " - ", 1, 100).Tables[0];
         DataRow dr = catData.NewRow();
         dr["CATEGORY_ID"] = 0;
         dr["CATEGORY_VI_TITLE"] = "--Chọn chuyên mục--";
@@ -298,8 +298,8 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
 
     public void Take_LinkRelatedContents()
     {
-        if (Session["METADATA"] == null) Response.Redirect("MetaContentAddUpdate.aspx");
-        LegoWeb.DataProvider.ContentEditorDataHelper _MetaContentObject = new ContentEditorDataHelper();
+        if (Session["METADATA"] == null) Response.Redirect("MetaContentEditor.aspx");
+        LegoWebAdmin.DataProvider.ContentEditorDataHelper _MetaContentObject = new ContentEditorDataHelper();
         _MetaContentObject.load_Xml(Session["METADATA"].ToString());
         try
         {
@@ -342,7 +342,7 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
             }
             _MetaContentObject.bind_TableDataToMarc(ref marcTable);
             Session["METADATA"] = _MetaContentObject.OuterXml;
-            Response.Redirect("MetaContentAddUpdate.aspx");
+            Response.Redirect("MetaContentEditor.aspx");
         }
         catch (Exception ex)
         {

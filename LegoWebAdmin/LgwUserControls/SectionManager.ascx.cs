@@ -8,8 +8,8 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-using LegoWeb.DataProvider;
-using LegoWeb.Controls;
+using LegoWebAdmin.DataProvider;
+using LegoWebAdmin.Controls;
 
 public partial class LgwUserControls_SectionManager : System.Web.UI.UserControl
 {
@@ -107,7 +107,6 @@ public partial class LgwUserControls_SectionManager : System.Web.UI.UserControl
             cbRow.Checked = cb.Checked;
         }
 
-
     }
     protected void chkSelect_CheckedChanged(object sender, EventArgs e)
     {
@@ -127,7 +126,7 @@ public partial class LgwUserControls_SectionManager : System.Web.UI.UserControl
                 TextBox txtSectionId = (TextBox)sectionManagerRepeater.Items[i].FindControl("txtSectionId");
                 if (txtSectionId != null)
                 {
-                    LegoWeb.BusLogic.Sections.remove_Section(int.Parse(txtSectionId.Text));
+                    LegoWebAdmin.BusLogic.Sections.remove_Section(int.Parse(txtSectionId.Text));
                 }
             }
         }

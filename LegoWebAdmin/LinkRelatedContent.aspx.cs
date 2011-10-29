@@ -23,7 +23,7 @@ public partial class LegoWebAdmin_LinkRelatedContent : System.Web.UI.Page
     }
     protected void linkCancelButton_Click(object sender, EventArgs e)
     {
-        Response.Redirect("MetaContentAddUpdate.aspx");
+        Response.Redirect("MetaContentEditor.aspx");
     }
     protected override void OnInit(EventArgs e)
     {

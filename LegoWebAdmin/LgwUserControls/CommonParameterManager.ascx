@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="CommonParameterManager.ascx.cs" Inherits="LgwUserControls_CommonParameterManager" %>
-<%@Register TagPrefix="CC" Namespace="LegoWeb.Controls"%>
+<%@Register TagPrefix="CC" Namespace="LegoWebAdmin.Controls"%>
 <table width="100%" cellpadding="2" cellspacing="2" border="0">
 <tbody>
 <tr>

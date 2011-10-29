@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MetaContentManager.aspx.cs" Inherits="Administrator_MetaContentManager" Title="KIPOSADMIN: Quản trị nội dung web" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MetaContentManager.aspx.cs" Inherits="LegoWebAdmin_MetaContentManager" Title="MetaContent manager" %>
 <%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
 <%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
 <%@ Register src="LgwUserControls/MetaContentManager.ascx" tagname="MetaContentManager" tagprefix="uc3" %>
@@ -12,7 +12,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
 	<div id="header-box">
-
         <!--menu bar go here -->
         <uc1:AdminMenuBarActive ID="AdminMenuBarActive1" runat="server" />
 		<div class="clr"></div>
@@ -39,7 +38,7 @@
         onclick="linkPublishButton_Click">
 <span class="icon-32-publish" title="Publish">
 </span>
-Công bố
+<%=Resources.strings.btnPublish_Text %>
 </asp:LinkButton>
 </td>
  
@@ -48,17 +47,17 @@ Công bố
         onclick="linkUnPublishButton_Click">
 <span class="icon-32-unpublish" title="Unpublish">
 </span>
-Hạn chế
+<%=Resources.strings.btnUnPublish_Text %>
 </asp:LinkButton>
 </td>
 
 
-<td class="button" id="toolbar-delete">
+<td class="button" id="toolbar-trash">
 <asp:LinkButton ID="linkDeleteButton" class="toolbar" runat="server" 
-        onclick="linkDeleteButton_Click" OnClientClick="return confirm('Bạn thực sự muốn xóa các mục được chọn?')">
-<span class="icon-32-delete" title="Delete">
+        onclick="linkDeleteButton_Click" OnClientClick="return confirm('Are you sure to remove selected items?')">
+<span class="icon-32-trash" title="Delete">
 </span>
-Xóa
+<%=Resources.strings.btnDelete_Text %>
 </asp:LinkButton>
 </td>
 
@@ -67,7 +66,7 @@ Xóa
         onclick="linkEditButton_Click">
 <span class="icon-32-edit" title="Edit">
 </span>
-Sửa
+<%=Resources.strings.btnEdit_Text %>
 </asp:LinkButton>
 </td>
 
@@ -76,21 +75,23 @@ Sửa
         onclick="linkNewButton_Click">
 <span class="icon-32-new" title="New">
 </span>
-Thêm
+<%=Resources.strings.btnAdd_Text %>
 </asp:LinkButton>
 </td>
 
 <td class="button" id="toolbar-help">
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
-<span class="icon-32-help" title="Trợ giúp">
+<span class="icon-32-help" title="Help">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text %>
 </a>
 </td>
 
 </tr></table>
 </div>
-				    <asp:Literal ID="literalIconTitle" runat="server"></asp:Literal>
+<div class="header icon-48-article">
+<%=Resources.strings.ContentManager_Text %>
+</div>
 
 				<div class="clr"></div>
 			</div>
@@ -103,17 +104,18 @@ Trợ giúp
 	  
 	  <div class="clr"></div>
 	  
+	  	  <asp:Literal ID="litErrorSpaceHolder" runat="server"> </asp:Literal>
+
+	  
 		<div id="element-box">
 			<div class="t">
 		 		<div class="t">
 					<div class="t"></div>
 		 		</div>
 			</div>
-			<div class="m">
-                                                                                                
-                            
-                            <uc3:MetaContentManager ID="MetaContentManager1" runat="server" />
-                                                                                                              															
+			<div class="m">                           
+
+                            <uc3:MetaContentManager ID="MetaContentManager1" runat="server" /> 																
 									
 			        <div class="clr"></div>
 			</div>
@@ -129,4 +131,5 @@ Trợ giúp
 	</div>
 
 </asp:Content>
+
 

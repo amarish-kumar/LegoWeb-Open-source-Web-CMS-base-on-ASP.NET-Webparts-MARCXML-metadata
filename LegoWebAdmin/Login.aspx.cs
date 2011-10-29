@@ -15,8 +15,37 @@ public partial class Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
+            this.Login1.LoginButtonText = Resources.strings.Login_Text;
+            this.Login1.RememberMeText = Resources.strings.RememberMeNextTime_Text;
 
+            if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "vi")
+            {
+                this.btnSelectEnglish.Visible = true;
+                this.btnSelectVietnamese.Visible = false;
+            }
+            else
+            {
+                this.btnSelectEnglish.Visible = false;
+                this.btnSelectVietnamese.Visible = true;
+            }
+        }
     }
+
+    protected void en_Click(object sender, EventArgs e)
+    {
+        UrlQuery myURL = new UrlQuery(Request.Url.AbsoluteUri);
+        myURL.Set("locale", "en-US");
+        Response.Redirect(myURL.AbsoluteUri);
+    }
+    protected void vi_Click(object sender, EventArgs e)
+    {
+        UrlQuery myURL = new UrlQuery(Request.Url.AbsoluteUri);
+        myURL.Set("locale", "vi-VN");
+        Response.Redirect(myURL.AbsoluteUri);
+    }
+
     protected override void OnInit(EventArgs e)
     {
         CultureUtility.SetThreadCulture();

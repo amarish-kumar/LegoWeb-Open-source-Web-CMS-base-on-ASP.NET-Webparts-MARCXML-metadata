@@ -1,14 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="CategoryManager.ascx.cs" Inherits="LgwUserControls_CategoryManager" %>
-<%@Register TagPrefix="CC" Namespace="LegoWeb.Controls"%>
+<%@Register TagPrefix="CC" Namespace="LegoWebAdmin.Controls"%>
 
-<table width="100%" cellpadding="2" cellspacing="2">
-<tbody>
-<tr>
-<td align="right" valign="middle"><b> Vùng thông tin:</b></td>
-<td align="left" valign="middle" style="width:200px"><asp:dropdownlist ID="dropSections" runat="server" oninit="dropSections_Init" AutoPostBack="true" OnSelectedIndexChanged="dropSections_SelectedIndexChanged"></asp:dropdownlist></td>
-</tr>
-</tbody>
-</table>
 
 <table class="adminlist" cellspacing="1">   									
 					<asp:repeater id="categoryManagerRepeater" runat="server" OnItemCommand="categoryManagerDataCommand" OnItemDataBound="categoryManagerItemDataBound">
@@ -18,10 +10,12 @@
 							<th width="2%" class="title">#</th>
 							<th width="3%" class="title">
 							<asp:CheckBox ID="chkSelectAll" Checked="false" AutoPostBack="true" runat="server" OnCheckedChanged="chkSelectAll_CheckedChanged" /></th>
-							<th class="title">ID</th>							
-							<th class="title">Tên tiếng Việt</th>
-							<th class="title">Công bố</th>
-							<th class="title">Khuôn mẫu</th>
+							<th class="title"><%=Resources.strings.ID_Text%></th>							
+							<th class="title"><%=Resources.strings.VietnameseTitle_Text%></th>
+							<th class="title"><%=Resources.strings.EnglishTitle_Text%></th>
+							<th class="title"><%=Resources.strings.Alias_Text%></th>
+							<th class="title"><%=Resources.strings.IsPublic_Text%></th>
+							<th class="title"><%=Resources.strings.Template_Text%></th>
 							<th class="title">							
 							<asp:LinkButton ID="linkOrderUp" runat="server" OnClick="linkOrderUp_OnClick">
 							<span class="icon-16-uparrow">
@@ -32,9 +26,8 @@
 							</span>
 							</asp:LinkButton>							
 							</th>
-							<th class="title">Vùng tin</th>
-    						<th class="title">Liên kết Trình đơn</th>
-    						<th class="title">Quyền quản trị</th>
+    						<th class="title"><%=Resources.strings.LinkedMenuItem_Text%></th>
+    						<th class="title"><%=Resources.strings.AdminRoles_Text%></th>
 							</tr>
 							</thead>
 							<tbody>
@@ -54,6 +47,12 @@
                                 <td align="left">                                
                                 <a href="CategoryAddUpdate.aspx?category_id=<%# DataBinder.Eval(Container.DataItem, "CATEGORY_ID") %>"><%# DataBinder.Eval(Container.DataItem, "CATEGORY_VI_TITLE")%></a>                                
                                 </td>
+                                <td align="left">                                
+                                <a href="CategoryAddUpdate.aspx?category_id=<%# DataBinder.Eval(Container.DataItem, "CATEGORY_ID") %>"><%# DataBinder.Eval(Container.DataItem, "CATEGORY_EN_TITLE")%></a>                                
+                                </td>                                
+                                <td align="left">                                
+                                <%# DataBinder.Eval(Container.DataItem, "CATEGORY_ALIAS")%>
+                                </td>                                                                
                                 <td align="center">          
                                  <asp:Image ID="imgIsPublic" runat="server" SkinID="Tick" Visible='<%#(bool)DataBinder.Eval(Container.DataItem, "IS_PUBLIC")%>'/>  
                                  <asp:Image ID="imgIsNotPublic" runat="server" SkinID="Stop" Visible='<%#!(bool)DataBinder.Eval(Container.DataItem, "IS_PUBLIC")%>'/>  
@@ -63,15 +62,12 @@
                                 </td>    
                                 <td align="left">                                
                                 <%# DataBinder.Eval(Container.DataItem, "ORDER_PATH")%>                                
-                                </td>                                  
+                                </td>                                     
                                 <td align="left">                                
-                                <%# DataBinder.Eval(Container.DataItem, "SECTION_VI_TITLE")%>                                                                 
-                                </td>      
-                                <td align="left">                                
-                                <%# DataBinder.Eval(Container.DataItem, "MENU_VI_TITLE")%>                                                               
+                                <%# DataBinder.Eval(Container.DataItem, "MENU_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE")%>                                                               
                                 </td>
                                 <td align="left">                                
-                                <%# int.Parse(DataBinder.Eval(Container.DataItem, "ADMIN_LEVEL").ToString())==0?"Bất kỳ":DataBinder.Eval(Container.DataItem, "ADMIN_ROLES")%>                                                               
+                                <%# int.Parse(DataBinder.Eval(Container.DataItem, "ADMIN_LEVEL").ToString())==0?Resources.strings.Any_Text:DataBinder.Eval(Container.DataItem, "ADMIN_ROLES")%>                                                               
                                 </td>                                
                             </tr>
 							</ItemTemplate>
@@ -90,26 +86,29 @@
                                 <td align="left">                                
                                 <a href="CategoryAddUpdate.aspx?category_id=<%# DataBinder.Eval(Container.DataItem, "CATEGORY_ID") %>"><%# DataBinder.Eval(Container.DataItem, "CATEGORY_VI_TITLE")%></a>                                
                                 </td>
+                                <td align="left">                                
+                                <a href="CategoryAddUpdate.aspx?category_id=<%# DataBinder.Eval(Container.DataItem, "CATEGORY_ID") %>"><%# DataBinder.Eval(Container.DataItem, "CATEGORY_EN_TITLE")%></a>                                
+                                </td>                                
+                                <td align="left">                                
+                                <%# DataBinder.Eval(Container.DataItem, "CATEGORY_ALIAS")%>
+                                </td>                                                                
                                 <td align="center">          
                                  <asp:Image ID="imgIsPublic" runat="server" SkinID="Tick" Visible='<%#(bool)DataBinder.Eval(Container.DataItem, "IS_PUBLIC")%>'/>  
                                  <asp:Image ID="imgIsNotPublic" runat="server" SkinID="Stop" Visible='<%#!(bool)DataBinder.Eval(Container.DataItem, "IS_PUBLIC")%>'/>  
                                 </td>
                                 <td align="center">                                
                                 <%# DataBinder.Eval(Container.DataItem, "CATEGORY_TEMPLATE_NAME")%>                                
-                                </td> 
+                                </td>    
                                 <td align="left">                                
                                 <%# DataBinder.Eval(Container.DataItem, "ORDER_PATH")%>                                
-                                </td>                                                                                                               
+                                </td>                                     
                                 <td align="left">                                
-                                <%# DataBinder.Eval(Container.DataItem, "SECTION_VI_TITLE")%>                                
-                                </td>                                                                                       
-                                <td align="left">                                
-                                <%# DataBinder.Eval(Container.DataItem, "MENU_VI_TITLE")%>                                                               
+                                <%# DataBinder.Eval(Container.DataItem, "MENU_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE")%>                                                               
                                 </td>
                                 <td align="left">                                
-                                <%# int.Parse(DataBinder.Eval(Container.DataItem, "ADMIN_LEVEL").ToString()) == 0 ? "Bất kỳ" : DataBinder.Eval(Container.DataItem, "ADMIN_ROLES")%>                                                               
-                                </td>                                                                
-                            </tr>                            
+                                <%# int.Parse(DataBinder.Eval(Container.DataItem, "ADMIN_LEVEL").ToString())==0?Resources.strings.Any_Text:DataBinder.Eval(Container.DataItem, "ADMIN_ROLES")%>                                                               
+                                </td>         
+                               </tr>                            
 							</AlternatingItemTemplate>
 							<FooterTemplate>
 							</tbody>		
@@ -128,7 +127,7 @@
 							        <asp:ListItem Value="100" Text="100"></asp:ListItem>
 							    </asp:DropDownList> 
 							 </td>				
-							<td colspan="7" align="center">			
+							<td colspan="8" align="center">			
 							&nbsp;
 							<div runat="server" id="divNavigator" visible="<%#_categoryManagerData.PageCount>1%>" >									
 									<CC:Navigator id="NavigatorNavigator" MaxPage="<%#_categoryManagerData.PageCount%>" PageNumber="<%#_categoryManagerData.PageNumber%>" runat="server">

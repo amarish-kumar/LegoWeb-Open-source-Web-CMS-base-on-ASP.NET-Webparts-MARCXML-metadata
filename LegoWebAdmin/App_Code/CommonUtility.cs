@@ -20,6 +20,31 @@ using System.IO;
     public static class CommonUtility
     {
 
+        public static string convert_TitleToAlias(string sInput)
+        {         
+            string FindText = "áàảãạâấầẩẫậăắằẳẵặđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶĐÉÈẺẼẸÊẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÚÙỦŨỤƯỨỪỬỮỰÝỲỶỸỴqwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM/";
+            string ReplText = "aaaaaaaaaaaaaaaaadeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyaaaaaaaaaaaaaaaaadeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyqwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm";        
+            char[] tmp = sInput.ToCharArray();
+            int index = -1;
+            string[] toreturn = new string[tmp.Length];
+            int Length = sInput.Length;
+            for (int i = 0; i <= Length - 1; i++)
+            {
+                if (i >= tmp.Length) break;
+                index = FindText.IndexOf(tmp[i]);
+                if (index >= 0)
+                {
+                    toreturn[i] = ReplText.Substring(index, 1);
+                }
+                else
+                {
+                    toreturn[i] = "-";
+                }
+            }
+            return String.Join("", toreturn).Replace("--", "-");        
+        }
+
+
         public static string HighLightText(string source, string key, bool HtmlTagEndcode, string CssSpanClass)
         {
             if (key.Trim() != "")
