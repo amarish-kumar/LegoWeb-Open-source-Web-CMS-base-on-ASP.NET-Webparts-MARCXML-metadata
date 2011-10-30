@@ -35,13 +35,11 @@ public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
             item = new ListItem();
             item.Value = "1";
             item.Text = Resources.strings.NewWindowWithBrowserNavigation_Text;
-            item.Selected = true;
             listBoxBrowserNavigation.Items.Add(item);
 
             item = new ListItem();
             item.Value = "2";
             item.Text = Resources.strings.NewWindowWithoutBrowserNavigation_Text;
-            item.Selected = true;
             listBoxBrowserNavigation.Items.Add(item);
 
 

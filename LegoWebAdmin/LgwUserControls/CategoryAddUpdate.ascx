@@ -140,7 +140,32 @@
             </td>
         </tr>
                               
+        <tr>
+            <td>
+            </td>
+            <td class="key"><label for="name"><%=Resources.strings.SEO_Text %>:</label></td>
+        </tr>
         
+        <tr>
+            <td class="key"><label for="name"><%=Resources.strings.Title_Text%>:</label></td>
+            <td>
+                <asp:TextBox ID="txtSeoTitle" runat="server" Width="90%"></asp:TextBox>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="key"><label for="name"><%=Resources.strings.Description_Text%>:</label></td>
+            <td>
+                <asp:TextBox ID="txtSeoDescription" runat="server" Width="90%"></asp:TextBox>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="key"><label for="name"><%=Resources.strings.Keywords_Text%>:</label></td>
+            <td>
+               <asp:TextBox ID="txtSeoKeywords" runat="server" Width="90%"></asp:TextBox> 
+            </td>
+        </tr>        
             </tbody>
             </table>
 		</fieldset>

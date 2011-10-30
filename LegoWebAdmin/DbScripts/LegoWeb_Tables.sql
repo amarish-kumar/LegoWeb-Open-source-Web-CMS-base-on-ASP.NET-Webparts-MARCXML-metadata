@@ -10,7 +10,7 @@
 */
 --Modified 28-10-2011 add some new ALIAS fields
 --Modified 22-09-2011 add some new fields LEGOWEB_CATEGORIES.ADMIN_LEVEL, LEGOWEB_CATEGORIES.ADMIN_ROLES, LEGOWEB_META_CONTENTS.LEADER
-
+--Modified 30-10-2011 add some SEO FIELDS to Category
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -47,7 +47,10 @@ CREATE TABLE [dbo].[LEGOWEB_CATEGORIES](
 	[ORDER_NUMBER] int DEFAULT 0,
 	[IS_PUBLIC] bit DEFAULT 1,
 	[ADMIN_LEVEL] smallint DEFAULT 0, -- qui dinh cach phan quyen cap nhat noi dung cho category 0 moi nguoi dang nhap thanh cong vao quan tri, 1 nhung nguoi nam trong admin_roles
-	[ADMIN_ROLES] nvarchar(250) DEFAULT NULL, -- cac nhom quyen cap nhat noi dung thuoc ve chuyen muc nay	
+	[ADMIN_ROLES] nvarchar(250) DEFAULT NULL, -- cac nhom quyen cap nhat noi dung thuoc ve chuyen muc nay
+	[SEO_TITLE]   nvarchar(100) DEFAULT NULL, 
+	[SEO_DESCRIPTION] nvarchar(255) DEFAULT NULL,
+	[SEO_KEYWORDS] nvarchar(255) DEFAULT NULL,	
 	CONSTRAINT [PK_CATEGORY_ID] PRIMARY KEY NONCLUSTERED  ( CATEGORY_ID )
 	)
 GO

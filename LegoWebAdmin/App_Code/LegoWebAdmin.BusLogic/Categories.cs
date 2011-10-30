@@ -233,7 +233,7 @@ namespace LegoWebAdmin.BusLogic
             }
         }
 
-        public static void addUpdate_CATEGORY(int iCATEGORY_ID, int iPARENT_CATEGORY_ID, int iSECTION_ID, string sCATEGORY_VI_TITLE, string sCATEGORY_EN_TITLE, string sCATEGORY_ALIAS, string sCATEGORY_TEMPLATE_NAME, string sCATEGORY_IMAGE_URL, int iMENU_ID, bool bIsPublic, int iAdminLevel, string sAdminRoles)
+        public static void addUpdate_CATEGORY(int iCATEGORY_ID, int iPARENT_CATEGORY_ID, int iSECTION_ID, string sCATEGORY_VI_TITLE, string sCATEGORY_EN_TITLE, string sCATEGORY_ALIAS, string sCATEGORY_TEMPLATE_NAME, string sCATEGORY_IMAGE_URL, int iMENU_ID, bool bIsPublic, int iAdminLevel, string sAdminRoles, string sSeoTitle, string sSeoDescription, string sSeoKeywords)
         {
             string connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
             SqlConnection connection = new SqlConnection(connStr);
@@ -295,6 +295,18 @@ namespace LegoWebAdmin.BusLogic
                 objParam = objCommand.Parameters.Add(new SqlParameter("@_ADMIN_ROLES", SqlDbType.NVarChar, 250));
                 objParam.Direction = ParameterDirection.Input;
                 objParam.Value = sAdminRoles;
+
+                objParam = objCommand.Parameters.Add(new SqlParameter("@_SEO_TITLE", SqlDbType.NVarChar, 100));
+                objParam.Direction = ParameterDirection.Input;
+                objParam.Value = sSeoTitle;
+
+                objParam = objCommand.Parameters.Add(new SqlParameter("@_SEO_DESCRIPTION", SqlDbType.NVarChar, 255));
+                objParam.Direction = ParameterDirection.Input;
+                objParam.Value = sSeoDescription;
+
+                objParam = objCommand.Parameters.Add(new SqlParameter("@_SEO_KEYWORDS", SqlDbType.NVarChar, 255));
+                objParam.Direction = ParameterDirection.Input;
+                objParam.Value = sSeoKeywords;
 
                 connection.Open();
                 objCommand.ExecuteNonQuery();

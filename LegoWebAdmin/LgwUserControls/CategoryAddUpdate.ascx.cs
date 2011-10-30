@@ -60,6 +60,10 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
                     this.HiddenCategoryImageUrl.Value = CatData.Tables[0].Rows[0]["CATEGORY_IMAGE_URL"].ToString();
                     this.dropAdminLevels.SelectedValue = CatData.Tables[0].Rows[0]["ADMIN_LEVEL"].ToString();
 
+                    this.txtSeoTitle.Text = CatData.Tables[0].Rows[0]["SEO_TITLE"].ToString();
+                    this.txtSeoDescription.Text = CatData.Tables[0].Rows[0]["SEO_DESCRIPTION"].ToString();
+                    this.txtSeoKeywords.Text = CatData.Tables[0].Rows[0]["SEO_KEYWORDS"].ToString();
+
                     if (Convert.ToInt16(CatData.Tables[0].Rows[0]["ADMIN_LEVEL"].ToString()) >= 1)//special permission
                     {
                         cblRoles.Visible = true;
@@ -187,7 +191,7 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
         {
             txtCategoryAlias.Text = CommonUtility.convert_TitleToAlias(txtCategoryViTitle.Text);
         }
-        LegoWebAdmin.BusLogic.Categories.addUpdate_CATEGORY(int.Parse(txtCategoryID.Text),int.Parse("0" + this.dropParentCategories.SelectedValue.ToString()), int.Parse("0" + this.dropSections.SelectedValue.ToString()), txtCategoryViTitle.Text, txtCategoryEnTitle.Text,txtCategoryAlias.Text, dpTemplateNames.SelectedValue.ToString(),HiddenCategoryImageUrl.Value,int.Parse("0" + dropLinkMenus.SelectedValue.ToString()),radioIsPublic.Checked, iAdminLevel,sAdminRoles);
+        LegoWebAdmin.BusLogic.Categories.addUpdate_CATEGORY(int.Parse(txtCategoryID.Text),int.Parse("0" + this.dropParentCategories.SelectedValue.ToString()), int.Parse("0" + this.dropSections.SelectedValue.ToString()), txtCategoryViTitle.Text, txtCategoryEnTitle.Text,txtCategoryAlias.Text, dpTemplateNames.SelectedValue.ToString(),HiddenCategoryImageUrl.Value,int.Parse("0" + dropLinkMenus.SelectedValue.ToString()),radioIsPublic.Checked, iAdminLevel,sAdminRoles, txtSeoTitle.Text,txtSeoDescription.Text,txtSeoKeywords.Text);
         if (radioApplyChilrenNodes.Checked)//áp dụng cho node con
         {
             LegoWebAdmin.BusLogic.Categories.apply_ADMIN_ROLES_TO_CHILREN(int.Parse(txtCategoryID.Text), iAdminLevel, sAdminRoles);    

@@ -80,7 +80,10 @@ CREATE procedure sp_LEGOWEB_CATEGORIES_ADDUPDATE
 		@_MENU_ID int=0,
 		@_IS_PUBLIC bit = 1,
 		@_ADMIN_LEVEL int = 0,
-		@_ADMIN_ROLES nvarchar(250) = NULL
+		@_ADMIN_ROLES nvarchar(250) = NULL,
+		@_SEO_TITLE   nvarchar(100)= NULL, 
+		@_SEO_DESCRIPTION nvarchar(255)= NULL,
+		@_SEO_KEYWORDS nvarchar(255)= NULL
 as
 BEGIN
 	  begin    
@@ -99,7 +102,10 @@ BEGIN
 				MENU_ID=@_MENU_ID,
 				IS_PUBLIC=@_IS_PUBLIC,
 				ADMIN_LEVEL=@_ADMIN_LEVEL,
-				ADMIN_ROLES=@_ADMIN_ROLES				
+				ADMIN_ROLES=@_ADMIN_ROLES,		
+				SEO_TITLE=@_SEO_TITLE, 
+				SEO_DESCRIPTION=@_SEO_DESCRIPTION,
+				SEO_KEYWORDS=@_SEO_KEYWORDS		
 			where
 				CATEGORY_ID=@_CATEGORY_ID
 		 end    
@@ -118,7 +124,10 @@ BEGIN
 				MENU_ID,
 				IS_PUBLIC,
 				ADMIN_LEVEL,
-				ADMIN_ROLES
+				ADMIN_ROLES,
+				SEO_TITLE, 
+				SEO_DESCRIPTION,
+				SEO_KEYWORDS		
 			)
 			values
 			(
@@ -133,7 +142,10 @@ BEGIN
 				@_MENU_ID,
 				@_IS_PUBLIC,
 				@_ADMIN_LEVEL,
-				@_ADMIN_ROLES
+				@_ADMIN_ROLES,
+				@_SEO_TITLE,
+				@_SEO_DESCRIPTION,
+				@_SEO_KEYWORDS
 			)	
 	     end
 	  end
