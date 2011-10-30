@@ -37,7 +37,7 @@
         onclick="linkSaveButton_Click" ValidationGroup="CommonParameterInfo" CausesValidation="true">
 <span class="icon-32-save" title="Save">
 </span>
-Chấp nhận
+<%=Resources.strings.btnSave_Text %>
 </asp:LinkButton>
 </td>
  
@@ -47,23 +47,23 @@ Chấp nhận
         onclick="linkCancelButton_Click" ValidationGroup="CommonParameterInfo" CausesValidation="false">
         <span class="icon-32-cancel" title="Cancel">
 </span>
-Bỏ qua
+<%=Resources.strings.btnCancel_Text %>
 </asp:LinkButton>
 </td>
  
 <td class="button" id="toolbar-help">
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
-<span class="icon-32-help" title="Trợ giúp">
+<span class="icon-32-help" title="Help">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text %>
 </a>
 </td>
  
 </tr></table>
 
 </div>
-				<div class="header icon-48-config">
-Tham số hệ thống: [thêm/sửa]
+<div class="header icon-48-config">
+<%=Resources.strings.AddUpdateParameter_Text%>
 </div>
 
 				<div class="clr"></div>
@@ -76,6 +76,8 @@ Tham số hệ thống: [thêm/sửa]
   		</div>  		
 	  
 	  <div class="clr"></div>
+	  
+	   <asp:Literal ID="litErrorSpaceHolder" runat="server"> </asp:Literal>
 	  
 		<div id="element-box">
 			<div class="t">

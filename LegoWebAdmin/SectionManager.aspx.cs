@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="SectionManager.aspx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
@@ -19,14 +27,28 @@ public partial class Administrator_SectionManager : System.Web.UI.Page
         {
             if (!Roles.IsUserInRole("ADMINISTRATORS"))
             {
-                Response.Redirect("ErrorMessage.aspx?ErrorMessage='Bạn không có quyền truy cập vào tính năng này!'");
+                Response.Redirect("ErrorMessage.aspx?ErrorMessage='You are not authorized to change Sections!'");
             }
         }
     }
 
     protected void linkDeleteButton_Click(object sender, EventArgs e)
-    {
-        this.SectionManager1.Remove_SelectedSections();
+    {        
+        try
+        {
+            this.SectionManager1.Remove_SelectedSections();
+        }
+        catch (Exception ex)
+        {
+            String errorFomat = @"<dl id='system-message'>
+                                            <dd class='error message fade'>
+	                                            <ul>
+		                                            <li>{0}</li>
+	                                            </ul>
+                                            </dd>
+                                            </dl>";
+            litErrorSpaceHolder.Text = String.Format(errorFomat, ex.Message);
+        }
     }
     protected void linkEditButton_Click(object sender, EventArgs e)
     {

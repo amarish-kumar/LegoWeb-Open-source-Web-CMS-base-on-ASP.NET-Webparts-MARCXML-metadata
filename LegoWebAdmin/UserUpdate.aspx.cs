@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="UserUpdate.aspx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
@@ -25,8 +33,22 @@ public partial class LegoWebAdmin_UserUpdate : System.Web.UI.Page
     }
     protected void linkSaveButton_Click(object sender, EventArgs e)
     {
-        this.UserUpdate1.Save_User();
-        Response.Redirect("UserManager.aspx");
+        try
+        {
+            this.UserUpdate1.Save_User();
+            Response.Redirect("UserManager.aspx");
+        }
+        catch (Exception ex)
+        {
+            String errorFomat = @"<dl id='system-message'>
+                                            <dd class='error message fade'>
+	                                            <ul>
+		                                            <li>{0}</li>
+	                                            </ul>
+                                            </dd>
+                                            </dl>";
+            litErrorSpaceHolder.Text = String.Format(errorFomat, ex.Message);
+        }
     }
     protected void linkCancelButton_Click(object sender, EventArgs e)
     {

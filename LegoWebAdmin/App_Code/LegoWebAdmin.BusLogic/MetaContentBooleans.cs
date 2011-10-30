@@ -1,6 +1,7 @@
 ﻿// ----------------------------------------------------------------------
-// <copyright file="MetaContentBooleans.cs" company="HIENDAI SOFTWARE COMPANY">
+// <copyright file="MetaContentBooleans.cs" package="LEGOWEB">
 //     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
 //     License: GNU/GPL
 //     LEGOWEB IS FREE SOFTWARE
 // </copyright>

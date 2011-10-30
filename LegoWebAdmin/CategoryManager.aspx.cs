@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="CategoryManager.aspx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
@@ -40,16 +48,60 @@ public partial class KiposWebAdmin_CategoryManager : System.Web.UI.Page
 
     protected void linkPublishButton_Click(object sender, EventArgs e)
     {
-        this.CategoryManager1.Publish_SelectedCategories();
+        
+        try
+        {
+            this.CategoryManager1.Publish_SelectedCategories();
+        }
+        catch (Exception ex)
+        {
+            String errorFomat = @"<dl id='system-message'>
+                                            <dd class='error message fade'>
+	                                            <ul>
+		                                            <li>{0}</li>
+	                                            </ul>
+                                            </dd>
+                                            </dl>";
+            litErrorSpaceHolder.Text = String.Format(errorFomat, ex.Message);
+        }
     }
     protected void linkUnPublishButton_Click(object sender, EventArgs e)
     {
-        this.CategoryManager1.UnPublish_SelectedCategories();
+        try
+        {
+            this.CategoryManager1.UnPublish_SelectedCategories();
+
+        }
+        catch (Exception ex)
+        {
+            String errorFomat = @"<dl id='system-message'>
+                                            <dd class='error message fade'>
+	                                            <ul>
+		                                            <li>{0}</li>
+	                                            </ul>
+                                            </dd>
+                                            </dl>";
+            litErrorSpaceHolder.Text = String.Format(errorFomat, ex.Message);
+        }
     }
     
     protected void linkDeleteButton_Click(object sender, EventArgs e)
     {
-        this.CategoryManager1.Remove_SelectedCategories();
+        try
+        {
+            this.CategoryManager1.Remove_SelectedCategories();
+        }
+        catch (Exception ex)
+        {
+            String errorFomat = @"<dl id='system-message'>
+                                            <dd class='error message fade'>
+	                                            <ul>
+		                                            <li>{0}</li>
+	                                            </ul>
+                                            </dd>
+                                            </dl>";
+            litErrorSpaceHolder.Text = String.Format(errorFomat, ex.Message);
+        }
     }
     protected void linkEditButton_Click(object sender, EventArgs e)
     {

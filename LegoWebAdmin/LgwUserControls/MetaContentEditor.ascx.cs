@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="MetaContentEditor.ascx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
@@ -105,6 +113,7 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
         _MetaContent=new ContentEditorDataHelper();
         _MetaContent.load_Xml(Session["METADATA"].ToString());
         this.txtMetaContentID.Text = _MetaContent.MetaContentID.ToString();
+        this.txtMetaContentAlias.Text = _MetaContent.Alias;
         if (_MetaContent.MetaContentID > 0)
         {
             int iCategoryId = _MetaContent.CategoryID;
@@ -118,6 +127,7 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
         labelRec.load_File(FileTemplateDataProvider.get_LabelTemplateFile(LegoWebAdmin.BusLogic.Categories.get_CATEGORY_TEMPLATE_NAME(int.Parse(dropCategories.SelectedValue.ToString()))));
         _MetaContent.set_DataTableLabel(ref marcTable,labelRec);
         repeater_DataBind(marcTable);
+        
         this.radioRecordStatus.SelectedValue = _MetaContent.RecordStatus.ToString();
         this.labelEntryDate.Text = _MetaContent.EntryDate;
         this.labelCreator.Text = _MetaContent.Creator;
@@ -161,6 +171,7 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
         _MetaContent = new ContentEditorDataHelper();
         _MetaContent.load_Xml(sXmlData);
         this.txtMetaContentID.Text = _MetaContent.MetaContentID.ToString();
+        this.txtMetaContentAlias.Text = _MetaContent.Alias;
         if (_MetaContent.MetaContentID>0)
         {
             Int16 iCategoryId = (Int16)Convert.ToDouble(_MetaContent.CategoryID);
@@ -220,6 +231,7 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
         _MetaContent = new ContentEditorDataHelper();
         _MetaContent.load_File(FileTemplateDataProvider.get_WorkformTemplateFile(LegoWebAdmin.BusLogic.Categories.get_CATEGORY_TEMPLATE_NAME(int.Parse(dropCategories.SelectedValue.ToString()))));
         _MetaContent.MetaContentID = 0;
+        this.txtMetaContentAlias.Text = "";
 
         this.radioRecordStatus.SelectedValue = _MetaContent.RecordStatus.ToString();
         
@@ -349,7 +361,7 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
 
         if (!is_UserCanUpdateContent(_MetaContent.CategoryID))
         {
-            throw new Exception("You are not authozie to update this category meta contents!");
+            throw new Exception("You are not authozied to update this category meta contents!");
         }
 
         int retID = LegoWebAdmin.BusLogic.MetaContents.save_META_CONTENTS_XML(_MetaContent.OuterXml, this.Page.User.Identity.Name);        
@@ -378,6 +390,7 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
             _MetaContent = new ContentEditorDataHelper();
             _MetaContent.load_Xml(Session["METADATA"].ToString());
 
+            _MetaContent.Alias = txtMetaContentAlias.Text;
             if (!String.IsNullOrEmpty(this.dropCategories.SelectedValue))
             {
                 _MetaContent.CategoryID = Convert.ToInt16(this.dropCategories.SelectedValue.ToString());

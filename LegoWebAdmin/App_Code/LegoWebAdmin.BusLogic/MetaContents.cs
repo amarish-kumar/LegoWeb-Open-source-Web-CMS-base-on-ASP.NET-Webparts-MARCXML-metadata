@@ -1,6 +1,7 @@
 ﻿// ----------------------------------------------------------------------
-// <copyright file="MetaContents.cs" company="HIENDAI SOFTWARE COMPANY">
+// <copyright file="MetaContents.cs" package="LEGOWEB">
 //     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
 //     License: GNU/GPL
 //     LEGOWEB IS FREE SOFTWARE
 // </copyright>
@@ -37,7 +38,7 @@ namespace LegoWebAdmin.BusLogic
             bool isUpdate = false;
             if (is_META_CONTENTS_EXIST(retId))
             {
-                if (String.IsNullOrEmpty(sAlias))
+                if (string.IsNullOrEmpty(sAlias))
                 {
                     sAlias = CommonUtility.convert_TitleToAlias(sTitle);
                     string orgAlias = sAlias;
@@ -54,7 +55,7 @@ namespace LegoWebAdmin.BusLogic
             }
             else
             {
-                if (String.IsNullOrEmpty(sAlias))
+                if (string.IsNullOrEmpty(sAlias))
                 {
                     sAlias = CommonUtility.convert_TitleToAlias(sTitle);
                     string orgAlias = sAlias;

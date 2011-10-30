@@ -1,5 +1,4 @@
-﻿//Navigator Class @0-71CCA1A1
-//Target Framework version is 2.0
+﻿
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;

@@ -1,4 +1,16 @@
-﻿--LEGOWEB_SECTIONS
+﻿/*
+// ----------------------------------------------------------------------
+// <copyright file="LegoWeb_Stores.sql" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+*/
+
+
+--LEGOWEB_SECTIONS
 
 if exists (select * from sysobjects where id = object_id('dbo.sp_LEGOWEB_SECTIONS_ADDUPDATE') and sysstat & 0xf = 4)   drop procedure dbo.sp_LEGOWEB_SECTIONS_ADDUPDATE    
 GO

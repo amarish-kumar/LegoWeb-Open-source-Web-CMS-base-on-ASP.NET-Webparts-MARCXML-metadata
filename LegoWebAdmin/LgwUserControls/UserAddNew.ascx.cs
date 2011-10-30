@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="UserAddNew.ascx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
@@ -44,11 +52,11 @@ public partial class LgwUserControls_UserAddNew : System.Web.UI.UserControl
         }
         else if (kq == MembershipCreateStatus.DuplicateUserName)
         {
-            this.errorMessage.Text = "Tên đăng nhập đã tồn tại!";
+            throw new Exception("User name already exists!");
         }
         else
         {
-            this.errorMessage.Text = "Có lỗi xảy ra trong quá trình tạo tài khoản";
+            throw new Exception("Unknown error occurred in creating new user account!");
         }
     }
     protected void linkButtonAssignRole_Click(object sender, EventArgs e)

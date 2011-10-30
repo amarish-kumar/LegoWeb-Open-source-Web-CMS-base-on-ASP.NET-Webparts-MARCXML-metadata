@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="LinkRelatedContent.aspx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
@@ -18,8 +26,22 @@ public partial class LegoWebAdmin_LinkRelatedContent : System.Web.UI.Page
 
     }
     protected void linkTakeRelatedContent_Click(object sender, EventArgs e)
-    {
-        this.LinkRelatedContent1.Take_LinkRelatedContents();
+    {        
+        try
+        {
+            this.LinkRelatedContents1.Take_LinkRelatedContents();
+        }
+        catch (Exception ex)
+        {
+            String errorFomat = @"<dl id='system-message'>
+                                            <dd class='error message fade'>
+	                                            <ul>
+		                                            <li>{0}</li>
+	                                            </ul>
+                                            </dd>
+                                            </dl>";
+            litErrorSpaceHolder.Text = String.Format(errorFomat, ex.Message);
+        }
     }
     protected void linkCancelButton_Click(object sender, EventArgs e)
     {

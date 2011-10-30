@@ -29,12 +29,16 @@
 				</div>
 			</div>
 			<div class="m">
-				<div class="toolbar" id="toolbar">
-
-</div>
-<div class="header icon-48-info">
-<asp:Literal ID="ltErrorMessage" runat="server"></asp:Literal>
-</div>
+				
+                    <dl id='system-message'>
+                    <dd class='error message fade'>
+                        <ul>
+                            <li> 
+                            <asp:Literal ID="ltErrorMessage" runat="server"></asp:Literal>
+                            </li>
+                        </ul>
+                    </dd>
+                    </dl>
 
 				<div class="clr"></div>
 			</div>

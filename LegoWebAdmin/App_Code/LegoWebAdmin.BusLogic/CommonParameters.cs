@@ -1,10 +1,12 @@
 ﻿// ----------------------------------------------------------------------
-// <copyright file="CommonParameters.cs" company="HIENDAI SOFTWARE COMPANY">
+// <copyright file="CommonParameters.cs" package="LEGOWEB">
 //     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
 //     License: GNU/GPL
 //     LEGOWEB IS FREE SOFTWARE
 // </copyright>
 // ------------------------------------------------------------------------
+
 using System;
 using System.Data.SqlClient;
 using System.Data;

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="LinkRelatedContent.ascx.cs" Inherits="LgwUserControls_LinkRelatedContent" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="LinkRelatedContents.ascx.cs" Inherits="LgwUserControls_LinkRelatedContents" %>
 <%@Register TagPrefix="CC" Namespace="LegoWebAdmin.Controls"%>
 
 
@@ -6,28 +6,27 @@
 <tbody>
 <tr>
 <td></td>
-<td align="right" valign="middle" style="width:100px"><b> Vùng thông tin:</b></td>
-<td align="left" valign="middle" style="width:200px"><asp:dropdownlist ID="dropSections" runat="server" oninit="dropSections_Init" AutoPostBack="true" OnSelectedIndexChanged="dropSections_SelectedIndexChanged"></asp:dropdownlist></td>
-<td align="right" valign="middle" style="width:100px"><b> Chuyên mục:</b></td>
+<td align="right" valign="middle" style="width:100px"><b><%=Resources.strings.Section_Text %>:</b></td>
+<td align="left" valign="middle" style="width:200px"><asp:dropdownlist ID="dropSections" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropSections_SelectedIndexChanged"></asp:dropdownlist></td>
+<td align="right" valign="middle" style="width:100px"><b> <%=Resources.strings.Category_Text %>:</b></td>
 <td align="left" valign="middle" style="width:200px">
     <asp:dropdownlist ID="dropCategories" runat="server" AutoPostBack="true" 
-        OnSelectedIndexChanged="dropCategories_SelectedIndexChanged" 
-        oninit="dropCategories_Init"></asp:dropdownlist></td>
+        OnSelectedIndexChanged="dropCategories_SelectedIndexChanged"></asp:dropdownlist></td>
 </tr>
 </tbody>
 </table>
 
 <table class="adminlist" cellspacing="1">   									
-					<asp:repeater id="metaContentManagerRepeater" runat="server" OnItemCommand="metaContentManagerDataCommand" OnItemDataBound="metaContentManagerItemDataBound">
+					<asp:repeater id="metaContentManagerRepeater" runat="server" OnItemCommand="metaContentManagerDataCommand">
 							<HeaderTemplate>
 							<thead>
 							<tr>
 							<th width="5%" class="title">#</th>
 							<th width="5%" class="title">
 							<asp:CheckBox ID="chkSelectAll" Checked="false" AutoPostBack="true" runat="server" OnCheckedChanged="chkSelectAll_CheckedChanged" /></th>
-							<th class="title">ID</th>							
-							<th class="title">Tiêu đề</th>
-							<th class="title">Chuyên mục</th>
+							<th class="title"><%=Resources.strings.ID_Text %></th>							
+							<th class="title"><%=Resources.strings.Title_Text %></th>
+							<th class="title"><%=Resources.strings.Category_Text %></th>
 							</tr>
 							</thead>
 							<tbody>
@@ -77,7 +76,7 @@
 							<tfoot>					
 							<tr>		
 							<td colspan="3" align="center">
-							    Trình bày:
+							    <%=Resources.strings.Display_Text %>:
 			                    <asp:DropDownList ID="dropRecordPerPage" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropRecordPerPage_SelectedIndexChanged">
 							        <asp:ListItem Value="5" Text="5"></asp:ListItem>
 							        <asp:ListItem Value="10" Text="10"></asp:ListItem>

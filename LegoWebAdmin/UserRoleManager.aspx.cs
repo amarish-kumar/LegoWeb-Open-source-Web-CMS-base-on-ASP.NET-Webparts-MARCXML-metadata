@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="UserRoleManager.aspx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
@@ -19,7 +27,7 @@ public partial class KiposWebAdmin_UserRoleManager : System.Web.UI.Page
         {
             if (!Roles.IsUserInRole("ADMINISTRATORS"))
             {
-                Response.Redirect("ErrorMessage.aspx?ErrorMessage='Bạn không có quyền truy cập vào tính năng này!'");
+                Response.Redirect("ErrorMessage.aspx?ErrorMessage='You are not authorized to manage users!'");
             }
         }
     }

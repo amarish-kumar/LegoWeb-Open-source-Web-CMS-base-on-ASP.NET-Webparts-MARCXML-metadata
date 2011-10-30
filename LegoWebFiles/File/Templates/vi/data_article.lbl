@@ -3,7 +3,7 @@
   <leader>########################</leader>
   <controlfield tag="001" type="NUMBER">MetaContentID</controlfield>
   <controlfield tag="002" type="NUMBER">CategoryID</controlfield>
-  <controlfield tag="003" type="BOOLEAN">IsPublic</controlfield>
+  <controlfield tag="003" type="TEXT">Alias</controlfield>
   <controlfield tag="004" type="TEXT">CreatedDate</controlfield>
   <controlfield tag="005" type="TEXT">ModifiedDate</controlfield>
   <controlfield tag="006" type="TEXT">Creator</controlfield>

@@ -1,4 +1,14 @@
-﻿--Modified 28-10-2011 add some new ALIAS fields
+﻿/*
+// ----------------------------------------------------------------------
+// <copyright file="LegoWeb_Tables.sql" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+*/
+--Modified 28-10-2011 add some new ALIAS fields
 --Modified 22-09-2011 add some new fields LEGOWEB_CATEGORIES.ADMIN_LEVEL, LEGOWEB_CATEGORIES.ADMIN_ROLES, LEGOWEB_META_CONTENTS.LEADER
 
 SET ANSI_NULLS ON
@@ -258,14 +268,14 @@ CREATE TABLE LEGOWEB_COMMON_PARAMETERS
 )
 GO
 
-INSERT LEGOWEB_COMMON_PARAMETERS VALUES('WEBSITE_TITLE',1,'tiêu đề website của bạn','your website title',N'Website title ')
-INSERT LEGOWEB_COMMON_PARAMETERS VALUES('WEBSITE_META_DESCRIPTION',1,'dữ liệu mô tả hỗ trợ máy tìm kiếm','your meta description for SEO',N'Website title ')
-INSERT LEGOWEB_COMMON_PARAMETERS VALUES('WEBSITE_META_KEYWORDS',1,'các từ khóa hỗ trợ máy tìm kiếm','your meta keywords for SEO',N'Website title ')
-INSERT LEGOWEB_COMMON_PARAMETERS VALUES('ORGANIZATION_NAME',1,'tên tổ chức của bạn','your organization name',N'Tên công ty trình bày dưới footer')
-INSERT LEGOWEB_COMMON_PARAMETERS VALUES('ORGANIZATION_ADDRESS',1,'địa chỉ','your organization address',N'Địa chỉ công ty trình bày dưới footer')
-INSERT LEGOWEB_COMMON_PARAMETERS VALUES('ORGANIZATION_PHONE',1,'điện thoại','your organization phone number',N'Điện thoại công ty trình bày dưới footer')
-INSERT LEGOWEB_COMMON_PARAMETERS VALUES('ORGANIZATION_FAX',1,'số fax','your organization fax number',N'Fax công ty trình bày dưới footer')
-INSERT LEGOWEB_COMMON_PARAMETERS VALUES('ORGANIZATION_EMAIL',1,'địa chỉ email','your organization email address',N'Email công ty trình bày dưới footer')
+INSERT LEGOWEB_COMMON_PARAMETERS VALUES('WEBSITE_TITLE',1,N'tiêu đề website của bạn','your website title',N'Website title ')
+INSERT LEGOWEB_COMMON_PARAMETERS VALUES('WEBSITE_META_DESCRIPTION',1,N'dữ liệu mô tả hỗ trợ máy tìm kiếm','your meta description for SEO',N'Website title ')
+INSERT LEGOWEB_COMMON_PARAMETERS VALUES('WEBSITE_META_KEYWORDS',1,N'các từ khóa hỗ trợ máy tìm kiếm','your meta keywords for SEO',N'Website title ')
+INSERT LEGOWEB_COMMON_PARAMETERS VALUES('ORGANIZATION_NAME',1,N'tên tổ chức của bạn','your organization name',N'Tên công ty trình bày dưới footer')
+INSERT LEGOWEB_COMMON_PARAMETERS VALUES('ORGANIZATION_ADDRESS',1,N'địa chỉ','your organization address',N'Địa chỉ công ty trình bày dưới footer')
+INSERT LEGOWEB_COMMON_PARAMETERS VALUES('ORGANIZATION_PHONE',1,N'điện thoại','your organization phone number',N'Điện thoại công ty trình bày dưới footer')
+INSERT LEGOWEB_COMMON_PARAMETERS VALUES('ORGANIZATION_FAX',1,N'số fax','your organization fax number',N'Fax công ty trình bày dưới footer')
+INSERT LEGOWEB_COMMON_PARAMETERS VALUES('ORGANIZATION_EMAIL',1,N'địa chỉ email','your organization email address',N'Email công ty trình bày dưới footer')
 INSERT LEGOWEB_COMMON_PARAMETERS VALUES('NUMBER_OF_VISITED',2,'0','0',N'number of visted')
 INSERT LEGOWEB_COMMON_PARAMETERS VALUES('REGISTRATION_EMAIL_SUBJECT',2,N'Đăng ký người sử dụng','User registration',N'Tiêu đề thư kích hoạt tài khoản đăng ký')
 INSERT LEGOWEB_COMMON_PARAMETERS VALUES('REGISTRATION_EMAIL_BODY',2,N'Chào {0}, cảm ơn bạn đã đăng ký sử dụng dịch vụ của chúng tôi!.<br/> Để kích hoạt tài khoản người dùng <a href={1}> Nhấn vào đây</a>',N'Hello {0}, Welcome to LIBRARY OF NHATRANG UNIVERSITY. <p/> To activate your account <a href={1}> Click here </a>',N'Nội dung thư kích hoạt tài khoản đăng ký 2 tham số {0} tên user, {1} url kích hoạt')

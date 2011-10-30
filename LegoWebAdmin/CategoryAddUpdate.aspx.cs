@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="CategoryAddUpdate.aspx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
@@ -28,8 +36,22 @@ public partial class KiposWebAdmin_CategoryAddUpdate : System.Web.UI.Page
 
     protected void linkSaveButton_Click(object sender, EventArgs e)
     {
-        this.CategoryAddUpdate1.Save_CategoryRecord();
         
+        try
+        {
+            this.CategoryAddUpdate1.Save_CategoryRecord();
+        }
+        catch (Exception ex)
+        {
+            String errorFomat = @"<dl id='system-message'>
+                                            <dd class='error message fade'>
+	                                            <ul>
+		                                            <li>{0}</li>
+	                                            </ul>
+                                            </dd>
+                                            </dl>";
+            litErrorSpaceHolder.Text = String.Format(errorFomat, ex.Message);
+        }
     }
     protected void linkCancelButton_Click(object sender, EventArgs e)
     {

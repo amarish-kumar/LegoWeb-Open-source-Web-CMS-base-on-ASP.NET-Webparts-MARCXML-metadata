@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="LinkRelatedContent.ascx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
@@ -12,7 +20,7 @@ using LegoWebAdmin.DataProvider;
 using LegoWebAdmin.Controls;
 using MarcXmlParserEx;
 
-public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserControl
+public partial class LgwUserControls_LinkRelatedContents : System.Web.UI.UserControl
 {
     protected MetaContentDataProvider _metaContentManagerData;
 
@@ -24,10 +32,12 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
         {
             if (!IsPostBack)
             {
+                load_dropSections();
+                load_dropCategories();
 
                 CommonUtility.InitializeGridParameters(ViewState, "metaContentManager", typeof(SortFields), 1, 100);
                 ViewState["metaContentManagerPageNumber"] = 1;
-                ViewState["metaContentManagerPageSize"] = 10;
+                ViewState["metaContentManagerPageSize"] = 20;
                 metaContentManagerBind();
             }
         }
@@ -103,10 +113,7 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
         if (BindAllowed)
             metaContentManagerPageBind();
     }
-    protected void metaContentManagerItemDataBound(object sender, RepeaterItemEventArgs e)
-    {
 
-    }
     protected void chkSelectAll_CheckedChanged(object sender, EventArgs e)
     {
         CheckBox cb = (CheckBox)sender;
@@ -127,156 +134,38 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
         }
     }
 
-    protected void linkOrderUp_OnClick(object sender, EventArgs e)
-    {
-        int iMetaContentId = 0;
-        for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
-        {
-            CheckBox cbRow = ((CheckBox)metaContentManagerRepeater.Items[i].FindControl("chkSelect"));
-            if (cbRow.Checked == true)
-            {
-                TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
-                if (txtMetaContentId != null)
-                {
-                    iMetaContentId = int.Parse(txtMetaContentId.Text);
-                    LegoWebAdmin.BusLogic.Categories.moveUp_CATEGORY(iMetaContentId);
-                }
-            }
-        }
-        metaContentManagerPageBind();
-        for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
-        {
-            TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
-            if (txtMetaContentId != null && txtMetaContentId.Text == iMetaContentId.ToString())
-            {
-                CheckBox cbRow = ((CheckBox)metaContentManagerRepeater.Items[i].FindControl("chkSelect"));
-                cbRow.Checked = true;
-            }
-        }
-    }
-    protected void linkOrderDown_OnClick(object sender, EventArgs e)
-    {
-        int iMetaContentId = 0;
-        for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
-        {
-            CheckBox cbRow = ((CheckBox)metaContentManagerRepeater.Items[i].FindControl("chkSelect"));
-            if (cbRow.Checked == true)
-            {
-                TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
-                if (txtMetaContentId != null)
-                {
-                    LegoWebAdmin.BusLogic.Categories.moveDown_CATEGORY(int.Parse(txtMetaContentId.Text));
-                }
-            }
-        }
-        metaContentManagerPageBind();
-        for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
-        {
-            TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
-            if (txtMetaContentId != null && txtMetaContentId.Text == iMetaContentId.ToString())
-            {
-                CheckBox cbRow = ((CheckBox)metaContentManagerRepeater.Items[i].FindControl("chkSelect"));
-                cbRow.Checked = true;
-            }
-        }
-    }
-    public void Remove_SelectedMetaContents()
-    {
-        for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
-        {
-            CheckBox cbRow = ((CheckBox)metaContentManagerRepeater.Items[i].FindControl("chkSelect"));
-            if (cbRow.Checked == true)
-            {
-                TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
-                if (txtMetaContentId != null)
-                {
-                    LegoWebAdmin.BusLogic.MetaContents.movetrash_META_CONTENTS(int.Parse(txtMetaContentId.Text));
-                }
-            }
-        }
-        metaContentManagerPageBind();
-    }
-    public void Publish_SelectedCategories()
-    {
-        for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
-        {
-            CheckBox cbRow = ((CheckBox)metaContentManagerRepeater.Items[i].FindControl("chkSelect"));
-            if (cbRow.Checked == true)
-            {
-                TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
-                if (txtMetaContentId != null)
-                {
-                    LegoWebAdmin.BusLogic.Categories.publish_CATEGORY(int.Parse(txtMetaContentId.Text), true);
-                }
-            }
-        }
-        metaContentManagerPageBind();
-    }
-    public void UnPublish_SelectedCategories()
-    {
-        for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
-        {
-            CheckBox cbRow = ((CheckBox)metaContentManagerRepeater.Items[i].FindControl("chkSelect"));
-            if (cbRow.Checked == true)
-            {
-                TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
-                if (txtMetaContentId != null)
-                {
-                    LegoWebAdmin.BusLogic.Categories.publish_CATEGORY(int.Parse(txtMetaContentId.Text), false);
-                }
-            }
-        }
-        metaContentManagerPageBind();
-    }
-
-    public void Edit_SelectedMetaContent()
-    {
-        for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)
-        {
-            CheckBox cbRow = ((CheckBox)metaContentManagerRepeater.Items[i].FindControl("chkSelect"));
-            if (cbRow.Checked == true)
-            {
-                TextBox txtMetaContentId = (TextBox)metaContentManagerRepeater.Items[i].FindControl("txtMetaContentId");
-                if (txtMetaContentId != null)
-                {
-                    Response.Redirect("MetaContentEditor.aspx?meta_content_id=" + txtMetaContentId.Text);
-                }
-            }
-        }
-    }
-    public void AddNew_MetaContent()
-    {
-        string sSectionId = this.dropSections.SelectedValue.ToString();
-        string sCategoryId = this.dropCategories.SelectedValue.ToString();
-        Response.Redirect("MetaContentEditor.aspx?section_id=" + sSectionId + "&category_id=" + sCategoryId);
-    }
     override protected void OnInit(EventArgs e)
     {
         _metaContentManagerData = new MetaContentDataProvider();
     }
 
-    protected void dropSections_Init(object sender, EventArgs e)
+    protected void load_dropSections()
     {
         DataTable secData = LegoWebAdmin.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
         DataRow dr = secData.NewRow();
         dr["SECTION_ID"] = 0;
-        dr["SECTION_VI_TITLE"] = "--Chọn vùng tin--";
+        dr["SECTION_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"] = "--" + Resources.strings.Select_Text + "--";
         secData.Rows.Add(dr);
-        this.dropSections.DataTextField = "SECTION_VI_TITLE";
+        this.dropSections.DataTextField = "SECTION_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE";
         this.dropSections.DataValueField = "SECTION_ID";
         this.dropSections.DataSource = secData;
         this.dropSections.DataBind();
         this.dropSections.SelectedValue = "0";
     }
 
-    protected void load_dropCategories(int iSectionId)
+    protected void load_dropCategories()
     {
+        int iSectionId = 0;
+        if (dropSections.SelectedValue != null)
+        {
+           iSectionId = int.Parse(dropSections.SelectedValue);
+        }
         DataTable catData = LegoWebAdmin.BusLogic.Categories.get_Search_Page(0, 0, iSectionId, " - ", 1, 100).Tables[0];
         DataRow dr = catData.NewRow();
         dr["CATEGORY_ID"] = 0;
-        dr["CATEGORY_VI_TITLE"] = "--Chọn chuyên mục--";
+        dr["CATEGORY_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"] = "--" + Resources.strings.Select_Text + "--";
         catData.Rows.Add(dr);
-        this.dropCategories.DataTextField = "CATEGORY_VI_TITLE";
+        this.dropCategories.DataTextField = "CATEGORY_" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE";
         this.dropCategories.DataValueField = "CATEGORY_ID";
         this.dropCategories.DataSource = catData;
         this.dropCategories.DataBind();
@@ -286,7 +175,7 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
     protected void dropSections_SelectedIndexChanged(object sender, EventArgs e)
     {
         ViewState["metaContentManagerPageNumber"] = 1;
-        load_dropCategories(int.Parse(this.dropSections.SelectedValue.ToString()));
+        load_dropCategories();
         metaContentManagerBind();
     }
 
@@ -348,9 +237,5 @@ public partial class LgwUserControls_LinkRelatedContent : System.Web.UI.UserCont
         {
             throw ex;
         }
-    }
-    protected void dropCategories_Init(object sender, EventArgs e)
-    {
-        load_dropCategories(0);
     }
 }

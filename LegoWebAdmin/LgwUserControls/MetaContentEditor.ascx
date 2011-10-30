@@ -49,7 +49,7 @@
 							    <th style="width:25px"><%=Resources.strings.Tag_Text%></th>
 							    <th style="width:120px"><%=Resources.strings.Label_Text%></th>
 							    <th><%=Resources.strings.Content_Text%></th>
-							    <th style="width:30px"><%=Resources.strings.Select_Text%></th>
+							    <th style="width:35px;" align="center"><%=Resources.strings.Select_Text%></th>
 							</tr>
 							</HeaderTemplate>
 							<ItemTemplate>

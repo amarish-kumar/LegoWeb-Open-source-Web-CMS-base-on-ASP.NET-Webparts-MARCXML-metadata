@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="UpgradeDatabase.aspx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 
 using System.Web;
@@ -14,21 +22,27 @@ public partial class UpgradeDatabase : System.Web.UI.Page
         {
             if (!Roles.IsUserInRole("ADMINISTRATORS"))
             {
-                Response.Redirect("ErrorMessage.aspx?ErrorMessage='Bạn không có quyền truy cập vào tính năng này!'");
+                Response.Redirect("ErrorMessage.aspx?ErrorMessage='You are not authorized to run SQL Scripts on LEGOWEB database!'");
             }
         }
     }
 
     protected void btnRun_Click(object sender, EventArgs e)
     {
-        errorMessage.Text = "";
         try
         {
             LegoWebAdmin.BusLogic.UpgradeDatabase.run_SQLScript(txtSqlScripts.Text);
         }
         catch (Exception ex)
         {
-            errorMessage.Text ="Lỗi thực thi:" + ex.Message + " " + ex.InnerException;
+            String errorFomat = @"<dl id='system-message'>
+                                            <dd class='error message fade'>
+	                                            <ul>
+		                                            <li>{0}</li>
+	                                            </ul>
+                                            </dd>
+                                            </dl>";
+            litErrorSpaceHolder.Text = String.Format(errorFomat, ex.Message + " " + ex.InnerException);
         }
     }
     protected override void OnInit(EventArgs e)

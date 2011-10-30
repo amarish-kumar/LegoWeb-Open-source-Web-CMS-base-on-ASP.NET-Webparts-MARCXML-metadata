@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="CommonParameterAddUpdate.ascx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
@@ -13,6 +21,28 @@ public partial class LgwUserControls_CommonParameterAddUpdate : System.Web.UI.Us
     {
         if (!IsPostBack)
         {
+
+            ListItem item = new ListItem();
+            item.Value="0";
+            item.Text=Resources.strings.NotSpecified_Text;
+            dropPraramType.Items.Add(item);
+
+            item = new ListItem();
+            item.Value="1";
+            item.Text=Resources.strings.Registration_Text;
+            dropPraramType.Items.Add(item);
+
+            item = new ListItem();
+            item.Value="2";
+            item.Text=Resources.strings.Proccess_Text;
+            dropPraramType.Items.Add(item);
+
+            item = new ListItem();
+            item.Value="3";
+            item.Selected=true;
+            item.Text=Resources.strings.Dictionary_Text;
+            dropPraramType.Items.Add(item);
+
             if (CommonUtility.GetInitialValue("parameter_name") != null)
             {
                 DataSet ParamData = LegoWebAdmin.BusLogic.CommonParameters.get_LEGOWEB_COMMON_PARAMETER(CommonUtility.GetInitialValue("parameter_name").ToString());
@@ -31,6 +61,8 @@ public partial class LgwUserControls_CommonParameterAddUpdate : System.Web.UI.Us
 
     public void Save_CommonParameterRecord()
     {
-        LegoWebAdmin.BusLogic.CommonParameters.addudp_LEGOWEB_COMMON_PARAMETER(txtCommonParameterName.Text,int.Parse(dropPraramType.SelectedValue), txtCommonParameterViValue.Text, txtCommonParameterEnValue.Text, txtCommonParameterDescription.Text);
+
+            LegoWebAdmin.BusLogic.CommonParameters.addudp_LEGOWEB_COMMON_PARAMETER(txtCommonParameterName.Text, int.Parse(dropPraramType.SelectedValue), txtCommonParameterViValue.Text, txtCommonParameterEnValue.Text, txtCommonParameterDescription.Text);
+        
     }
 }

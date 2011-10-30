@@ -37,10 +37,10 @@
 
 <td class="button" id="toolbar-delete">
 <asp:LinkButton ID="linkDeleteButton" class="toolbar" runat="server" 
-        onclick="linkDeleteButton_Click" OnClientClick="return confirm('Bạn thực sự muốn xóa nội dung này?')">
-<span class="icon-32-delete" title="Delete">
+        onclick="linkDeleteButton_Click" OnClientClick="return confirm('Are you sure to remove this item?')">
+<span class="icon-32-trash" title="Delete">
 </span>
-Xóa
+<%=Resources.strings.btnDelete_Text %>
 </asp:LinkButton>
 </td>
 
@@ -49,7 +49,7 @@ Xóa
         onclick="linkEditButton_Click">
 <span class="icon-32-edit" title="Edit">
 </span>
-Sửa
+<%=Resources.strings.btnEdit_Text %>
 </asp:LinkButton>
 </td>
  
@@ -58,26 +58,26 @@ Sửa
         onclick="linkCancelButton_Click">
         <span class="icon-32-cancel" title="Cancel">
 </span>
-Bỏ qua
+<%=Resources.strings.btnCancel_Text %>
 </asp:LinkButton>
 </td>
 
 <td class="button" id="toolbar-help">
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
-<span class="icon-32-help" title="Trợ giúp">
+<span class="icon-32-help" title="Help">
 </span>
-Trợ giúp
+<%=Resources.strings.btnHelp_Text %>
 </a>
 </td>
 
 </tr></table>
 </div>
-				<div class="header icon-48-article">
-Duyệt xem
+<div class="header icon-48-article">
+<%=Resources.strings.ContentPreview_Text %>
 </div>
 
 				<div class="clr"></div>
-			</div>
+			</div>			
 			<div class="b">
 				<div class="b">
 					<div class="b"></div>
@@ -86,6 +86,14 @@ Duyệt xem
   		</div>  		
 	  
 	  <div class="clr"></div>
+	    <dl id="system-message">
+        <dd class="message fade">
+            <ul>
+                <li><%=Resources.strings.ContentPreviewNotice_Text %> </li>
+            </ul>
+        </dd>
+        </dl>
+
 	  
 		<div id="element-box">
 			<div class="t">

@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="CategoryAddUpdate.ascx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
@@ -159,8 +167,7 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
         //check if insert dublicated id
         if ((CommonUtility.GetInitialValue("category_id",null) == null) && LegoWebAdmin.BusLogic.Categories.is_CATEGORY_ID_EXIST(int.Parse(txtCategoryID.Text)))
         {
-            errorMessage.Text = "ID already existed!";
-            return;
+            throw new Exception("ID already exists!");
         }
         int iAdminLevel=int.Parse(dropAdminLevels.SelectedValue.ToString());
         string sAdminRoles = null;

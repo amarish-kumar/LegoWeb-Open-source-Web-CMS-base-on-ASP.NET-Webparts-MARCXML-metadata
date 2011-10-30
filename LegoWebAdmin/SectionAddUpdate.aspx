@@ -75,6 +75,7 @@
   		</div>  		
 	  
 	  <div class="clr"></div>
+	  <asp:Literal ID="litErrorSpaceHolder" runat="server"> </asp:Literal>
 	  
 		<div id="element-box">
 			<div class="t">

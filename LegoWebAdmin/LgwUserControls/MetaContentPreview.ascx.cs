@@ -1,4 +1,12 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="MetaContentPreview.ascx.cs" package="LEGOWEB">
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     www.legoweb.org
+//     License: GNU/GPL
+//     LEGOWEB IS FREE SOFTWARE
+// </copyright>
+// ------------------------------------------------------------------------
+using System;
 using System.Collections;
 using System.Configuration;
 using System.Data;
@@ -56,7 +64,7 @@ public partial class LgwUserControls_MetaContentPreview : System.Web.UI.UserCont
         _MetaContentObject.load_Xml(Session["METADATA"].ToString());
 
         string sTemplateName = LegoWebAdmin.DataProvider.FileTemplateDataProvider.get_XsltTemplateFile(dpTemplateNames.SelectedValue);
-        this.divPreviewer.InnerHtml=_MetaContentObject.XsltFile_Transform(sTemplateName);
+        this.litContentViewer.Text=_MetaContentObject.XsltFile_Transform(sTemplateName);
     }
     public void Delete_PreviewRecord()
     {

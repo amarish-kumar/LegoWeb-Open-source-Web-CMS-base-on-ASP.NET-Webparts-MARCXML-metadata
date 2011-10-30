@@ -81,7 +81,7 @@
                                 <%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID")%>                             
                                 </td>
                                 <td align="left">                                
-                                <a href="MetaContentEditor.aspx?meta_content_id=<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID") %>"><%# DataBinder.Eval(Container.DataItem, "META_CONTENT_TITLE")%></a>                                
+                                <a href="MetaContentEditor.aspx?meta_content_id=<%# DataBinder.Eval(Container.DataItem, "META_CONTENT_ID") %>"><%# DataBinder.Eval(Container.DataItem, "META_CONTENT_TITLE")%></a>       
                                 </td>
                                 <td align="center">                                
                                 <%# DataBinder.Eval(Container.DataItem, "LANG_CODE")%>                                
@@ -104,7 +104,7 @@
                                 <%# ((DateTime)DataBinder.Eval(Container.DataItem, "MODIFIED_DATE")).ToString("dd.MM.yy")%>                                
                                 </td>   
                                 <td align="left">                                
-                                <%# int.Parse(DataBinder.Eval(Container.DataItem, "ACCESS_LEVEL").ToString()) == 0 ? Resources.strings.Any_Text : (int.Parse(DataBinder.Eval(Container.DataItem, "ACCESS_LEVEL").ToString()) == 1 ? "Đăng nhập" : DataBinder.Eval(Container.DataItem, "ACCESS_ROLES"))%>                                
+                                <%# int.Parse(DataBinder.Eval(Container.DataItem, "ACCESS_LEVEL").ToString()) == 0 ? Resources.strings.Any_Text : (int.Parse(DataBinder.Eval(Container.DataItem, "ACCESS_LEVEL").ToString()) == 1 ?Resources.strings.Registered_Text : DataBinder.Eval(Container.DataItem, "ACCESS_ROLES"))%>                                
                                 </td>                                  
                                 <td align="right">                                
                                 <%# DataBinder.Eval(Container.DataItem, "READ_COUNT")%>                                
@@ -146,7 +146,7 @@
                                 <%# ((DateTime)DataBinder.Eval(Container.DataItem, "MODIFIED_DATE")).ToString("dd.MM.yy")%>                                
                                 </td>    
                                 <td align="left">                                
-                                <%# int.Parse(DataBinder.Eval(Container.DataItem, "ACCESS_LEVEL").ToString()) == 0 ? Resources.strings.Any_Text : (int.Parse(DataBinder.Eval(Container.DataItem, "ACCESS_LEVEL").ToString()) == 1 ? "Đăng nhập" : DataBinder.Eval(Container.DataItem, "ACCESS_ROLES"))%>                                
+                                <%# int.Parse(DataBinder.Eval(Container.DataItem, "ACCESS_LEVEL").ToString()) == 0 ? Resources.strings.Any_Text : (int.Parse(DataBinder.Eval(Container.DataItem, "ACCESS_LEVEL").ToString()) == 1 ? Resources.strings.Registered_Text : DataBinder.Eval(Container.DataItem, "ACCESS_ROLES"))%>                                
                                 </td>                                                                  
                                 <td align="right">                                
                                 <%# DataBinder.Eval(Container.DataItem, "READ_COUNT")%>                                
