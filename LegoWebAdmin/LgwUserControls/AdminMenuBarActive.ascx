@@ -51,8 +51,8 @@
 </li>
 <li class="node"><a><%=Resources.strings.mnuHelp_Text%></a>
 <ul>
-<li><a class="icon-16-info" href="">Giới thiệu</a></li>
-<li><a class="icon-16-help" href="">Trợ giúp</a></li>
+<li><a class="icon-16-info" href="http://www.legoweb.org"><%=Resources.strings.mnuiAbout_Text%></a></li>
+<li><a class="icon-16-help" href="http://www.legoweb.org/help"><%=Resources.strings.mnuiHelp_Text%></a></li>
 </ul>
 </li>
 </ul>

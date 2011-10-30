@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" Theme="legoweb" Title="KIPOS WEB ADMIN:Đăng nhập" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" Theme="legoweb" Title="Login" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -35,15 +35,16 @@
 					</div>
 				</div>
 				<div class="m">
+				<div style="float:right">
 							<span>
-			  <asp:LinkButton id="btnSelectEnglish" runat="server" OnClick="en_Click">
-		            <asp:image ID="EnglishFlag" runat="server" skinid="en"  />
-		        </asp:LinkButton>
-		        <asp:LinkButton id="btnSelectVietnamese" runat="server" OnClick="vi_Click">
-		            <asp:image ID="VietnameseFlag" runat="server" skinid="vi"  />
-		        </asp:LinkButton>
-		    </span>
- 
+			                    <asp:LinkButton id="btnSelectEnglish" runat="server" OnClick="en_Click">
+		                            <asp:image ID="EnglishFlag" runat="server" skinid="en"  />
+		                        </asp:LinkButton>
+		                        <asp:LinkButton id="btnSelectVietnamese" runat="server" OnClick="vi_Click">
+		                            <asp:image ID="VietnameseFlag" runat="server" skinid="vi"  />
+		                        </asp:LinkButton>
+		                    </span>
+                </div>
 					<h1><%=Resources.strings.AdministrationLogin_Text %></h1>
 					
 							<div id="section-box">

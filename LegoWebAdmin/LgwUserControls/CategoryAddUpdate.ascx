@@ -32,8 +32,8 @@
 			<table class="admintable" cellspacing="1" width="100%">
 			<tbody>
         <tr>
-            <td width="150px" class="key"><label for="name"><%=Resources.strings.ID_Text %>:</label></td>
-            <td>
+            <td style="width:150px" class="key"><label for="name"><%=Resources.strings.ID_Text %>:</label></td>
+            <td style="width:450px">
                 <asp:TextBox ID="txtCategoryID" runat="server" MaxLength="10"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="CategoryIDRequired" runat="server" ControlToValidate="txtCategoryID" ErrorMessage="ID is required!"
                      ToolTip="ID is required!" Display="Dynamic" SetFocusOnError="true" ValidationGroup="CategoryInfo">*</asp:RequiredFieldValidator>
@@ -59,7 +59,7 @@
         <tr>
             <td class="key"><label for="name"><%=Resources.strings.VietnameseTitle_Text %>:</label></td>
             <td>
-                <asp:TextBox ID="txtCategoryViTitle" runat="server" Width="90%"></asp:TextBox>
+                <asp:TextBox ID="txtCategoryViTitle" runat="server" Width="95%"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="CategoryViTitleRequired" runat="server" ControlToValidate="txtCategoryViTitle" ErrorMessage="Title/name is required!"
                      ToolTip="Title/name is required!" Display="Dynamic" SetFocusOnError="true" ValidationGroup="CategoryInfo">*</asp:RequiredFieldValidator>
             </td>
@@ -67,13 +67,13 @@
         <tr>
             <td class="key"><label for="name"><%=Resources.strings.VietnameseValue_Text%>:</label></td>
             <td>
-                <asp:TextBox ID="txtCategoryEnTitle" runat="server" Width="90%"></asp:TextBox>
+                <asp:TextBox ID="txtCategoryEnTitle" runat="server" Width="95%"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td class="key"><label for="name"><%=Resources.strings.Alias_Text%>:</label></td>
             <td>
-                <asp:TextBox ID="txtCategoryAlias" runat="server" Width="90%"></asp:TextBox>
+                <asp:TextBox ID="txtCategoryAlias" runat="server" Width="95%"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -149,21 +149,21 @@
         <tr>
             <td class="key"><label for="name"><%=Resources.strings.Title_Text%>:</label></td>
             <td>
-                <asp:TextBox ID="txtSeoTitle" runat="server" Width="90%"></asp:TextBox>
+                <asp:TextBox ID="txtSeoTitle" runat="server" Width="95%"></asp:TextBox>
             </td>
         </tr>
         
         <tr>
             <td class="key"><label for="name"><%=Resources.strings.Description_Text%>:</label></td>
             <td>
-                <asp:TextBox ID="txtSeoDescription" runat="server" Width="90%"></asp:TextBox>
+                <asp:TextBox ID="txtSeoDescription" runat="server" Width="95%" TextMode="MultiLine"></asp:TextBox>
             </td>
         </tr>
         
         <tr>
             <td class="key"><label for="name"><%=Resources.strings.Keywords_Text%>:</label></td>
             <td>
-               <asp:TextBox ID="txtSeoKeywords" runat="server" Width="90%"></asp:TextBox> 
+               <asp:TextBox ID="txtSeoKeywords" runat="server" Width="95%" TextMode="MultiLine"></asp:TextBox> 
             </td>
         </tr>        
             </tbody>

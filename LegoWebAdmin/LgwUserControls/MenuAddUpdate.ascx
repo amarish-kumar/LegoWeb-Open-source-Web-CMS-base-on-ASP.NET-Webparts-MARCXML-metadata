@@ -31,8 +31,8 @@
 			<table class="admintable" cellspacing="1" width="100%">
 			<tbody>
         <tr>
-            <td width="150px" class="key"><label for="name"><%=Resources.strings.ID_Text%>:</label></td>
-            <td>
+            <td style="width:150px" class="key"><label for="name"><%=Resources.strings.ID_Text%>:</label></td>
+            <td style="width:450px">
                 <asp:TextBox ID="txtMenuID" runat="server" MaxLength="10"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="MenuIDRequired" runat="server" ControlToValidate="txtMenuID" ErrorMessage="Bạn chưa nhập mã mục trình đơn!"
                      ToolTip="Chưa nhập Menu ID." Display="Dynamic" SetFocusOnError="true" ValidationGroup="MenuInfo">*</asp:RequiredFieldValidator>
@@ -58,7 +58,7 @@
         <tr>
             <td class="key"><label for="name"><%=Resources.strings.VietnameseTitle_Text %>:</label></td>
             <td>
-                <asp:TextBox ID="txtMenuViTitle" runat="server" Width="90%"></asp:TextBox>
+                <asp:TextBox ID="txtMenuViTitle" runat="server" Width="95%"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="MenuViTitleRequired" runat="server" ControlToValidate="txtMenuViTitle" ErrorMessage="Bạn chưa nhập Vùng thông tin!"
                      ToolTip="Chưa nhập tên Vùng thông tin." Display="Dynamic" SetFocusOnError="true" ValidationGroup="MenuInfo">*</asp:RequiredFieldValidator>
             </td>
@@ -66,14 +66,14 @@
         <tr>
             <td class="key"><label for="name"><%=Resources.strings.EnglishTitle_Text %>:</label></td>
             <td>
-                <asp:TextBox ID="txtMenuEnTitle" runat="server" Width="90%"></asp:TextBox>
+                <asp:TextBox ID="txtMenuEnTitle" runat="server" Width="95%"></asp:TextBox>
             </td>
         </tr>
         
         <tr>
             <td class="key"><label for="name"><%=Resources.strings.Link_Text %>:</label></td>
             <td>            
-                <asp:TextBox ID="txtLinkUrl" runat="server" Width="90%"></asp:TextBox>    
+                <asp:TextBox ID="txtLinkUrl" runat="server" Width="95%"></asp:TextBox>    
             </td>
         </tr>
         <tr style="height:100px">
