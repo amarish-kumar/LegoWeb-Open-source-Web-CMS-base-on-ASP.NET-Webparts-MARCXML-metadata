@@ -3,7 +3,7 @@
   <leader>########################</leader>
   <controlfield tag="001" type="NUMBER">MetaContentID</controlfield>
   <controlfield tag="002" type="NUMBER">CategoryID</controlfield>
-  <controlfield tag="003" type="BOOLEAN">IsPublic</controlfield>
+  <controlfield tag="003" type="TEXT">Alias</controlfield>
   <controlfield tag="004" type="TEXT">CreatedDate</controlfield>
   <controlfield tag="005" type="TEXT">ModifiedDate</controlfield>
   <controlfield tag="006" type="TEXT">Creator</controlfield>
@@ -11,21 +11,21 @@
   <controlfield tag="008" type="TEXT">LangCode</controlfield>
   <controlfield tag="009" type="TEXT">AccessLevel</controlfield>
   <datafield tag="245" ind1=" " ind2=" ">
-    <subfield code="a" type="TEXT">Tên tập ảnh</subfield>
-    <subfield code="b" type="TEXT">Mô tả</subfield>
-    <subfield code="u" type="TEXT">Ảnh đại diện</subfield>
+    <subfield code="a" type="TEXT">Collection title</subfield>
+    <subfield code="b" type="TEXT">Summary</subfield>
+    <subfield code="u" type="TEXT">Thumb image</subfield>
   </datafield>
   <datafield tag="300" ind1=" " ind2=" ">
-    <subfield code="h" type="NUMBER">Chiều cao</subfield>
-    <subfield code="w" type="NUMBER">Chiều rộng</subfield>
+    <subfield code="h" type="NUMBER">Default height</subfield>
+    <subfield code="w" type="NUMBER">Default width</subfield>
   </datafield>
   <datafield tag="856" ind1=" " ind2=" ">
-    <subfield code="0" type="NUMBER">Số thứ tự</subfield>
-    <subfield code="3" type="TEXT">Tên</subfield>
-    <subfield code="a" type="TEXT">Chú thích</subfield>
-    <subfield code="h" type="NUMBER">Chiều cao</subfield>
-    <subfield code="w" type="NUMBER">Chiều rộng</subfield>
-    <subfield code="u" type="TEXT">Tệp ảnh</subfield>
-    <subfield code="l" type="TEXT">Liên kết tới URL</subfield>
+    <subfield code="0" type="NUMBER">Order number</subfield>
+    <subfield code="3" type="TEXT">Name</subfield>
+    <subfield code="a" type="TEXT">Description</subfield>
+    <subfield code="h" type="NUMBER">Height</subfield>
+    <subfield code="w" type="NUMBER">Width</subfield>
+    <subfield code="u" type="TEXT">Image source</subfield>
+    <subfield code="l" type="TEXT">Link to</subfield>
   </datafield>		
 </record>

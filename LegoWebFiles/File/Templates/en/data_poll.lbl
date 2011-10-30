@@ -3,7 +3,7 @@
   <leader>########################</leader>
   <controlfield tag="001" type="NUMBER">MetaContentID</controlfield>
   <controlfield tag="002" type="NUMBER">CategoryID</controlfield>
-  <controlfield tag="003" type="BOOLEAN">IsPublic</controlfield>
+  <controlfield tag="003" type="TEXT">Alias</controlfield>
   <controlfield tag="004" type="TEXT">CreatedDate</controlfield>
   <controlfield tag="005" type="TEXT">ModifiedDate</controlfield>
   <controlfield tag="006" type="TEXT">Creator</controlfield>
@@ -11,13 +11,13 @@
   <controlfield tag="008" type="TEXT">LangCode</controlfield>
   <controlfield tag="009" type="TEXT">AccessLevel</controlfield>
   <datafield tag="245" ind1=" " ind2=" ">
-    <subfield code="a" type="TEXT">Câu hỏi</subfield>
-    <subfield code="b" type="TEXT">Mô tả thêm</subfield>
-    <subfield code="u" type="TEXT">Ảnh đại diện</subfield>
+    <subfield code="a" type="TEXT">Poll question*</subfield>
+    <subfield code="b" type="TEXT">Note</subfield>
+    <subfield code="u" type="TEXT">Thumb image</subfield>
   </datafield>
   <datafield tag="650" ind1=" " ind2=" ">
-    <subfield code="0" type="NUMBER">Số thứ tự</subfield>
-    <subfield code="a" type="TEXT">Trả lời</subfield>
-    <subfield code="n" type="NUMBER">Số phiếu</subfield>   
+    <subfield code="0" type="NUMBER">Order number</subfield>
+    <subfield code="a" type="TEXT">Answer</subfield>
+    <subfield code="n" type="NUMBER">Number of vote</subfield>   
 	</datafield>		
 </record>
