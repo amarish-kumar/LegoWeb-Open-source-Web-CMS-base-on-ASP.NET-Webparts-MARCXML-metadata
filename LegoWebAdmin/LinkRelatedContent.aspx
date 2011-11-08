@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="LinkRelatedContent.aspx.cs" Inherits="LegoWebAdmin_LinkRelatedContent" Title="Link related contents" %>
-<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
-<%@ Register src="LgwUserControls/LinkRelatedContents.ascx" tagname="LinkRelatedContents" tagprefix="uc3" %>
+<%@ Register src="~/UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="~/UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="~/UserControls/LinkRelatedContents.ascx" tagname="LinkRelatedContents" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 

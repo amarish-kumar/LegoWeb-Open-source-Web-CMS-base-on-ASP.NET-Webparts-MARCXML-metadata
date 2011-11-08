@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>LEGOWEB ADMIN</title>
+    <title>LEGOWEB ADMINISTRATION</title>
     <link href="App_Themes/kipos.ico" rel="shortcut icon" type="image/x-icon" />
      
 <!--[if IE 7]>
@@ -151,7 +151,7 @@
 	</div>
 	<div id="footer">
 	    <p class="copyright">
-		    <a href="http://www.legoweb.org" target="_blank"> Copyright &copy;HIENDAI SOFTWARE COMPANY 2004-2010</a>
+		    <a href="http://www.hiendai.com.vn/kipos" target="_blank"> Copyright &copy;HIENDAI SOFTWARE COMPANY 2008-2010</a>
 	    </p>
     </div>  
     </form>

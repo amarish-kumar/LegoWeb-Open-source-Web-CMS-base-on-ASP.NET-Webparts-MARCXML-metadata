@@ -1,18 +1,9 @@
-﻿// ----------------------------------------------------------------------
-// <copyright file="Forums.cs" package="LEGOWEB">
-//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
-//     www.legoweb.org
-//     License: GNU/GPL
-//     LEGOWEB IS FREE SOFTWARE
-// </copyright>
-// ------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 
-namespace LegoWebAdmin.BusLogic
+namespace LegoWebForum.BusLogic
 {
     /// <summary>
     /// Summary description for Forums
@@ -62,7 +53,7 @@ namespace LegoWebAdmin.BusLogic
         public static Int32 add_LEGOWEB_FORUMS(string sTitle, string sDescription, string sAdminRoles, bool bIsPublic, int iOrderNumber, string sImageURL)
         {
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString);
-            SqlCommand cmd = new SqlCommand("WS_AddForum", conn);
+            SqlCommand cmd = new SqlCommand("LWF_AddForum", conn);
 
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -95,7 +86,7 @@ namespace LegoWebAdmin.BusLogic
         public static void update_LEGOWEB_FORUMS(int iForumID,string sTitle, string sDescription, string sAdminRoles, bool bIsPublic, int iOrderNumber,string sImageURL)
         {
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString);
-            SqlCommand cmd = new SqlCommand("WS_UpdateForum", conn);
+            SqlCommand cmd = new SqlCommand("LWF_UpdateForum", conn);
 
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -123,7 +114,7 @@ namespace LegoWebAdmin.BusLogic
         public static void delete_LEGOWEB_FORUMS(int iForumID)
         {
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString);
-            SqlCommand cmd = new SqlCommand("WS_DeleteForum", conn);
+            SqlCommand cmd = new SqlCommand("LWF_DeleteForum", conn);
 
             cmd.CommandType = CommandType.StoredProcedure;
 

@@ -269,13 +269,7 @@
                         </td> 
                     </tr>                      
                                                                              
-                    <tr>                                                                     
-                        <td colspan="2" align="right">
-                                <asp:RadioButtonList ID="radioRecordStatus" runat="server" RepeatDirection="Horizontal">
-                                
-                                </asp:RadioButtonList>
-                       </td>                         
-                    </tr>
+
                     <tr>                                     
                         
                         <td class="key">
@@ -291,6 +285,16 @@
                             </asp:CheckBoxList>                            
                         </td>                                                  
                     </tr>     
+                    <tr>                                                             
+                        <td class="key">
+                            <label for="name"><%=Resources.strings.ImportantLevel_Text %>:</label>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="dropImportantLevels" runat="server">
+
+                            </asp:DropDownList>
+                        </td>                                                  
+                    </tr>                     
                     <tr>                                     
                         <td class="key">
                             <label for="name"><%=Resources.strings.EntryDate_Text %>:</label>
@@ -322,7 +326,17 @@
                         <td>             
                         <asp:Label ID="labelModifier" runat="server"></asp:Label>           
                         </td> 
-                    </tr>                                              
+                    </tr> 
+                    <tr>
+                     <td class="key" colspan="2"><%=Resources.strings.RecordStatus_Text%> </td>
+                    </tr>
+                    <tr>                                                                     
+                        <td colspan="2" align="right">
+                                <asp:RadioButtonList ID="radioRecordStatus" runat="server" RepeatDirection="Horizontal">
+                                
+                                </asp:RadioButtonList>
+                       </td>                         
+                    </tr>                                                                 
             </tbody>
             </table>
         </fieldset>

@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="ErrorMessage.aspx.cs" Inherits="ErrorMessage" %>
 
-<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="~/UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="~/UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">    
         <script src="AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>
     <script src="AdminTools/JavaScripts/index.js" type="text/javascript"></script>
@@ -29,17 +29,17 @@
 				</div>
 			</div>
 			<div class="m">
-				
-                    <dl id='system-message'>
-                    <dd class='error message fade'>
-                        <ul>
-                            <li> 
-                            <asp:Literal ID="ltErrorMessage" runat="server"></asp:Literal>
-                            </li>
-                        </ul>
-                    </dd>
-                    </dl>
-
+				    <div style="clear:both">
+                        <dl id='system-message'>
+                        <dd class='error message fade'>
+                            <ul>
+                                <li> 
+                                <asp:Literal ID="ltErrorMessage" runat="server"></asp:Literal>
+                                </li>
+                            </ul>
+                        </dd>
+                        </dl>
+                    </div>
 				<div class="clr"></div>
 			</div>
 			<div class="b">

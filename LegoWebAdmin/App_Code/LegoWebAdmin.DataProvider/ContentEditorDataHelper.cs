@@ -253,25 +253,23 @@ namespace LegoWebAdmin.DataProvider
                 }
             }
         }        
-        //try to using first character in leader to indicate isHotList
-        public bool isHotContent
+        //try to using first character in leader to indicate important level
+        public int ImportantLevel
         {
             get
             {
-                if (this.get_LeaderValueByPos(0, 0) == " " || this.get_LeaderValueByPos(0, 0) == "0" || this.get_LeaderValueByPos(0, 0) == "F") return false;
-                if (this.get_LeaderValueByPos(0, 0) == "1" || this.get_LeaderValueByPos(0, 0).ToUpper() == "T") return true;
-                return false;
+                int iLevel = 0;
+                string sLevel=this.get_LeaderValueByPos(0, 0);
+                if(!int.TryParse(sLevel,out iLevel))
+                {
+                    iLevel = 0;
+                    this.set_LeaderValueByPos("0", 0, 0);
+                }
+                return iLevel;
             }
             set
             {
-                if (value == true)
-                {
-                    this.set_LeaderValueByPos("1", 0, 0);
-                }
-                else
-                {
-                    this.set_LeaderValueByPos("0", 0, 0);
-                }
+                    this.set_LeaderValueByPos(value.ToString(), 0, 0);
             }
         }   
 

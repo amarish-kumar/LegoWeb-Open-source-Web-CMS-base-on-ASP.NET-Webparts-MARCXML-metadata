@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MetaContentEditor.aspx.cs" Inherits="Administrator_MetaContentEditor" Title="Meta Content Editor" ValidateRequest="false" %>
-<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
-<%@ Register src="LgwUserControls/MetaContentEditor.ascx" tagname="MetaContentEditor" tagprefix="uc3" %>
+<%@ Register src="~/UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="~/UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="~/UserControls/MetaContentEditor.ascx" tagname="MetaContentEditor" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
         <script language="javascript" type="text/javascript">

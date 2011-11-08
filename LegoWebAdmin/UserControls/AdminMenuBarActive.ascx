@@ -17,7 +17,7 @@
 
 <li class="node"><a><%=Resources.strings.mnuSytem_Text%></a>
 <ul>
-<li><a class="icon-16-cpanel" href="ControlPanel.aspx"><%=Resources.strings.mnuiControlPanel_Text%></a></li>
+<li><a class="icon-16-cpanel" href=<% %>"ControlPanel.aspx"><%=Resources.strings.mnuiControlPanel_Text%></a></li>
 <li class="separator"><span></span></li>
 <li><a class="icon-16-user" href="UserManager.aspx"><%=Resources.strings.mnuiUsers_Text%></a></li>
 <li><a class="icon-16-user" href="UserRoleManager.aspx"><%=Resources.strings.mnuiUserRoles_Text%></a></li>
@@ -49,6 +49,13 @@
 <asp:Literal ID="sectionnames" runat="server"></asp:Literal>
 </ul>
 </li>
+
+<li class="node"><a><%=Resources.strings.mnuModules_Text%></a>
+<ul>
+<li><a class="icon-16-forum" href="Forum/ForumManager.aspx"><%=Resources.strings.mnuForumManager_Text%></a></li>
+</ul>
+</li>
+
 <li class="node"><a><%=Resources.strings.mnuHelp_Text%></a>
 <ul>
 <li><a class="icon-16-info" href="http://www.legoweb.org"><%=Resources.strings.mnuiAbout_Text%></a></li>

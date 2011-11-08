@@ -31,6 +31,7 @@ namespace LegoWebAdmin.BusLogic
             string sAlias = contentObj.Alias;
             int iRecordStatus=contentObj.RecordStatus;
             int iAccessLevel=contentObj.AccessLevel;
+            int iImportantLevel = contentObj.ImportantLevel;
             retId = contentObj.MetaContentID;
             string sLeader = contentObj.Leader;
 
@@ -50,7 +51,7 @@ namespace LegoWebAdmin.BusLogic
                     }
                 }
                 //update meta content process
-                update_META_CONTENT(retId, iCategoryId, sLeader, sLangCode, sTitle,sAlias, iRecordStatus, iAccessLevel, sUSER);
+                update_META_CONTENT(retId, iCategoryId, sLeader, sLangCode, sTitle,sAlias, iRecordStatus, iAccessLevel,iImportantLevel, sUSER);
                 isUpdate = true;
             }
             else
@@ -67,7 +68,7 @@ namespace LegoWebAdmin.BusLogic
                     }
                 }
                 //insert meta content process
-                retId = insert_META_CONTENTS(iCategoryId, sLeader, sLangCode, sTitle,sAlias, iRecordStatus, iAccessLevel, sUSER);
+                retId = insert_META_CONTENTS(iCategoryId, sLeader, sLangCode, sTitle,sAlias, iRecordStatus, iAccessLevel,iImportantLevel, sUSER);
                 isUpdate = false;
             }
 
@@ -272,6 +273,7 @@ namespace LegoWebAdmin.BusLogic
                     ContentObject.Leader = reader0["LEADER"].ToString();
                     ContentObject.RecordStatus =int.Parse(reader0["RECORD_STATUS"].ToString());
                     ContentObject.AccessLevel =Convert.ToInt16(reader0["ACCESS_LEVEL"]);
+                    ContentObject.ImportantLevel = Convert.ToInt16(reader0["IMPORTANT_LEVEL"]);
                     ContentObject.LangCode = reader0["LANG_CODE"].ToString();
                     ContentObject.EntryDate =Convert.ToDateTime(reader0["CREATED_DATE"]).ToString("yyyy-MMM-dd hh:mm:ss");
                     ContentObject.Creator = reader0["CREATED_USER"].ToString();
@@ -290,7 +292,7 @@ namespace LegoWebAdmin.BusLogic
                         conn.Close();
                 }
             }
-
+            ContentObject.Sort();
             return ContentObject.OuterXml;
         }
         public static bool is_META_CONTENTS_EXIST(Int32 iID)
@@ -362,7 +364,7 @@ namespace LegoWebAdmin.BusLogic
 
 
 
-        public static Int32 insert_META_CONTENTS(int iCATEGORY_ID,string sLEADER, string sLANG_CODE,string sMETA_CONTENT_TITLE, string sMETA_CONTENT_ALIAS,int iRECORD_STATUS, int iACCESS_LEVEL, string sCREATED_USER)
+        public static Int32 insert_META_CONTENTS(int iCATEGORY_ID,string sLEADER, string sLANG_CODE,string sMETA_CONTENT_TITLE, string sMETA_CONTENT_ALIAS,int iRECORD_STATUS, int iACCESS_LEVEL,int iIMPORTANT_LEVEL, string sCREATED_USER)
         {
             string connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
             SqlConnection connection = new SqlConnection(connStr);
@@ -407,6 +409,10 @@ namespace LegoWebAdmin.BusLogic
                 objParam.Direction = ParameterDirection.Input;
                 objParam.Value = iACCESS_LEVEL;
 
+                objParam = objCommand.Parameters.Add(new SqlParameter("@_IMPORTANT_LEVEL", SqlDbType.Int));
+                objParam.Direction = ParameterDirection.Input;
+                objParam.Value = iIMPORTANT_LEVEL;
+
                 objParam = objCommand.Parameters.Add(new SqlParameter("@_CREATED_USER", SqlDbType.NVarChar, 30));
                 objParam.Direction = ParameterDirection.Input;
                 objParam.Value = sCREATED_USER;
@@ -433,7 +439,7 @@ namespace LegoWebAdmin.BusLogic
             }
         }
 
-        public static void update_META_CONTENT(int iMETA_CONTENT_ID,int iCATEGORY_ID, string sLEADER, string sLANG_CODE,string sMETA_CONTENT_TITLE,string sMETA_CONTENT_ALIAS, int iRECORD_STATUS, int iACCESS_LEVEL, string sMODIFIED_USER)
+        public static void update_META_CONTENT(int iMETA_CONTENT_ID,int iCATEGORY_ID, string sLEADER, string sLANG_CODE,string sMETA_CONTENT_TITLE,string sMETA_CONTENT_ALIAS, int iRECORD_STATUS, int iACCESS_LEVEL,int iIMPORTANT_LEVEL, string sMODIFIED_USER)
         {
             string connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
             SqlConnection connection = new SqlConnection(connStr);
@@ -479,6 +485,10 @@ namespace LegoWebAdmin.BusLogic
                 objParam = objCommand.Parameters.Add(new SqlParameter("@_ACCESS_LEVEL", SqlDbType.Int));
                 objParam.Direction = ParameterDirection.Input;
                 objParam.Value = iACCESS_LEVEL;
+
+                objParam = objCommand.Parameters.Add(new SqlParameter("@_IMPORTANT_LEVEL", SqlDbType.Int));
+                objParam.Direction = ParameterDirection.Input;
+                objParam.Value = iIMPORTANT_LEVEL;
 
                 objParam = objCommand.Parameters.Add(new SqlParameter("@_MODIFIED_USER", SqlDbType.NVarChar, 30));
                 objParam.Direction = ParameterDirection.Input;

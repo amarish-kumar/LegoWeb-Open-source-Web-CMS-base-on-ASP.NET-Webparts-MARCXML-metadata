@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>LEGOWEB - BACKEND</title>
+    <title>LEGOWEB - ADMINISTRATION</title>
     <link href="App_Themes/legoweb.ico" rel="shortcut icon" type="image/x-icon" />
      
 <!--[if IE 7]>
@@ -23,6 +23,7 @@
     <div id="border-top" class="h_green">
 		<div>
 			<div>
+			    <span class="version">Version 1.0</span>
 				<span class="title">LEGOWEB</span>
 			</div>
 		</div>
@@ -41,7 +42,7 @@
 	</div>
 	<div id="footer">
 	    <p class="copyright">
-		    <a href="http://www.legoweb.org" target="_blank"> Copyright &copy;HIENDAI SOFTWARE COMPANY 2004-2011</a>
+		    <a href="http://www.hiendai.com.vn" target="_blank"> Copyright &copy;HIENDAI SOFTWARE COMPANY 2008-2011</a>
 	    </p>
     </div>  
     </form>

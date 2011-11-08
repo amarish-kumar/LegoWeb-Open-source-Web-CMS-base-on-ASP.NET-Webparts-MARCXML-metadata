@@ -12,13 +12,13 @@
         {
             Roles.CreateRole("WEBEDITORS");
         }
-        if (Roles.RoleExists("WEBMASTER") == false)
+        if (Roles.RoleExists("WEBMASTERS") == false)
         {
-            Roles.CreateRole("WEBMASTER");
+            Roles.CreateRole("WEBMASTERS");
         }                
         if (Membership.GetUser("admin") == null)
         {
-            Membership.CreateUser("admin", "admin" + DateTime.Now.Year.ToString(),"legoweb@www.legoweb.org");                  
+            Membership.CreateUser("admin", "admin" + DateTime.Now.Year.ToString(),"kipos@hiendai.com.vn");                  
         }
         
         if (!Roles.IsUserInRole("admin", "ADMINISTRATORS"))

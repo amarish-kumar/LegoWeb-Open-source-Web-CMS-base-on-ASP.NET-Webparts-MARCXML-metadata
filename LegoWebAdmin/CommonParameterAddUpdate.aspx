@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="CommonParameterAddUpdate.aspx.cs" Inherits="Administrator_CommonParameterAddUpdate" Title="KIPOSADMIN:Cập nhật Tham số hệ thống" ValidateRequest="false" %>
-<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
-<%@ Register src="LgwUserControls/CommonParameterAddUpdate.ascx" tagname="CommonParameterAddUpdate" tagprefix="uc3" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="CommonParameterAddUpdate.aspx.cs" Inherits="Administrator_CommonParameterAddUpdate" Title="Update system parameters" ValidateRequest="false" %>
+<%@ Register src="~/UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="~/UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="~/UserControls/CommonParameterAddUpdate.ascx" tagname="CommonParameterAddUpdate" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 

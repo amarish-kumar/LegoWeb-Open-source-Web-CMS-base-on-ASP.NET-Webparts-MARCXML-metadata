@@ -235,7 +235,43 @@ namespace LegoWebAdmin.BusLogic
             }
             return myPageData;
         }
-    
+
+
+        public static DataSet get_LEGOWEB_MENU_TYPES()
+        {
+            DataSet myPageData = new DataSet();
+            String connString = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
+
+            using (SqlConnection Conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    String strCommandText = "";
+                    SqlCommand objCommand;
+
+                    strCommandText += "SELECT LEGOWEB_MENU_TYPES.* FROM LEGOWEB_MENU_TYPES ORDER BY MENU_TYPE_ID ASC";
+
+                    objCommand = new SqlCommand(strCommandText, Conn);
+                    objCommand.CommandType = CommandType.Text;
+
+                    SqlDataAdapter adap = new SqlDataAdapter(objCommand);
+                    Conn.Open();
+                    adap.Fill(myPageData, "Table");
+                    Conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (Conn.State == ConnectionState.Open)
+                        Conn.Close();
+                }
+            }
+            return myPageData;
+        }
+
     
     }
 }

@@ -59,6 +59,23 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
             item.Value = "2";
             dropAccessLevels.Items.Add(item);
 
+            //load important levels
+            item = new ListItem();
+            item.Text = Resources.strings.Level_Text + " 0";
+            item.Value = "0";
+            item.Selected = true;
+            dropImportantLevels.Items.Add(item);
+
+            item = new ListItem();
+            item.Text = Resources.strings.Level_Text + " 1";
+            item.Value = "1";
+            dropImportantLevels.Items.Add(item);
+
+            item = new ListItem();
+            item.Text = Resources.strings.Level_Text + " 2";
+            item.Value = "2";
+            dropImportantLevels.Items.Add(item);
+
             //load languages 
             item = new ListItem();
             item.Text = Resources.strings.Vietnamese_Text;
@@ -134,7 +151,8 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
         this.labelModifyDate.Text = _MetaContent.ModifyDate;
         this.labelModifier.Text = _MetaContent.Modifier;
         this.dropLanguages.SelectedValue = _MetaContent.LangCode;
-        this.dropAccessLevels.SelectedValue = _MetaContent.AccessLevel.ToString();        
+        this.dropAccessLevels.SelectedValue = _MetaContent.AccessLevel.ToString();
+        this.dropImportantLevels.SelectedValue = _MetaContent.ImportantLevel.ToString();
         
         if (_MetaContent.AccessLevel >= 2)//special permission
         {
@@ -196,7 +214,7 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
         this.labelModifier.Text = _MetaContent.Modifier;
         this.dropLanguages.SelectedValue = _MetaContent.LangCode;
         this.dropAccessLevels.SelectedValue = _MetaContent.AccessLevel.ToString();
-        
+        this.dropImportantLevels.SelectedValue = _MetaContent.ImportantLevel.ToString();
         if (_MetaContent.AccessLevel >= 2)//special permission
         {
             cblRoles.Visible = true;
@@ -241,7 +259,8 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
         this.labelModifier.Text = "";
         this.dropLanguages.SelectedValue = _MetaContent.LangCode;
         this.dropAccessLevels.SelectedValue = _MetaContent.AccessLevel.ToString();
-        
+        this.dropImportantLevels.SelectedValue = _MetaContent.ImportantLevel.ToString();
+
         DataTable marcTable = _MetaContent.get_MarcDatafieldTable();
         CRecord labelRec = new CRecord();
         labelRec.load_File(FileTemplateDataProvider.get_LabelTemplateFile(LegoWebAdmin.BusLogic.Categories.get_CATEGORY_TEMPLATE_NAME(int.Parse(dropCategories.SelectedValue.ToString()))));
@@ -398,6 +417,7 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
             _MetaContent.RecordStatus =int.Parse( this.radioRecordStatus.SelectedValue);
             _MetaContent.LangCode = this.dropLanguages.SelectedValue.ToString();
             _MetaContent.AccessLevel = int.Parse(this.dropAccessLevels.SelectedValue);
+            _MetaContent.ImportantLevel = int.Parse(this.dropImportantLevels.SelectedValue);
 
             DataTable marcTable = _MetaContent.create_MarcDataTable();
 

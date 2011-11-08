@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Metadata imports" Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="MetaContentImport.aspx.cs" Inherits="MetaContentImport" %>
 
-<%@ Register src="LgwUserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="LgwUserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="~/UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="~/UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
     	<%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
     <%@ Register Assembly="CKFinder" Namespace="CKFinder" TagPrefix="CKFinder" %>
 
@@ -29,9 +29,10 @@
     }
 
     // This is a sample function which is called when a file is selected in CKFinder.
-    function SetFileField(fileUrl) 
-    {
-        document.getElementById('<%=txtFileName.ClientID%>').value = fileUrl;
+    function SetFileField(fileUrl) {
+
+        var txtFile = '<%=txtFileName.ClientID%>';  
+        document.getElementById(txtFile).value = fileUrl;
     }
     </script>
 </asp:Content>
@@ -103,6 +104,7 @@
   		</div>  		
 	  
 	  <div class="clr"></div>
+	  <asp:Literal ID="litErrorSpaceHolder" runat="server"> </asp:Literal>
 	  
 		<div id="element-box">
 			<div class="t">
@@ -126,13 +128,6 @@
                         runat="server" onclick="btnBrowse_Click" />
                     <asp:Button ID="btnAnalyse" Text="Analyse" runat="server" 
                         onclick="btnAnalyse_Click" />
-                </td>
-                </tr>
-                <tr>
-                <td>
-                </td>
-                <td>
-                    <asp:Literal ID="litErrorMessage" runat="server" Visible="false"></asp:Literal>
                 </td>
                 </tr>
                 </tbody>
@@ -185,10 +180,10 @@
 							<thead>
 							<tr>
 							<th width="2%" class="title">#</th>
-							<th class="title">ID</th>							
-							<th class="title">Tiêu đề</th>
-							<th class="title">Ngôn ngữ</th>
-							<th class="title">Chuyên mục</th>
+							<th class="title"><%=Resources.strings.ID_Text %></th>							
+							<th class="title"><%=Resources.strings.Title_Text %></th>
+							<th class="title"><%=Resources.strings.Language_Text %></th>
+							<th class="title"><%=Resources.strings.Category_Text %></th>
 							</tr>
 							</thead>
 							<tbody>

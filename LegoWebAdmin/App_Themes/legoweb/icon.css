@@ -28,6 +28,9 @@
 .icon-16-trash 		{ background-image: url(images/menu/icon-16-trash.png); }
 .icon-16-user 			{ background-image: url(images/menu/icon-16-user.png); }
 .icon-16-report 			{ background-image: url(images/menu/icon-16-report.png); }
+.icon-16-forum 			{ background-image: url(images/menu/icon-16-forum.gif); }
+.icon-16-blockedstatus 			{ background-image: url(images/menu/icon-16-blockedstatus.png); }
+.icon-16-money 			{ background-image: url(images/menu/icon-16-money.png); }
 
 /** toolbar icons **/
 .icon-32-send 			{ background-image: url(images/toolbar/icon-32-send.png); }
@@ -98,6 +101,9 @@
 .icon-48-language { background-image: url(images/header/icon-48-language.png); }
 .icon-48-explore { background-image: url(images/header/icon-48-explore.png); }
 .icon-48-report { background-image: url(images/header/icon-48-report.png); }
+.icon-48-forum { background-image: url(images/header/icon-48-forum.png); }
+.icon-48-blockedstatus { background-image: url(images/header/icon-48-blockedstatus.png); }
+.icon-48-money { background-image: url(images/header/icon-48-money.png); }
 /*add for header of repeater*/
 
 .icon-16-uparrow {float: none; width: 16px; height: 16px; margin: 0 auto; display: block; background-image: url(images/uparrow.png);}

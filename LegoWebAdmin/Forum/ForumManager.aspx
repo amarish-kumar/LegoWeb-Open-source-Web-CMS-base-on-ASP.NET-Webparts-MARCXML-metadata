@@ -1,12 +1,13 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="UserRoleManager.aspx.cs" Inherits="KiposWebAdmin_UserRoleManager" Title="User role manager" %>
-<%@ Register src="~/UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
-<%@ Register src="~/UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
-<%@ Register src="~/UserControls/UserRoleManager.ascx" tagname="UserRoleManager" tagprefix="uc3" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LegoWebAdmin.master" AutoEventWireup="true" CodeFile="ForumManager.aspx.cs" Inherits="ForumManager" %>
+
+<%@ Register src="UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
+<%@ Register src="UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
+<%@ Register src="UserControls/ForumManager.ascx" tagname="ForumManager" tagprefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <script src="AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>
-    <script src="AdminTools/JavaScripts/index.js" type="text/javascript"></script>
-    <script src="AdminTools/JavaScripts/menu.js" type="text/javascript"></script>
+    <script src="../AdminTools/JavaScripts/mootools.js" type="text/javascript"></script>
+    <script src="../AdminTools/JavaScripts/index.js" type="text/javascript"></script>
+    <script src="../AdminTools/JavaScripts/menu.js" type="text/javascript"></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -35,8 +36,8 @@
 <table class="toolbar"><tr>
 
 <td class="button" id="toolbar-help">
-<a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
-<span class="icon-32-help" title="Trợ giúp">
+<a href="#" onclick="popupWindow('http://www.hiendai.com.vn/kipos', 'Trợ giúp', 640, 480, 1)" class="toolbar">
+<span class="icon-32-help" title="Help">
 </span>
 <%=Resources.strings.btnHelp_Text %>
 </a>
@@ -45,8 +46,8 @@
 </tr></table>
 </div>
 
-                <div class='header icon-48-user'>
-                   <%=Resources.strings.UserRoleManager_Text %>
+                <div class='header icon-48-forum'>
+                    <%=Resources.strings.ForumManager_Text %>
                 </div>
 
 
@@ -61,7 +62,7 @@
   		</div>  		
 	  
 	  <div class="clr"></div>
-	  <asp:Literal ID="litErrorSpaceHolder" runat="server"> </asp:Literal>
+	  
 		<div id="element-box">
 			<div class="t">
 		 		<div class="t">
@@ -69,10 +70,8 @@
 		 		</div>
 			</div>
 			<div class="m">
-                                                                                                                               
                             
-                            <uc3:UserRoleManager ID="UserRoleManager1" runat="server" />
-                                                       																
+                            <uc3:ForumManager ID="ForumManager1" runat="server" />
 									
 			        <div class="clr"></div>
 			</div>

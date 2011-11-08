@@ -20,7 +20,7 @@ namespace LegoWebAdmin.BusLogic
     public static class Menus
     {
 
-        public static void addUpdate_MENU(int iMENU_ID, int iPARENT_MENU_ID, int iMENU_TYPE_ID, string sMENU_VI_TITLE, string sMENU_EN_TITLE, string sMENU_LINK_URL, string sMENU_IMAGE_URL, int iBROWSER_NAVIGATE, bool bIsPublic)
+        public static void addUpdate_MENU(int iMENU_ID, int iPARENT_MENU_ID, int iMENU_TYPE_ID, string sMENU_VI_TITLE, string sMENU_EN_TITLE, string sMENU_IMAGE_URL, string sMENU_LINK_URL, int iBROWSER_NAVIGATE, bool bIsPublic)
         {
             string connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
             SqlConnection connection = new SqlConnection(connStr);
@@ -55,7 +55,7 @@ namespace LegoWebAdmin.BusLogic
                 objParam.Direction = ParameterDirection.Input;
                 objParam.Value = sMENU_EN_TITLE;
 
-                objParam = objCommand.Parameters.Add(new SqlParameter("@_MENU_LINK_URL", SqlDbType.NVarChar, 50));
+                objParam = objCommand.Parameters.Add(new SqlParameter("@_MENU_LINK_URL", SqlDbType.NVarChar, 250));
                 objParam.Direction = ParameterDirection.Input;
                 objParam.Value = sMENU_LINK_URL;
 
@@ -523,6 +523,43 @@ namespace LegoWebAdmin.BusLogic
             }
             return myPageData;
         }
+
+
+        public static DataSet get_LEGOWEB_MENUS()
+        {
+            DataSet myPageData = new DataSet();
+            String connString = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
+
+            using (SqlConnection Conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    string strCommandName;
+                    SqlCommand objCommand;
+                    SqlParameter objParam;
+
+
+                    strCommandName = "SELECT * FROM LEGOWEB_MENUS ORDER BY MENU_ID ASC";
+                    objCommand = new SqlCommand(strCommandName, Conn);
+                    objCommand.CommandType = CommandType.Text;
+                    SqlDataAdapter adap = new SqlDataAdapter(objCommand);
+                    Conn.Open();
+                    adap.Fill(myPageData, "Table");
+                    Conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (Conn.State == ConnectionState.Open)
+                        Conn.Close();
+                }
+            }
+            return myPageData;
+        }
+
 
         public static bool is_MenuItem_Exist(int iMenuId)
         {

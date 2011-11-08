@@ -66,6 +66,40 @@ namespace LegoWebAdmin.BusLogic
             }
         }
 
+        public static DataSet get_LEGOWEB_COMMON_PARAMETERS()
+        {
+            DataSet retData = new DataSet();
+            String connString = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
+            using (SqlConnection Conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    String strCommandText;
+                    SqlCommand objCommand;
+
+                    strCommandText = "SELECT * FROM LEGOWEB_COMMON_PARAMETERS ORDER BY PARAMETER_TYPE, PARAMETER_NAME ASC";
+
+                    objCommand = new SqlCommand(strCommandText, Conn);
+                    objCommand.CommandType = CommandType.Text;
+
+                    SqlDataAdapter adap = new SqlDataAdapter(objCommand);
+                    Conn.Open();
+                    adap.Fill(retData, "Table");
+                    Conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (Conn.State == ConnectionState.Open)
+                        Conn.Close();
+                }
+            }
+            return retData;
+        }
+
         public static DataSet get_LEGOWEB_COMMON_PARAMETER(String sParameterName)
         {
             DataSet retData = new DataSet();

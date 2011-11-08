@@ -793,6 +793,41 @@ namespace LegoWebAdmin.BusLogic
             }
             return myPageData;
         }
-    
+
+
+        public static DataSet get_LEGOWEB_CATEGORIES()
+        {
+            DataSet myPageData = new DataSet();
+            String connString = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
+
+            using (SqlConnection Conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    string strCommandName;
+                    SqlCommand objCommand;
+
+                    strCommandName = "SELECT * FROM LEGOWEB_CATEGORIES ORDER BY CATEGORY_ID ASC";
+                    objCommand = new SqlCommand(strCommandName, Conn);
+                    objCommand.CommandType = CommandType.Text;
+
+                    SqlDataAdapter adap = new SqlDataAdapter(objCommand);
+                    Conn.Open();
+                    adap.Fill(myPageData, "Table");
+                    Conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (Conn.State == ConnectionState.Open)
+                        Conn.Close();
+                }
+            }
+            return myPageData;
+        }
+
     }
 }

@@ -131,6 +131,42 @@ namespace LegoWebAdmin.BusLogic
             }
             return retData;
         }
+
+        public static DataSet get_LEGOWEB_SECTIONS()
+        {
+            DataSet myPageData = new DataSet();
+            String connString = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
+
+            using (SqlConnection Conn = new SqlConnection(connString))
+            {
+                try
+                {
+                    String strCommandText = "";
+                    SqlCommand objCommand;
+
+                    strCommandText += "SELECT LEGOWEB_SECTIONS.* FROM LEGOWEB_SECTIONS ORDER BY SECTION_ID ASC";
+
+                    objCommand = new SqlCommand(strCommandText, Conn);
+                    objCommand.CommandType = CommandType.Text;
+
+                    SqlDataAdapter adap = new SqlDataAdapter(objCommand);
+                    Conn.Open();
+                    adap.Fill(myPageData, "Table");
+                    Conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (Conn.State == ConnectionState.Open)
+                        Conn.Close();
+                }
+            }
+            return myPageData;
+        }
+
         public static Int32 get_Search_Count()
         {
             String connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
@@ -161,7 +197,7 @@ namespace LegoWebAdmin.BusLogic
                         Conn.Close();
                 }
             }
-        }
+        }       
 
         public static DataSet get_Search_Page(int iPage, int iPageSize)
         {

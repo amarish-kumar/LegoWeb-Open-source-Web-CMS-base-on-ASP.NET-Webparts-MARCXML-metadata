@@ -102,4 +102,3 @@
             </table>
 		</fieldset>
 	</div>
-<font color="aqua"><b><i><asp:Literal ID="errorMessage" runat="server"></asp:Literal></i></b></font>

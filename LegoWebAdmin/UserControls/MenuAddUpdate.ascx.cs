@@ -135,12 +135,10 @@ public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
         {
             if (LegoWebAdmin.BusLogic.Menus.is_MenuItem_Exist(int.Parse(txtMenuID.Text)))
             {
-                errorMessage.Text = "ID is existed!.";
-                txtMenuID.Focus();
-                return;
+                throw new Exception("Menu id is existed!");
             }
         }
-        LegoWebAdmin.BusLogic.Menus.addUpdate_MENU(int.Parse(txtMenuID.Text),int.Parse("0" + this.dropParentMenus.SelectedValue.ToString()), int.Parse("0" + this.dropMenuTypes.SelectedValue.ToString()), txtMenuViTitle.Text, txtMenuEnTitle.Text,txtLinkUrl.Text,HiddenMenuImageUrl.Value,int.Parse(this.listBoxBrowserNavigation.SelectedValue.ToString()),radioIsPublic.Checked);
+        LegoWebAdmin.BusLogic.Menus.addUpdate_MENU(int.Parse(txtMenuID.Text), int.Parse("0" + this.dropParentMenus.SelectedValue.ToString()), int.Parse("0" + this.dropMenuTypes.SelectedValue.ToString()), txtMenuViTitle.Text, txtMenuEnTitle.Text, HiddenMenuImageUrl.Value, txtLinkUrl.Text, int.Parse(this.listBoxBrowserNavigation.SelectedValue.ToString()), radioIsPublic.Checked);
         Response.Redirect("MenuManager.aspx?menu_type_id=" + dropMenuTypes.SelectedValue.ToString());
     }
 

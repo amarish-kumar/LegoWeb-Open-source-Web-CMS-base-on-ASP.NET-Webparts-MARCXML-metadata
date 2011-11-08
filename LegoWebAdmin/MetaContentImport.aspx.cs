@@ -62,14 +62,14 @@ public partial class MetaContentImport : System.Web.UI.Page
     }
     protected void linkImportContentButton_Click(object sender, EventArgs e)
     {
+       litErrorSpaceHolder.Text = "";
+        //try
+        //{
         divDefaultCategory.Visible = false;
         DataTable contentTable = create_ContentTable();
         if (String.IsNullOrEmpty(txtFileName.Text))
         {
-            litErrorMessage.Visible = true;
-            litErrorMessage.Text = "You must select a metadata source file!";
-            txtFileName.Focus();
-            return;            
+            throw new Exception("You must select a source file!");
         }
         //chuyển đổi địa chỉ URL sang Physycal
         string sFileURL = txtFileName.Text;
@@ -77,14 +77,10 @@ public partial class MetaContentImport : System.Web.UI.Page
         sFileName = sFileName.Replace("/", "\\");
         if (!System.IO.File.Exists(sFileName))
         {
-            litErrorMessage.Visible = true;
-            litErrorMessage.Text = "source file does not exist!";
-            return;
+            throw new Exception("Source file does not exists!");
         }
         else
         {
-            litErrorMessage.Visible = false;
-            litErrorMessage.Text = "";
             divDefaultCategory.Visible = true;
         }
 
@@ -95,29 +91,19 @@ public partial class MetaContentImport : System.Web.UI.Page
         {
             CRecord myRec = new CRecord();
             myRec.load_Xml(myRecs.Record(i).OuterXml);
-            Int32 iID = String.IsNullOrEmpty(myRecs.Record(i).Controlfields.Controlfield("001").Value) ? 0 : Int32.Parse(myRecs.Record(i).Controlfields.Controlfield("001").Value);
-            Int32 iCatID = String.IsNullOrEmpty(myRecs.Record(i).Controlfields.Controlfield("002").Value) ? 0 : Int32.Parse(myRecs.Record(i).Controlfields.Controlfield("002").Value);            
-            switch (radioImportTypes.SelectedValue)
-            { 
-                case "0"://append
-                    myRec.Controlfields.Controlfield("001").Value = "0";
-                    switch (radioForceToDefaultCategory.SelectedValue)
-                    { 
-                        case "0"://auto detech category id
-                            if (!LegoWebAdmin.BusLogic.Categories.is_CATEGORY_ID_EXIST(iCatID))
-                            {
-                                myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
-                            }                            
-                            break;
-                        case "1": //force to default category
-                            myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
-                            break;
-                    }
-                    LegoWebAdmin.BusLogic.MetaContents.save_META_CONTENTS_XML(myRec.OuterXml, this.Page.User.Identity.Name);
-                    break;
-                case "1"://skip if ID exsist
-                    if (!LegoWebAdmin.BusLogic.MetaContents.is_META_CONTENTS_EXIST(iID))
-                    {
+
+            if (myRec.get_LeaderValueByPos(6, 6) == "s")//system tables data
+            {
+                import_SystemTableData(myRec);
+            }
+            else
+            {
+                Int32 iID = String.IsNullOrEmpty(myRecs.Record(i).Controlfields.Controlfield("001").Value) ? 0 : Int32.Parse(myRecs.Record(i).Controlfields.Controlfield("001").Value);
+                Int32 iCatID = String.IsNullOrEmpty(myRecs.Record(i).Controlfields.Controlfield("002").Value) ? 0 : Int32.Parse(myRecs.Record(i).Controlfields.Controlfield("002").Value);
+                switch (radioImportTypes.SelectedValue)
+                {
+                    case "0"://append
+                        myRec.Controlfields.Controlfield("001").Value = "0";
                         switch (radioForceToDefaultCategory.SelectedValue)
                         {
                             case "0"://auto detech category id
@@ -131,31 +117,62 @@ public partial class MetaContentImport : System.Web.UI.Page
                                 break;
                         }
                         LegoWebAdmin.BusLogic.MetaContents.save_META_CONTENTS_XML(myRec.OuterXml, this.Page.User.Identity.Name);
-                    }
-                    else
-                    {
-                        iSkipCount++;
-                    }
-                    break;
-                case "2":
-                    switch (radioForceToDefaultCategory.SelectedValue)
-                    {
-                        case "0"://auto detech category id
-                            if (!LegoWebAdmin.BusLogic.Categories.is_CATEGORY_ID_EXIST(iCatID))
+                        break;
+                    case "1"://skip if ID exsist
+                        if (!LegoWebAdmin.BusLogic.MetaContents.is_META_CONTENTS_EXIST(iID))
+                        {
+                            switch (radioForceToDefaultCategory.SelectedValue)
                             {
-                                myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
+                                case "0"://auto detech category id
+                                    if (!LegoWebAdmin.BusLogic.Categories.is_CATEGORY_ID_EXIST(iCatID))
+                                    {
+                                        myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
+                                    }
+                                    break;
+                                case "1": //force to default category
+                                    myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
+                                    break;
                             }
-                            break;
-                        case "1": //force to default category
-                            myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
-                            break;
-                    }
-                    LegoWebAdmin.BusLogic.MetaContents.save_META_CONTENTS_XML(myRec.OuterXml, this.Page.User.Identity.Name);
-                    break;
+                            LegoWebAdmin.BusLogic.MetaContents.save_META_CONTENTS_XML(myRec.OuterXml, this.Page.User.Identity.Name);
+                        }
+                        else
+                        {
+                            iSkipCount++;
+                        }
+                        break;
+                    case "2":
+                        switch (radioForceToDefaultCategory.SelectedValue)
+                        {
+                            case "0"://auto detech category id
+                                if (!LegoWebAdmin.BusLogic.Categories.is_CATEGORY_ID_EXIST(iCatID))
+                                {
+                                    myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
+                                }
+                                break;
+                            case "1": //force to default category
+                                myRec.Controlfields.Controlfield("002").Value = dropCategories.SelectedValue;
+                                break;
+                        }
+                        LegoWebAdmin.BusLogic.MetaContents.save_META_CONTENTS_XML(myRec.OuterXml, this.Page.User.Identity.Name);
+                        break;
+                }
             }
         }
-        litErrorMessage.Visible = true;
-        litErrorMessage.Text = String.Format("Imports successfully {0} records, skips {1}!.",myRecs.Count.ToString(), iSkipCount.ToString());
+        
+        litErrorSpaceHolder.Text = String.Format("Imports successfully {0} records, skips {1}!.", myRecs.Count.ToString(), iSkipCount.ToString());
+//        }
+//        catch (Exception ex)
+//        {
+//            String errorFomat = @"<dl id='system-message'>
+//                                            <dd class='error message fade'>
+//	                                            <ul>
+//		                                            <li>{0}</li>
+//	                                            </ul>
+//                                            </dd>
+//                                            </dl>";
+//            litErrorSpaceHolder.Text = String.Format(errorFomat, ex.Message);
+
+//        }
     }
     protected void linkCancelButton_Click(object sender, EventArgs e)
     {
@@ -164,14 +181,14 @@ public partial class MetaContentImport : System.Web.UI.Page
 
     protected void btnAnalyse_Click(object sender, EventArgs e)
     {
+        litErrorSpaceHolder.Text = "";
+        try
+        {
         divDefaultCategory.Visible = false;
         DataTable contentTable = create_ContentTable();
         if (String.IsNullOrEmpty(txtFileName.Text))
         {
-            litErrorMessage.Visible = true;
-            litErrorMessage.Text = "You must select a metadata source file!";
-            txtFileName.Focus();
-            return;            
+            throw new Exception("You must select a source file!");
         }
         //chuyển đổi địa chỉ URL sang Physycal
         string sFileURL = txtFileName.Text;
@@ -179,14 +196,11 @@ public partial class MetaContentImport : System.Web.UI.Page
         sFileName = sFileName.Replace("/", "\\");
         if (!System.IO.File.Exists(sFileName))
         {
-            litErrorMessage.Visible = true;
-            litErrorMessage.Text = "Physical file does not exist!";
-            return;
+            throw new Exception("File doest not exists!");
         }
         else
         {
-            litErrorMessage.Visible = false;
-            litErrorMessage.Text = "";
+
             divDefaultCategory.Visible = true;
         }
 
@@ -195,16 +209,39 @@ public partial class MetaContentImport : System.Web.UI.Page
         for (int i = 0; i < myRecs.Count; i++)
         {
             DataRow row = contentTable.NewRow();
-            row["META_CONTENT_ID"] = String.IsNullOrEmpty(myRecs.Record(i).Controlfields.Controlfield("001").Value) ? 0 : Int32.Parse(myRecs.Record(i).Controlfields.Controlfield("001").Value);
-            row["META_CONTENT_TITLE"] = myRecs.Record(i).Datafields.Datafield("245").Subfields.Subfield("a").Value;
-            row["LANG_CODE"] = myRecs.Record(i).Controlfields.Controlfield("008").get_ValueByPos(35, 36);
-            row["CATEGORY_ID"] =String.IsNullOrEmpty(myRecs.Record(i).Controlfields.Controlfield("002").Value)?0:Int32.Parse(myRecs.Record(i).Controlfields.Controlfield("002").Value);
-
+            if (myRecs.Record(i).get_LeaderValueByPos(6, 6) == "s")//system tables data
+            {
+                row["META_CONTENT_ID"] = 0;
+                row["META_CONTENT_TITLE"] = myRecs.Record(i).Datafields.Datafield("245").Subfields.Subfield("a").Value;
+                row["LANG_CODE"] = "";
+                row["CATEGORY_ID"] = 0;
+            }
+            else
+            {
+                row["META_CONTENT_ID"] = String.IsNullOrEmpty(myRecs.Record(i).Controlfields.Controlfield("001").Value) ? 0 : Int32.Parse(myRecs.Record(i).Controlfields.Controlfield("001").Value);
+                row["META_CONTENT_TITLE"] = myRecs.Record(i).Datafields.Datafield("245").Subfields.Subfield("a").Value;
+                row["LANG_CODE"] = myRecs.Record(i).Controlfields.Controlfield("008").get_ValueByPos(35, 36);
+                row["CATEGORY_ID"] = String.IsNullOrEmpty(myRecs.Record(i).Controlfields.Controlfield("002").Value) ? 0 : Int32.Parse(myRecs.Record(i).Controlfields.Controlfield("002").Value);
+            }
             contentTable.Rows.Add(row);
         }
 
         metaContentRepeater.DataSource = contentTable;
         metaContentRepeater.DataBind();
+        }
+        catch (Exception ex)
+        {
+            String errorFomat = @"<dl id='system-message'>
+                                            <dd class='error message fade'>
+	                                            <ul>
+		                                            <li>{0}</li>
+	                                            </ul>
+                                            </dd>
+                                            </dl>";
+            litErrorSpaceHolder.Text = String.Format(errorFomat, ex.Message);
+
+        }
+
 
     }
     protected void btnBrowse_Click(object sender, EventArgs e)
@@ -267,6 +304,78 @@ public partial class MetaContentImport : System.Web.UI.Page
         load_dropCategories();
     }
 
+    protected void import_SystemTableData(CRecord tblRec)
+    {
+        CDatafields Dfs;
+        CDatafield Df=new CDatafield();
+        switch (tblRec.Controlfields.Controlfield("001").Value)
+        { 
+            case "LEGOWEB_COMMON_PARAMETERS":
+                //Df.SubfieldsText = String.Format("$a{0} $b{1} $c{2} $d{3} $e{4}", row["PARAMETER_NAME"].ToString(), row["PARAMETER_TYPE"].ToString(), row["PARAMETER_VI_VALUE"].ToString(), row["PARAMETER_EN_VALUE"].ToString(), row["PARAMETER_DESCRIPTION"].ToString());
+                Dfs=tblRec.Datafields;
+                Dfs.Filter("650");
+                for (int i = 0; i < Dfs.Count; i++)
+                { 
+                    Df=Dfs.Datafield(i);
+                    LegoWebAdmin.BusLogic.CommonParameters.addudp_LEGOWEB_COMMON_PARAMETER(Df.Subfields.Subfield("a").Value, int.Parse(Df.Subfields.Subfield("b").Value), Df.Subfields.Subfield("c").Value, Df.Subfields.Subfield("d").Value, Df.Subfields.Subfield("e").Value);
+                }
+            break;
+            case "LEGOWEB_SECTIONS":
+            //Df.SubfieldsText = String.Format("$a{0} $b{1} $c{2}", row["SECTION_ID"].ToString(), row["SECTION_VI_TITLE"].ToString(), row["SECTION_EN_TITLE"].ToString());
+            Dfs = tblRec.Datafields;
+            Dfs.Filter("650");
+            for (int i = 0; i < Dfs.Count; i++)
+            {
+                Df = Dfs.Datafield(i);
+                LegoWebAdmin.BusLogic.Sections.add_Update(int.Parse(Df.Subfields.Subfield("a").Value), Df.Subfields.Subfield("b").Value, Df.Subfields.Subfield("c").Value);
+            }
+            break;
+
+            case "LEGOWEB_CATEGORIES":
+            //Df.SubfieldsText = String.Format("$a{0} $b{1} $c{2} $d{3} $e{4} $f{5} $g{6} $h{7} $i{8} $j{9} $k{10} $l{11} $m{12} $n{13} $o{14} $p{15}", row["CATEGORY_ID"].ToString(), row["PARENT_CATEGORY_ID"].ToString(), row["SECTION_ID"].ToString(), row["CATEGORY_VI_TITLE"].ToString(), row["CATEGORY_EN_TITLE"].ToString(), row["CATEGORY_ALIAS"].ToString(), row["CATEGORY_TEMPLATE_NAME"].ToString(), row["CATEGORY_IMAGE_URL"].ToString(), row["MENU_ID"].ToString(), row["IS_PUBLIC"].ToString(), row["ADMIN_LEVEL"].ToString(), row["ADMIN_ROLES"].ToString(), row["SEO_TITLE"].ToString(), row["SEO_DESCRIPTION"].ToString(), row["SEO_KEYWORDS"].ToString(),row["ORDER_NUMBER"].ToString());
+
+            Dfs = tblRec.Datafields;
+            Dfs.Filter("650");
+            for (int i = 0; i < Dfs.Count; i++)
+            {
+                Df = Dfs.Datafield(i);
+                LegoWebAdmin.BusLogic.Categories.addUpdate_CATEGORY(int.Parse(Df.Subfields.Subfield("a").Value), int.Parse(Df.Subfields.Subfield("b").Value), int.Parse(Df.Subfields.Subfield("c").Value), Df.Subfields.Subfield("d").Value, Df.Subfields.Subfield("e").Value, Df.Subfields.Subfield("f").Value, Df.Subfields.Subfield("g").Value, Df.Subfields.Subfield("h").Value, int.Parse(Df.Subfields.Subfield("i").Value), Convert.ToBoolean(Df.Subfields.Subfield("j").Value), int.Parse(Df.Subfields.Subfield("k").Value),Df.Subfields.Subfield("l").Value, Df.Subfields.Subfield("m").Value, Df.Subfields.Subfield("n").Value,Df.Subfields.Subfield("o").Value);
+                if (!String.IsNullOrEmpty(Df.Subfields.Subfield("p").Value))
+                {
+                    LegoWebAdmin.BusLogic.Categories.update_CATEGORY_ORDER(int.Parse(Df.Subfields.Subfield("a").Value), int.Parse(Df.Subfields.Subfield("p").Value));
+                }
+            }
+            break;
+
+            case "LEGOWEB_MENU_TYPES":
+            //Df.SubfieldsText = String.Format("$a{0} $b{1} $c{2} $d{3}", row["MENU_TYPE_ID"].ToString(), row["MENU_TYPE_VI_TITLE"].ToString(), row["MENU_TYPE_EN_TITLE"].ToString(), row["MENU_TYPE_DESCRIPTION"].ToString());
+            Dfs = tblRec.Datafields;
+            Dfs.Filter("650");
+            for (int i = 0; i < Dfs.Count; i++)
+            {
+                Df = Dfs.Datafield(i);
+                LegoWebAdmin.BusLogic.MenuTypes.addUpdate_MenuType(int.Parse(Df.Subfields.Subfield("a").Value), Df.Subfields.Subfield("b").Value, Df.Subfields.Subfield("c").Value, Df.Subfields.Subfield("d").Value);
+            }
+            break;
+            
+
+            case "LEGOWEB_MENUS":
+            //Df.SubfieldsText = String.Format("$a{0} $b{1} $c{2} $d{3} $e{4} $f{5} $g{6} $h{7} $i{8} $j{9}", row["MENU_ID"].ToString(), row["PARENT_MENU_ID"].ToString(), row["MENU_TYPE_ID"].ToString(), row["MENU_VI_TITLE"].ToString(), row["MENU_EN_TITLE"].ToString(), row["MENU_IMAGE_URL"].ToString(), row["MENU_LINK_URL"].ToString(), row["BROWSER_NAVIGATE"].ToString(), row["IS_PUBLIC"].ToString(),row["ORDER_NUMBER"].ToString());
+            Dfs = tblRec.Datafields;
+            Dfs.Filter("650");
+            for (int i = 0; i < Dfs.Count; i++)
+            {
+                Df = Dfs.Datafield(i);
+                LegoWebAdmin.BusLogic.Menus.addUpdate_MENU(int.Parse(Df.Subfields.Subfield("a").Value), int.Parse(Df.Subfields.Subfield("b").Value), int.Parse(Df.Subfields.Subfield("c").Value), Df.Subfields.Subfield("d").Value, Df.Subfields.Subfield("e").Value, Df.Subfields.Subfield("f").Value, Df.Subfields.Subfield("g").Value, int.Parse(Df.Subfields.Subfield("h").Value), Convert.ToBoolean(Df.Subfields.Subfield("i").Value));
+                if (!String.IsNullOrEmpty(Df.Subfields.Subfield("j").Value))
+                {
+                    LegoWebAdmin.BusLogic.Menus.update_MENU_ORDER(int.Parse(Df.Subfields.Subfield("a").Value), int.Parse(Df.Subfields.Subfield("j").Value));
+                }
+            }
+            break;
+
+        }    
+    }
     protected override void OnInit(EventArgs e)
     {
         CultureUtility.SetThreadCulture();
