@@ -33,7 +33,77 @@ namespace LegoWebAdmin.DataProvider
             marcTable.Columns.Add(new DataColumn("SUBFIELD_VALUE", typeof(string)));
             return marcTable;
         }
+        #region using of leader        
+        /// <summary>
+        /// use first character position in leader to store ImportantLevel: 0,1,2
+        /// </summary>
+        public int ImportantLevel //
+        {
+            get
+            {
+                int iLevel = 0;
+                string sLevel = this.get_LeaderValueByPos(0, 0);
+                if (!int.TryParse(sLevel, out iLevel))
+                {
+                    iLevel = 0;
+                    this.set_LeaderValueByPos("0", 0, 0);
+                }
+                return iLevel;
+            }
+            set
+            {
+                this.set_LeaderValueByPos(value.ToString(), 0, 0);
+            }
+        }
+        /// <summary>
+        /// use second character position in leader to store AccessLevel: 0,1,2
+        /// </summary>
+    
+        public int AccessLevel
+        {
+            get
+            {
+                int iLevel = 0;
+                string sLevel = this.get_LeaderValueByPos(1, 1);
+                if (!int.TryParse(sLevel, out iLevel))
+                {
+                    iLevel = 0;
+                    this.set_LeaderValueByPos("0", 1, 1);
+                }
+                return iLevel;
+            }
+            set
+            {
+                this.set_LeaderValueByPos(value.ToString(), 1, 1);
+            }
+        }  
+        /// <summary>
+        ///use fouth and fith character positions in leader to store RecordStatus: -1,0,1 
+        /// </summary>
+        public int RecordStatus // 4,5 positions in leader
+        {
+            get
+            {
+                int iret = 1;
+                string sStatus = this.get_LeaderValueByPos(4, 5);
+                if (!String.IsNullOrEmpty(sStatus))
+                {
+                    int.TryParse(sStatus, out iret);
+                }
+                return iret;
+            }
+            set
+            {
+                string sValue = value.ToString();
+                this.set_LeaderValueByPos(sValue, 4, 5);
+            }
+        }
+        #endregion using of leader
 
+        #region using of controlfields
+        /// <summary>
+        /// use controlfield 001 to store meta content ID
+        /// </summary>
         public Int32 MetaContentID
         {
             get
@@ -57,7 +127,9 @@ namespace LegoWebAdmin.DataProvider
                 }
             }
         }
-
+        /// <summary>
+        /// use controlfield 001 to store category id
+        /// </summary>
         public int CategoryID
         {
             get
@@ -81,49 +153,11 @@ namespace LegoWebAdmin.DataProvider
                 }
             }
         }
-        public string Alias
-        {
-            get
-            {
-                return this.Controlfields.Controlfield("003").Value;
-            }
-            set
-            {
-                CControlfield Cf = new CControlfield();
-                if (this.Controlfields.get_Controlfield("003", ref Cf))
-                {
-                    Cf.Type = "TEXT";
-                    Cf.Value = value.ToString();
-                }
-                else
-                {
-                    Cf.Tag = "003";
-                    Cf.Type = "TEXT";
-                    Cf.Value = value.ToString();
-                    this.Controlfields.Add(Cf);
-                }
-            }
-        }
-        //using tow characters 4,5 in leader as record status
-        public int RecordStatus
-        {
-            get
-            {
-                int iret = 1;
-                string sStatus = this.get_LeaderValueByPos(4, 5);
-                if (!String.IsNullOrEmpty(sStatus))
-                {
-                    int.TryParse(sStatus, out iret);
-                }
-                return iret;
-            }
-            set
-            {
-                string sValue=value.ToString();
-                this.set_LeaderValueByPos(sValue, 4, 5);
-            }
-        }
-        public string EntryDate
+        /// <summary>
+        /// use controlfield 004 to store local code ex: product code, customer code...
+        /// if 004 has value need to check duplicate with other records in the same category before save
+        /// </summary>
+        public string LocalCode
         {
             get
             {
@@ -134,33 +168,64 @@ namespace LegoWebAdmin.DataProvider
                 CControlfield Cf = new CControlfield();
                 if (this.Controlfields.get_Controlfield("004", ref Cf))
                 {
+                    Cf.Type = "TEXT";
                     Cf.Value = value.ToString();
                 }
                 else
                 {
                     Cf.Tag = "004";
+                    Cf.Type = "TEXT";
                     Cf.Value = value.ToString();
                     this.Controlfields.Add(Cf);
                 }
             }
         }
-        public string ModifyDate
+        
+        /// <summary>
+        /// using 005 to store EntryDate and UpdateDate in format of: 
+        /// yyyy-MMM-dd hh:mm:ss yyyy-MMM-dd hh:mm:ss
+        /// 01234567890123456789012345678901234567890
+        /// </summary>
+
+        public string EntryDate
         {
             get
             {
-                return this.Controlfields.Controlfield("005").Value;
+                return this.Controlfields.Controlfield("005").get_ValueByPos(0,19);
             }
             set
             {
                 CControlfield Cf = new CControlfield();
                 if (this.Controlfields.get_Controlfield("005", ref Cf))
                 {
-                    Cf.Value = value.ToString();
+                    Cf.set_ValueByPos(value.ToString(),0,19);
                 }
                 else
                 {
                     Cf.Tag = "005";
-                    Cf.Value = value.ToString();
+                    Cf.set_ValueByPos(value.ToString(),0,19);
+                    this.Controlfields.Add(Cf);
+                }
+            }
+        }
+
+        public string ModifyDate
+        {
+            get
+            {
+                return this.Controlfields.Controlfield("005").get_ValueByPos(21, 40);
+            }
+            set
+            {
+                CControlfield Cf = new CControlfield();
+                if (this.Controlfields.get_Controlfield("005", ref Cf))
+                {
+                    Cf.set_ValueByPos(value.ToString(), 21, 40);
+                }
+                else
+                {
+                    Cf.Tag = "005";
+                    Cf.set_ValueByPos(value.ToString(), 21, 40);
                     this.Controlfields.Add(Cf);
                 }
             }
@@ -207,7 +272,6 @@ namespace LegoWebAdmin.DataProvider
                 }
             }
         }
-
         public String LangCode
         {
             get
@@ -229,49 +293,31 @@ namespace LegoWebAdmin.DataProvider
                 }
             }
         }
-        
-        public int AccessLevel
+        public string Alias
         {
             get
             {
-                return (int)Convert.ToDouble("0" + this.Controlfields.Controlfield("009").Value);
+                return this.Controlfields.Controlfield("009").Value;
             }
             set
             {
                 CControlfield Cf = new CControlfield();
                 if (this.Controlfields.get_Controlfield("009", ref Cf))
                 {
-                    Cf.Type = "NUMBER";
+                    Cf.Type = "TEXT";
                     Cf.Value = value.ToString();
                 }
                 else
                 {
                     Cf.Tag = "009";
-                    Cf.Type = "NUMBER";
+                    Cf.Type = "TEXT";
                     Cf.Value = value.ToString();
                     this.Controlfields.Add(Cf);
                 }
             }
-        }        
-        //try to using first character in leader to indicate important level
-        public int ImportantLevel
-        {
-            get
-            {
-                int iLevel = 0;
-                string sLevel=this.get_LeaderValueByPos(0, 0);
-                if(!int.TryParse(sLevel,out iLevel))
-                {
-                    iLevel = 0;
-                    this.set_LeaderValueByPos("0", 0, 0);
-                }
-                return iLevel;
-            }
-            set
-            {
-                    this.set_LeaderValueByPos(value.ToString(), 0, 0);
-            }
-        }   
+        }
+        #endregion using of controlfields
+
 
         public DataTable get_MarcDatafieldTable()
         {             

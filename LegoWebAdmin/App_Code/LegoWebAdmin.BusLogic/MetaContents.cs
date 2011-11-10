@@ -28,6 +28,7 @@ namespace LegoWebAdmin.BusLogic
             int iCategoryId=contentObj.CategoryID;
             string sLangCode=contentObj.LangCode;
             string sTitle=contentObj.Datafields.Datafield("245").Subfields.Subfield("a").Value;
+            string sLocalCode = contentObj.LocalCode;
             string sAlias = contentObj.Alias;
             int iRecordStatus=contentObj.RecordStatus;
             int iAccessLevel=contentObj.AccessLevel;
@@ -51,7 +52,7 @@ namespace LegoWebAdmin.BusLogic
                     }
                 }
                 //update meta content process
-                update_META_CONTENT(retId, iCategoryId, sLeader, sLangCode, sTitle,sAlias, iRecordStatus, iAccessLevel,iImportantLevel, sUSER);
+                update_META_CONTENT(retId, iCategoryId,sLocalCode, sLeader, sLangCode, sTitle,sAlias, iRecordStatus, iAccessLevel,iImportantLevel, sUSER);
                 isUpdate = true;
             }
             else
@@ -68,7 +69,7 @@ namespace LegoWebAdmin.BusLogic
                     }
                 }
                 //insert meta content process
-                retId = insert_META_CONTENTS(iCategoryId, sLeader, sLangCode, sTitle,sAlias, iRecordStatus, iAccessLevel,iImportantLevel, sUSER);
+                retId = insert_META_CONTENTS(iCategoryId,sLocalCode, sLeader, sLangCode, sTitle,sAlias, iRecordStatus, iAccessLevel,iImportantLevel, sUSER);
                 isUpdate = false;
             }
 
@@ -267,11 +268,10 @@ namespace LegoWebAdmin.BusLogic
                     objCommand0.CommandType = CommandType.Text;
                     SqlDataReader reader0 = objCommand0.ExecuteReader();
                     reader0.Read();
+                    ContentObject.Leader = reader0["LEADER"].ToString();
                     ContentObject.MetaContentID = iMETA_CONTENT_ID;
                     ContentObject.CategoryID =Convert.ToInt16(reader0["CATEGORY_ID"]);
-                    ContentObject.Alias = reader0["META_CONTENT_ALIAS"].ToString();
-                    ContentObject.Leader = reader0["LEADER"].ToString();
-                    ContentObject.RecordStatus =int.Parse(reader0["RECORD_STATUS"].ToString());
+                    ContentObject.LocalCode = reader0["LOCAL_CODE"].ToString();                  
                     ContentObject.AccessLevel =Convert.ToInt16(reader0["ACCESS_LEVEL"]);
                     ContentObject.ImportantLevel = Convert.ToInt16(reader0["IMPORTANT_LEVEL"]);
                     ContentObject.LangCode = reader0["LANG_CODE"].ToString();
@@ -279,6 +279,8 @@ namespace LegoWebAdmin.BusLogic
                     ContentObject.Creator = reader0["CREATED_USER"].ToString();
                     ContentObject.ModifyDate = Convert.ToDateTime(reader0["MODIFIED_DATE"]).ToString("yyyy-MMM-dd hh:mm:ss");
                     ContentObject.Modifier = reader0["MODIFIED_USER"].ToString();
+                    ContentObject.Alias = reader0["META_CONTENT_ALIAS"].ToString();
+                    ContentObject.RecordStatus = int.Parse(reader0["RECORD_STATUS"].ToString());
                     reader0.Close();
                     conn.Close();                   
                 }
@@ -362,9 +364,7 @@ namespace LegoWebAdmin.BusLogic
 
         }
 
-
-
-        public static Int32 insert_META_CONTENTS(int iCATEGORY_ID,string sLEADER, string sLANG_CODE,string sMETA_CONTENT_TITLE, string sMETA_CONTENT_ALIAS,int iRECORD_STATUS, int iACCESS_LEVEL,int iIMPORTANT_LEVEL, string sCREATED_USER)
+        public static Int32 insert_META_CONTENTS(int iCATEGORY_ID, string sLOCAL_CODE, string sLEADER, string sLANG_CODE,string sMETA_CONTENT_TITLE, string sMETA_CONTENT_ALIAS,int iRECORD_STATUS, int iACCESS_LEVEL,int iIMPORTANT_LEVEL, string sCREATED_USER)
         {
             string connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
             SqlConnection connection = new SqlConnection(connStr);
@@ -384,6 +384,10 @@ namespace LegoWebAdmin.BusLogic
                 objParam = objCommand.Parameters.Add(new SqlParameter("@_CATEGORY_ID", SqlDbType.Int));
                 objParam.Direction = ParameterDirection.Input;
                 objParam.Value = iCATEGORY_ID;
+
+                objParam = objCommand.Parameters.Add(new SqlParameter("@_LOCAL_CODE", SqlDbType.NVarChar, 30));
+                objParam.Direction = ParameterDirection.Input;
+                objParam.Value = sLOCAL_CODE;
 
                 objParam = objCommand.Parameters.Add(new SqlParameter("@_LEADER", SqlDbType.NVarChar, 24));
                 objParam.Direction = ParameterDirection.Input;
@@ -439,7 +443,7 @@ namespace LegoWebAdmin.BusLogic
             }
         }
 
-        public static void update_META_CONTENT(int iMETA_CONTENT_ID,int iCATEGORY_ID, string sLEADER, string sLANG_CODE,string sMETA_CONTENT_TITLE,string sMETA_CONTENT_ALIAS, int iRECORD_STATUS, int iACCESS_LEVEL,int iIMPORTANT_LEVEL, string sMODIFIED_USER)
+        public static void update_META_CONTENT(int iMETA_CONTENT_ID,int iCATEGORY_ID, string sLOCAL_CODE, string sLEADER, string sLANG_CODE,string sMETA_CONTENT_TITLE,string sMETA_CONTENT_ALIAS, int iRECORD_STATUS, int iACCESS_LEVEL,int iIMPORTANT_LEVEL, string sMODIFIED_USER)
         {
             string connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
             SqlConnection connection = new SqlConnection(connStr);
@@ -461,6 +465,10 @@ namespace LegoWebAdmin.BusLogic
                 objParam = objCommand.Parameters.Add(new SqlParameter("@_CATEGORY_ID", SqlDbType.Int));
                 objParam.Direction = ParameterDirection.Input;
                 objParam.Value = iCATEGORY_ID;
+
+                objParam = objCommand.Parameters.Add(new SqlParameter("@_LOCAL_CODE", SqlDbType.NVarChar, 30));
+                objParam.Direction = ParameterDirection.Input;
+                objParam.Value = sLOCAL_CODE;
 
                 objParam = objCommand.Parameters.Add(new SqlParameter("@_LEADER", SqlDbType.NVarChar, 24));
                 objParam.Direction = ParameterDirection.Input;
@@ -1199,5 +1207,59 @@ namespace LegoWebAdmin.BusLogic
             }
             return myPageData;
         }
+
+        /// <summary>
+        /// Check if LocalCode exist in category
+        /// </summary>
+        /// <param name="sLocalCode"></param>
+        /// <param name="iCategoryId"></param>
+        /// <param name="iCurrentMetaContentId"> pass if check update meta content</param>
+        /// <returns></returns>
+        public static bool is_LocalCode_Exist(string sLocalCode, int iCategoryId, int iCurrentMetaContentId)
+        {
+
+            bool bRet = false;
+            String connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                try
+                {
+                    string sSQL="SELECT META_CONTENT_ID FROM LEGOWEB_META_CONTENTS WHERE LOCAL_CODE=N'" + sLocalCode + "'";
+                    if(iCategoryId>0)
+                    {
+                        sSQL+= " AND CATEGORY_ID=" + iCategoryId.ToString();
+                    }
+                    if(iCurrentMetaContentId>0)
+                    {
+                        sSQL+= " AND META_CONTENT_ID<>" + iCurrentMetaContentId.ToString();
+                    }
+                    SqlCommand cmdReader = new SqlCommand(sSQL,conn);                                       
+                    conn.Open();
+                    SqlDataReader reader = cmdReader.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        conn.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        conn.Close();
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (conn != null)
+                        conn.Close();
+                }
+            }
+
+            return bRet;                
+        }
+
     }
 }

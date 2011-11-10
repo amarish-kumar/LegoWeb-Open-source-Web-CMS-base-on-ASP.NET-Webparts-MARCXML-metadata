@@ -232,14 +232,7 @@
                         <asp:textbox ID="txtMetaContentID" runat="server" Enabled="false"></asp:textbox>                        
                         </td>            
                     </tr>
-                    <tr>                                     
-                       <td class="key">
-                        <label for="name"><%=Resources.strings.Alias_Text %>:</label>
-                        </td>
-                        <td>
-                        <asp:TextBox ID="txtMetaContentAlias" runat="server" Text="" Width="98%"></asp:TextBox> 
-                        </td>
-                    </tr>                                
+                               
                      <tr>
                         <td class="key">
                             <label for="name"><%=Resources.strings.Section_Text %>:</label>
@@ -259,6 +252,16 @@
                             </asp:DropDownList>
                         </td> 
                     </tr>   
+                    
+                    <tr>                                     
+                       <td class="key">
+                        <label for="name"><%=Resources.strings.LocalCode_Text %>:</label>
+                        </td>
+                        <td>
+                        <asp:TextBox ID="txtLocalCode" runat="server" Text="" Width="98%"></asp:TextBox> 
+                        </td>
+                    </tr> 
+                                        
                     <tr>                                     
                         <td class="key">
                             <label for="name"><%=Resources.strings.Language_Text %>:</label>
@@ -269,9 +272,7 @@
                         </td> 
                     </tr>                      
                                                                              
-
-                    <tr>                                     
-                        
+                    <tr>                                                             
                         <td class="key">
                             <label for="name"><%=Resources.strings.AccessLevel_Text %>:</label>
                         </td>
@@ -327,6 +328,14 @@
                         <asp:Label ID="labelModifier" runat="server"></asp:Label>           
                         </td> 
                     </tr> 
+                    <tr>                                     
+                       <td class="key">
+                        <label for="name"><%=Resources.strings.Alias_Text %>:</label>
+                        </td>
+                        <td>
+                        <asp:TextBox ID="txtMetaContentAlias" runat="server" Text="" Width="98%"></asp:TextBox> 
+                        </td>
+                    </tr>                     
                     <tr>
                      <td class="key" colspan="2"><%=Resources.strings.RecordStatus_Text%> </td>
                     </tr>

@@ -66,6 +66,7 @@ GO
 CREATE TABLE [dbo].[LEGOWEB_META_CONTENTS](
 	[META_CONTENT_ID] [int] IDENTITY(1,1) NOT NULL,
 	[CATEGORY_ID] [int] NULL DEFAULT ((1)),
+	[LOCAL_CODE] [nvarchar] (30) DEFAULT (NULL),
 	[LEADER] [nvarchar] (24) DEFAULT ('                        '),-- 24 ky tu theo tieu chuan MARC phuc vu mo rong cac thuoc tinh quan tri cua META_CONTENT
 	[LANG_CODE]   [nvarchar](3) NULL DEFAULT ('vie'),
 	[META_CONTENT_TITLE] [nvarchar](250) NULL,

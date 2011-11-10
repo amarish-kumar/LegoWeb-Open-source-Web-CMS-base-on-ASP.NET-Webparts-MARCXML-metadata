@@ -146,6 +146,7 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
         repeater_DataBind(marcTable);
         
         this.radioRecordStatus.SelectedValue = _MetaContent.RecordStatus.ToString();
+        this.txtLocalCode.Text = _MetaContent.LocalCode;
         this.labelEntryDate.Text = _MetaContent.EntryDate;
         this.labelCreator.Text = _MetaContent.Creator;
         this.labelModifyDate.Text = _MetaContent.ModifyDate;
@@ -207,7 +208,8 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
         _MetaContent.set_DataTableLabel(ref marcTable, labelRec);
         repeater_DataBind(marcTable);
         
-        this.radioRecordStatus.SelectedValue = _MetaContent.RecordStatus.ToString();        
+        this.radioRecordStatus.SelectedValue = _MetaContent.RecordStatus.ToString();
+        this.txtLocalCode.Text = _MetaContent.LocalCode;
         this.labelEntryDate.Text = _MetaContent.EntryDate;
         this.labelCreator.Text = _MetaContent.Creator;
         this.labelModifyDate.Text = _MetaContent.ModifyDate;
@@ -252,7 +254,8 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
         this.txtMetaContentAlias.Text = "";
 
         this.radioRecordStatus.SelectedValue = _MetaContent.RecordStatus.ToString();
-        
+
+        this.txtLocalCode.Text = _MetaContent.LocalCode;
         this.labelEntryDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
         this.labelCreator.Text = this.Page.User.Identity.Name;
         this.labelModifyDate.Text = "";
@@ -413,6 +416,12 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
             if (!String.IsNullOrEmpty(this.dropCategories.SelectedValue))
             {
                 _MetaContent.CategoryID = Convert.ToInt16(this.dropCategories.SelectedValue.ToString());
+            }
+            _MetaContent.LocalCode = txtLocalCode.Text;
+            //check duplicate in local code go here
+            if (LegoWebAdmin.BusLogic.MetaContents.is_LocalCode_Exist(txtLocalCode.Text, _MetaContent.CategoryID,_MetaContent.MetaContentID))
+            {
+                throw new Exception("Local Code is already existed!");
             }
             _MetaContent.RecordStatus =int.Parse( this.radioRecordStatus.SelectedValue);
             _MetaContent.LangCode = this.dropLanguages.SelectedValue.ToString();

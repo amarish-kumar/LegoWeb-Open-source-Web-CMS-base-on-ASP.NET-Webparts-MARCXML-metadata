@@ -20,7 +20,7 @@
             <li class="disabled"><a><%=Resources.strings.mnuContents_Text%></a>
             </li>                                                               
             <li class="disabled"><a><%=Resources.strings.mnuModules_Text%></a>
-            </li>                                                                                                                                                                
+            </li>                                                                                                                                                                 
             <li class="disabled"><a><%=Resources.strings.mnuHelp_Text%></a>
             </li>                                             
             </ul>

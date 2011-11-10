@@ -56,6 +56,8 @@
 </ul>
 </li>
 
+
+
 <li class="node"><a><%=Resources.strings.mnuHelp_Text%></a>
 <ul>
 <li><a class="icon-16-info" href="http://www.legoweb.org"><%=Resources.strings.mnuiAbout_Text%></a></li>

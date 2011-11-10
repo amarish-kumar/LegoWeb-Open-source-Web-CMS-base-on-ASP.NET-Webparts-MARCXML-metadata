@@ -46,7 +46,7 @@
 							<FooterTemplate>
 							<tr>
 							<td colspan="3" valign="middle" align="right">
-							    <asp:LinkButton ID="linkAddNew" runat="server" Text="<%$ Resources:Strings,btnAdd.Text%>"></ OnClick="linkAddNew_OnClick"></asp:LinkButton>   
+							    <asp:LinkButton ID="linkAddNew" runat="server" Text="<%$ Resources:Strings,btnAdd.Text%>" OnClick="linkAddNew_OnClick"></asp:LinkButton>   
 							</td>
 							</tr>
 							
