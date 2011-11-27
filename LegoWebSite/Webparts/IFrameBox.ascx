@@ -1,18 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="IFrameBox.ascx.cs" Inherits="Webparts_IFrameBox" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="IFRAMEBOX.ascx.cs" Inherits="Webparts_IFRAMEBOX" %>
 
-<div class="WebPartBox_AquaRoundHeader">
-    <div class="ttright">
-        <p class="ttmid">
-            <span class="textleft"><asp:Label ID="iFrameBoxTitle" runat="server"></asp:Label></span>
-        </p>
-    </div>
-</div>
-
-<div class="WebPartBox_AquaRoundBody">
-         <div class ="divStock" runat="server">
-            <iframe id="iframebox" runat="server" scrolling="no" height="98" frameborder="0" src="blank.html" marginheight="0" marginwidth="0" style="width:100%; height:100%;"> </iframe>                   
-        </div>
-</div>
-
-
-
+<asp:Literal ID="litBoxTop" runat="server"></asp:Literal>
+    <iframe id="iframebox" runat="server" scrolling="no" height="98" frameborder="0" src="" marginheight="0" marginwidth="0"> </iframe>                   
+<asp:Literal ID="litBoxBottom" runat="server"></asp:Literal>

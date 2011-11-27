@@ -1,6 +1,6 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="MetaContentImport.aspx.cs" package="LEGOWEB">
-//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     Copyright (C) 2011 LEGOWEB.ORG. All rights reserved.
 //     www.legoweb.org
 //     License: GNU/GPL
 //     LEGOWEB IS FREE SOFTWARE
@@ -21,8 +21,8 @@ public partial class MetaContentImport : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            btnBrowse.Text = Resources.strings.btnBrowse_Text;
-            btnAnalyse.Text = Resources.strings.btnAnalyse_Text;
+            btnBrowse.Text = Resources.strings.Browse_Text;
+            btnAnalyse.Text = Resources.strings.Analyse_Text;
             ListItem item = new ListItem();
             item.Text = String.Format("<span style='width:50px'>{0}</span>", Resources.strings.Append_Text);
             item.Value = "0";

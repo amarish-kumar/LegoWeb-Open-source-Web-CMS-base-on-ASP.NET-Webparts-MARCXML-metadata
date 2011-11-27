@@ -1,6 +1,6 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="MetaContentExport.aspx.cs" package="LEGOWEB">
-//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     Copyright (C) 2011 LEGOWEB.ORG. All rights reserved.
 //     www.legoweb.org
 //     License: GNU/GPL
 //     LEGOWEB IS FREE SOFTWARE
@@ -21,7 +21,7 @@ public partial class MetaContentExport : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            btnShowResults.Text = Resources.strings.btnShowResults_Text;
+            btnShowResults.Text = Resources.strings.ShowResults_Text;
             //load filter type radio buttons
             ListItem item=new ListItem();
             item.Text=String.Format("<span style='width:50px'>{0}</span>",Resources.strings.FilterByCategory_Text);
@@ -150,7 +150,7 @@ public partial class MetaContentExport : System.Web.UI.Page
                             //e PARAMETER_DESCRIPTION	nvarchar(255)	Checked
                             Df = new CDatafield();
                             Df.Tag = "650";
-                            Df.SubfieldsText = String.Format("$a{0} $b{1} $c{2} $d{3} $e{4}", row["PARAMETER_NAME"].ToString(), row["PARAMETER_TYPE"].ToString(), row["PARAMETER_VI_VALUE"].ToString(), row["PARAMETER_EN_VALUE"].ToString(), row["PARAMETER_DESCRIPTION"].ToString());
+                            Df.SubfieldsText = String.Format("$a{0}$b{1}$c{2}$d{3}$e{4}", row["PARAMETER_NAME"].ToString(), row["PARAMETER_TYPE"].ToString(), row["PARAMETER_VI_VALUE"].ToString(), row["PARAMETER_EN_VALUE"].ToString(), row["PARAMETER_DESCRIPTION"].ToString());
                             myRec.Datafields.Add(Df);                            
                         }
 
@@ -178,7 +178,7 @@ public partial class MetaContentExport : System.Web.UI.Page
                             //c SECTION_EN_TITLE	nvarchar(250)	Checked
                             Df = new CDatafield();
                             Df.Tag = "650";
-                            Df.SubfieldsText = String.Format("$a{0} $b{1} $c{2}", row["SECTION_ID"].ToString(), row["SECTION_VI_TITLE"].ToString(), row["SECTION_EN_TITLE"].ToString());
+                            Df.SubfieldsText = String.Format("$a{0}$b{1}$c{2}", row["SECTION_ID"].ToString(), row["SECTION_VI_TITLE"].ToString(), row["SECTION_EN_TITLE"].ToString());
                             myRec.Datafields.Add(Df);
                         }
 
@@ -219,7 +219,7 @@ public partial class MetaContentExport : System.Web.UI.Page
                             //p ORDER_NUMBER smallint 
                             Df = new CDatafield();
                             Df.Tag = "650";
-                            Df.SubfieldsText = String.Format("$a{0} $b{1} $c{2} $d{3} $e{4} $f{5} $g{6} $h{7} $i{8} $j{9} $k{10} $l{11} $m{12} $n{13} $o{14} $p{15}", row["CATEGORY_ID"].ToString(), row["PARENT_CATEGORY_ID"].ToString(), row["SECTION_ID"].ToString(), row["CATEGORY_VI_TITLE"].ToString(), row["CATEGORY_EN_TITLE"].ToString(), row["CATEGORY_ALIAS"].ToString(), row["CATEGORY_TEMPLATE_NAME"].ToString(), row["CATEGORY_IMAGE_URL"].ToString(), row["MENU_ID"].ToString(), row["IS_PUBLIC"].ToString(), row["ADMIN_LEVEL"].ToString(), row["ADMIN_ROLES"].ToString(), row["SEO_TITLE"].ToString(), row["SEO_DESCRIPTION"].ToString(), row["SEO_KEYWORDS"].ToString(), row["ORDER_NUMBER"].ToString());
+                            Df.SubfieldsText = String.Format("$a{0}$b{1}$c{2}$d{3}$e{4}$f{5}$g{6}$h{7}$i{8}$j{9}$k{10}$l{11}$m{12}$n{13}$o{14}$p{15}", row["CATEGORY_ID"].ToString(), row["PARENT_CATEGORY_ID"].ToString(), row["SECTION_ID"].ToString(), row["CATEGORY_VI_TITLE"].ToString(), row["CATEGORY_EN_TITLE"].ToString(), row["CATEGORY_ALIAS"].ToString(), row["CATEGORY_TEMPLATE_NAME"].ToString(), row["CATEGORY_IMAGE_URL"].ToString(), row["MENU_ID"].ToString(), row["IS_PUBLIC"].ToString(), row["ADMIN_LEVEL"].ToString(), row["ADMIN_ROLES"].ToString(), row["SEO_TITLE"].ToString(), row["SEO_DESCRIPTION"].ToString(), row["SEO_KEYWORDS"].ToString(), row["ORDER_NUMBER"].ToString());
                             myRec.Datafields.Add(Df);
                         }
 
@@ -248,7 +248,7 @@ public partial class MetaContentExport : System.Web.UI.Page
                             //d MENU_TYPE_DESCRIPTION	nvarchar(250)	Checked
                             Df = new CDatafield();
                             Df.Tag = "650";
-                            Df.SubfieldsText = String.Format("$a{0} $b{1} $c{2} $d{3}", row["MENU_TYPE_ID"].ToString(), row["MENU_TYPE_VI_TITLE"].ToString(), row["MENU_TYPE_EN_TITLE"].ToString(), row["MENU_TYPE_DESCRIPTION"].ToString());
+                            Df.SubfieldsText = String.Format("$a{0}$b{1}$c{2}$d{3}", row["MENU_TYPE_ID"].ToString(), row["MENU_TYPE_VI_TITLE"].ToString(), row["MENU_TYPE_EN_TITLE"].ToString(), row["MENU_TYPE_DESCRIPTION"].ToString());
                             myRec.Datafields.Add(Df);
                         }
 
@@ -284,11 +284,55 @@ public partial class MetaContentExport : System.Web.UI.Page
                             //j ORDER_NUMBER smallint
                             Df = new CDatafield();
                             Df.Tag = "650";
-                            Df.SubfieldsText = String.Format("$a{0} $b{1} $c{2} $d{3} $e{4} $f{5} $g{6} $h{7} $i{8} $j{9}", row["MENU_ID"].ToString(), row["PARENT_MENU_ID"].ToString(), row["MENU_TYPE_ID"].ToString(), row["MENU_VI_TITLE"].ToString(), row["MENU_EN_TITLE"].ToString(), row["MENU_IMAGE_URL"].ToString(), row["MENU_LINK_URL"].ToString(), row["BROWSER_NAVIGATE"].ToString(), row["IS_PUBLIC"].ToString(), row["ORDER_NUMBER"].ToString());
+                            Df.SubfieldsText = String.Format("$a{0}$b{1}$c{2}$d{3}$e{4}$f{5}$g{6}$h{7}$i{8}$j{9}", row["MENU_ID"].ToString(), row["PARENT_MENU_ID"].ToString(), row["MENU_TYPE_ID"].ToString(), row["MENU_VI_TITLE"].ToString(), row["MENU_EN_TITLE"].ToString(), row["MENU_IMAGE_URL"].ToString(), row["MENU_LINK_URL"].ToString(), row["BROWSER_NAVIGATE"].ToString(), row["IS_PUBLIC"].ToString(), row["ORDER_NUMBER"].ToString());
                             myRec.Datafields.Add(Df);
                         }
 
                         exRecs.Add(myRec);
+
+                        #region KIPOS TABLES
+
+                        myRec = new CRecord();
+                        myRec.set_LeaderValueByPos("s", 6, 6);
+                        Cf = new CControlfield();
+                        Cf.Tag = "001";
+                        Cf.Value = "CAT_DMD_CATEGORY";
+                        myRec.Controlfields.Add(Cf);
+
+                        Df = new CDatafield();
+                        Df.Tag = "245";
+                        Df.SubfieldsText = "$aCAT_DMD_CATEGORY";
+                        myRec.Datafields.Add(Df);
+
+                        tbData = LegoWebAdmin.BusLogic.Menus.get_LEGOWEB_MENUS().Tables[0];
+
+                        foreach (DataRow row in tbData.Rows)
+                        {
+                            //a MENU_ID	int	Unchecked
+                            //b PARENT_MENU_ID	int	Unchecked
+                            //c MENU_TYPE_ID	int	Unchecked
+                            //d MENU_VI_TITLE	nvarchar(50)	Checked
+                            //e MENU_EN_TITLE	nvarchar(50)	Checked
+                            //f MENU_IMAGE_URL	nvarchar(250)	Checked
+                            //g MENU_LINK_URL	nvarchar(50)	Checked
+                            //h BROWSER_NAVIGATE	tinyint	Unchecked
+                            //i IS_PUBLIC	bit	Unchecked
+                            //j ORDER_NUMBER smallint
+                            Df = new CDatafield();
+                            Df.Tag = "650";
+                            Df.SubfieldsText = String.Format("$a{0}$b{1}$c{2}$d{3}$e{4}$f{5}$g{6}$h{7}$i{8}$j{9}", row["MENU_ID"].ToString(), row["PARENT_MENU_ID"].ToString(), row["MENU_TYPE_ID"].ToString(), row["MENU_VI_TITLE"].ToString(), row["MENU_EN_TITLE"].ToString(), row["MENU_IMAGE_URL"].ToString(), row["MENU_LINK_URL"].ToString(), row["BROWSER_NAVIGATE"].ToString(), row["IS_PUBLIC"].ToString(), row["ORDER_NUMBER"].ToString());
+                            myRec.Datafields.Add(Df);
+                        }
+
+                        exRecs.Add(myRec);
+
+
+
+
+
+
+
+                        #endregion KIPOS TABLES
 
                         break;
                 }

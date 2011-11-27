@@ -40,7 +40,7 @@
         onclick="linkDeleteButton_Click" OnClientClick="return confirm('Are you sure to remove this item?')">
 <span class="icon-32-trash" title="Delete">
 </span>
-<%=Resources.strings.btnDelete_Text %>
+<%=Resources.strings.Delete_Text %>
 </asp:LinkButton>
 </td>
 
@@ -49,7 +49,7 @@
         onclick="linkEditButton_Click">
 <span class="icon-32-edit" title="Edit">
 </span>
-<%=Resources.strings.btnEdit_Text %>
+<%=Resources.strings.Edit_Text %>
 </asp:LinkButton>
 </td>
  
@@ -58,7 +58,7 @@
         onclick="linkCancelButton_Click">
         <span class="icon-32-cancel" title="Cancel">
 </span>
-<%=Resources.strings.btnCancel_Text %>
+<%=Resources.strings.Cancel_Text %>
 </asp:LinkButton>
 </td>
 
@@ -66,7 +66,7 @@
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Help">
 </span>
-<%=Resources.strings.btnHelp_Text %>
+<%=Resources.strings.Help_Text %>
 </a>
 </td>
 

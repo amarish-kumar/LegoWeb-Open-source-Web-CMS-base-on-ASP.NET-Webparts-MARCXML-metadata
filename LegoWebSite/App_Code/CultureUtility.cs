@@ -54,21 +54,19 @@ public static class CultureUtility
 
         if (!isCultureSelected)
         {
-            culture = ConfigurationManager.AppSettings["SiteLanguage"].ToString();
+            culture = ConfigurationManager.AppSettings["defaultlanguage"].ToString();
         }
 
         System.Threading.Thread.CurrentThread.CurrentCulture = (CultureInfo)locales[culture];
         System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.CurrentCulture;
 
         HttpCookie cookie = new HttpCookie("locale", culture);
-        cookie.Domain = ConfigurationManager.AppSettings["DomainName"].ToString();
+        cookie.Domain = ConfigurationManager.AppSettings["domainname"].ToString();
         cookie.Expires = DateTime.Now.AddDays(365);
 
         current.Response.Cookies.Add(cookie);
 
         current.Session["locale"] = culture;
-        current.Session["lang"] = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
-        //Configuration.Settings.BoolFormat = ((CCSCultureInfo)locales[culture]).BooleanFormat;
 
     }
 

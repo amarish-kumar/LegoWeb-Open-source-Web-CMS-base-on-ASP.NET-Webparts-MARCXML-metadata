@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<record>
+  <leader>########################</leader>
+  <controlfield tag="001" type="NUMBER">MetaContentID</controlfield>
+  <controlfield tag="002" type="NUMBER">CategoryID</controlfield>
+  
+  <controlfield tag="004" type="TEXT">LocalCode</controlfield>
+  <controlfield tag="005" type="TEXT">Date</controlfield>
+  <controlfield tag="006" type="TEXT">Creator</controlfield>
+  <controlfield tag="007" type="TEXT">Modifier</controlfield>
+  <controlfield tag="008" type="TEXT">LangCode</controlfield>
+  <controlfield tag="009" type="TEXT">Alias</controlfield>
+  <datafield tag="245" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT">Tên tập ảnh</subfield>
+    <subfield code="b" type="TEXT">Mô tả</subfield>
+    <subfield code="u" type="TEXT">Ảnh đại diện</subfield>
+  </datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="h" type="NUMBER">Chiều cao</subfield>
+    <subfield code="w" type="NUMBER">Chiều rộng</subfield>
+  </datafield>
+  <datafield tag="856" ind1=" " ind2=" ">
+    <subfield code="0" type="NUMBER">Số thứ tự</subfield>
+    <subfield code="3" type="TEXT">Tên</subfield>
+    <subfield code="a" type="TEXT">Chú thích</subfield>
+    <subfield code="h" type="NUMBER">Chiều cao</subfield>
+    <subfield code="w" type="NUMBER">Chiều rộng</subfield>
+    <subfield code="u" type="TEXT">Tệp ảnh</subfield>
+    <subfield code="l" type="TEXT">Liên kết tới URL</subfield>
+  </datafield>		
+</record>

@@ -1,6 +1,6 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="LinkRelatedContent.ascx.cs" package="LEGOWEB">
-//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     Copyright (C) 2011 LEGOWEB.ORG. All rights reserved.
 //     www.legoweb.org
 //     License: GNU/GPL
 //     LEGOWEB IS FREE SOFTWARE
@@ -187,11 +187,12 @@ public partial class LgwUserControls_LinkRelatedContents : System.Web.UI.UserCon
 
     public void Take_LinkRelatedContents()
     {
+        try
+        {
         if (Session["METADATA"] == null) Response.Redirect("MetaContentEditor.aspx");
         LegoWebAdmin.DataProvider.ContentEditorDataHelper _MetaContentObject = new ContentEditorDataHelper();
         _MetaContentObject.load_Xml(Session["METADATA"].ToString());
-        try
-        {
+
             DataTable marcTable = _MetaContentObject.get_MarcDatafieldTable();
             CDatafield Df = new CDatafield();
             for (int i = 0; i < this.metaContentManagerRepeater.Items.Count; i++)

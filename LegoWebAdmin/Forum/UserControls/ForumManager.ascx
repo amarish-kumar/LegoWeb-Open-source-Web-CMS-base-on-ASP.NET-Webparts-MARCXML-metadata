@@ -70,7 +70,7 @@
                                  <asp:Image ID="imgIsNotPublic" runat="server" SkinID="Stop" Visible='<%#!(bool)DataBinder.Eval(Container.DataItem, "IsPublic")%>'/>  
                                 </td>                                      
                                 <td align="center">                                
-                                  <asp:LinkButton ID="linkEdit" Runat="server" CommandName="edit" CommandArgument='<%# Eval("ForumID") %>'><%=Resources.strings.btnEdit_Text %></asp:LinkButton>                               
+                                  <asp:LinkButton ID="linkEdit" Runat="server" CommandName="edit" CommandArgument='<%# Eval("ForumID") %>'><%=Resources.strings.Edit_Text %></asp:LinkButton>                               
                                 </td>
                             </tr>
 							</ItemTemplate>
@@ -96,14 +96,14 @@
                                  <asp:Image ID="imgIsNotPublic" runat="server" SkinID="Stop" Visible='<%#!(bool)DataBinder.Eval(Container.DataItem, "IsPublic")%>'/>  
                                 </td>                                      
                                 <td align="center">                                
-                                  <asp:LinkButton ID="linkEdit" Runat="server" CommandName="edit" CommandArgument='<%# Eval("ForumID") %>'><%=Resources.strings.btnEdit_Text %></asp:LinkButton>                               
+                                  <asp:LinkButton ID="linkEdit" Runat="server" CommandName="edit" CommandArgument='<%# Eval("ForumID") %>'><%=Resources.strings.Edit_Text %></asp:LinkButton>                               
                                 </td>
                             </tr>                            
 							</AlternatingItemTemplate>
 							<FooterTemplate>
 							<tr>
 							<td colspan="7" valign="middle" align="right">
-							    <asp:LinkButton ID="linkAddNew" runat="server" OnClick="linkAddNew_OnClick"><%=Resources.strings.btnAdd_Text %></asp:LinkButton>   
+							    <asp:LinkButton ID="linkAddNew" runat="server" OnClick="linkAddNew_OnClick"><%=Resources.strings.Add_Text %></asp:LinkButton>   
 							</td>
 							</tr>
 							
@@ -159,7 +159,7 @@
             <td>
                 <asp:Image id="ImageForumImageUrl" style="max-height:32px; max-width:32px" ImageUrl="" runat="server" />
                 <asp:HiddenField ID="HiddenForumImageUrl" runat="server" Value=""/>
-                <a href="javascript:BrowseServer();"><%=Resources.strings.btnBrowse_Text %></a>
+                <a href="javascript:BrowseServer();"><%=Resources.strings.Browse_Text %></a>
             </td>
         </tr>  
         <tr>                                                                     

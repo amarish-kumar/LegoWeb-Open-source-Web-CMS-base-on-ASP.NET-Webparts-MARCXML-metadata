@@ -1,6 +1,6 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="MetaContentEditor.ascx.cs" package="LEGOWEB">
-//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     Copyright (C) 2011 LEGOWEB.ORG. All rights reserved.
 //     www.legoweb.org
 //     License: GNU/GPL
 //     LEGOWEB IS FREE SOFTWARE
@@ -88,6 +88,8 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
             dropLanguages.Items.Add(item);
 
             dropLanguages.SelectedValue = System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower();
+
+            load_Sections(0);
 
             if (CommonUtility.GetInitialValue("section_id", null) != null)
             {
@@ -275,10 +277,7 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
 
         Session["METADATA"] = _MetaContent.OuterXml;
     }
-    protected void dropSections_Init(object sender, EventArgs e)
-    {
-        load_Sections(0);
-    }
+
     protected void load_Sections(int iSelectedSectionId)
     {
         DataTable secData = LegoWebAdmin.BusLogic.Sections.get_Search_Page(1, 100).Tables[0];
@@ -419,9 +418,12 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
             }
             _MetaContent.LocalCode = txtLocalCode.Text;
             //check duplicate in local code go here
-            if (LegoWebAdmin.BusLogic.MetaContents.is_LocalCode_Exist(txtLocalCode.Text, _MetaContent.CategoryID,_MetaContent.MetaContentID))
+            if (!String.IsNullOrEmpty(txtLocalCode.Text))
             {
-                throw new Exception("Local Code is already existed!");
+                if (LegoWebAdmin.BusLogic.MetaContents.is_LocalCode_Exist(txtLocalCode.Text, _MetaContent.CategoryID, _MetaContent.MetaContentID))
+                {
+                    throw new Exception("Local Code is already existed!");
+                }
             }
             _MetaContent.RecordStatus =int.Parse( this.radioRecordStatus.SelectedValue);
             _MetaContent.LangCode = this.dropLanguages.SelectedValue.ToString();

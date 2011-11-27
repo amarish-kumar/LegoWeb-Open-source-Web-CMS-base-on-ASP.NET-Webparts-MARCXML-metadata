@@ -1,6 +1,6 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="FileTemplateDataProvider.cs" package="LEGOWEB">
-//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     Copyright (C) 2011 LEGOWEB.ORG. All rights reserved.
 //     www.legoweb.org
 //     License: GNU/GPL
 //     LEGOWEB IS FREE SOFTWARE
@@ -20,41 +20,80 @@ namespace LegoWebAdmin.DataProvider
     {
         public static string get_LabelTemplateFile(string expectedTemplateName)
         {
+            HttpRequest Request = HttpContext.Current.Request;
+            String retFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + "/" + expectedTemplateName + ".lbl";
 
-            String retFileName= System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "/" + expectedTemplateName + ".lbl";
-                if (!File.Exists(retFileName))
-                {                    
-                    retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/default.lbl";
-                }
-                return retFileName;
-        }
-
-        public static string get_XsltTemplateFile(string expectedTemplateName)
-        {
-            
-            String retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "/" + expectedTemplateName + ".xsl";
             if (File.Exists(retFileName))
             {
                 return retFileName;
             }
             else
             {
-                retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/default.xsl";
+                retFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/default.lbl";
+            }
+            return retFileName;
+        }
+
+        public static string get_XsltTemplateFile(string expectedTemplateName)
+        {
+            HttpRequest Request = HttpContext.Current.Request;
+            String retFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + "/" + expectedTemplateName + ".xsl";
+            if (File.Exists(retFileName))
+            {
+                return retFileName;
+            }
+            else
+            {
+                retFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/default.xsl";
+            }
+            return retFileName;
+        }
+
+        public static string get_XsltTemplateFile(string expectedTemplateName, bool bDefaultIfNotExist)
+        {
+            HttpRequest Request = HttpContext.Current.Request;
+            String retFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + "/" + expectedTemplateName + ".xsl";
+            if (File.Exists(retFileName))
+            {
+                return retFileName;
+            }
+            else if (bDefaultIfNotExist)
+            {
+                retFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/default.xsl";
+            }
+            else
+            {
+                return null;
             }
             return retFileName;
         }
 
         public static string get_WorkformTemplateFile(string expectedTemplateName)
         {
-            
-            String retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "/" + expectedTemplateName + ".wfm";
+            HttpRequest Request = HttpContext.Current.Request;
+            String retFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + "/" + expectedTemplateName + ".wfm";
             if (File.Exists(retFileName))
             {
                 return retFileName;
             }
             else
             {
-                retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/default.wfm";
+                retFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/default.wfm";
+            }
+            return retFileName;
+        }
+
+        public static string get_HtmlTemplateFile(string expectedTemplateName)
+        {
+            HttpRequest Request = HttpContext.Current.Request;
+            String retFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + "/" + expectedTemplateName + ".htm";
+            if (File.Exists(retFileName))
+            {
+                return retFileName;
+            }
+            else
+            {
+                retFileName = null;
             }
             return retFileName;
         }

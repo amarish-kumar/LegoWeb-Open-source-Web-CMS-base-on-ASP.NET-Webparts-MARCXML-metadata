@@ -26,7 +26,7 @@
                                   <%# Container.DataItem %>
                                 </td>
                                 <td align="center">                                
-                                  <asp:LinkButton ID="linkEdit" Runat="server" CommandName="edit" CommandArgument='<%# Container.DataItem %>'><%=Resources.strings.btnEdit_Text %></asp:LinkButton>                               
+                                  <asp:LinkButton ID="linkEdit" Runat="server" CommandName="edit" CommandArgument='<%# Container.DataItem %>'><%=Resources.strings.Edit_Text %></asp:LinkButton>                               
                                 </td>
                             </tr>
 							</ItemTemplate>
@@ -39,14 +39,14 @@
                                   <%# Container.DataItem %>
                                 </td>
                                 <td align="center">                                
-                                  <asp:LinkButton ID="linkEdit" Runat="server" CommandName="edit" CommandArgument='<%# Container.DataItem %>'><%=Resources.strings.btnEdit_Text %></asp:LinkButton>                               
+                                  <asp:LinkButton ID="linkEdit" Runat="server" CommandName="edit" CommandArgument='<%# Container.DataItem %>'><%=Resources.strings.Edit_Text %></asp:LinkButton>                               
                                 </td>
                             </tr>                            
 							</AlternatingItemTemplate>
 							<FooterTemplate>
 							<tr>
 							<td colspan="3" valign="middle" align="right">
-							    <asp:LinkButton ID="linkAddNew" runat="server" Text="<%$ Resources:Strings,btnAdd.Text%>" OnClick="linkAddNew_OnClick"></asp:LinkButton>   
+							    <asp:LinkButton ID="linkAddNew" runat="server" Text="<%$ Resources:Strings,Add.Text%>" OnClick="linkAddNew_OnClick"></asp:LinkButton>   
 							</td>
 							</tr>
 							
@@ -82,9 +82,9 @@
             <td colspan="2" align="right">
                 <asp:Button ID="btnDelete" 
                     OnClientClick="return confirm('Are you sure to remove item?')" 
-                    runat="server" Text="<%$Resources:Strings,btnDelete.Text %>" onclick="btnDelete_Click" />&nbsp;       
-                <asp:Button ID="btnOk" runat="server"  Text="<%$Resources:Strings,btnSave.Text %>" onclick="btnOk_Click" />&nbsp;       
-                <asp:Button ID="btnCancel" runat="server"  Text="<%$Resources:Strings,btnCancel.Text %>" 
+                    runat="server" Text="<%$Resources:Strings,Delete.Text %>" onclick="btnDelete_Click" />&nbsp;       
+                <asp:Button ID="btnOk" runat="server"  Text="<%$Resources:Strings,Save.Text %>" onclick="btnOk_Click" />&nbsp;       
+                <asp:Button ID="btnCancel" runat="server"  Text="<%$Resources:Strings,Cancel.Text %>" 
                     onclick="btnCancel_Click" />&nbsp;       
             </td>
         </tr>

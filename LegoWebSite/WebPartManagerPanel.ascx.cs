@@ -16,7 +16,7 @@ public partial class WebPartManagerPanel : System.Web.UI.UserControl
 		// Based on WebPartManager's capabilities, show / hide options for 
 		// switching display modes of the page.
 		//
-        if (Page.User.Identity.IsAuthenticated && Roles.IsUserInRole(Page.User.Identity.Name, "WEBMASTER"))
+        if (Page.User.Identity.IsAuthenticated && Roles.IsUserInRole(Page.User.Identity.Name, "WEBMASTERS"))
         {
             this.divWPManagerPanel.Visible = true;
             _browseViewLabel.Visible =

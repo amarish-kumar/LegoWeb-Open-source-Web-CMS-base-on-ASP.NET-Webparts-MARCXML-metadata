@@ -81,7 +81,7 @@
             <td>
                 <asp:Image id="ImageMenuImageUrl" style="max-height:100px; max-width:150px" ImageUrl="" runat="server" />
                 <asp:HiddenField ID="HiddenMenuImageUrl" runat="server" Value=""/>
-                <a href="javascript:BrowseServer();"><%=Resources.strings.btnBrowse_Text %></a>
+                <a href="javascript:BrowseServer();"><%=Resources.strings.Browse_Text %></a>
             </td>
         </tr> 
          <tr>

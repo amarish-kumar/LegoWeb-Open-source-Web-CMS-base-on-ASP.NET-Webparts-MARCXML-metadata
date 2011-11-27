@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<record>
+  <leader>########################</leader>
+  <controlfield tag="001" type="NUMBER"></controlfield>
+  <controlfield tag="002" type="NUMBER"></controlfield>
+  <controlfield tag="003" type="TEXT"></controlfield>
+  <controlfield tag="004" type="TEXT"></controlfield>
+  <controlfield tag="005" type="TEXT"></controlfield>
+  <controlfield tag="006" type="TEXT"></controlfield>
+  <controlfield tag="007" type="TEXT"></controlfield>
+  <controlfield tag="008" type="TEXT">081223s2011    vm|                 vie   </controlfield>
+  <controlfield tag="009" type="NUMBER"></controlfield>
+  <datafield tag="245" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT"></subfield>
+    <subfield code="b" type="TEXT"></subfield>
+    <subfield code="u" type="TEXT"></subfield>
+  </datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="h" type="NUMBER">360</subfield>
+    <subfield code="w" type="NUMBER">580</subfield>
+  </datafield>
+  <datafield tag="856" ind1=" " ind2=" ">
+    <subfield code="0" type="NUMBER">0</subfield>
+    <subfield code="3" type="TEXT"></subfield>
+    <subfield code="a" type="TEXT"></subfield>
+    <subfield code="u" type="TEXT"></subfield>
+    <subfield code="l" type="TEXT">#</subfield>
+    <subfield code="h" type="NUMBER">360</subfield>
+    <subfield code="w" type="NUMBER">580</subfield>
+  </datafield>
+</record>

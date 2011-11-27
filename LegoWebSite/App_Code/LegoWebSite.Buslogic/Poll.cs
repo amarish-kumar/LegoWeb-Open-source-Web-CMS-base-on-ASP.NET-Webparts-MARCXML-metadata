@@ -21,93 +21,73 @@ namespace LegoWebSite.Buslgic
 {
     public class Polls
     {
-        public static DataTable get_PollData(int iMeta_Content_Id, out string sQuestion,out int iTotalVote, string sLangCode)
+        public static DataTable get_PollData(int iPollContentId, out string sQuestion,out int iTotalVoteCount)
         {
-            iTotalVote = 0;
+            iTotalVoteCount = 0;
             sQuestion = null;
             DataTable pollData = new DataTable();
             DataColumn IDcol= new DataColumn("ID");
             IDcol.DataType = System.Type.GetType("System.Int32");
             pollData.Columns.Add(IDcol);
 
-            DataColumn voteCol = new DataColumn("VoteCount");
-            voteCol.DataType = System.Type.GetType("System.Int32");
-            pollData.Columns.Add(voteCol);
+            DataColumn voteCountCol = new DataColumn("VoteCount");
+            voteCountCol.DataType = System.Type.GetType("System.Int32");
+            pollData.Columns.Add(voteCountCol);
 
-            DataColumn AnswerCol = new DataColumn("Answer");
-            AnswerCol.DataType = System.Type.GetType("System.String");
-            pollData.Columns.Add(AnswerCol);
+            DataColumn ChoiceCol = new DataColumn("Choice");
+            ChoiceCol.DataType = System.Type.GetType("System.String");
+            pollData.Columns.Add(ChoiceCol);
 
             DataColumn orderCol = new DataColumn("OrderNumber");
-            voteCol.DataType = System.Type.GetType("System.Int32");
+            orderCol.DataType = System.Type.GetType("System.Int32");
             pollData.Columns.Add(orderCol);
            
             CRecord pollRecord = new CRecord();
             CDatafield Df = new CDatafield();
             CSubfield Sf = new CSubfield();
 
-            pollRecord.load_Xml(LegoWebSite.Buslgic.MetaContents.get_META_CONTENT_MARCXML(iMeta_Content_Id,false));
+            pollRecord.load_Xml(LegoWebSite.Buslgic.MetaContents.get_META_CONTENT_MARCXML(iPollContentId, 0));
 
             pollRecord.Sort();
             //get Question First
-            if (sLangCode.ToLower() == "vi")
-            {
-                sQuestion = pollRecord.Datafields.Datafield("245").Subfields.Subfield("a").Value;
-               
-            }
-            else
-            {
-                sQuestion = pollRecord.Datafields.Datafield("245").Subfields.Subfield("b").Value;
-            }
+            sQuestion = pollRecord.Datafields.Datafield("245").Subfields.Subfield("a").Value;
             
-            CDatafields AnswerDfs = pollRecord.Datafields;
+            CDatafields ChoiceDfs = pollRecord.Datafields;
           
-            AnswerDfs.Filter("650");            
+            ChoiceDfs.Filter("650");            
 
-            for (int i = 0; i < AnswerDfs.Count; i++)
+            for (int i = 0; i < ChoiceDfs.Count; i++)
             {
-                string sAn = "";
+                string sChoice = "";
                 int iID = 0;
                 int iVoteCount = 0;
                 int iOrderNumber = 0;
-                Df = AnswerDfs.Datafield(i);
+                Df = ChoiceDfs.Datafield(i);
 
                 if (Df.Subfields.get_Subfield("0", ref Sf))
                 {
                     iOrderNumber =String.IsNullOrEmpty(Sf.Value)?0:int.Parse(Sf.Value);
                 }
-                if (sLangCode.ToLower() == "vi")
+
+                if (Df.Subfields.get_Subfield("a", ref Sf))
                 {
-                    if (Df.Subfields.get_Subfield("a", ref Sf))
-                    {
-                        sAn = Sf.Value;
-                    }
-                    else
-                    {
-                        sAn = "Không có dữ liệu câu hỏi";
-                    }
+                    sChoice = Sf.Value;
+                    iID = int.Parse(Sf.ID);        
                 }
                 else
                 {
-                    if (Df.Subfields.get_Subfield("b", ref Sf))
-                    {
-                        sAn = Sf.Value;
-                    }
-                    else
-                    {
-                        sAn = "No question data";
-                    }
+                    sChoice = "No choice info";
                 }
+
                 if (Df.Subfields.get_Subfield("n", ref Sf))
                 {
-                    iTotalVote += int.Parse(Sf.Value);
-                    iVoteCount = int.Parse(Sf.Value);
-                    iID = int.Parse(Sf.ID);                
+                    iTotalVoteCount += int.Parse(Sf.Value);
+                    iVoteCount = int.Parse(Sf.Value);                            
                 }
                                 
                 DataRow row = pollData.NewRow();
                 row["ID"] = iID;
-                row["Answer"] = sAn;
+                row["Choice"] = sChoice;
                 row["VoteCount"] = iVoteCount;
                 row["OrderNumber"] = iOrderNumber;
                 pollData.Rows.Add(row);
@@ -117,12 +97,13 @@ namespace LegoWebSite.Buslgic
         }
 
 
-        public static void increase_VoteCount(int iAnswerId)
+        public static void increase_VoteCount(int iChoiceId)
         {
-            DataTable AnswerInfo = LegoWebSite.Buslgic.MetaContentTexts.get_META_CONTENT_TEXT(iAnswerId);
-            if (AnswerInfo.Rows.Count > 0)
+            //not work now - something is wrong!
+            DataTable ChoiceInfo = LegoWebSite.Buslgic.MetaContentTexts.get_META_CONTENT_TEXT(iChoiceId);
+            if (ChoiceInfo.Rows.Count > 0)
             {
-                DataTable CountInfo = LegoWebSite.Buslgic.MetaContentNumbers.get_META_CONTENT_NUMBER(int.Parse(AnswerInfo.Rows[0]["META_CONTENT_ID"].ToString()), int.Parse(AnswerInfo.Rows[0]["TAG"].ToString()), int.Parse(AnswerInfo.Rows[0]["TAG_INDEX"].ToString()), "n");
+                DataTable CountInfo = LegoWebSite.Buslgic.MetaContentNumbers.get_META_CONTENT_NUMBER(int.Parse(ChoiceInfo.Rows[0]["META_CONTENT_ID"].ToString()), int.Parse(ChoiceInfo.Rows[0]["TAG"].ToString()), int.Parse(ChoiceInfo.Rows[0]["TAG_INDEX"].ToString()), "n");
                 if (CountInfo.Rows.Count > 0)
                 {
                     Decimal count = CountInfo.Rows[0]["SUBFIELD_VALUE"] != DBNull.Value ? (Decimal)CountInfo.Rows[0]["SUBFIELD_VALUE"] : 0;

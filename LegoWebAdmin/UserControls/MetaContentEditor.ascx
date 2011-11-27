@@ -178,35 +178,35 @@
                             <asp:LinkButton ID="linkTakeRelatedContent" class="toolbar" runat="server" ToolTip="Link related contents" onclick="linkTakeRelatedContent_Click">
                             <span class="icon-16-info" title="Remove selected rows">
                             </span>          
-                            <%=Resources.strings.btnTakeRelatedContents_Text%>
+                            <%=Resources.strings.TakeRelatedContents_Text%>
                             </asp:LinkButton>
                         </td>
                         <td class="button">
                             <a href="#" onclick="javascript:showDatePicker('myDatePicker','aspnetForm',inputId);" class="toolbar">
                             <span class="icon-16-stats" title="Date picker">
                             </span>
-                            <%=Resources.strings.btnPickDate_Text%>
+                            <%=Resources.strings.PickDate_Text%>
                             </a>
                         </td>
                         <td class="button">
                             <a href="#" onclick="BrowseServer();" class="toolbar">
                             <span class="icon-16-media" title="File browse">
                             </span>
-                            <%=Resources.strings.btnBrowseFile_Text%>
+                            <%=Resources.strings.BrowseFile_Text%>
                             </a>
                         </td>
                         <td class="button">
                             <asp:LinkButton ID="linkRemoveSelectedRow" class="toolbar" runat="server" ToolTip="Xóa dòng chọn" onclick="cmdRemoveSelectedRow_Click">
                             <span class="icon-16-logout" title="Remove selected rows">
                             </span>          
-                            <%=Resources.strings.btnRemoveLine_Text%>
+                            <%=Resources.strings.RemoveLine_Text%>
                             </asp:LinkButton>
                         </td>                        
                         <td class="button">
                             <asp:LinkButton ID="linkAddTagOrSubfield" class="toolbar" runat="server" ToolTip="Thêm dòng" onclick="cmdAddTagOrSubfield_Click">
                             <span class="icon-16-checkin" title="Add rows">
                             </span>          
-                            <%=Resources.strings.btnAddLine_Text%>
+                            <%=Resources.strings.AddLine_Text%>
                             </asp:LinkButton>
                         </td>
 				    </tr>
@@ -238,7 +238,7 @@
                             <label for="name"><%=Resources.strings.Section_Text %>:</label>
                         </td>
                         <td>                        
-                            <asp:DropDownList ID="dropSections" runat="server" oninit="dropSections_Init" 
+                            <asp:DropDownList ID="dropSections" runat="server"
                                 onselectedindexchanged="dropSections_SelectedIndexChanged" AutoPostBack="true">
                             </asp:DropDownList>
                         </td>         

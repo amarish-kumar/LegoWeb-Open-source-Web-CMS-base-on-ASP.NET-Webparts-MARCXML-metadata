@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="MenuBar.ascx.cs" Inherits="Webparts_MenuBar" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="MENUBAR.ascx.cs" Inherits="Webparts_MENUBAR" %>
 <div class="wrapper1">
 	<div class="wrapper">
 		<div class="nav-wrapper">

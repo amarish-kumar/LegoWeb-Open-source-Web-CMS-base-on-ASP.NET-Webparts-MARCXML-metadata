@@ -36,10 +36,10 @@
 <table class="toolbar"><tr>
 
 <td class="button" id="toolbar-help">
-<a href="#" onclick="popupWindow('http://www.hiendai.com.vn/kipos', 'Trợ giúp', 640, 480, 1)" class="toolbar">
+<a href="#" onclick="popupWindow('http://legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Help">
 </span>
-<%=Resources.strings.btnHelp_Text %>
+<%=Resources.strings.Help_Text %>
 </a>
 </td>
 

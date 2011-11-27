@@ -37,7 +37,7 @@ namespace LegoWebSite.Buslgic
 
 	                             SELECT LEGOWEB_META_CONTENTS.META_CONTENT_ID 
 		                         FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID
-                                 WHERE IS_PUBLIC=1 
+                                 WHERE RECORD_STATUS>0 
                                  ORDER BY MODIFIED_DATE DESC   
                                 ";
 
@@ -77,7 +77,7 @@ namespace LegoWebSite.Buslgic
                for (int i = 0; i < myTable.Rows.Count; i++)
                {
                    Int32 iID =Int32.Parse( myTable.Rows[i]["META_CONTENT_ID"].ToString());
-                   String sXML = get_META_CONTENT_MARCXML(iID, false);                   
+                   String sXML = get_META_CONTENT_MARCXML(iID, 0);                   
                    myRec.load_Xml(sXML);
                    retRecords.Add(myRec);
                }               
@@ -110,7 +110,7 @@ namespace LegoWebSite.Buslgic
 
 	                             SELECT DISTINCT TOP(@_NUMBER_OF_RECORD) LEGOWEB_META_CONTENTS.META_CONTENT_ID,LEGOWEB_META_CONTENTS.MODIFIED_DATE
 		                         FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID
-                                 WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE AND IS_PUBLIC=1 ";
+                                 WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE AND RECORD_STATUS>0 ";
                         
                        if(excepted_meta_content_ids.Length>0)
                        {                       
@@ -151,7 +151,7 @@ namespace LegoWebSite.Buslgic
                return retData.Tables[0];
            }
 
-           public static DataTable get_TOP_NEWS_CONTENTS(int iCATEGORY_ID,int iNUMBER_OF_RECORD, string sLANG_CODE)
+           public static DataTable get_TOP_CONTENTS_OF_CATEGORY(int iCATEGORY_ID,int iNUMBER_OF_RECORD, string sLANG_CODE, string sOrderClause)
            {
                DataSet retData = new DataSet();
 
@@ -177,14 +177,23 @@ namespace LegoWebSite.Buslgic
 
 	                             SELECT DISTINCT TOP(@_NUMBER_OF_RECORD) LEGOWEB_META_CONTENTS.META_CONTENT_ID,LEGOWEB_META_CONTENTS.MODIFIED_DATE
 		                         FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID
-                                 WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE  AND IS_PUBLIC=1 
-                                 ORDER BY MODIFIED_DATE DESC   
+                                 WHERE RECORD_STATUS>0                                     
                                 ";
-                       
+                       if (!String.IsNullOrEmpty(sLANG_CODE))
+                       {
+                           strCommandName += " AND LANG_CODE=N'" + sLANG_CODE + "'" ;
+                       }
+                       if (String.IsNullOrEmpty(sOrderClause))
+                       {
+                           strCommandName += " ORDER BY MODIFIED_DATE DESC";
+                       }
+                       else
+                       {
+                           strCommandName += " " + sOrderClause;
+                       }
                        
                        objCommand = new SqlCommand(strCommandName, conn);
                        objCommand.CommandType = CommandType.Text;
-
 
                        objParam = objCommand.Parameters.Add(new SqlParameter("@_CATEGORY_ID", SqlDbType.Int));
                        objParam.Direction = ParameterDirection.Input;
@@ -193,10 +202,6 @@ namespace LegoWebSite.Buslgic
                        objParam = objCommand.Parameters.Add(new SqlParameter("@_NUMBER_OF_RECORD", SqlDbType.Int));
                        objParam.Direction = ParameterDirection.Input;
                        objParam.Value = iNUMBER_OF_RECORD;
-
-                       objParam = objCommand.Parameters.Add(new SqlParameter("@_LANG_CODE", SqlDbType.NVarChar,3));
-                       objParam.Direction = ParameterDirection.Input;
-                       objParam.Value = sLANG_CODE;
 
                        SqlDataAdapter adap = new SqlDataAdapter(objCommand);
                        conn.Open();
@@ -216,7 +221,7 @@ namespace LegoWebSite.Buslgic
                return retData.Tables[0];                     
            }
 
-           public static DataTable get_TOP_READ_CONTENTS(int iCATEGORY_ID, int iNUMBER_OF_RECORD, string sLANG_CODE)
+           public static DataTable get_MOST_READ_CONTENTS(int iCATEGORY_ID, int iNUMBER_OF_RECORD, string sLANG_CODE)
            {
                DataSet retData = new DataSet();
 
@@ -242,7 +247,7 @@ namespace LegoWebSite.Buslgic
 
 	                             SELECT DISTINCT TOP(@_NUMBER_OF_RECORD) LEGOWEB_META_CONTENTS.META_CONTENT_ID,LEGOWEB_META_CONTENTS.READ_COUNT
 		                         FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID
-                                 WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE  AND IS_PUBLIC=1 
+                                 WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE  AND RECORD_STATUS>0 
                                  ORDER BY READ_COUNT DESC   
                                 ";
 
@@ -281,7 +286,7 @@ namespace LegoWebSite.Buslgic
                return retData.Tables[0];
            }
 
-           public static DataTable get_TOP_NEWS_BY_CATEGORY(int iCATEGORY_ID, int iNUMBER_OF_RECORD, string sLANG_CODE)
+           public static DataTable get_TOP_NEWS_BY_CATEGORY(int iCATEGORY_ID, int iNUMBER_OF_RECORD, string sLANG_CODE, int iIMPORTANT_LEVEL)
            {
                DataSet retData = new DataSet();
 
@@ -307,7 +312,7 @@ namespace LegoWebSite.Buslgic
 
 	                             SELECT DISTINCT TOP(@_NUMBER_OF_RECORD) LEGOWEB_META_CONTENTS.META_CONTENT_ID,LEGOWEB_META_CONTENTS.MODIFIED_DATE 
 		                         FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID
-                                 WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE  AND IS_PUBLIC=1 
+                                 WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE  AND RECORD_STATUS>0 AND IMPORTANT_LEVEL>=@_IMPORTANT_LEVEL
                                  ORDER BY MODIFIED_DATE DESC   
                                 ";
 
@@ -328,6 +333,10 @@ namespace LegoWebSite.Buslgic
                        objParam.Direction = ParameterDirection.Input;
                        objParam.Value = sLANG_CODE;
 
+                       objParam = objCommand.Parameters.Add(new SqlParameter("@_IMPORTANT_LEVEL", SqlDbType.Int));
+                       objParam.Direction = ParameterDirection.Input;
+                       objParam.Value = iIMPORTANT_LEVEL;
+
                        SqlDataAdapter adap = new SqlDataAdapter(objCommand);
                        conn.Open();
                        adap.Fill(retData, "Table");
@@ -346,7 +355,7 @@ namespace LegoWebSite.Buslgic
                return retData.Tables[0];
            }
 
-           public static DataTable get_TOP_NEWS_BY_SECTION(int iSECTION_ID, int iNUMBER_OF_RECORD, string sLANG_CODE)
+           public static DataTable get_TOP_NEWS_BY_SECTION(int iSECTION_ID, int iNUMBER_OF_RECORD, string sLANG_CODE, int iIMPORTANT_LEVEL)
            {
                DataSet retData = new DataSet();
 
@@ -372,7 +381,7 @@ namespace LegoWebSite.Buslgic
 
 	                             SELECT DISTINCT TOP(@_NUMBER_OF_RECORD) LEGOWEB_META_CONTENTS.META_CONTENT_ID,LEGOWEB_META_CONTENTS.MODIFIED_DATE 
 		                         FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID
-                                 WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE  AND IS_PUBLIC=1 
+                                 WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE  AND RECORD_STATUS>0 AND IMPORTANT_LEVEL>=@_IMPORTANT_LEVEL
                                  ORDER BY MODIFIED_DATE DESC   
                                 ";
 
@@ -392,6 +401,10 @@ namespace LegoWebSite.Buslgic
                        objParam = objCommand.Parameters.Add(new SqlParameter("@_LANG_CODE", SqlDbType.NVarChar, 3));
                        objParam.Direction = ParameterDirection.Input;
                        objParam.Value = sLANG_CODE;
+
+                       objParam = objCommand.Parameters.Add(new SqlParameter("@_IMPORTANT_LEVEL", SqlDbType.Int));
+                       objParam.Direction = ParameterDirection.Input;
+                       objParam.Value = iIMPORTANT_LEVEL;                       
 
                        SqlDataAdapter adap = new SqlDataAdapter(objCommand);
                        conn.Open();
@@ -480,9 +493,9 @@ namespace LegoWebSite.Buslgic
 
            }
 
-           public static String get_META_CONTENT_MARCXML(Int32 iMETA_CONTENT_ID, bool bIS_FULL)
+           public static String get_META_CONTENT_MARCXML(Int32 iMETA_CONTENT_ID, int  iSCOPE)
            {
-               CRecord outRec = new CRecord();
+               LegoWebSite.DataProvider.MetaContentObject outRec = new LegoWebSite.DataProvider.MetaContentObject();
                CControlfield Cf = new CControlfield();
                CDatafield Df = new CDatafield();
                CSubfield Sf = new CSubfield();
@@ -504,9 +517,9 @@ namespace LegoWebSite.Buslgic
                        objParam.Direction = ParameterDirection.Input;
                        objParam.Value = iMETA_CONTENT_ID;
 
-                       objParam = objCommand.Parameters.Add(new SqlParameter("@_SCOPE", SqlDbType.Bit));
+                       objParam = objCommand.Parameters.Add(new SqlParameter("@_SCOPE", SqlDbType.SmallInt));
                        objParam.Direction = ParameterDirection.Input;
-                       objParam.Value =bIS_FULL;
+                       objParam.Value =iSCOPE;
 
                        conn.Open();
                        SqlDataReader reader = objCommand.ExecuteReader();
@@ -584,8 +597,6 @@ namespace LegoWebSite.Buslgic
                        reader.Close();
                        //end read datafield
 
-                       LegoWebSite.DataProvider.MetaContentEditorDataProvider ContentObject = new LegoWebSite.DataProvider.MetaContentEditorDataProvider();
-                       ContentObject.MarcData = outRec;
 
                        string strCommandName0;
                        SqlCommand objCommand0;
@@ -596,19 +607,20 @@ namespace LegoWebSite.Buslgic
                        objCommand0.CommandType = CommandType.Text;
                        SqlDataReader reader0 = objCommand0.ExecuteReader();
                        reader0.Read();
-                       ContentObject.MetaContentID = iMETA_CONTENT_ID;
-                       ContentObject.CategoryID = Convert.ToInt16(reader0["CATEGORY_ID"]);
-                       ContentObject.IsPublic = (bool)reader0["IS_PUBLIC"];
-                       ContentObject.AccessLevel = int.Parse(reader0["ACCESS_LEVEL"].ToString());
-                       ContentObject.LangCode = reader0["LANG_CODE"].ToString();
-                       ContentObject.EntryDate = Convert.ToDateTime(reader0["CREATED_DATE"]).ToString("yyyy-MMM-dd hh:mm:ss");
-                       ContentObject.Creator = reader0["CREATED_USER"].ToString();
-                       ContentObject.ModifyDate = Convert.ToDateTime(reader0["MODIFIED_DATE"]).ToString("dd/MM/yy hh:mm:ss");
-                       ContentObject.Modifier = reader0["MODIFIED_USER"].ToString();
+                       outRec.MetaContentID = iMETA_CONTENT_ID;
+                       outRec.Alias = reader0["META_CONTENT_ALIAS"].ToString();
+                       outRec.CategoryID = Convert.ToInt16(reader0["CATEGORY_ID"]);
+                       outRec.RecordStatus = int.Parse(reader0["RECORD_STATUS"].ToString());
+                       outRec.AccessLevel = int.Parse(reader0["ACCESS_LEVEL"].ToString());
+                       outRec.LangCode = reader0["LANG_CODE"].ToString();
+                       outRec.EntryDate = Convert.ToDateTime(reader0["CREATED_DATE"]).ToString("yyyy-MMM-dd hh:mm:ss");
+                       outRec.Creator = reader0["CREATED_USER"].ToString();
+                       outRec.ModifyDate = Convert.ToDateTime(reader0["MODIFIED_DATE"]).ToString("dd/MM/yy hh:mm:ss");
+                       outRec.Modifier = reader0["MODIFIED_USER"].ToString();
                        reader0.Close();
                        conn.Close();
-                       outRec = ContentObject.MarcData;
                        outRec.Datafields.Clean();
+                       outRec.Sort();                       
                    }
                    catch (Exception ex)
                    {
@@ -620,7 +632,6 @@ namespace LegoWebSite.Buslgic
                            conn.Close();
                    }
                }
-
                return outRec.OuterXml;
            }
 
@@ -636,7 +647,7 @@ namespace LegoWebSite.Buslgic
                         string strCommand = @"
                                             SELECT TOP(@_NUMBER_OF_RECORD) META_CONTENT_ID 
                                             FROM LEGOWEB_META_CONTENTS
-                                            WHERE CATEGORY_ID=" + iCatid.ToString() + "AND LANG_CODE=N'" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "'  AND IS_PUBLIC=1 ORDER BY MODIFIED_DATE desc";
+                                            WHERE CATEGORY_ID=" + iCatid.ToString() + "AND LANG_CODE=N'" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "'  AND RECORD_STATUS>0 ORDER BY MODIFIED_DATE desc";
 
                         objCommand = new SqlCommand(strCommand, conn);
 
@@ -737,7 +748,7 @@ namespace LegoWebSite.Buslgic
                     {
                         String strCommandText;
                         SqlCommand objCommand;
-                        strCommandText = "select TOP(@_NUMBER_OF_RECORD)* from LEGOWEB_META_CONTENTS where CATEGORY_ID = @_CATEGORY_ID AND LANG_CODE=N'" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "'  AND IS_PUBLIC=1  ORDER BY ORDER_NUMBER asc";
+                        strCommandText = "select TOP(@_NUMBER_OF_RECORD)* from LEGOWEB_META_CONTENTS where CATEGORY_ID = @_CATEGORY_ID AND LANG_CODE=N'" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "'  AND RECORD_STATUS>0  ORDER BY ORDER_NUMBER asc";
 
                         objCommand = new SqlCommand(strCommandText, Conn);
                         objCommand.CommandType = CommandType.Text;
@@ -835,12 +846,12 @@ namespace LegoWebSite.Buslgic
                         }
                         if (bAddWhere)
                         {
-                            strCommandName += " WHERE LEGOWEB_META_CONTENTS.IS_PUBLIC=1 ";
+                            strCommandName += " WHERE LEGOWEB_META_CONTENTS.RECORD_STATUS>0 ";
                             bAddWhere = false;
                         }
                         else
                         {
-                            strCommandName += " AND LEGOWEB_META_CONTENTS.IS_PUBLIC=1 ";                        
+                            strCommandName += " AND LEGOWEB_META_CONTENTS.RECORD_STATUS>0 ";                        
                         }
 
 
@@ -941,12 +952,12 @@ namespace LegoWebSite.Buslgic
                         }
                         if (bAddWhere)
                         {
-                            strCommandName += " WHERE LEGOWEB_META_CONTENTS.IS_PUBLIC=1 ";
+                            strCommandName += " WHERE LEGOWEB_META_CONTENTS.RECORD_STATUS>0 ";
                             bAddWhere = false;
                         }
                         else
                         {
-                            strCommandName += " AND LEGOWEB_META_CONTENTS.IS_PUBLIC=1 ";
+                            strCommandName += " AND LEGOWEB_META_CONTENTS.RECORD_STATUS>0 ";
                         }
 
                         strCommandName += "ORDER BY META_CONTENT_ID DESC ";
@@ -978,7 +989,8 @@ namespace LegoWebSite.Buslgic
                 }
                 return myPageData;
             }
-            public static Int32 get_Document_Browse_Count(int iCATEGORY_ID, string sLANG_CODE)
+
+            public static Int32 get_Content_Navigator_Count(int iCATEGORY_ID, string sLANG_CODE)
             {
                 String connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
                 using (SqlConnection Scon = new SqlConnection(connStr))
@@ -1003,7 +1015,7 @@ namespace LegoWebSite.Buslgic
 
 	                                         SELECT COUNT(DISTINCT LEGOWEB_META_CONTENTS.META_CONTENT_ID)
 		                                     FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID
-                                             WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE AND IS_PUBLIC=1
+                                             WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE AND RECORD_STATUS>0
                                              ";
 
                         objCommand = new SqlCommand(strCommandName, Scon);
@@ -1033,7 +1045,7 @@ namespace LegoWebSite.Buslgic
                     }
                 }
             }
-            public static DataSet get_Document_Browse_Page(int iCATEGORY_ID, string sLANG_CODE, int iPage, int iPageSize)
+            public static DataSet get_Content_Navigator_Page(int iCATEGORY_ID, string sLANG_CODE, int iPage, int iPageSize)
             {
                 int startPos = (iPage - 1) * iPageSize;
                 int iSelectRow = iPage * iPageSize;
@@ -1061,7 +1073,7 @@ namespace LegoWebSite.Buslgic
                     	                     )
                                          SELECT DISTINCT TOP(@_SELECT_ROW_NUMBER) LEGOWEB_META_CONTENTS.META_CONTENT_ID,LEGOWEB_META_CONTENTS.MODIFIED_DATE
 	                                     FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID
-                                         WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE AND IS_PUBLIC=1
+                                         WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE AND RECORD_STATUS>0
                                          ORDER BY MODIFIED_DATE DESC ";
 
                         objCommand = new SqlCommand(strCommandName, SConn);

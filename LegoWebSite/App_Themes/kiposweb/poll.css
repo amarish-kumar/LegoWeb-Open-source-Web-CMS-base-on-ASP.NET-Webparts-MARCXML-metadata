@@ -1,5 +1,6 @@
 ﻿
 /* POLL */
+.icon-red-bar {background: url("images/red-bar.gif")}
 
 .poll-question
 {
@@ -11,7 +12,7 @@
     padding: 0;
     width: 100%;
 }
-.questionList
+..poll-choices
 {
 	background-color: #66CCFF;
     color: #333333;

@@ -16,7 +16,7 @@ div#element-box div.b
 }
 div#element-box div.m 
 {  
-  padding: 5px 10px 5px 10px;
+  padding: 5px 5px 5px 5px;
   background: #fbfbfb;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
@@ -27,27 +27,27 @@ div#element-box{
 }
 
 div#element-box div.t {
-  background: url(boximages/j_border.png) 0 0 repeat-x;
+  background: url(images/boxs/j_border.png) 0 0 repeat-x;
 }
 
 div#element-box div.t div.t {
-   background: url(boximages/j_crn_tr_light.png) 100% 0 no-repeat;
+   background: url(images/boxs/j_crn_tr_light.png) 100% 0 no-repeat;
 }
 
 div#element-box div.t div.t div.t {
-   background: url(boximages/j_crn_tl_light.png) 0 0 no-repeat;
+   background: url(images/boxs/j_crn_tl_light.png) 0 0 no-repeat;
 }
 
 div#element-box div.b {
-  background: url(boximages/j_border.png) 0 100% repeat-x;
+  background: url(images/boxs/j_border.png) 0 100% repeat-x;
 }
 
 div#element-box div.b div.b {
-   background: url(boximages/j_crn_br_light.png) 100% 0 no-repeat;
+   background: url(images/boxs/j_crn_br_light.png) 100% 0 no-repeat;
 }
 
 div#element-box div.b div.b div.b {
-   background: url(boximages/j_crn_bl_light.png) 0 0 no-repeat;
+   background: url(images/boxs/j_crn_bl_light.png) 0 0 no-repeat;
 }
 
 /*end joomla single solid 1px round border box*/
@@ -82,27 +82,27 @@ div#blue-element-box{
 }
 
 div#blue-element-box div.t {
-  background: url(boximages/jb_top_center.JPG) 0 0 repeat-x;
+  background: url(images/boxs/jb_top_center.JPG) 0 0 repeat-x;
 }
 
 div#blue-element-box div.t div.t {
-   background: url(boximages/jb_top_right.JPG) 100% 0 no-repeat;
+   background: url(images/boxs/jb_top_right.JPG) 100% 0 no-repeat;
 }
 
 div#blue-element-box div.t div.t div.t {
-   background: url(boximages/jb_top_left.JPG) 0 0 no-repeat;
+   background: url(images/boxs/jb_top_left.JPG) 0 0 no-repeat;
 }
 
 div#blue-element-box div.b {
-  background: url(boximages/jb_bottom_center.jpg) 0 100% repeat-x;
+  background: url(images/boxs/jb_bottom_center.jpg) 0 100% repeat-x;
 }
 
 div#blue-element-box div.b div.b {
-   background: url(boximages/jb_bottom_right.jpg) 100% 0 no-repeat;
+   background: url(images/boxs/jb_bottom_right.jpg) 100% 0 no-repeat;
 }
 
 div#blue-element-box div.b div.b div.b {
-   background: url(boximages/jb_bottom_left.jpg) 0 0 no-repeat;
+   background: url(images/boxs/jb_bottom_left.jpg) 0 0 no-repeat;
 }
 /*end joomla single solid 1px round border box*/
 
@@ -144,27 +144,27 @@ div#element-title-box div.m
 }
 
 div#element-title-box div.t {
-  background: url(boximages/g_top_center.JPG) 0 0 repeat-x;
+  background: url(images/boxs/g_top_center.JPG) 0 0 repeat-x;
 }
 
 div#element-title-box div.t div.t {
-   background: url(boximages/g_top_right.JPG) 100% 0 no-repeat;
+   background: url(images/boxs/g_top_right.JPG) 100% 0 no-repeat;
 }
 
 div#element-title-box div.t div.t div.t {
-   background: url(boximages/g_top_left.JPG) 0 0 no-repeat;
+   background: url(images/boxs/g_top_left.JPG) 0 0 no-repeat;
 }
 
 div#element-title-box div.b {
-  background: url(boximages/g_bottom_center.jpg) 0 100% repeat-x;
+  background: url(images/boxs/g_bottom_center.jpg) 0 100% repeat-x;
 }
 
 div#element-title-box div.b div.b {
-   background: url(boximages/g_bottom_right.jpg) 100% 0 no-repeat;
+   background: url(images/boxs/g_bottom_right.jpg) 100% 0 no-repeat;
 }
 
 div#element-title-box div.b div.b div.b {
-   background: url(boximages/g_bottom_left.jpg) 0 0 no-repeat;
+   background: url(images/boxs/g_bottom_left.jpg) 0 0 no-repeat;
 }
 
 /*end element box with grey title solid 1 px border with title box */
@@ -209,28 +209,28 @@ div#grey-header-title-box div.m
 }
 
 div#grey-header-title-box div.t {
-  background: url(boximages/gt_top_center.JPG) 0 0 repeat-x;
+  background: url(images/boxs/gt_top_center.JPG) 0 0 repeat-x;
 }
 
 div#grey-header-title-box div.t div.t {
-   background: url(boximages/gt_top_right.JPG) 100% 0 no-repeat;
+   background: url(images/boxs/gt_top_right.JPG) 100% 0 no-repeat;
 }
 
 div#grey-header-title-box div.t div.t div.t {
-   background: url(boximages/gt_top_left.JPG) 0 0 no-repeat;
+   background: url(images/boxs/gt_top_left.JPG) 0 0 no-repeat;
 }
 
 /*
 div#grey-header-title-box div.b 
 {	
-   background: url(boximages/gt_bottom_center.jpg) 0 100% repeat-x;
+   background: url(images/boxs/gt_bottom_center.jpg) 0 100% repeat-x;
 }
 div#grey-header-title-box div.b div.b {
-   background: url(boximages/gt_bottom_right.jpg) 100% 0 no-repeat;
+   background: url(images/boxs/gt_bottom_right.jpg) 100% 0 no-repeat;
 }
 
 div#grey-header-title-box div.b div.b div.b {
-   background: url(boximages/gt_bottom_left.jpg) 0 0 no-repeat;
+   background: url(images/boxs/gt_bottom_left.jpg) 0 0 no-repeat;
 }
 */
 /*end element box with grey title with header line solid 1 px border with title box */
@@ -255,34 +255,34 @@ div#silver-gradient-box div.b
   overflow:visible;
 }
 div#silver-gradient-box div.m {
-  padding: 6px 0 10px 10px;
-  background: url("boximages/s_body.jpg" ) repeat-x scroll left bottom transparent;
+  padding: 5px 2px 5px 5px;
+  background: url("images/boxs/s_body.jpg" ) repeat-x scroll left bottom transparent;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
 }
 
 div#silver-gradient-box div.t {
-  background: url(boximages/s_top_center.JPG) 0 0 repeat-x;
+  background: url(images/boxs/s_top_center.JPG) 0 0 repeat-x;
 }
 
 div#silver-gradient-box div.t div.t {
-   background: url(boximages/s_top_right.JPG) 100% 0 no-repeat;
+   background: url(images/boxs/s_top_right.JPG) 100% 0 no-repeat;
 }
 
 div#silver-gradient-box div.t div.t div.t {
-   background: url(boximages/s_top_left.JPG) 0 0 no-repeat;
+   background: url(images/boxs/s_top_left.JPG) 0 0 no-repeat;
 }
 
 div#silver-gradient-box div.b {
-  background: url(boximages/s_bottom_center.jpg) 0 100% repeat-x;
+  background: url(images/boxs/s_bottom_center.jpg) 0 100% repeat-x;
 }
 
 div#silver-gradient-box div.b div.b {
-   background: url(boximages/s_bottom_right.jpg) 100% 0 no-repeat;
+   background: url(images/boxs/s_bottom_right.jpg) 100% 0 no-repeat;
 }
 
 div#silver-gradient-box div.b div.b div.b {
-   background: url(boximages/s_bottom_left.jpg) 0 0 no-repeat;
+   background: url(images/boxs/s_bottom_left.jpg) 0 0 no-repeat;
 }
 
 /*end silver gradient round border box*/
@@ -325,27 +325,27 @@ div#blue-title-box div.m
 }
 
 div#blue-title-box div.t {
-  background: url(boximages/b_top_center.JPG) 0 0 repeat-x;
+  background: url(images/boxs/b_top_center.JPG) 0 0 repeat-x;
 }
 
 div#blue-title-box div.t div.t {
-   background: url(boximages/b_top_right.JPG) 100% 0 no-repeat;
+   background: url(images/boxs/b_top_right.JPG) 100% 0 no-repeat;
 }
 
 div#blue-title-box div.t div.t div.t {
-   background: url(boximages/b_top_left.JPG) 0 0 no-repeat;
+   background: url(images/boxs/b_top_left.JPG) 0 0 no-repeat;
 }
 
 div#blue-title-box div.b {
-  background: url(boximages/b_bottom_center.jpg) 0 100% repeat-x;
+  background: url(images/boxs/b_bottom_center.jpg) 0 100% repeat-x;
 }
 
 div#blue-title-box div.b div.b {
-   background: url(boximages/b_bottom_right.jpg) 100% 0 no-repeat;
+   background: url(images/boxs/b_bottom_right.jpg) 100% 0 no-repeat;
 }
 
 div#blue-title-box div.b div.b div.b {
-   background: url(boximages/b_bottom_left.jpg) 0 0 no-repeat;
+   background: url(images/boxs/b_bottom_left.jpg) 0 0 no-repeat;
 }
 
 /*end steel blue gradient footer with title box */
@@ -388,27 +388,27 @@ div#blue-header-title-box div.m
 }
 
 div#blue-header-title-box div.t {
-  background: url(boximages/bh_top_center.JPG) 0 0 repeat-x;
+  background: url(images/boxs/bh_top_center.JPG) 0 0 repeat-x;
 }
 
 div#blue-header-title-box div.t div.t {
-   background: url(boximages/bh_top_right.JPG) 100% 0 no-repeat;
+   background: url(images/boxs/bh_top_right.JPG) 100% 0 no-repeat;
 }
 
 div#blue-header-title-box div.t div.t div.t {
-   background: url(boximages/bh_top_left.JPG) 0 0 no-repeat;
+   background: url(images/boxs/bh_top_left.JPG) 0 0 no-repeat;
 }
 
 div#blue-header-title-box div.b {
-  background: url(boximages/bh_bottom_center.jpg) 0 100% repeat-x;
+  background: url(images/boxs/bh_bottom_center.jpg) 0 100% repeat-x;
 }
 
 div#blue-header-title-box div.b div.b {
-   background: url(boximages/bh_bottom_right.jpg) 100% 0 no-repeat;
+   background: url(images/boxs/bh_bottom_right.jpg) 100% 0 no-repeat;
 }
 
 div#blue-header-title-box div.b div.b div.b {
-   background: url(boximages/bh_bottom_left.jpg) 0 0 no-repeat;
+   background: url(images/boxs/bh_bottom_left.jpg) 0 0 no-repeat;
 }
 
 /*end blue header with title box */
@@ -452,28 +452,28 @@ div#darkblue-header-title-box div.m
 }
 
 div#darkblue-header-title-box div.t {
-  background: url(boximages/db_top_center.JPG) 0 0 repeat-x;
+  background: url(images/boxs/db_top_center.JPG) 0 0 repeat-x;
 }
 
 div#darkblue-header-title-box div.t div.t {
-   background: url(boximages/db_top_right.JPG) 100% 0 no-repeat;
+   background: url(images/boxs/db_top_right.JPG) 100% 0 no-repeat;
 }
 
 div#darkblue-header-title-box div.t div.t div.t {
-   background: url(boximages/db_top_left.JPG) 0 0 no-repeat;
+   background: url(images/boxs/db_top_left.JPG) 0 0 no-repeat;
 }
 
 /*
 div#darkblue-header-title-box div.b 
 {	
-   background: url(boximages/db_bottom_center.jpg) 0 100% repeat-x;
+   background: url(images/boxs/db_bottom_center.jpg) 0 100% repeat-x;
 }
 div#darkblue-header-title-box div.b div.b {
-   background: url(boximages/db_bottom_right.jpg) 100% 0 no-repeat;
+   background: url(images/boxs/db_bottom_right.jpg) 100% 0 no-repeat;
 }
 
 div#darkblue-header-title-box div.b div.b div.b {
-   background: url(boximages/db_bottom_left.jpg) 0 0 no-repeat;
+   background: url(images/boxs/db_bottom_left.jpg) 0 0 no-repeat;
 }
 */
 /*end top round conner darkblue header title box */

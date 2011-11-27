@@ -3,7 +3,7 @@
 </asp:WebPartManager>
 
 <div id="divWPManagerPanel" runat="server">
-<table class="Toolbar" border="0" cellpadding="0" cellspacing="5" width="100%">	
+<table class="wpmToolbar" border="0" cellpadding="0" cellspacing="5" width="100%">	
 	<tr>
 		<td align="right">
 		  <asp:Label runat="server" ID="_browseViewLabel">

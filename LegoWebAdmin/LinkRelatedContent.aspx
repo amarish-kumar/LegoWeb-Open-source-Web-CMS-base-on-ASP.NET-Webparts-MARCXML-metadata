@@ -37,7 +37,7 @@
         onclick="linkTakeRelatedContent_Click">
 <span class="icon-32-apply" title="Link">
 </span>
-<%=Resources.strings.btnLink_Text %>
+<%=Resources.strings.Link_Text %>
 </asp:LinkButton>
 </td>
  
@@ -46,7 +46,7 @@
         onclick="linkCancelButton_Click">
         <span class="icon-32-cancel" title="Cancel">
 </span>
-<%=Resources.strings.btnCancel_Text %>
+<%=Resources.strings.Cancel_Text %>
 </asp:LinkButton>
 </td>
 
@@ -54,7 +54,7 @@
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Help">
 </span>
-<%=Resources.strings.btnHelp_Text %>
+<%=Resources.strings.Help_Text %>
 </a>
 </td>
 

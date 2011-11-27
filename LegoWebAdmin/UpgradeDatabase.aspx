@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="UpgradeDatabase.aspx.cs" Inherits="UpgradeDatabase" Title="Upgrade database" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="UpgradeDatabase.aspx.cs" Inherits="UpgradeDatabase" Title="KIPOSADMIN: Nâng cấp CSDL" %>
 <%@ Register src="~/UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
 <%@ Register src="~/UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">    

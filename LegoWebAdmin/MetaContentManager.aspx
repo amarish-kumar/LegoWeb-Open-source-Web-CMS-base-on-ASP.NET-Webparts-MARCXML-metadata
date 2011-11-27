@@ -38,7 +38,7 @@
         onclick="linkPublishButton_Click">
 <span class="icon-32-publish" title="Publish">
 </span>
-<%=Resources.strings.btnPublish_Text %>
+<%=Resources.strings.Publish_Text %>
 </asp:LinkButton>
 </td>
  
@@ -47,7 +47,7 @@
         onclick="linkUnPublishButton_Click">
 <span class="icon-32-unpublish" title="Unpublish">
 </span>
-<%=Resources.strings.btnUnPublish_Text %>
+<%=Resources.strings.UnPublish_Text %>
 </asp:LinkButton>
 </td>
 
@@ -57,7 +57,7 @@
         onclick="linkDeleteButton_Click" OnClientClick="return confirm('Are you sure to remove selected items?')">
 <span class="icon-32-trash" title="Delete">
 </span>
-<%=Resources.strings.btnDelete_Text %>
+<%=Resources.strings.Delete_Text %>
 </asp:LinkButton>
 </td>
 
@@ -66,7 +66,7 @@
         onclick="linkEditButton_Click">
 <span class="icon-32-edit" title="Edit">
 </span>
-<%=Resources.strings.btnEdit_Text %>
+<%=Resources.strings.Edit_Text %>
 </asp:LinkButton>
 </td>
 
@@ -75,7 +75,7 @@
         onclick="linkNewButton_Click">
 <span class="icon-32-new" title="New">
 </span>
-<%=Resources.strings.btnAdd_Text %>
+<%=Resources.strings.Add_Text %>
 </asp:LinkButton>
 </td>
 
@@ -83,7 +83,7 @@
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Help">
 </span>
-<%=Resources.strings.btnHelp_Text %>
+<%=Resources.strings.Help_Text %>
 </a>
 </td>
 

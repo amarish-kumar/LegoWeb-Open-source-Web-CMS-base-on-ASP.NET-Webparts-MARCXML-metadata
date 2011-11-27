@@ -11,7 +11,7 @@ using System.Web.UI.WebControls.WebParts;
 
 public partial class Webparts_UserRegistration :WebPartBase
 {
-    protected string _verifynewuser_url = "http://localhost/VerifyNewUser.aspx?mnuid=161&ID={0}";
+    protected string _verifynewuser_url = "http://thuvien.ntu.edu.vn/VerifyNewUser.aspx?mnuid=161&ID={0}";
     [Personalizable]
     [WebBrowsable]
     /// <summary>
@@ -33,7 +33,7 @@ public partial class Webparts_UserRegistration :WebPartBase
     {
         if (!IsPostBack)
         { 
-            string sAgreementFile=LegoWebSite.DataProvider.FileTemplateDataProvider.get_HtmlTemplateFile("ForumUserAgreement");
+            string sAgreementFile=LegoWebSite.DataProvider.FileTemplateDataProvider.get_HtmlTemplateFile("UserAgreement");
             if (sAgreementFile != null)
             {
                 StreamReader sr = new StreamReader(sAgreementFile);
@@ -55,42 +55,39 @@ public partial class Webparts_UserRegistration :WebPartBase
         CreateUserWizard cuw = (CreateUserWizard)sender;
         MembershipUser newUser = Membership.GetUser(cuw.UserName);
 
-        //update PATRON Email
-        //KIPOSWEB.Buslogic.Circulation.update_CIRC_PATRON_EMAIL(cuw.UserName,cuw.Email);
-
-        ////insert user to LEGOWEB_FORUM_USERS
-        //TextBox Alias = (TextBox)CreateUserWizardStep1.ContentTemplateContainer.FindControl("Alias");
-        //HiddenField AvatarURL = (HiddenField)CreateUserWizardStep1.ContentTemplateContainer.FindControl("AvatarURL");
-        //// Create new user
-        //Forum.Buslogic.User user = new Forum.Buslogic.User();
-        //int iUserId = 0;
-        ////check if email exsit     
-        //iUserId = Forum.Buslogic.ForumUsers.GetUserIDFromEmail(cuw.Email);
-        //if (iUserId > 0)
-        //{
-        //    //update
-        //    user = Forum.Buslogic.ForumUsers.GetUser(iUserId);
-        //    user.Alias = Alias.Text;
-        //    if (!String.IsNullOrEmpty(AvatarURL.Value))
-        //    {
-        //        user.Avatar = AvatarURL.Value;
-        //    }
-        //    Forum.Buslogic.ForumUsers.UpdateUser(user);
-        //}
-        //else
-        //{
-        //    user.Alias = Alias.Text;
-        //    user.Email = cuw.Email;
-        //    iUserId = Forum.Buslogic.ForumUsers.AddUser(user);
-        //    if (iUserId > 0)
-        //    {
-        //        if (!String.IsNullOrEmpty(AvatarURL.Value))
-        //        {
-        //            user.Avatar = AvatarURL.Value;
-        //            Forum.Buslogic.ForumUsers.UpdateUser(user);
-        //        }
-        //    }               
-        //}        
+        //insert user to LEGOWEB_FORUM_USERS
+        TextBox Alias = (TextBox)CreateUserWizardStep1.ContentTemplateContainer.FindControl("Alias");
+        HiddenField AvatarURL = (HiddenField)CreateUserWizardStep1.ContentTemplateContainer.FindControl("AvatarURL");
+        // Create new user
+        LegoWebSiteForum.Buslogic.User user = new LegoWebSiteForum.Buslogic.User();
+        int iUserId = 0;
+        //check if email exsit     
+        iUserId = LegoWebSiteForum.Buslogic.ForumUsers.GetUserIDFromEmail(cuw.Email);
+        if (iUserId > 0)
+        {
+            //update
+            user = LegoWebSiteForum.Buslogic.ForumUsers.GetUser(iUserId);
+            user.Alias = Alias.Text;
+            if (!String.IsNullOrEmpty(AvatarURL.Value))
+            {
+                user.Avatar = AvatarURL.Value;
+            }
+            LegoWebSiteForum.Buslogic.ForumUsers.UpdateUser(user);
+        }
+        else
+        {
+            user.Alias = Alias.Text;
+            user.Email = cuw.Email;
+            iUserId = LegoWebSiteForum.Buslogic.ForumUsers.AddUser(user);
+            if (iUserId > 0)
+            {
+                if (!String.IsNullOrEmpty(AvatarURL.Value))
+                {
+                    user.Avatar = AvatarURL.Value;
+                    LegoWebSiteForum.Buslogic.ForumUsers.UpdateUser(user);
+                }
+            }               
+        }        
 
         //Set the user's id
         Guid newUserId = (Guid)newUser.ProviderUserKey; 
@@ -158,14 +155,6 @@ public partial class Webparts_UserRegistration :WebPartBase
         CustomErrorMessage.Visible = false;
 
         string sUserName = UserName.Text;
-
-        //if (!KIPOSWEB.Buslogic.Circulation.is_CIRC_PATRON_EXIST(sUserName))
-        //{
-        //    CustomErrorMessage.Visible = true;
-        //    CustomErrorMessage.Text = "Không tồn tại mã độc giả này/ Patron Barcode does not exist!";
-        //    e.Cancel = true;
-        //    return;
-        //}
         
         AvatarURL.Value = null;
         if (fileUploadAvatar != null && fileUploadAvatar.HasFile)

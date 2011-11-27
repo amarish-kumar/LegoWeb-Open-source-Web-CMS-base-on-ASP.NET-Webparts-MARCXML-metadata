@@ -38,7 +38,7 @@
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Trợ giúp">
 </span>
-<%=Resources.strings.btnHelp_Text %>
+<%=Resources.strings.Help_Text %>
 </a>
 </td>
 

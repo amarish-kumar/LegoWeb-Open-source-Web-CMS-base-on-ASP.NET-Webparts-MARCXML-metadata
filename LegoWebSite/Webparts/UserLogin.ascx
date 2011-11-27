@@ -1,13 +1,6 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="UserLogin.ascx.cs" Inherits="Webparts_UserLogin" %>
-		<div id="grey-header-title-box"><%--grey-header-title-box--%>
-			<div class="t">
-		 		<div class="t">
-					<div class="t"></div>
-		 		</div>
-			</div>
-            <div class="title"> <%=this.Page.User.Identity.IsAuthenticated?this.Page.User.Identity.Name:LegoWebSite.Buslgic.CommonParameters.asign_WEBPART_PERSONALIZE_PARAMETER(this.Title)%></div>		    						
-			<div class="m">			
-			<div class="clearfix">
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="USERLOGIN.ascx.cs" Inherits="Webparts_USERLOGIN" %>
+
+<asp:Literal ID="litBoxTop" runat="server"></asp:Literal>
 			
 		<!-- login form -->
 		<div id="divLogin" runat="server" visible="false">
@@ -140,13 +133,4 @@
 		</div>
 		<!-- / login form -->
 
-		    </div>		
-			        <div class="clr"></div>
-			</div>
-					
-			<div class="b">
-				<div class="b">
-					<div class="b"></div>
-				</div>
-			</div>
-   		</div>
+<asp:Literal ID="litBoxBottom" runat="server"></asp:Literal>

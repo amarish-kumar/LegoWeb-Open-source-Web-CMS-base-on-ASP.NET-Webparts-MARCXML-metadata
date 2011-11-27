@@ -159,7 +159,14 @@ public class UrlQuery
 
         for (int i = 0; i < List.Length; i++)
         {
-            this.queryString.Remove(List[i]);
+            try
+            {
+                this.queryString.Remove(List[i]);
+            }
+            catch
+            { 
+                //do nothing if param is not available
+            }
         }    
     }
     /// <summary>

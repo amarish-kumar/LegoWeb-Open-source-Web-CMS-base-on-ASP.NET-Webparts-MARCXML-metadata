@@ -1,6 +1,6 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="FileMetaContentDataProvider.cs" package="LEGOWEB">
-//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     Copyright (C) 2011 LEGOWEB.ORG. All rights reserved.
 //     www.legoweb.org
 //     License: GNU/GPL
 //     LEGOWEB IS FREE SOFTWARE
@@ -31,7 +31,7 @@ namespace LegoWebAdmin.DataProvider
         public static CRecord get_DataRecord(String sCategory, string sID)
         {
             CRecords myRecs = new CRecords();
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -77,7 +77,7 @@ namespace LegoWebAdmin.DataProvider
         public static CRecords get_DataRecords(String sCategory)
         {
             CRecords myRecs = new CRecords();
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -92,7 +92,7 @@ namespace LegoWebAdmin.DataProvider
         {
             CRecords myRecs = new CRecords();
             CRecords retRecs = new CRecords();
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -120,7 +120,7 @@ namespace LegoWebAdmin.DataProvider
 
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -143,7 +143,7 @@ namespace LegoWebAdmin.DataProvider
             CRecords myRecs = new CRecords();
             CRecords retRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -174,7 +174,7 @@ namespace LegoWebAdmin.DataProvider
             CRecords myRecs = new CRecords();
             CRecords retRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -213,7 +213,7 @@ namespace LegoWebAdmin.DataProvider
             addRecord.Controlfields.Controlfield("005").Value = DateTime.Now.ToLongDateString();
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -255,7 +255,7 @@ namespace LegoWebAdmin.DataProvider
 
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -295,7 +295,7 @@ namespace LegoWebAdmin.DataProvider
         {
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -316,7 +316,7 @@ namespace LegoWebAdmin.DataProvider
         {
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -338,7 +338,7 @@ namespace LegoWebAdmin.DataProvider
         {
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);
@@ -360,7 +360,7 @@ namespace LegoWebAdmin.DataProvider
         {
             CRecords myRecs = new CRecords();
             
-            String dataFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
+            String dataFileName = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Data/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "\\" + sCategory + ".xml";
             if (File.Exists(dataFileName))
             {
                 myRecs.load_File(dataFileName);

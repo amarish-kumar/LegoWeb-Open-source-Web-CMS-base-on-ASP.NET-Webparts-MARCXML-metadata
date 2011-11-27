@@ -11,16 +11,15 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using LegoWebSite.Buslgic;
 
-public partial class Webparts_MenuBar:WebPartBase
-{
-    public string sTempMenu;
+public partial class Webparts_MENUBAR:WebPartBase
+{   
     public int _menu_type_id = 0;
     [Personalizable]
     [WebBrowsable]
     /// <summary>
     /// Set Content Category
     /// </summary>
-    public int menu_type_id
+    public int p1_menu_type_id
     {
         get
         {
@@ -32,27 +31,34 @@ public partial class Webparts_MenuBar:WebPartBase
         }
     }
 
-    public Webparts_MenuBar()
+    public Webparts_MENUBAR()
     {
         this.Title = "MENUBAR";    
     } 
     protected void Page_Load(object sender, EventArgs e)
     {
+        string sMenuHTML="";
+        int iroot_menu_id = 0;
+        int imenu_type_id = 0;
+        int iactive_menu_id=0;
+        int icategory_id=0;
+        int imeta_content_id = 0;
         if (!IsPostBack)
         {
-            int iActiveMenuId = int.Parse(CommonUtility.GetInitialValue("mnuid", 0).ToString());
-            string keywork = CommonUtility.GetInitialValue("SearchValue", "").ToString();
+            imenu_type_id = _menu_type_id;
 
+            iactive_menu_id= int.Parse(CommonUtility.GetInitialValue("mnuid", 0).ToString());
+            string skeywork = CommonUtility.GetInitialValue("SearchValue", "").ToString();
 
-            if (iActiveMenuId == 0)
+            if (iactive_menu_id == 0)
             { 
-                //try to find Active Menu Id from catid parameter
+                //try to find active menu id from catid parameter
                 if (CommonUtility.GetInitialValue("catid", null) != null)
                 {
-                    int iCateroryId = int.Parse(CommonUtility.GetInitialValue("catid", 0).ToString());
-                    if (iCateroryId > 0)
+                     icategory_id= int.Parse(CommonUtility.GetInitialValue("catid", 0).ToString());
+                     if (icategory_id > 0)
                     {
-                        iActiveMenuId = int.Parse(LegoWebSite.Buslgic.Categories.get_CATEGORY_BY_ID(iCateroryId).Tables[0].Rows[0]["MENU_ID"].ToString());
+                        iactive_menu_id = int.Parse(LegoWebSite.Buslgic.Categories.get_CATEGORY_BY_ID(icategory_id).Tables[0].Rows[0]["MENU_ID"].ToString());
                     }
                 }
                 else
@@ -60,132 +66,143 @@ public partial class Webparts_MenuBar:WebPartBase
                     //try to find active Menu Id from contentid
                     if (CommonUtility.GetInitialValue("contentid", null) != null)
                     {
-                        int iContentId = int.Parse(CommonUtility.GetInitialValue("contentid", 0).ToString());
-                        if (iContentId > 0)
+                        imeta_content_id = int.Parse(CommonUtility.GetInitialValue("contentid", 0).ToString());
+                        if (imeta_content_id > 0)
                         {
-                            int iCateroryId = LegoWebSite.Buslgic.MetaContents.get_META_CONTENT_CATEGORY_ID(iContentId);
-                            if (iCateroryId > 0)
+                            icategory_id = LegoWebSite.Buslgic.MetaContents.get_META_CONTENT_CATEGORY_ID(imeta_content_id);
+                            if (icategory_id > 0)
                             {
-                                iActiveMenuId = int.Parse(LegoWebSite.Buslgic.Categories.get_CATEGORY_BY_ID(iCateroryId).Tables[0].Rows[0]["MENU_ID"].ToString());
+                                iactive_menu_id = int.Parse(LegoWebSite.Buslgic.Categories.get_CATEGORY_BY_ID(icategory_id).Tables[0].Rows[0]["MENU_ID"].ToString());
                             }
                         }
                     }
                 }
-                //still not found
-                if (iActiveMenuId == 0 && Session["mnuid"]!=null)
-                {
-                    iActiveMenuId = (int)Session["mnuid"];
-                }
+            }
+            //still not found
+            if (iactive_menu_id == 0 && Session["mnuid"] != null)
+            {
+                iactive_menu_id = (int)Session["mnuid"];
+            }
+            else
+            {
+                Session["mnuid"] = iactive_menu_id;
             }
 
-            Session["mnuid"] = iActiveMenuId;
-
-            //try to get Root Menu Id of this ActiveMenuId
-            if (iActiveMenuId > 0)
+            //try to discover root menu of current active menu then set active menu to root
+            if (iactive_menu_id > 0)
             {
-                int iRootMenuId = LegoWebSite.Buslgic.Menus.get_PARENT_MENU_ID(iActiveMenuId);
-                while(iRootMenuId>0)
+                DataTable mnuTable=LegoWebSite.Buslgic.Menus.get_MENUS_BY_MENU_ID(iactive_menu_id).Tables[0];
+                iroot_menu_id = (int)mnuTable.Rows[0]["PARENT_MENU_ID"];
+                imenu_type_id=  (int)mnuTable.Rows[0]["MENU_TYPE_ID"];               
+                while(iroot_menu_id>0)
                 {
-                    iActiveMenuId = iRootMenuId;
-                    iRootMenuId = LegoWebSite.Buslgic.Menus.get_PARENT_MENU_ID(iActiveMenuId);
+                    iactive_menu_id = iroot_menu_id;
+                    iroot_menu_id = LegoWebSite.Buslgic.Menus.get_PARENT_MENU_ID(iactive_menu_id,imenu_type_id);
                 }
             }
             //try to get Current Menu Type
-            if (_menu_type_id == 0)
+            if (_menu_type_id == 0 && imenu_type_id==0)
             {
-                if (iActiveMenuId > 0)
+                if (iactive_menu_id> 0)
                 {
-                    _menu_type_id = int.Parse(LegoWebSite.Buslgic.Menus.get_MENUS_BY_MENU_ID(iActiveMenuId).Tables[0].Rows[0]["MENU_TYPE_ID"].ToString());
+                    imenu_type_id = int.Parse(LegoWebSite.Buslgic.Menus.get_MENUS_BY_MENU_ID(iactive_menu_id).Tables[0].Rows[0]["MENU_TYPE_ID"].ToString());
                 }
                 else
                 {
                     if (CommonUtility.GetInitialValue("mnutypeid", null) != null)
                     {
-                        _menu_type_id = int.Parse(CommonUtility.GetInitialValue("mnutypeid", null).ToString());
+                        imenu_type_id = int.Parse(CommonUtility.GetInitialValue("mnutypeid", null).ToString());
                     }
                     else
                     {
-                        _menu_type_id = LegoWebSite.Buslgic.MenuTypes.get_TOP_MENU_TYPE_ID();
+                        imenu_type_id = LegoWebSite.Buslgic.MenuTypes.get_TOP_MENU_TYPE_ID();
                     }
                 }
-            }            
+            }
+            else if (_menu_type_id > 0)
+            {
+                imenu_type_id = _menu_type_id;
+            }
             
             //Buil Menu Bar
-            DataTable tbRootCate = LegoWebSite.Buslgic.Menus.get_MENUS_BY_PARENT_ID(0, _menu_type_id).Tables[0];
+            DataTable tbRootCate = LegoWebSite.Buslgic.Menus.get_MENUS_BY_PARENT_ID(0, imenu_type_id).Tables[0];
             if (tbRootCate.Rows.Count > 0)
             {
-                      sTempMenu += "<ul id='navigation'>";
+                      sMenuHTML += "<ul id='navigation'>";
                         for (int i = 0; i < tbRootCate.Rows.Count; i++)
-                        {
+                        {                            
                             int mnuLevel0Id = int.Parse(tbRootCate.Rows[i]["MENU_ID"].ToString());
+                            string sMenuHref = tbRootCate.Rows[i]["MENU_LINK_URL"].ToString().ToLower();
 
-                            if (iActiveMenuId == 0 && i==0 && keywork=="")
+                            if (iactive_menu_id == 0 && i==0 && skeywork=="")
                             {
-                                sTempMenu += "<li class='active'>";
+                                sMenuHTML += "<li class='active'>";
                             }
-                            else if (iActiveMenuId == mnuLevel0Id && i < (tbRootCate.Rows.Count-1))
+                            else if (iactive_menu_id == mnuLevel0Id && i < (tbRootCate.Rows.Count-1))
                             {
-                                sTempMenu += "<li class='active'>";
+                                sMenuHTML += "<li class='active'>";
 
                             }
                             else if (i == (tbRootCate.Rows.Count - 1))
                             {
-                                if (iActiveMenuId == mnuLevel0Id)
+                                if (iactive_menu_id == mnuLevel0Id)
                                 {
-                                    sTempMenu += "<li class='active last'>";
+                                    sMenuHTML += "<li class='active last'>";
                                 }
                                 else
                                 {
-                                    sTempMenu += "<li class='last'>";
+                                    sMenuHTML += "<li class='last'>";
                                 }
                             }
                             else
                             {
-                                sTempMenu += "<li>";
+                                sMenuHTML += "<li>";
                             }
                             
                             if(int.Parse(tbRootCate.Rows[i]["BROWSER_NAVIGATE"].ToString())>0)
                             {
                                 //open in new windows
-                                sTempMenu += "<a href=\"javascript:void(0)\" onclick=\"window.open('" + tbRootCate.Rows[i]["MENU_LINK_URL"] + "')\">";
+                                sMenuHTML += "<a href=\"javascript:void(0)\" onclick=\"window.open('" + (sMenuHref.IndexOf("http://") >= 0 ? sMenuHref : ResolveUrl("~/" + sMenuHref)) + "')\">";
 
                             }else
                             {
-                                sTempMenu += "<a href='" + tbRootCate.Rows[i]["MENU_LINK_URL"] + "'>";
+                                sMenuHTML += "<a href='" + (sMenuHref.IndexOf("http://") >= 0 ? sMenuHref : ResolveUrl("~/" + sMenuHref)) + "'>";
                             }
 
-                            sTempMenu +="<span class='menu-left'></span>";
-                            sTempMenu +="<span class='menu-mid'>" + tbRootCate.Rows[i]["MENU_" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "_TITLE"].ToString() + "</span>";
-                            sTempMenu += "<span class='menu-right'></span>";
-                            sTempMenu +="</a>";
+                            sMenuHTML +="<span class='menu-left'></span>";
+                            sMenuHTML +="<span class='menu-mid'>" + tbRootCate.Rows[i]["MENU_" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "_TITLE"].ToString() + "</span>";
+                            sMenuHTML += "<span class='menu-right'></span>";
+                            sMenuHTML +="</a>";
 
 
-                            DataTable childR = LegoWebSite.Buslgic.Menus.get_MENUS_BY_PARENT_ID(int.Parse(tbRootCate.Rows[i]["MENU_ID"].ToString()), _menu_type_id).Tables[0];
+                            DataTable childR = LegoWebSite.Buslgic.Menus.get_MENUS_BY_PARENT_ID(int.Parse(tbRootCate.Rows[i]["MENU_ID"].ToString()), imenu_type_id).Tables[0];
                             if (childR.Rows.Count > 0) //check data
                             {
-                                sTempMenu +=@"<div class='sub'><ul>";
+                                sMenuHTML +=@"<div class='sub'><ul>";
+                                
 
                                 for (int j = 0; j < childR.Rows.Count; j++)
                                 {
+                                    sMenuHref = childR.Rows[j]["MENU_LINK_URL"].ToString();
                                     if (int.Parse(childR.Rows[j]["BROWSER_NAVIGATE"].ToString()) > 0)
                                     {
-                                        sTempMenu += "<li><a href=\"javascript:void(0)\" onclick=\"window.open('" + childR.Rows[j]["MENU_LINK_URL"] + "')\">" + childR.Rows[j]["MENU_" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "_TITLE"].ToString() + "</a></li>";
+                                        sMenuHTML += "<li><a href=\"javascript:void(0)\" onclick=\"window.open('" + (sMenuHref.IndexOf("http://") >= 0 ? sMenuHref : ResolveUrl("~/" + sMenuHref)) + "')\">" + childR.Rows[j]["MENU_" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "_TITLE"].ToString() + "</a></li>";
                                     }
                                     else
                                     { 
-                                        sTempMenu += @"
+                                        sMenuHTML += @"
                                         <li>
-                                            <a  href='" + childR.Rows[j]["MENU_LINK_URL"] + @"'>" + childR.Rows[j]["MENU_" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "_TITLE"].ToString() + @"</a>
+                                            <a  href='" + (sMenuHref.IndexOf("http://") >= 0 ? sMenuHref : ResolveUrl("~/" + sMenuHref)) + @"'>" + childR.Rows[j]["MENU_" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "_TITLE"].ToString() + @"</a>
                                         </li>";
                                     }
                                 }
-                                sTempMenu += @"</ul><div class='btm-bg'></div></div>";
+                                sMenuHTML += @"</ul><div class='btm-bg'></div></div>";
                             }
-                            sTempMenu +="</li>";
+                            sMenuHTML +="</li>";
                         }
-                    sTempMenu += "</ul>";
+                    sMenuHTML += "</ul>";
                 }
-                 this.mnTitle.InnerHtml = sTempMenu;
+                 this.mnTitle.InnerHtml = sMenuHTML;
             }
            
            

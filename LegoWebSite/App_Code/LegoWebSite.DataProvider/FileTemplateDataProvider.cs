@@ -13,7 +13,7 @@ namespace LegoWebSite.DataProvider
         public static string get_LabelTemplateFile(string expectedTemplateName)
         {
             HttpRequest Request = HttpContext.Current.Request;
-            String retFileName = HttpContext.Current.Application["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Templates/" + HttpContext.Current.Session["lang"].ToString() + "/" + expectedTemplateName + ".lbl";
+            String retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + "/" + expectedTemplateName + ".lbl";
 
             if (File.Exists(retFileName))
             {
@@ -21,7 +21,7 @@ namespace LegoWebSite.DataProvider
             }
             else
             {
-                retFileName = HttpContext.Current.Application["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Templates/default.lbl";
+                retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/default.lbl";
             }
             return retFileName;
         }
@@ -29,14 +29,14 @@ namespace LegoWebSite.DataProvider
         public static string get_XsltTemplateFile(string expectedTemplateName)
         {
             HttpRequest Request = HttpContext.Current.Request;
-            String retFileName = HttpContext.Current.Application["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Templates/" + HttpContext.Current.Session["lang"].ToString() + "/" + expectedTemplateName + ".xsl";
+            String retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + "/" + expectedTemplateName + ".xsl";
             if (File.Exists(retFileName))
             {
                 return retFileName;
             }
             else
             {
-                retFileName = HttpContext.Current.Application["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Templates/default.xsl";
+                retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/default.xsl";
             }
             return retFileName;
         }
@@ -44,14 +44,14 @@ namespace LegoWebSite.DataProvider
         public static string get_XsltTemplateFile(string expectedTemplateName, bool bDefaultIfNotExist)
         {
             HttpRequest Request = HttpContext.Current.Request;
-            String retFileName = HttpContext.Current.Application["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Templates/" + HttpContext.Current.Session["lang"].ToString() + "/" + expectedTemplateName + ".xsl";
+            String retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + "/" + expectedTemplateName + ".xsl";
             if (File.Exists(retFileName))
             {
                 return retFileName;
             }
             else if (bDefaultIfNotExist)
             {
-                retFileName = HttpContext.Current.Application["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Templates/default.xsl";
+                retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/default.xsl";
             }
             else
             {
@@ -63,14 +63,14 @@ namespace LegoWebSite.DataProvider
         public static string get_WorkformTemplateFile(string expectedTemplateName)
         {
             HttpRequest Request = HttpContext.Current.Request;
-            String retFileName = HttpContext.Current.Application["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Templates/" + HttpContext.Current.Session["lang"].ToString() + "/" + expectedTemplateName + ".wfm";
+            String retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + "/" + expectedTemplateName + ".wfm";
             if (File.Exists(retFileName))
             {
                 return retFileName;
             }
             else
             {
-                retFileName = HttpContext.Current.Application["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Templates/default.wfm";
+                retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/default.wfm";
             }
             return retFileName;
         }
@@ -78,7 +78,7 @@ namespace LegoWebSite.DataProvider
         public static string get_HtmlTemplateFile(string expectedTemplateName)
         {
             HttpRequest Request = HttpContext.Current.Request;
-            String retFileName = HttpContext.Current.Application["FCKeditor:UserFilesPhysicalPath"].ToString() + "File/Templates/" + HttpContext.Current.Session["lang"].ToString() + "/" + expectedTemplateName + ".htm";
+            String retFileName = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString() + "File/Templates/" + System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + "/" + expectedTemplateName + ".htm";
             if (File.Exists(retFileName))
             {
                 return retFileName;

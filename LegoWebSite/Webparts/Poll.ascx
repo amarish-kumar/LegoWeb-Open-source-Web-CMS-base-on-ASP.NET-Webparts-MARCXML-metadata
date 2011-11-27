@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Poll.ascx.cs" Inherits="Webparts_Poll" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="POLL.ascx.cs" Inherits="Webparts_POLL" %>
 
     <script type="text/javascript">
         $(document).ready(function() 
@@ -15,18 +15,16 @@
         });
     </script>
     
-    <div><span class="WebPartHeader_IconTitle"><img src="images/icon-l.jpg" border="0" style="float:left;padding-right:3px"/><%=Title.ToUpper() %></span></div>
-    <div class="WebPartHeader_Line"></div>
-    <div class="WebPartBox_SteelBlueLine">
-		 <div class="WebPartBox_SteelBlueLineWrap">
-            <div runat="server" id="divMsg" class="mInfo" visible="false" />
+<asp:Literal ID="litBoxTop" runat="server"></asp:Literal>		 
+		 
+            <div runat="server" id="divMessage" class="mInfo" visible="false" />
             <div id="divPoll" runat="server">
                 <div class="poll-question">
 					<div style="padding:3px">
 						 <asp:Literal ID="litQuestion" runat="server"></asp:Literal>
 					</div>
                 </div>
-                <div id="divQuestion" class="questionList" runat="server" visible="true">
+                <div id="divChoices" class="poll-choices" runat="server" visible="true">
                     <table width="100%" cellpadding="5" cellspacing="0" border="0">                
                         <tr>
                         <td>
@@ -38,43 +36,36 @@
                         <tr>
                             <td align="right">
                             <asp:Button ID="btnVote" Text="Bỏ phiếu" runat="server" OnClick="btnVote_OnClick" 
-                                    Font-Bold="False" Font-Italic="False"/>
+                                    BorderStyle="Outset" Font-Bold=true ForeColor="White" 
+                    BorderColor="#CCFFFF" BackColor="#0066FF"/>
                             </td>
                         </tr>            
                     </table>
                 </div>
-                <div id="divVote" runat="server" visible="false" class="questionList">
+                <div id="divVoting" runat="server" visible="false" class="poll-choices">
                     <table width="100%" cellpadding="5" cellspacing="0" border="0">
                     <tr>
-                    <td colspan="2" valign="middle">
-                        <img src="JpegImage.aspx"/>
+                    <td align="center" valign="middle">
+                        <img src="Captcha.aspx"/>
                     </td>
                     </tr>
                     <tr>
-                    <td>
+                    <td align="right">
                     <asp:TextBox ID="txtVoteConfirmNumber" runat="server" Width="100"></asp:TextBox>
-                    </td>
-                    <td>
-                    <asp:Button ID="btnConfirmVote" Text="Xác Nhận" runat="server" OnClick="btnConfirmVote_OnClick"/>        
-                    </td>
-                    </tr>
-                    <tr>
-                    <td colspan="2">
-                    <asp:Label ID="labelErroMessage" runat="server" ForeColor="#CC3333"></asp:Label>
+                    <asp:Button ID="btnConfirmVote" Text="Xác Nhận" runat="server" OnClick="btnConfirmVote_OnClick" BorderStyle="Outset" Font-Bold=true ForeColor="White" 
+                    BorderColor="#CCFFFF" BackColor="#0066FF"/>        
                     </td>
                     </tr>
                     </table>        
                 </div>
-                <div id="divResult" runat="server" visible="false" class="questionList">
+                <div id="divResult" runat="server" visible="false" class="poll-choices">
                 
                 </div>        
             </div>
-        </div>    
-    </div>
-    <div class="WebPartBox_SteelBlueFooter_Center">
-        <div class="WebPartBox_SteelBlueFooter_Left"></div>
-        <div class="WebPartBox_SteelBlueFooter_Right"></div>
-    </div>
+
+<asp:Literal ID="litBoxBottom" runat="server"></asp:Literal>
+
+
 
 
  

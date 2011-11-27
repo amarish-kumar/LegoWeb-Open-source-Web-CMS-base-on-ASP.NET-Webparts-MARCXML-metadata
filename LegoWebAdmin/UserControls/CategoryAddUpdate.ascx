@@ -94,7 +94,7 @@
             <td>
                 <asp:Image id="ImageCategoryImageUrl" style="max-height:100px; max-width:150px" ImageUrl="" runat="server" />
                 <asp:HiddenField ID="HiddenCategoryImageUrl" runat="server" Value=""/>
-                <a href="javascript:BrowseServer();"><%=Resources.strings.btnBrowse_Text %></a>
+                <a href="javascript:BrowseServer();"><%=Resources.strings.Browse_Text %></a>
             </td>
         </tr>  
         

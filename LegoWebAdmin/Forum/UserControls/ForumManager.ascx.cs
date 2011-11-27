@@ -15,9 +15,9 @@ public partial class LgwUserControls_ForumManager  : System.Web.UI.UserControl
     {
         this.radioIsPublic.Text = Resources.strings.Yes_Text;
         this.radioIsNotPublic.Text = Resources.strings.No_Text;
-        this.btnOk.Text = Resources.strings.btnOk_Text;
-        this.btnCancel.Text = Resources.strings.btnCancel_Text;
-        this.btnDelete.Text = Resources.strings.btnDelete_Text;
+        this.btnOk.Text = Resources.strings.Ok_Text;
+        this.btnCancel.Text = Resources.strings.Cancel_Text;
+        this.btnDelete.Text = Resources.strings.Delete_Text;
 
         if (!IsPostBack)
         {

@@ -18,7 +18,7 @@
         }                
         if (Membership.GetUser("admin") == null)
         {
-            Membership.CreateUser("admin", "admin" + DateTime.Now.Year.ToString(),"kipos@hiendai.com.vn");                  
+            Membership.CreateUser("admin", "admin" + DateTime.Now.Year.ToString(),"contact@legoweb.org");                  
         }
         
         if (!Roles.IsUserInRole("admin", "ADMINISTRATORS"))
@@ -29,9 +29,13 @@
         {
             Roles.AddUserToRole("admin", "WEBEDITORS");
         }
+        if (!Roles.IsUserInRole("admin", "WEBMASTERS"))
+        {
+            Roles.AddUserToRole("admin", "WEBMASTERS");
+        }        
         //FCKEditor
-        Application["FCKeditor:UserFilesPhysicalPath"] = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesPhysicalPath"].ToString();
-        Application["FCKeditor:UserFilesVirtuaPath"] = System.Configuration.ConfigurationSettings.AppSettings["LegoWebFilesVirtuaPath"].ToString();
+        Application["FCKeditor:UserFilesPhysicalPath"] = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString();
+        Application["FCKeditor:UserFilesVirtuaPath"] = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesVirtuaPath"].ToString();
 
         Application["_locales"] = System.Configuration.ConfigurationManager.GetSection("locales");
         HttpContext.Current.Cache.Insert("__InvalidateAllPages", DateTime.Now, null,

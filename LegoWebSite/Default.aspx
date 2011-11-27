@@ -1,11 +1,14 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="NORTH POWER SERVICE JOINT STOCK COMPANY " %>
-<%@Register TagPrefix="cc1" Namespace="LegoWebSite.Webparts"%>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" Title="Home page" %>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+	<script src="js/jquery-latest.js" type="text/javascript"></script> 
+    <script src="js/MenuTree.js" type="text/javascript"></script> 
+    <script src="js/jsPopup.js" type="text/javascript"></script>
+    <script src="js/searchEngine.js" type="text/javascript"></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyPlaceHolder" Runat="Server">
-    <div id="Content_Body">
+    <div id="lgw-content">
     <%--change to 4 columns redesign by NTU--%>
 	<table cellpadding="0" cellpadding="0" border="0" width="100%" style="table-layout:fixed">
 	<tbody>

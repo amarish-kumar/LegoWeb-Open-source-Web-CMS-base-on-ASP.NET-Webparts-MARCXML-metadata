@@ -1,6 +1,6 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="CommonParameterManager.ascx.cs" package="LEGOWEB">
-//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     Copyright (C) 2011 LEGOWEB.ORG. All rights reserved.
 //     www.legoweb.org
 //     License: GNU/GPL
 //     LEGOWEB IS FREE SOFTWARE
@@ -32,7 +32,7 @@ public partial class LgwUserControls_CommonParameterManager : System.Web.UI.User
             if (!IsPostBack)
             {
                 load_rdlParamType();
-                btnFilter.Text = Resources.strings.btnFilter_Text;
+                btnFilter.Text = Resources.strings.Filter_Text;
                 CommonUtility.InitializeGridParameters(ViewState, "commonparameterManager", typeof(SortFields), 1, 100);
                 ViewState["commonparameterManagerPageNumber"] = 1;
                 ViewState["commonparameterManagerPageSize"] = 10;

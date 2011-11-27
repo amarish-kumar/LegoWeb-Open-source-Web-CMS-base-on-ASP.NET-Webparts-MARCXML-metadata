@@ -1,6 +1,6 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="UserManager.ascx.cs" package="LEGOWEB">
-//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
+//     Copyright (C) 2011 LEGOWEB.ORG. All rights reserved.
 //     www.legoweb.org
 //     License: GNU/GPL
 //     LEGOWEB IS FREE SOFTWARE
@@ -29,8 +29,8 @@ public partial class LgwUserControls_UserManager : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
-            btnSearch.Text = Resources.strings.btnSearch_Text;
-            btnReset.Text = Resources.strings.btnReset_Text;
+            btnSearch.Text = Resources.strings.Search_Text;
+            btnReset.Text = Resources.strings.Reset_Text;
 
             CommonUtility.InitializeGridParameters(ViewState, "userManager", typeof(SortFields), 1, 100);
             ViewState["userManagerPageNumber"] = 1;

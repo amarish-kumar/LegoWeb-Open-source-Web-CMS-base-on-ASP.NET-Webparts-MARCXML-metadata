@@ -11,51 +11,6 @@ namespace LegoWebSite.Buslgic
     /// </summary>
     public static class Categories
     {
-        public static DataSet get_CONTENT_CATEGORY_ID(int iSectionId, int iCategoryId)
-        {
-            DataSet dataset = new DataSet();
-            String connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connStr))
-            {
-                try
-                {
-                    string strCommandText;
-                    SqlCommand objCommand;
-                    strCommandText = @" With hierarchy
-                                        AS
-                                            (
-                                                SELECT *
-                                                FROM LEGOWEB_CATEGORIES
-                                                WHERE SECTION_ID=@_SECTION_ID AND PARENT_CATEGORY_ID=0 and CATEGORY_ID=@_CATEGORY_ID
-                                                UNION ALL
-                                                SELECT c.CATEGORY_ID,c.PARENT_CATEGORY_ID,c.SECTION_ID,c.CATEGORY_VI_TITLE,c.CATEGORY_EN_TITLE,c.CATEGORY_TEMPLATE_NAME,c.ORDER_NUMBER,c.IS_PUBLIC
-                                                FROM LEGOWEB_CATEGORIES AS c INNER JOIN hierarchy AS p ON c.PARENT_CATEGORY_ID = p.CATEGORY_ID
-                                            )	
-                                        select * from hierarchy";
-
-                    objCommand = new SqlCommand(strCommandText, conn);
-                    objCommand.CommandType = CommandType.Text;
-                    objCommand.Parameters.Add(new SqlParameter("@_SECTION_ID", SqlDbType.Int));
-                    objCommand.Parameters["@_SECTION_ID"].Value = iSectionId;
-                    objCommand.Parameters.Add(new SqlParameter("@_CATEGORY_ID", SqlDbType.Int));
-                    objCommand.Parameters["@_CATEGORY_ID"].Value = iCategoryId;
-                    SqlDataAdapter adap = new SqlDataAdapter(objCommand);
-                    conn.Open();
-                    adap.Fill(dataset, "Table");
-                    conn.Close();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    if (conn.State == ConnectionState.Open)
-                        conn.Close();
-                }
-            }
-            return dataset;
-        }
         public static DataSet get_CATEGORY_BY_ID(int iCategoryID)
         {
             DataSet retData = new DataSet();
@@ -404,8 +359,8 @@ namespace LegoWebSite.Buslgic
             string strSQL = @"SELECT      
 	                            Category_Id AS '@Category_Id',      
 	                            Parent_Category_Id AS '@Parent_Category_Id',     
-		                        Category_Vi_Title + '(' + cast((Select COUNT(META_CONTENT_ID) From LEGOWEB_META_CONTENTS Where LEGOWEB_META_CONTENTS.IS_PUBLIC=1 AND LEGOWEB_META_CONTENTS.CATEGORY_ID=c.Category_Id) as nvarchar(20)) + ')' as '@Category_Vi_Title',             
-		                        Category_En_Title + '(' + cast((Select COUNT(META_CONTENT_ID) From LEGOWEB_META_CONTENTS Where LEGOWEB_META_CONTENTS.IS_PUBLIC=1 AND LEGOWEB_META_CONTENTS.CATEGORY_ID=c.Category_Id) as nvarchar(20)) + ')' as '@Category_En_Title',             
+		                        Category_Vi_Title + '(' + cast((Select COUNT(META_CONTENT_ID) From LEGOWEB_META_CONTENTS Where LEGOWEB_META_CONTENTS.RECORD_STATUS>0 AND LEGOWEB_META_CONTENTS.CATEGORY_ID=c.Category_Id) as nvarchar(20)) + ')' as '@Category_Vi_Title',             
+		                        Category_En_Title + '(' + cast((Select COUNT(META_CONTENT_ID) From LEGOWEB_META_CONTENTS Where LEGOWEB_META_CONTENTS.RECORD_STATUS>0 AND LEGOWEB_META_CONTENTS.CATEGORY_ID=c.Category_Id) as nvarchar(20)) + ')' as '@Category_En_Title',             
 	                            dbo.SelectChildCategoryXml(Category_Id,0)      
                                 FROM LEGOWEB_CATEGORIES AS c
                                 WHERE Parent_Category_Id=@_ROOT_PARENT_ID AND Is_Public=1 FOR XML PATH ('category')";
@@ -449,24 +404,32 @@ namespace LegoWebSite.Buslgic
             }
         }
 
-        public static string get_NavigatePath(int iCategroryId, string linkUrl)
+        public static string get_NavigatePath(int iCategroryId, string postLink)
         {
+            UrlQuery postURL = new UrlQuery(postLink);
+            postURL.Remove("contentid");
+            postURL.Remove("mnuid");
+            postURL.Remove("catid");
+            
             string sNaviPath = "";
-            string sNaviFormat = "<a href='{0}?catid={1}'>{2}</a>";
+            string sRootNaviFormat = "<span class='icon-11-arr-target navigator-text'><a href='{0}'>{1}</a></span>";
+            string sChildNaviFormat = "<span class='icon-11-arr-navigate navigator-text'><a href='{0}'>{1}</a></span>";
 
             DataTable CatInfo = LegoWebSite.Buslgic.Categories.get_CATEGORY_BY_ID(iCategroryId).Tables[0];
             int icatid = iCategroryId;
             string scatname = CatInfo.Rows[0]["CATEGORY_" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"].ToString();
             int ipcatid = int.Parse(CatInfo.Rows[0]["PARENT_CATEGORY_ID"].ToString());
-            sNaviPath = string.Format(sNaviFormat, linkUrl, icatid, scatname);
+            postURL.Set("catid", icatid.ToString());
+            sNaviPath = (ipcatid > 0 ? string.Format(sChildNaviFormat, postURL.AbsoluteUri, scatname) : string.Format(sRootNaviFormat, postURL.AbsoluteUri, scatname));
             while (ipcatid > 0)
             {
                 iCategroryId = ipcatid;
                 CatInfo = LegoWebSite.Buslgic.Categories.get_CATEGORY_BY_ID(iCategroryId).Tables[0];
                 icatid = iCategroryId;
                 scatname = CatInfo.Rows[0]["CATEGORY_" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToUpper() + "_TITLE"].ToString();
-                sNaviPath = string.Format(sNaviFormat, linkUrl, icatid, scatname) + "<img src='images/navigate.gif' border='0' /> " + sNaviPath;
                 ipcatid = int.Parse(CatInfo.Rows[0]["PARENT_CATEGORY_ID"].ToString());
+                postURL.Set("catid", icatid.ToString());
+                sNaviPath = (ipcatid > 0 ? string.Format(sChildNaviFormat, postURL.AbsoluteUri, scatname) : string.Format(sRootNaviFormat,postURL.AbsoluteUri, scatname)) + sNaviPath;                
             }
             return sNaviPath;
         }

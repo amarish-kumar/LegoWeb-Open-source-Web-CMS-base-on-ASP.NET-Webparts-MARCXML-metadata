@@ -4,8 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyPlaceHolder" Runat="Server">
 
-    <div id ="Content_Body">
-        <div class="MenuLeft">
+    <div id ="lgw-content">
+        <div class="left-column-240">
          <asp:WebPartZone ID="WebPartZone1" runat="server" Width="100%" PartChromeType="none" Padding="0" PartStyle-CssClass="NoPadding"> 
             <PartStyle CssClass="Nopadding"></PartStyle>
             <CloseVerb Visible="false" />
@@ -15,7 +15,7 @@
             </ZoneTemplate>
         </asp:WebPartZone>
        </div>
-        <div class="ContentRight">
+        <div class="midle-right-column-740">
             <asp:Label ID="label1" runat="server"></asp:Label>
             <asp:WebPartZone ID="WebPartZone2" runat="server" Width="100%"  PartChromeType="none" Padding="0" PartStyle-CssClass="NoPadding">
             <PartStyle CssClass="Nopadding"></PartStyle>

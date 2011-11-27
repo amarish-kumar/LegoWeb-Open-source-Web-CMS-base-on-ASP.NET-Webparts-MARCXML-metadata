@@ -132,6 +132,7 @@ namespace LegoWebSite.Buslgic
             }
             return retData;
         }
+
         public static int get_PARENT_MENU_ID(int iMenuID)
         {
             String connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
@@ -141,6 +142,52 @@ namespace LegoWebSite.Buslgic
                 {
                     SqlCommand cmdReader = new SqlCommand("SELECT PARENT_MENU_ID FROM LEGOWEB_MENUS WHERE MENU_ID=" + iMenuID.ToString(), conn);
                     conn.Open();
+                    SqlDataReader reader = cmdReader.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        int retID = (int)reader["PARENT_MENU_ID"];
+                        conn.Close();
+                        return retID;
+                    }
+                    else
+                    {
+                        conn.Close();
+                        return -1;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (conn != null)
+                        conn.Close();
+                }
+            }
+
+        }
+
+        public static int get_PARENT_MENU_ID(int iMenuID, int iMenuTypeID)
+        {
+            String connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                try
+                {
+                    SqlParameter objParam;
+                    SqlCommand cmdReader = new SqlCommand("SELECT PARENT_MENU_ID FROM LEGOWEB_MENUS WHERE MENU_ID=@_MENU_ID AND (PARENT_MENU_ID IN (SELECT MENU_ID FROM LEGOWEB_MENUS WHERE MENU_TYPE_ID=@_MENU_TYPE_ID))", conn);
+                    conn.Open();
+
+                    objParam = cmdReader.Parameters.Add(new SqlParameter("@_MENU_ID", SqlDbType.Int));
+                    objParam.Direction = ParameterDirection.Input;
+                    objParam.Value = iMenuID;
+
+                    objParam = cmdReader.Parameters.Add(new SqlParameter("@_MENU_TYPE_ID", SqlDbType.Int));
+                    objParam.Direction = ParameterDirection.Input;
+                    objParam.Value = iMenuTypeID;
+
                     SqlDataReader reader = cmdReader.ExecuteReader();
                     if (reader.HasRows)
                     {

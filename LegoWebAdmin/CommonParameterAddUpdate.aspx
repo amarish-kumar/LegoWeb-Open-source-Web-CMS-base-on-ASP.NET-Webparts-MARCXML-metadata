@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="CommonParameterAddUpdate.aspx.cs" Inherits="Administrator_CommonParameterAddUpdate" Title="Update system parameters" ValidateRequest="false" %>
+﻿<%@ Page Language="C#" MasterPageFile="LegoWebAdmin.master" AutoEventWireup="true" CodeFile="CommonParameterAddUpdate.aspx.cs" Inherits="Administrator_CommonParameterAddUpdate" Title="KIPOSADMIN:Cập nhật Tham số hệ thống" ValidateRequest="false" %>
 <%@ Register src="~/UserControls/AdminMenuBarActive.ascx" tagname="AdminMenuBarActive" tagprefix="uc1" %>
 <%@ Register src="~/UserControls/AdminMenuBarDeactive.ascx" tagname="AdminMenuBarDeactive" tagprefix="uc2" %>
 <%@ Register src="~/UserControls/CommonParameterAddUpdate.ascx" tagname="CommonParameterAddUpdate" tagprefix="uc3" %>
@@ -37,7 +37,7 @@
         onclick="linkSaveButton_Click" ValidationGroup="CommonParameterInfo" CausesValidation="true">
 <span class="icon-32-save" title="Save">
 </span>
-<%=Resources.strings.btnSave_Text %>
+<%=Resources.strings.Save_Text %>
 </asp:LinkButton>
 </td>
  
@@ -47,7 +47,7 @@
         onclick="linkCancelButton_Click" ValidationGroup="CommonParameterInfo" CausesValidation="false">
         <span class="icon-32-cancel" title="Cancel">
 </span>
-<%=Resources.strings.btnCancel_Text %>
+<%=Resources.strings.Cancel_Text %>
 </asp:LinkButton>
 </td>
  
@@ -55,7 +55,7 @@
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Help">
 </span>
-<%=Resources.strings.btnHelp_Text %>
+<%=Resources.strings.Help_Text %>
 </a>
 </td>
  

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Configuration;
 using System.Data;
+
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -35,12 +36,12 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
             HtmlMeta metaDesc = new HtmlMeta();
             metaDesc.Name = "description";
-            metaDesc.Content = LegoWebSite.Buslgic.CommonParameters.get_COMMON_PARAMETER_VALUE("WEBSITE_META_DESCRIPTION");
+            metaDesc.Content = LegoWebSite.Buslgic.CommonParameters.get_COMMON_PARAMETER_VALUE("META_DESCRIPTION");
             Page.Header.Controls.Add(metaDesc);
 
             HtmlMeta metaKey = new HtmlMeta();
             metaKey.Name = "keywords";
-            metaKey.Content = LegoWebSite.Buslgic.CommonParameters.get_COMMON_PARAMETER_VALUE("WEBSITE_META_KEYWORDS");
+            metaKey.Content = LegoWebSite.Buslgic.CommonParameters.get_COMMON_PARAMETER_VALUE("META_KEYWORDS");
             Page.Header.Controls.Add(metaKey);
 
         }

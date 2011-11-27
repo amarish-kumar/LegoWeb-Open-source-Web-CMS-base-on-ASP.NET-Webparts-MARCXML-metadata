@@ -34,9 +34,9 @@
 <table class="toolbar"><tr>
 <td class="button" id="toolbar-help">
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
-<span class="icon-32-help" title="<%=Resources.strings.btnHelp_Text %>">
+<span class="icon-32-help" title="<%=Resources.strings.Help_Text %>">
 </span>
-<%=Resources.strings.btnHelp_Text %>
+<%=Resources.strings.Help_Text %>
 </a>
 </td>
 

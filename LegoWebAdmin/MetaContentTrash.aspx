@@ -39,7 +39,7 @@
         onclick="linkRestoreButton_Click">
 <span class="icon-32-restore" title="Restore">
 </span>
-<%=Resources.strings.btnRestore_Text %>
+<%=Resources.strings.Restore_Text %>
 </asp:LinkButton>
 </td>
 
@@ -49,7 +49,7 @@
         onclick="linkDeleteButton_Click" OnClientClick="return confirm('Are you sure to delete permanently selected items?')">
 <span class="icon-32-delete" title="Delete">
 </span>
-<%=Resources.strings.btnDelete_Text %>
+<%=Resources.strings.Delete_Text %>
 </asp:LinkButton>
 </td>
 
@@ -57,7 +57,7 @@
 <a href="#" onclick="popupWindow('http://www.legoweb.org/help', 'Help', 640, 480, 1)" class="toolbar">
 <span class="icon-32-help" title="Help">
 </span>
-<%=Resources.strings.btnHelp_Text %>
+<%=Resources.strings.Help_Text %>
 </a>
 </td>
 
