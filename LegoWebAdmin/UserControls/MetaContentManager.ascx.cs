@@ -18,8 +18,8 @@ using System.Web.UI.WebControls;
 
 using LegoWebAdmin.DataProvider;
 /// <summary>
-    /// Webpart hiển thị chuyên mục nội dung theo hình cây
-    /// </summary>
+/// Displays category tree on the left and list of associated contents on the right
+/// </summary>
 public partial class LgwUserControls_MetaContentManager : System.Web.UI.UserControl
 {
     protected MetaContentDataProvider _metaContentManagerData;

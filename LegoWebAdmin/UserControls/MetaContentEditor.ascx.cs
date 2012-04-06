@@ -596,7 +596,7 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
                 //remove by TAG_INDEX and SUBFIELD_CODE
                 Label labelSubfieldID = ((Label)marcTextRepeater.Items[i].FindControl("labelSubfieldID"));
 
-                if (labelSubfieldID != null && !String.IsNullOrEmpty(labelSubfieldID.Text))
+                if (labelSubfieldID != null && !String.IsNullOrEmpty(labelSubfieldID.Text) && labelSubfieldID.Text!="0")
                 {
                     LegoWebAdmin.BusLogic.MetaContents.remove_META_CONTENT_SUBFIELD(int.Parse(labelSubfieldID.Text));
                     DataRow[] remRows = marcTable.Select(" SUBFIELD_ID=" + labelSubfieldID.Text);
@@ -612,7 +612,6 @@ public partial class LgwUserControls_MetaContentEditor : System.Web.UI.UserContr
                         DataRow[] remRows = marcTable.Select("TAG_INDEX=" + labelTagIndex.Text + " AND SUBFIELD_CODE='" + labelSubfieldCode.Text + "'");
                         if (remRows != null) marcTable.Rows.Remove(remRows[0]);                    
                     }
-
                 }
             }
         }

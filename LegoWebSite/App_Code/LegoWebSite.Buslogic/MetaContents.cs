@@ -151,7 +151,7 @@ namespace LegoWebSite.Buslgic
                return retData.Tables[0];
            }
 
-           public static DataTable get_TOP_CONTENTS_OF_CATEGORY(int iCATEGORY_ID,int iNUMBER_OF_RECORD, string sLANG_CODE, string sOrderClause)
+           public static DataTable get_TOP_CONTENTS_OF_CATEGORY(int iCATEGORY_ID,int iNUMBER_OF_RECORD, string sLANG_CODE)
            {
                DataSet retData = new DataSet();
 
@@ -164,6 +164,9 @@ namespace LegoWebSite.Buslgic
                        SqlCommand objCommand;
                        SqlParameter objParam;
                        strCommandName = @"
+                            	DECLARE @_SORT_CONTENT_BY smallint
+                                SET @_SORT_CONTENT_BY=1	
+                        		SELECT @_SORT_CONTENT_BY = SORT_CONTENT_BY FROM LEGOWEB_CATEGORIES WHERE CATEGORY_ID=@_CATEGORY_ID;
                                 WITH hierarchy
                                 AS
                                 (
@@ -175,23 +178,24 @@ namespace LegoWebSite.Buslgic
                                         FROM LEGOWEB_CATEGORIES AS c INNER JOIN hierarchy AS p ON c.PARENT_CATEGORY_ID = p.CATEGORY_ID
                                  )
 
-	                             SELECT DISTINCT TOP(@_NUMBER_OF_RECORD) LEGOWEB_META_CONTENTS.META_CONTENT_ID,LEGOWEB_META_CONTENTS.MODIFIED_DATE
+	                             SELECT TOP(@_NUMBER_OF_RECORD) LEGOWEB_META_CONTENTS.META_CONTENT_ID,LEGOWEB_META_CONTENTS.CATEGORY_ID,LEGOWEB_META_CONTENTS.MODIFIED_DATE,LEGOWEB_META_CONTENTS.ORDER_NUMBER
 		                         FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID
-                                 WHERE RECORD_STATUS>0                                     
+                                 WHERE RECORD_STATUS>0         
                                 ";
-                       if (!String.IsNullOrEmpty(sLANG_CODE))
-                       {
-                           strCommandName += " AND LANG_CODE=N'" + sLANG_CODE + "'" ;
-                       }
-                       if (String.IsNullOrEmpty(sOrderClause))
-                       {
-                           strCommandName += " ORDER BY MODIFIED_DATE DESC";
-                       }
-                       else
-                       {
-                           strCommandName += " " + sOrderClause;
-                       }
-                       
+                               if (!String.IsNullOrEmpty(sLANG_CODE))
+                               {
+                                   strCommandName += " AND LANG_CODE=N'" + sLANG_CODE + "'" ;
+                               }
+                                 strCommandName += @" ORDER BY 
+		                                        CASE @_SORT_CONTENT_BY 
+		                                        WHEN 1 THEN LEGOWEB_META_CONTENTS.MODIFIED_DATE 
+		                                        WHEN 3 THEN LEGOWEB_META_CONTENTS.ORDER_NUMBER
+		                                        END DESC,
+		                                        CASE @_SORT_CONTENT_BY
+		                                        WHEN 0 THEN LEGOWEB_META_CONTENTS.MODIFIED_DATE 
+		                                        WHEN 2 THEN LEGOWEB_META_CONTENTS.ORDER_NUMBER
+		                                        END;                            
+                                                ";                       
                        objCommand = new SqlCommand(strCommandName, conn);
                        objCommand.CommandType = CommandType.Text;
 
@@ -310,7 +314,7 @@ namespace LegoWebSite.Buslgic
                                         FROM LEGOWEB_CATEGORIES AS c INNER JOIN hierarchy AS p ON c.PARENT_CATEGORY_ID = p.CATEGORY_ID
                                  )
 
-	                             SELECT DISTINCT TOP(@_NUMBER_OF_RECORD) LEGOWEB_META_CONTENTS.META_CONTENT_ID,LEGOWEB_META_CONTENTS.MODIFIED_DATE 
+	                             SELECT DISTINCT TOP(@_NUMBER_OF_RECORD) LEGOWEB_META_CONTENTS.META_CONTENT_ID,LEGOWEB_META_CONTENTS.CATEGORY_ID,LEGOWEB_META_CONTENTS.MODIFIED_DATE 
 		                         FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID
                                  WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE  AND RECORD_STATUS>0 AND IMPORTANT_LEVEL>=@_IMPORTANT_LEVEL
                                  ORDER BY MODIFIED_DATE DESC   
@@ -379,7 +383,7 @@ namespace LegoWebSite.Buslgic
                                         FROM LEGOWEB_CATEGORIES AS c INNER JOIN hierarchy AS p ON c.PARENT_CATEGORY_ID = p.CATEGORY_ID
                                  )
 
-	                             SELECT DISTINCT TOP(@_NUMBER_OF_RECORD) LEGOWEB_META_CONTENTS.META_CONTENT_ID,LEGOWEB_META_CONTENTS.MODIFIED_DATE 
+	                             SELECT DISTINCT TOP(@_NUMBER_OF_RECORD) LEGOWEB_META_CONTENTS.META_CONTENT_ID,LEGOWEB_META_CONTENTS.CATEGORY_ID,LEGOWEB_META_CONTENTS.MODIFIED_DATE 
 		                         FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID
                                  WHERE LEGOWEB_META_CONTENTS.LANG_CODE=@_LANG_CODE  AND RECORD_STATUS>0 AND IMPORTANT_LEVEL>=@_IMPORTANT_LEVEL
                                  ORDER BY MODIFIED_DATE DESC   
@@ -613,9 +617,9 @@ namespace LegoWebSite.Buslgic
                        outRec.RecordStatus = int.Parse(reader0["RECORD_STATUS"].ToString());
                        outRec.AccessLevel = int.Parse(reader0["ACCESS_LEVEL"].ToString());
                        outRec.LangCode = reader0["LANG_CODE"].ToString();
-                       outRec.EntryDate = Convert.ToDateTime(reader0["CREATED_DATE"]).ToString("yyyy-MMM-dd hh:mm:ss");
+                       outRec.EntryDate = Convert.ToDateTime(reader0["CREATED_DATE"]).ToString("yyyy-MMM-dd HH:mm:ss");
                        outRec.Creator = reader0["CREATED_USER"].ToString();
-                       outRec.ModifyDate = Convert.ToDateTime(reader0["MODIFIED_DATE"]).ToString("dd/MM/yy hh:mm:ss");
+                       outRec.ModifyDate = Convert.ToDateTime(reader0["MODIFIED_DATE"]).ToString("dd-MM-yy HH:mm:ss");
                        outRec.Modifier = reader0["MODIFIED_USER"].ToString();
                        reader0.Close();
                        conn.Close();
@@ -800,7 +804,7 @@ namespace LegoWebSite.Buslgic
                                         SELECT c.CATEGORY_ID,c.CATEGORY_VI_TITLE
                                         FROM LEGOWEB_CATEGORIES AS c INNER JOIN hierarchy AS p ON c.PARENT_CATEGORY_ID = p.CATEGORY_ID
                                         )
-                                    SELECT COUNT(DISTINCT LEGOWEB_META_CONTENTS.META_CONTENT_ID) FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID 
+                                        SELECT COUNT(DISTINCT LEGOWEB_META_CONTENTS.META_CONTENT_ID) FROM LEGOWEB_META_CONTENTS LEFT JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID 
                                     ";
 
                         if (String.IsNullOrEmpty(sSearchField))
@@ -901,13 +905,13 @@ namespace LegoWebSite.Buslgic
 	                                    (
 	                                        SELECT CATEGORY_ID,CATEGORY_VI_TITLE
 	                                        FROM LEGOWEB_CATEGORIES
-	                                        WHERE   ((SECTION_ID=1000 AND PARENT_CATEGORY_ID=0))		   	
+	                                        WHERE   ((SECTION_ID=@_SECTION_ID AND PARENT_CATEGORY_ID=0))		   	
 	                                        UNION ALL
 	                                        SELECT c.CATEGORY_ID,c.CATEGORY_VI_TITLE
 	                                        FROM LEGOWEB_CATEGORIES AS c INNER JOIN hierarchy AS p ON c.PARENT_CATEGORY_ID = p.CATEGORY_ID
 	                                    )
                                         SELECT DISTINCT TOP(@_SELECT_ROW_NUMBER) LEGOWEB_META_CONTENTS.META_CONTENT_ID
-                                        FROM LEGOWEB_META_CONTENTS INNER JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID 
+                                        FROM LEGOWEB_META_CONTENTS LEFT JOIN hierarchy ON LEGOWEB_META_CONTENTS.CATEGORY_ID=hierarchy.CATEGORY_ID 
                                     ";
                         if (String.IsNullOrEmpty(sSearchField))
                         {

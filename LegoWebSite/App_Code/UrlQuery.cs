@@ -161,7 +161,7 @@ public class UrlQuery
         {
             try
             {
-                this.queryString.Remove(List[i]);
+                this.QueryString.Remove(List[i]);
             }
             catch
             { 
@@ -176,6 +176,7 @@ public class UrlQuery
     public static NameValueCollection NameValueCollection(string qs)
     {
         NameValueCollection nvc = new NameValueCollection();
+        if (String.IsNullOrEmpty(qs)) return nvc;
         //strip string data before the question mark
         qs = qs.IndexOf('?') > 0 ? qs.Remove(0, qs.IndexOf('?') + 1) : qs;
         Array sqarr = qs.Split("&".ToCharArray());

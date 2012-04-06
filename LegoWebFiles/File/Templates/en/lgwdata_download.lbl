@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<record>
+  <leader>00000nam#a2200000ui#4500</leader>
+  <controlfield tag="001" type="NUMBER">MetaContentID</controlfield>
+  <controlfield tag="002" type="NUMBER">CategoryID</controlfield>
+  <controlfield tag="003" type="BOOLEAN">IsPublic</controlfield>
+  <controlfield tag="004" type="NUMBER">DestinationId</controlfield>
+  <controlfield tag="005" type="NUMBER">ServiceId</controlfield>
+  <controlfield tag="006" type="NUMBER">AdvertismentGroup</controlfield>
+  <controlfield tag="007" type="TEXT"></controlfield>
+  <controlfield tag="008" type="TEXT">LanguageCode</controlfield>
+
+  <datafield tag="100" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT">Tác giả</subfield>
+  </datafield>
+
+  <datafield tag="110" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT">Cơ quan</subfield>
+  </datafield>
+
+  <datafield tag="245" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT">Nhan đề</subfield>
+    <subfield code="b" type="TEXT">Tóm tắt</subfield>
+    <subfield code="u" type="TEXT">Ảnh đại diện</subfield>
+  </datafield>
+
+  <datafield tag="260" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT">Nơi xuất bản</subfield>
+    <subfield code="b" type="TEXT">Nhà xuất bản</subfield>
+    <subfield code="c" type="NUMBER">Năm xuất bản</subfield>
+  </datafield>
+
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT">Số trang</subfield>
+    <subfield code="b" type="TEXT">Chi tiết vật lý khác</subfield>
+  </datafield>
+
+
+  <datafield tag="520" ind1=" " ind2=" ">
+    <subfield code="a" type="NTEXT">Tóm tắt</subfield>
+  </datafield>
+
+  <datafield tag="650" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT">Chủ đề/ từ khóa</subfield>
+  </datafield>
+
+  <datafield tag="780" ind1=" " ind2=" ">
+    <subfield code="t" type="TEXT">Tài liệu liên quan</subfield>
+    <subfield code="w" type="NUMBER">Mã tài liệu</subfield>
+  </datafield>
+
+  <datafield tag="856" ind1=" " ind2=" ">
+    <subfield code="f" type="TEXT">Tên tệp</subfield>
+    <subfield code="s" type="TEXT">Kích thước</subfield>
+   <subfield code="u" type="TEXT">Đường dẫn URL</subfield>
+    <subfield code="n" type="NUMBER">Số lượt tải về</subfield>   
+	</datafield>		
+</record>

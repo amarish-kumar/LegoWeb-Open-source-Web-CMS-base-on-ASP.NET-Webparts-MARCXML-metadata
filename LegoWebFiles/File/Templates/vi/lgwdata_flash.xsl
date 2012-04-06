@@ -1,4 +1,4 @@
-<xsl:stylesheet version="1.0" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0"  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="html" omit-xml-declaration="yes" />
 
   <xsl:template match="/">
@@ -20,6 +20,12 @@
          <xsl:attribute name="src">
            <xsl:value-of select="$FlashSource" />
          </xsl:attribute>
+         <xsl:attribute name="width">
+           <xsl:value-of select="$FlashWidth" />
+         </xsl:attribute>
+         <xsl:attribute name="height">
+           <xsl:value-of select="$FlashHeight" />
+         </xsl:attribute>
        </img>
      </xsl:when>
      <xsl:when test="contains($FlashSource,'.png')">
@@ -27,12 +33,24 @@
          <xsl:attribute name="src">
            <xsl:value-of select="$FlashSource" />
          </xsl:attribute>
+         <xsl:attribute name="width">
+           <xsl:value-of select="$FlashWidth" />
+         </xsl:attribute>
+         <xsl:attribute name="height">
+           <xsl:value-of select="$FlashHeight" />
+         </xsl:attribute>
        </img>
      </xsl:when>
      <xsl:when test="contains($FlashSource,'.gif')">
        <img>
          <xsl:attribute name="src">
            <xsl:value-of select="$FlashSource" />
+         </xsl:attribute>
+         <xsl:attribute name="width">
+           <xsl:value-of select="$FlashWidth" />
+         </xsl:attribute>
+         <xsl:attribute name="height">
+           <xsl:value-of select="$FlashHeight" />
          </xsl:attribute>
        </img>
      </xsl:when>

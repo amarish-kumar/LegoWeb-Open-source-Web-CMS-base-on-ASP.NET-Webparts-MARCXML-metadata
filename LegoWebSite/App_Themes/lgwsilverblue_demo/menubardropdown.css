@@ -1,0 +1,208 @@
+.menubardropdown-wrapper-container
+{
+	 font-family: arial,verdana,helvetica,sans-serif;
+     font-size:10.5pt;
+     font-weight:bold;
+     color:#fff;
+	 margin: 0 auto;
+	 padding:0;
+	 float:left;
+	 width:980px;
+}
+
+.menubardropdown-wrapper-container a
+{
+	color: #0D3D63;
+	text-decoration: none;
+}
+.menubardropdown-wrapper-container a:hover 
+{
+	color: #0D3D63;
+}
+.menubardropdown-wrapper-container p 
+{
+	margin: 0 0 17px;
+	padding: 0;
+	line-height: 18px;	
+}
+.menubardropdown-wrapper 
+{
+	width: 980px;
+    height:auto;
+    margin:auto;
+}
+.menubardropdown-nav 
+{
+	background: #fff url(images/menubardropdown/nav-bg.png) repeat-x;
+	float: left;
+	width: 968px;
+}
+.menubardropdown-nav-wrapper 
+{
+	clear: both;
+	float: left;
+	width: 980px;
+}
+.menubardropdown-nav-left 
+{
+	background: url(images/menubardropdown/nav-left.png) no-repeat top left;
+	float: left;
+	width: 6px;
+	height: 36px;
+}
+.menubardropdown-nav-right 
+{
+	background:url(images/menubardropdown/nav-right.png) no-repeat top right;
+	float: right;
+	width: 6px;
+	height: 36px;
+}
+.menubardropdown-nav ul 
+{
+	width: 950px;
+	height: 36px;
+	float: left;
+	margin: 0;
+	padding-top: 0px;
+	list-style: none;
+   
+}
+.menubardropdown-nav li 
+{
+	float: left;
+	padding: 0 7px;
+	background: url(images/menubardropdown/split.png) no-repeat right center;
+	position: relative;
+	z-index: 1;
+}
+.menubardropdown-nav li.last 
+{
+	background:none;
+}
+.menubardropdown-nav li:hover 
+{
+	z-index:2;
+}
+.menubardropdown-nav li a {
+	display: block;
+	line-height: 38px;
+	overflow: hidden;
+	float: left;
+	
+}
+a .menu-left 
+{
+	background: url(images/menubardropdown/menu-left.png) no-repeat left top;
+	width: 8px;
+	height: 36px;
+	line-height: 36px;
+	display: block;
+	float: left;
+}
+a .menu-mid 
+{
+	background: url(images/menubardropdown/menu-mid.png) repeat-x top left;
+	height: 36px;
+	line-height: 36px;
+	display: block;
+	float: left;
+}
+a .menu-right 
+{
+	background: url(images/menubardropdown/menu-right.png) no-repeat top left;
+	width: 8px;
+	height: 36px;
+	line-height: 36px;
+	display: block;
+	float: left;
+}
+.menubardropdown-nav li a:hover .menu-left,
+.menubardropdown-nav li.active a .menu-left,
+.menubardropdown-nav li:hover a .menu-left,
+.menubardropdown-nav li a:hover .menu-mid,
+.menubardropdown-nav li.active a .menu-mid,
+.menubardropdown-nav li:hover a .menu-mid,
+.menubardropdown-nav li a:hover .menu-right,
+.menubardropdown-nav li.active a .menu-right,
+.menubardropdown-nav li:hover a .menu-right {
+	background-position: 0 -37px;
+	line-height: 35px;
+}
+.menubardropdown-nav li a:hover,
+.menubardropdown-nav li.active a,
+.menubardropdown-nav li.hover a,
+.menubardropdown-nav li:hover a 
+{
+	color: #ffffff;
+}
+.menubardropdown-nav li:hover .sub,
+.menubardropdown-nav li.hover .sub 
+{
+	display:block;
+}
+.menubardropdown-nav li .sub 
+{
+	display: none;
+	position: absolute;
+	top: 27px;
+	left: 6px;
+	background: url(images/menubardropdown/submenu-top.png) no-repeat;
+	width: 186px;
+	padding-top: 9px;
+}
+.menubardropdown-nav li ul 
+{
+	background: url(images/menubardropdown/submenu-bg.png) repeat-y;
+	width: 162px;
+	height: auto;
+	margin: 0;
+	padding: 0 12px 10px;
+	list-style: none;
+	 font-family: Arial ;
+     font-size:8.5pt;
+}
+
+.menubardropdown-nav li:hover li,
+.menubardropdown-nav li.active li 
+{
+	width: 100%;
+	padding: 1px 0 2px;
+	border-bottom: 1px #C1D9F0 dashed;
+	background: none !important;
+}
+.menubardropdown-nav li:hover li a,
+.menubardropdown-nav li.active li a 
+{
+	color: #0D3D63;
+	background: none !important;
+	line-height: normal;
+	width: 156px;
+	padding: 8px 3px 3px;
+	text-indent: 1px;
+}
+.menubardropdown-nav li:hover li a:hover,
+.menubardropdown-nav li.active li a:hover 
+{
+	color: #fff;
+	background: #959595 !important;
+	text-decoration: none;
+	line-height: normal;
+}
+/*IE*/
+.menubardropdown-nav li li a:hover,
+.menubardropdown-nav li li a:hover 
+{
+	color: #fff;
+	background: #959595 !important;
+	text-decoration: none;
+	line-height: normal;
+}
+/**/
+.menubardropdown-nav .btm-bg 
+{
+	background: url(images/menubardropdown/submenu-bottom.png) no-repeat;
+	width: 205px;
+	height: 9px;
+	overflow: hidden;
+	clear: both;
+}

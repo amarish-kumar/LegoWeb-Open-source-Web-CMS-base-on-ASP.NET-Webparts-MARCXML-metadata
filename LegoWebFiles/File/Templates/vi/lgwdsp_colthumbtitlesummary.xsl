@@ -6,7 +6,7 @@
 	<xsl:template match="record">
     <table width="100%" border="0" bordercolor="#dfd0a3">
       <tr>
-      <td valign ="top" align="left" width="132px">
+      <td valign ="top" align="left" width="132px">        
         <xsl:variable name="ThumbExist" select="count(datafield[@tag=245]/subfield[@code='u'])" />
         <xsl:choose>
           <xsl:when test="$ThumbExist">
@@ -27,7 +27,7 @@
             <span style="font-family: Arial, Helvetica, sans-serif; font-size: small; font-weight: bold; font-style: regular">
               <a>
                 <xsl:attribute name="href">
-                  {POST_URL}
+                  <xsl:value-of select="controlfield[@tag=001]/text()"/>
                 </xsl:attribute>
                 <xsl:value-of select="datafield[@tag=245]/subfield[@code='a']/text()"/>
               </a>

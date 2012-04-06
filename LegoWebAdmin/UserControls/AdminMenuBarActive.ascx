@@ -52,7 +52,6 @@
 
 <li class="node"><a><%=Resources.strings.Modules_Text%></a>
 <ul>
-<li><a class="icon-16-forum" href="Forum/ForumManager.aspx"><%=Resources.strings.ForumManager_Text%></a></li>
 </ul>
 </li>
 

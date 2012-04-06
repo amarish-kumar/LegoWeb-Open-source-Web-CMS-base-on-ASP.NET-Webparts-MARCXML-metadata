@@ -1,20 +1,16 @@
-﻿<xsl:stylesheet version="1.0" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:output method="html" omit-xml-declaration="yes"/>
-    <xsl:template match="/">
-        <xsl:apply-templates></xsl:apply-templates>
-    </xsl:template>
-    <xsl:template match="record">
-		<div class="folder-content" style="padding-top:7px">
-			<ul>
-				<li>
-					<A>
-						<xsl:attribute name="href">
-							{POST_URL}
-						</xsl:attribute>
-						<xsl:value-of select="datafield[@tag=245]/subfield[@code='a']/text()"/>
-					</A>
-				</li>
-			</ul>	
-		</div>
-    </xsl:template>
+﻿<xsl:stylesheet version="1.0"  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:date="http://exslt.org/dates-and-times" extension-element-prefixes="date">
+  <xsl:output method="html" omit-xml-declaration="yes"/>
+  <xsl:template match="record">
+    <div style="padding-top:5px;position:relative;clear:both;">
+      <span class="icon-7-double-arrow">
+        <A class="link-title">
+          <xsl:attribute name="href">
+          <xsl:value-of select="controlfield[@tag=001]/text()"/>
+          </xsl:attribute>
+          <xsl:value-of select="datafield[@tag=245]/subfield[@code='a']/text()"/>
+        </A>
+      </span>
+    </div>
+  </xsl:template>
 </xsl:stylesheet>

@@ -132,36 +132,36 @@ public partial class Webparts_USERLOGIN :WebPartBase
 
     public void load_UserInfo()
     {
-        LegoWebSiteForum.Buslogic.User myUser;
+        //LegoWebSiteForum.Buslogic.User myUser;
         if (Page.User.Identity.IsAuthenticated)
         {
            MembershipUser currentUser=Membership.GetUser(Page.User.Identity.Name);
            if (currentUser == null) return;
 
-           int iUserId = LegoWebSiteForum.Buslogic.ForumUsers.GetUserIDFromEmail(currentUser.Email);
-            if (iUserId > 0)
-            {
-                string sUserInfo = "";
-                myUser = LegoWebSiteForum.Buslogic.ForumUsers.GetUser(iUserId);
-                sUserInfo += "<table width='100%'>";
-                if (!String.IsNullOrEmpty(myUser.Avatar))
-                {
-                    sUserInfo += String.Format("<tr><td align='center'><img src='{0}' style='max-width:120px;max-height:160px'/></td></tr>", myUser.Avatar);
-                }
-                sUserInfo += String.Format("<tr><td align='center'><b>{0}</b></td></tr><tr><td align='center'>Số bài:{1}</td></tr>", myUser.Alias, myUser.PostCount.ToString());
-                sUserInfo += "</table>";
-                literalUser.Text=sUserInfo;
-            }
-            else
-            {
-                literalUser.Text = String.Format("<span>{0}</span>", Resources.strings.UserHasNotRegistredAsAForumMember);
-            }
+           //int iUserId = LegoWebSiteForum.Buslogic.ForumUsers.GetUserIDFromEmail(currentUser.Email);
+           // if (iUserId > 0)
+           // {
+           //     string sUserInfo = "";
+           //     myUser = LegoWebSiteForum.Buslogic.ForumUsers.GetUser(iUserId);
+           //     sUserInfo += "<table width='100%'>";
+           //     if (!String.IsNullOrEmpty(myUser.Avatar))
+           //     {
+           //         sUserInfo += String.Format("<tr><td align='center'><img src='{0}' style='max-width:120px;max-height:160px'/></td></tr>", myUser.Avatar);
+           //     }
+           //     sUserInfo += String.Format("<tr><td align='center'><b>{0}</b></td></tr><tr><td align='center'>Số bài:{1}</td></tr>", myUser.Alias, myUser.PostCount.ToString());
+           //     sUserInfo += "</table>";
+           //     literalUser.Text=sUserInfo;
+           // }
+           // else
+           // {
+           literalUser.Text = String.Format("<span>{0}</span>", Page.User.Identity.Name);
+            //}
         }
     
     }
     protected void linkUserUpdateProfile_Click(object sender, EventArgs e)
     {
-        Response.Redirect(_updateprofile_url);
+        Response.Redirect(ResolveUrl("~/"+_updateprofile_url));
     }
     protected void linkUserChangePassword_Click(object sender, EventArgs e)
     {
@@ -193,6 +193,6 @@ public partial class Webparts_USERLOGIN :WebPartBase
     }
     protected void linkUserRegistration_Click(object sender, EventArgs e)
     {
-        Response.Redirect(_registration_url);
+        Response.Redirect(ResolveUrl("~/"+_registration_url));
     }
 }

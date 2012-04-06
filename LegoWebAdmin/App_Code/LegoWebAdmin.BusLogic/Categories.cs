@@ -72,8 +72,8 @@ namespace LegoWebAdmin.BusLogic
             string strSQL = @"SELECT
                                 CATEGORY_ID AS '@CATEGORY_ID',      
                                 PARENT_CATEGORY_ID AS '@PARENT_CATEGORY_ID',     
-                                CATEGORY_VI_TITLE + '(' + cast((Select COUNT(META_CONTENT_ID) From LEGOWEB_META_CONTENTS Where LEGOWEB_META_CONTENTS.CATEGORY_ID=LEGOWEB_CATEGORIES.CATEGORY_ID) as nvarchar(20)) + ')' as '@CATEGORY_VI_TITLE',             
-                                CATEGORY_EN_TITLE + '(' + cast((Select COUNT(META_CONTENT_ID) From LEGOWEB_META_CONTENTS Where LEGOWEB_META_CONTENTS.CATEGORY_ID=LEGOWEB_CATEGORIES.CATEGORY_ID) as nvarchar(20)) + ')' as '@CATEGORY_EN_TITLE',
+                                CATEGORY_VI_TITLE + '(' + cast((Select COUNT(META_CONTENT_ID) From LEGOWEB_META_CONTENTS Where LEGOWEB_META_CONTENTS.CATEGORY_ID=LEGOWEB_CATEGORIES.CATEGORY_ID AND RECORD_STATUS>=0) as nvarchar(20)) + ')' as '@CATEGORY_VI_TITLE',             
+                                CATEGORY_EN_TITLE + '(' + cast((Select COUNT(META_CONTENT_ID) From LEGOWEB_META_CONTENTS Where LEGOWEB_META_CONTENTS.CATEGORY_ID=LEGOWEB_CATEGORIES.CATEGORY_ID AND RECORD_STATUS>=0) as nvarchar(20)) + ')' as '@CATEGORY_EN_TITLE',
                                 dbo.SelectChildCategoryXml(CATEGORY_ID,1)      
                                 FROM LEGOWEB_CATEGORIES
                                 WHERE PARENT_CATEGORY_ID=@_ROOT_PARENT_ID AND SECTION_ID=@SECTION_ID FOR XML PATH ('category')";
@@ -233,7 +233,7 @@ namespace LegoWebAdmin.BusLogic
             }
         }
 
-        public static void addUpdate_CATEGORY(int iCATEGORY_ID, int iPARENT_CATEGORY_ID, int iSECTION_ID, string sCATEGORY_VI_TITLE, string sCATEGORY_EN_TITLE, string sCATEGORY_ALIAS, string sCATEGORY_TEMPLATE_NAME, string sCATEGORY_IMAGE_URL, int iMENU_ID, bool bIsPublic, int iAdminLevel, string sAdminRoles, string sSeoTitle, string sSeoDescription, string sSeoKeywords)
+        public static void addUpdate_CATEGORY(int iCATEGORY_ID, int iPARENT_CATEGORY_ID, int iSECTION_ID, string sCATEGORY_VI_TITLE, string sCATEGORY_EN_TITLE, string sCATEGORY_ALIAS, string sCATEGORY_TEMPLATE_NAME, string sCATEGORY_IMAGE_URL, int iMENU_ID, int iSORT_CONTENT_BY, bool bIsPublic, int iAdminLevel, string sAdminRoles, string sSeoTitle, string sSeoDescription, string sSeoKeywords)
         {
             string connStr = ConfigurationManager.ConnectionStrings["LEGOWEBDB"].ConnectionString;
             SqlConnection connection = new SqlConnection(connStr);
@@ -283,6 +283,10 @@ namespace LegoWebAdmin.BusLogic
                 objParam = objCommand.Parameters.Add(new SqlParameter("@_MENU_ID", SqlDbType.Int));
                 objParam.Direction = ParameterDirection.Input;
                 objParam.Value = iMENU_ID;
+
+                objParam = objCommand.Parameters.Add(new SqlParameter("@_SORT_CONTENT_BY", SqlDbType.Int));
+                objParam.Direction = ParameterDirection.Input;
+                objParam.Value = iSORT_CONTENT_BY;
 
                 objParam = objCommand.Parameters.Add(new SqlParameter("@_IS_PUBLIC", SqlDbType.Bit));
                 objParam.Direction = ParameterDirection.Input;

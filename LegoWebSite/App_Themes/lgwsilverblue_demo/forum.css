@@ -1,0 +1,80 @@
+﻿
+.tcat
+{
+	background: #CCCCFF;
+	color: #CC6600;
+	font: bold 11px tahoma,verdana,geneva,lucida, 'lucida grande' ,arial,helvetica,sans-serif;
+	padding: 5px;
+}
+.alt2
+{
+	background: #DFE6EE;
+}
+.thead
+{
+	background: #3883CC;
+	padding-left: 5px;
+}
+.thead a
+{
+	color: #FFFFFF;
+	font: bold 11px tahoma,verdana,geneva,lucida, 'lucida grande' ,arial,helvetica,sans-serif;
+	padding: 5px 10px 5px 15px;
+}
+
+
+.forum_colLeft
+{
+	-moz-border-bottom-colors: none;
+	-moz-border-image: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background: none repeat scroll 0 0 #F8F9FB;
+	border-color: -moz-use-text-color #BCCBD8 #BCCBD8;
+	padding: 0;
+}
+
+.forumBg
+{
+	background: url( "images/cell.gif" ) repeat-x scroll left top #EFF2F4;
+}
+
+.formatBody h2
+{
+	color: #006699;
+	font-size: 13pt;
+	margin: 5px;
+	padding-bottom: 20px;
+}
+.formatBody h2 a
+{
+	font-size: 13px;
+	font-weight: normal;
+	color: #0000CC;
+}
+DIV.box_item
+{
+	background-image: url( "images/21.gif" );
+	background-position: 5px 9px;
+	background-repeat: no-repeat;
+	border-bottom: 1px solid #FFFFFF;
+	padding-left: 15px;
+}
+A.box_item
+{
+	color: #0C46A6;
+	display: block;
+	font-size: 11px;
+	font-family: Arial;
+	text-align: justify;
+	font-weight: bold;
+	padding: 4px 10px 4px 0;
+}
+
+
+.restore p, .restore fieldset, .restore table, .restore pre
+{
+	margin-bottom: 1em;
+}
+

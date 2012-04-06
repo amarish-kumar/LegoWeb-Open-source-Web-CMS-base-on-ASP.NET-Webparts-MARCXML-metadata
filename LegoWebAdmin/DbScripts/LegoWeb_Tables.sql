@@ -1,7 +1,7 @@
 ﻿/*
 // ----------------------------------------------------------------------
 // <copyright file="LegoWeb_Tables.sql" package="LEGOWEB">
-//     Copyright (C) 2011 LEGOWEB.ORG. All rights reserved.
+//     Copyright (C) 2010-2011 HIENDAI SOFTWARE COMPANY. All rights reserved.
 //     www.legoweb.org
 //     License: GNU/GPL
 //     LEGOWEB IS FREE SOFTWARE
@@ -12,6 +12,7 @@
 --Modified 22-09-2011 add some new fields LEGOWEB_CATEGORIES.ADMIN_LEVEL, LEGOWEB_CATEGORIES.ADMIN_ROLES, LEGOWEB_META_CONTENTS.LEADER
 --Modified 30-10-2011 add some SEO FIELDS to Category
 --Modified 08-11-2011 add IMPORTANT_LEVEL to LEGOWEB_META_CONTENTS
+--Modified 10-03-2011 add SORT_CONTENT_BY to Category
 
 SET ANSI_NULLS ON
 GO
@@ -47,6 +48,7 @@ CREATE TABLE [dbo].[LEGOWEB_CATEGORIES](
 	[CATEGORY_IMAGE_URL] [nvarchar](250) NULL,
 	[MENU_ID] [int] NOT NULL DEFAULT 0,
 	[ORDER_NUMBER] int DEFAULT 0,
+	[SORT_CONTENT_BY] smallint DEFAULT 1, --0:MODIFIED_DATE ASC;1:MODIFIED_DATE DESC;2:ORDER_NUMBER ASC;3:ORDER_NUMBER DESC
 	[IS_PUBLIC] bit DEFAULT 1,
 	[ADMIN_LEVEL] smallint DEFAULT 0, -- qui dinh cach phan quyen cap nhat noi dung cho category 0 moi nguoi dang nhap thanh cong vao quan tri, 1 nhung nguoi nam trong admin_roles
 	[ADMIN_ROLES] nvarchar(250) DEFAULT NULL, -- cac nhom quyen cap nhat noi dung thuoc ve chuyen muc nay
@@ -290,4 +292,17 @@ INSERT LEGOWEB_COMMON_PARAMETERS VALUES('REGISTRATION_SUCCESS_GREETING',2,N'Chú
 GO
 
 
-
+/****** Object:  Table [dbo].[LEGOWEB_USER_FILES]    Script Date: 06/01/2012 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[LEGOWEB_USER_FILES]') AND type in (N'U'))
+DROP TABLE [dbo].[LEGOWEB_USER_FILES]
+GO
+CREATE TABLE [dbo].[LEGOWEB_USER_FILES](
+	[FILE_ID] [int] IDENTITY(1,1) NOT NULL,
+	[FORUM_POST_ID] [int] NULL,	
+	[USER_FILE_NAME] [nvarchar](50) NOT NULL,	
+	[PHYSICAL_PATH] [nvarchar](250) NULL,
+	[UPLOAD_USER] [nvarchar](30) NULL,	
+	[UPLOAD_DATE] [datetime] NOT NULL DEFAULT(getdate()), 	
+	CONSTRAINT [PK_FILE_ID] PRIMARY KEY NONCLUSTERED  ( FILE_ID )
+	)
+GO

@@ -1,0 +1,13 @@
+﻿.icon-5-arr-dot { background: url(images/arr-dot.jpg) no-repeat left center; }
+.icon-11-arr-target { background: url(images/arr-target.gif) no-repeat left center; padding-left:15px;}
+.icon-11-arr-navigate { background: url(images/arr-navigate.gif) no-repeat left center; }
+.icon-16-attachment { background: url(images/icon-16-attachment.gif) no-repeat left center; padding-left:20px;}
+
+.icon-7-arr-par {float: none; width: 7px; height: 7px; margin: 0 auto; display: block; background-image: url(images/arr-par.gif);}
+.icon-8-arr-forward {float: none; width: 8px; height: 5px; margin: 0 auto; display: block; background-image: url(images/arr-forward.gif);}
+
+.icon-no-image { background: url(images/icon-no-image.gif) no-repeat left center; width:100px; height:121px }
+.icon-download { background: url(images/icon-download.gif) no-repeat left center; }
+
+.icon-vertical-line {background: url("images/icon-vertical-line.gif") no-repeat scroll left center transparent;height: 10px; padding-bottom: 3px; width: 100%;}
+.icon-download{background: url("images/icon-download.gif") no-repeat left center;padding-left:9px;}

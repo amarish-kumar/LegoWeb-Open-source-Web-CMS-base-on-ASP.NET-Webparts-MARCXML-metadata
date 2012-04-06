@@ -24,6 +24,10 @@ public partial class LgwUserControls_UserRoleManager : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
+            btnOk.Text = Resources.strings.Ok_Text;
+            btnCancel.Text = Resources.strings.Cancel_Text;
+            btnDelete.Text = Resources.strings.Delete_Text;
+
             roleManagerBind();
         }
     }

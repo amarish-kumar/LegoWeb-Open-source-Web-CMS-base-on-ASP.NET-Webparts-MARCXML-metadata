@@ -30,7 +30,7 @@
     <span class="article-contextual-links">
       <a>
         <xsl:attribute name="href">
-          {POST_URL}<xsl:value-of select="subfield[@code='w']/text()"/>
+        <xsl:value-of select="subfield[@code='w']/text()"/>
         </xsl:attribute>
         <xsl:text disable-output-escaping="yes">></xsl:text>
         <xsl:value-of select="subfield[@code='t']/text()"/>

@@ -27,7 +27,7 @@ public partial class LegoWebAdmin_UserManager : System.Web.UI.Page
         {
             if (!Roles.IsUserInRole("ADMINISTRATORS"))
             {
-                Response.Redirect("ErrorMessage.aspx?ErrorMessage='Bạn không có quyền truy cập vào tính năng này!'");
+                Response.Redirect("ErrorMessage.aspx?ErrorMessage='You are not authorized to access this page!'");
             }
         }
     }

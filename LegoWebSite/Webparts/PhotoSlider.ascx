@@ -10,7 +10,8 @@ body{
  
 #gallery {
 	position:relative;
-	height:360px
+	height:360px;
+	z-index:1;
 }
 	#gallery a {
 		float:left;
@@ -22,14 +23,14 @@ body{
 	}
 	
 	#gallery a.show {
-		z-index:500
+		z-index:2;
 	}
  
 	#gallery .caption {
-		z-index:600; 
+		z-index:200; 
 		background-color:#000; 
 		color:#ffffff; 
-		height:100px; 
+		height:65px; 
 		width:100%; 
 		position:absolute;
 		bottom:0;

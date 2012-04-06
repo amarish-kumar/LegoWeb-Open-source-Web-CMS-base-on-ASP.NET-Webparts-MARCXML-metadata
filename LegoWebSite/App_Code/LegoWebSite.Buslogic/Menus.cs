@@ -21,7 +21,7 @@ namespace LegoWebSite.Buslgic
                 {
                     String strCommandText;
                     SqlCommand objCommand;
-                    strCommandText = "SELECT * FROM LEGOWEB_MENUS WHERE MENU_ID=" + iMenuID.ToString() +" ORDER BY ORDER_NUMBER ASC";
+                    strCommandText = "SELECT * FROM LEGOWEB_MENUS WHERE MENU_ID=" + iMenuID.ToString() +" AND IS_PUBLIC=1 ORDER BY ORDER_NUMBER ASC";
                     objCommand = new SqlCommand(strCommandText, Conn);
                     objCommand.CommandType = CommandType.Text;
                     SqlDataAdapter adap = new SqlDataAdapter(objCommand);
@@ -96,7 +96,7 @@ namespace LegoWebSite.Buslgic
                     {
                         strCommandText += " PARENT_MENU_ID =@_PARENT_MENU_ID AND MENU_TYPE_ID=@_MENU_TYPE_ID ";    
                     }
-                        strCommandText += " ORDER BY ORDER_NUMBER ASC";                    
+                    strCommandText += " AND LEGOWEB_MENUS.IS_PUBLIC=1 ORDER BY ORDER_NUMBER ASC";                    
                     
                     objCommand = new SqlCommand(strCommandText, Conn);
                     objCommand.CommandType = CommandType.Text;

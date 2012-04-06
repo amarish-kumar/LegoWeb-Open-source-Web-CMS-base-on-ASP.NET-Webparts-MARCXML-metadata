@@ -38,6 +38,16 @@ public partial class MetaContentExport : System.Web.UI.Page
             item.Value = "2";
             radioFilterType.Items.Add(item);
 
+            item = new ListItem();
+            item.Text = String.Format("<span style='width:50px'>{0}</span>", "KCMS Categories");
+            item.Value = "3";
+            radioFilterType.Items.Add(item);
+
+            item = new ListItem();
+            item.Text = String.Format("<span style='width:50px'>{0}</span>", "KCMS Contents");
+            item.Value = "4";
+            radioFilterType.Items.Add(item);
+
             load_dropSections();
             load_dropCategories();
 
@@ -217,9 +227,10 @@ public partial class MetaContentExport : System.Web.UI.Page
                             //n SEO_DESCRIPTION	nvarchar(255)	Checked
                             //o SEO_KEYWORDS	nvarchar(255)	Checked
                             //p ORDER_NUMBER smallint 
+                            //q SORT_CONTENT_BY smallint -- since 10-03-2012
                             Df = new CDatafield();
                             Df.Tag = "650";
-                            Df.SubfieldsText = String.Format("$a{0}$b{1}$c{2}$d{3}$e{4}$f{5}$g{6}$h{7}$i{8}$j{9}$k{10}$l{11}$m{12}$n{13}$o{14}$p{15}", row["CATEGORY_ID"].ToString(), row["PARENT_CATEGORY_ID"].ToString(), row["SECTION_ID"].ToString(), row["CATEGORY_VI_TITLE"].ToString(), row["CATEGORY_EN_TITLE"].ToString(), row["CATEGORY_ALIAS"].ToString(), row["CATEGORY_TEMPLATE_NAME"].ToString(), row["CATEGORY_IMAGE_URL"].ToString(), row["MENU_ID"].ToString(), row["IS_PUBLIC"].ToString(), row["ADMIN_LEVEL"].ToString(), row["ADMIN_ROLES"].ToString(), row["SEO_TITLE"].ToString(), row["SEO_DESCRIPTION"].ToString(), row["SEO_KEYWORDS"].ToString(), row["ORDER_NUMBER"].ToString());
+                            Df.SubfieldsText = String.Format("$a{0}$b{1}$c{2}$d{3}$e{4}$f{5}$g{6}$h{7}$i{8}$j{9}$k{10}$l{11}$m{12}$n{13}$o{14}$p{15}$q{16}", row["CATEGORY_ID"].ToString(), row["PARENT_CATEGORY_ID"].ToString(), row["SECTION_ID"].ToString(), row["CATEGORY_VI_TITLE"].ToString(), row["CATEGORY_EN_TITLE"].ToString(), row["CATEGORY_ALIAS"].ToString(), row["CATEGORY_TEMPLATE_NAME"].ToString(), row["CATEGORY_IMAGE_URL"].ToString(), row["MENU_ID"].ToString(), row["IS_PUBLIC"].ToString(), row["ADMIN_LEVEL"].ToString(), row["ADMIN_ROLES"].ToString(), row["SEO_TITLE"].ToString(), row["SEO_DESCRIPTION"].ToString(), row["SEO_KEYWORDS"].ToString(), row["ORDER_NUMBER"].ToString(), row["SORT_CONTENT_BY"].ToString());
                             myRec.Datafields.Add(Df);
                         }
 
@@ -290,50 +301,42 @@ public partial class MetaContentExport : System.Web.UI.Page
 
                         exRecs.Add(myRec);
 
-                        #region KIPOS TABLES
+                        //#region KIPOS TABLES
 
-                        myRec = new CRecord();
-                        myRec.set_LeaderValueByPos("s", 6, 6);
-                        Cf = new CControlfield();
-                        Cf.Tag = "001";
-                        Cf.Value = "CAT_DMD_CATEGORY";
-                        myRec.Controlfields.Add(Cf);
+                        //myRec = new CRecord();
+                        //myRec.set_LeaderValueByPos("s", 6, 6);
+                        //Cf = new CControlfield();
+                        //Cf.Tag = "001";
+                        //Cf.Value = "CAT_DMD_CATEGORY";
+                        //myRec.Controlfields.Add(Cf);
 
-                        Df = new CDatafield();
-                        Df.Tag = "245";
-                        Df.SubfieldsText = "$aCAT_DMD_CATEGORY";
-                        myRec.Datafields.Add(Df);
+                        //Df = new CDatafield();
+                        //Df.Tag = "245";
+                        //Df.SubfieldsText = "$aCAT_DMD_CATEGORY";
+                        //myRec.Datafields.Add(Df);
 
-                        tbData = LegoWebAdmin.BusLogic.Menus.get_LEGOWEB_MENUS().Tables[0];
+                        //tbData = LegoWebAdmin.BusLogic.Menus.get_LEGOWEB_MENUS().Tables[0];
 
-                        foreach (DataRow row in tbData.Rows)
-                        {
-                            //a MENU_ID	int	Unchecked
-                            //b PARENT_MENU_ID	int	Unchecked
-                            //c MENU_TYPE_ID	int	Unchecked
-                            //d MENU_VI_TITLE	nvarchar(50)	Checked
-                            //e MENU_EN_TITLE	nvarchar(50)	Checked
-                            //f MENU_IMAGE_URL	nvarchar(250)	Checked
-                            //g MENU_LINK_URL	nvarchar(50)	Checked
-                            //h BROWSER_NAVIGATE	tinyint	Unchecked
-                            //i IS_PUBLIC	bit	Unchecked
-                            //j ORDER_NUMBER smallint
-                            Df = new CDatafield();
-                            Df.Tag = "650";
-                            Df.SubfieldsText = String.Format("$a{0}$b{1}$c{2}$d{3}$e{4}$f{5}$g{6}$h{7}$i{8}$j{9}", row["MENU_ID"].ToString(), row["PARENT_MENU_ID"].ToString(), row["MENU_TYPE_ID"].ToString(), row["MENU_VI_TITLE"].ToString(), row["MENU_EN_TITLE"].ToString(), row["MENU_IMAGE_URL"].ToString(), row["MENU_LINK_URL"].ToString(), row["BROWSER_NAVIGATE"].ToString(), row["IS_PUBLIC"].ToString(), row["ORDER_NUMBER"].ToString());
-                            myRec.Datafields.Add(Df);
-                        }
+                        //foreach (DataRow row in tbData.Rows)
+                        //{
+                        //    //a MENU_ID	int	Unchecked
+                        //    //b PARENT_MENU_ID	int	Unchecked
+                        //    //c MENU_TYPE_ID	int	Unchecked
+                        //    //d MENU_VI_TITLE	nvarchar(50)	Checked
+                        //    //e MENU_EN_TITLE	nvarchar(50)	Checked
+                        //    //f MENU_IMAGE_URL	nvarchar(250)	Checked
+                        //    //g MENU_LINK_URL	nvarchar(50)	Checked
+                        //    //h BROWSER_NAVIGATE	tinyint	Unchecked
+                        //    //i IS_PUBLIC	bit	Unchecked
+                        //    //j ORDER_NUMBER smallint
+                        //    Df = new CDatafield();
+                        //    Df.Tag = "650";
+                        //    Df.SubfieldsText = String.Format("$a{0}$b{1}$c{2}$d{3}$e{4}$f{5}$g{6}$h{7}$i{8}$j{9}", row["MENU_ID"].ToString(), row["PARENT_MENU_ID"].ToString(), row["MENU_TYPE_ID"].ToString(), row["MENU_VI_TITLE"].ToString(), row["MENU_EN_TITLE"].ToString(), row["MENU_IMAGE_URL"].ToString(), row["MENU_LINK_URL"].ToString(), row["BROWSER_NAVIGATE"].ToString(), row["IS_PUBLIC"].ToString(), row["ORDER_NUMBER"].ToString());
+                        //    myRec.Datafields.Add(Df);
+                        //}
 
-                        exRecs.Add(myRec);
-
-
-
-
-
-
-
-                        #endregion KIPOS TABLES
-
+                        //exRecs.Add(myRec);
+                        //#endregion KIPOS TABLES
                         break;
                 }
 
@@ -343,7 +346,7 @@ public partial class MetaContentExport : System.Web.UI.Page
                 }
                 Response.ContentType = "APPLICATION/OCTET-STREAM";
                 //set the filename
-                Response.AddHeader("Content-Disposition", "attachment;filename=\"legowebContent.xml\"");
+                Response.AddHeader("Content-Disposition", "attachment;filename=\"legowebdata.xml\"");
                 String outStream = exRecs.OuterXml;
                 Response.Write(outStream);
                 Response.End();
@@ -388,6 +391,18 @@ public partial class MetaContentExport : System.Web.UI.Page
                 divFilterById.Visible = false;
                 btnShowResults.Visible = false;
                 metaContentRepeater.Visible = false;                
+                break;
+            case "3":
+                divFilterByCat.Visible = false;
+                divFilterById.Visible = false;
+                btnShowResults.Visible = false;
+                metaContentRepeater.Visible = false;
+                break;
+            case "4":
+                divFilterByCat.Visible = false;
+                divFilterById.Visible = false;
+                btnShowResults.Visible = false;
+                metaContentRepeater.Visible = false;
                 break;
         }
     }

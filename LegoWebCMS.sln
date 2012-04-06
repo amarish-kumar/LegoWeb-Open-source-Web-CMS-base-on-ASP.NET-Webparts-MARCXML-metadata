@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LegoWebSite", "LegoWebSite", "{7DEC5259-1945-4DAF-A0A6-15DC35EDC6B7}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFramework = "2.0"
+		TargetFramework = "3.5"
 		Debug.AspNetCompiler.VirtualPath = "/LegoWebSite"
 		Debug.AspNetCompiler.PhysicalPath = "LegoWebSite\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\LegoWebSite\"

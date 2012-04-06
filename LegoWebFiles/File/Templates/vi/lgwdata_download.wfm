@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<record>
+  <leader>00000nam#a2200000ui#4500</leader>
+  <controlfield tag="001" type="NUMBER"></controlfield>
+  <controlfield tag="002" type="NUMBER"></controlfield>
+  <controlfield tag="003" type="BOOLEAN">True</controlfield>
+  <controlfield tag="004" type="NUMBER"></controlfield>
+  <controlfield tag="005" type="NUMBER"></controlfield>
+  <controlfield tag="006" type="NUMBER"></controlfield>
+  <controlfield tag="007" type="TEXT"></controlfield>
+  <controlfield tag="008" type="TEXT">081223s2010    vm|                 vie   </controlfield>
+  
+  <datafield tag="100" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT"></subfield>
+  </datafield>
+  <datafield tag="110" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT"></subfield>
+  </datafield>
+  <datafield tag="245" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT"></subfield>
+    <subfield code="b" type="TEXT"></subfield>
+    <subfield code="u" type="TEXT"></subfield>
+ </datafield>
+  <datafield tag="260" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT"></subfield>
+    <subfield code="b" type="TEXT"></subfield>
+    <subfield code="c" type="NUMBER"></subfield>
+  </datafield>
+  <datafield tag="300" ind1=" " ind2=" ">
+    <subfield code="a" type="TEXT"></subfield>
+    <subfield code="b" type="TEXT"></subfield>
+  </datafield>
+<datafield tag="520" ind1=" " ind2=" ">
+	<subfield code="a" type="NTEXT"></subfield>
+</datafield>	
+<datafield tag="650" ind1=" " ind2=" ">
+	<subfield code="a" type="TEXT"></subfield>
+</datafield>	
+<datafield tag="856" ind1=" " ind2=" ">
+    <subfield code="f" type="TEXT"></subfield>
+    <subfield code="s" type="TEXT">.MB</subfield>
+    <subfield code="u" type="TEXT"></subfield>
+    <subfield code="n" type="NUMBER">0</subfield>
+  </datafield>	
+</record>

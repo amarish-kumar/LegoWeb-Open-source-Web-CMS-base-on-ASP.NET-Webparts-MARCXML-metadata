@@ -65,7 +65,7 @@
             </td>
         </tr>
         <tr>
-            <td class="key"><label for="name"><%=Resources.strings.VietnameseValue_Text%>:</label></td>
+            <td class="key"><label for="name"><%=Resources.strings.EnglishTitle_Text%>:</label></td>
             <td>
                 <asp:TextBox ID="txtCategoryEnTitle" runat="server" Width="95%"></asp:TextBox>
             </td>
@@ -139,7 +139,14 @@
                 <asp:DropDownList ID="dropLinkMenus" runat="server"></asp:DropDownList>
             </td>
         </tr>
-                              
+
+        <tr>
+            <td class="key"><label for="name"><%=Resources.strings.SortContentBy_Text%>:</label></td>
+            <td>
+                <asp:DropDownList ID="dropSortContentBy" runat="server"></asp:DropDownList>
+            </td>
+        </tr>
+                                      
         <tr>
             <td>
             </td>

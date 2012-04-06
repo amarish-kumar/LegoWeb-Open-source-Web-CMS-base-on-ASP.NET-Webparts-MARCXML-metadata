@@ -27,7 +27,7 @@
             <span style="font-family: Arial, Helvetica, sans-serif; font-size: small; font-weight: bold; font-style: regular">
               <a>
                 <xsl:attribute name="href">
-                  {POST_URL}
+                  <xsl:value-of select="controlfield[@tag=001]/text()"/>
                 </xsl:attribute>
                 <xsl:value-of select="datafield[@tag=245]/subfield[@code='a']/text()"/>
               </a>

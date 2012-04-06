@@ -1,15 +1,15 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
 <%@ Register src="WebPartManagerPanel.ascx" tagname="WebPartManagerPanel" tagprefix="uc1" %>
 <%@ Register src="Webparts/USERLOGIN.ascx" tagname="USERLOGIN" tagprefix="wp001" %>
-<%@ Register src="Webparts/MENUBAR.ascx" tagname="MENUBAR" tagprefix="wp002" %>
-<%@ Register src="Webparts/MENULEFT.ascx" tagname="MENULEFT" tagprefix="wp003" %>
-<%@ Register src="Webparts/CBTCONTENTBROWSER.ascx" tagname="CBTCONTENTBROWSER" tagprefix="wp004" %>
-<%@ Register src="Webparts/PBTCONTENTNAVIGATOR.ascx" tagname="PBTCONTENTNAVIGATOR" tagprefix="wp005" %>
-<%@ Register src="Webparts/CBTCONTENTVIEWER.ascx" tagname="CBTCONTENTVIEWER" tagprefix="wp006" %>
-<%@ Register src="Webparts/LBTTOP1TEMPLATE.ascx" tagname="LBTTOP1TEMPLATE" tagprefix="wp007" %>
-<%@ Register src="Webparts/LBTTOP2TEMPLATE.ascx" tagname="LBTTOP2TEMPLATE" tagprefix="wp008" %>
-<%@ Register src="Webparts/LBTMOSTREAD.ascx" tagname="LBTMOSTREAD" tagprefix="wp009" %>
-<%@ Register src="Webparts/LBNEWSPOPUP.ascx" tagname="LBNEWSPOPUP" tagprefix="wp010" %>
+<%@ Register src="Webparts/MENUBARDROPDOWN.ascx" tagname="MENUBARDROPDOWN" tagprefix="wp002" %>
+<%@ Register src="Webparts/MENUFLYOUT.ascx" tagname="MENUFLYOUT" tagprefix="wp003" %>
+<%@ Register src="Webparts/CONTENTBROWSER.ascx" tagname="CONTENTBROWSER" tagprefix="wp004" %>
+<%@ Register src="Webparts/CONTENTNAVIGATOR2COLUMNS.ascx" tagname="CONTENTNAVIGATOR2COLUMNS" tagprefix="wp005" %>
+<%@ Register src="Webparts/CONTENTVIEWER.ascx" tagname="CONTENTVIEWER" tagprefix="wp006" %>
+<%@ Register src="Webparts/CONTENTLIST01STYLE.ascx" tagname="CONTENTLIST01STYLE" tagprefix="wp007" %>
+<%@ Register src="Webparts/CONTENTLIST02STYLES.ascx" tagname="CONTENTLIST02STYLES" tagprefix="wp008" %>
+<%@ Register src="Webparts/CONTENTLISTTOPHIT.ascx" tagname="CONTENTLISTTOPHIT" tagprefix="wp009" %>
+<%@ Register src="Webparts/CONTENTLISTTOPNEWS.ascx" tagname="CONTENTLISTTOPNEWS" tagprefix="wp010" %>
 <%@ Register src="Webparts/PHOTOSLIDER.ascx" tagname="PHOTOSLIDER" tagprefix="wp011" %>
 <%@ Register src="Webparts/POLL.ascx" tagname="POLL" tagprefix="wp012" %>
 <%@ Register src="Webparts/IFRAMEBOX.ascx" tagname="IFRAMEBOX" tagprefix="wp013" %>
@@ -17,7 +17,11 @@
 <%@ Register src="Webparts/GGVNEXPSECURITIES.ascx" tagname="GGVNEXPSECURITIES" tagprefix="wp015" %>
 <%@ Register src="Webparts/GGVNEXPWEATHER.ascx" tagname="GGVNEXPWEATHER" tagprefix="wp016" %>
 <%@ Register Namespace="LegoWebSite.Webparts" TagPrefix="wp017" %>
-
+<%@ Register src="Webparts/CONTENTTAB02STYLES.ascx" tagname="CONTENTTAB02STYLES" tagprefix="wp018" %>
+<%@ Register src="Webparts/WEBSEARCHBOX.ascx" tagname="WEBSEARCHBOX" tagprefix="wp019" %>
+<%@ Register src="Webparts/WEBSEARCHRESULT.ascx" tagname="WEBSEARCHRESULT" tagprefix="wp020" %>
+<%@ Register src="Webparts/CONTENTNAVIGATORFLOAT.ascx" tagname="CONTENTNAVIGATORFLOAT" tagprefix="wp021" %>
+<%@ Register src="Webparts/CONTENTHORIZONTALCROLLER.ascx" tagname="CONTENTHORIZONTALCROLLER" tagprefix="wp022" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -25,32 +29,37 @@
 <title> <%=LegoWebSite.Buslgic.CommonParameters.get_COMMON_PARAMETER_VALUE("WEBSITE_TITLE") %> </title>
 <meta http-equiv="pragma" content="no-cache" />
 <meta content="MSHTML 6.00.6000.16640" name="GENERATOR"/>
+        <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>          
+        <script src="js/jsPopup.js" type="text/javascript"></script>
     <asp:ContentPlaceHolder id="head" runat="server">
-        
-    </asp:ContentPlaceHolder>
 
+    </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
+    <script src="js/wz_tooltip.js" type="text/javascript"></script>
+    
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div id="lgw-main">
             <div class="lgw-banner"> 
-            
+
                 <div id="login-panel">
-                      <div>
-                          <asp:LoginName ID="LoginName1" runat="server" style="color:#6e6e6e" />
-                          <asp:LinkButton ID="changeLanguage_link" runat="server" onclick="changeLanguage_link_Click">English</asp:LinkButton></div>
-                      <div class="vr">|</div>
-                      <div><asp:LoginStatus ID="LoginStatus1" runat="server" LoginText="Login" LogoutText="Logout" Visible="false"/>                        
-                           <a href="javascript:PopupArea('divLogin');">
-                                <asp:Label ID="loginPopupLink" runat="server" Visible="false" Text="Login"></asp:Label>
-                           </a>
-                      </div>
+                        <div style="float:right; padding-right:10px">
+                          <span class="login_panel_text"><asp:LoginName ID="LoginName1" runat="server"/></span><br />
+                          <asp:LinkButton ID="changeLanguage_link" runat="server" 
+                              onclick="changeLanguage_link_Click" Font-Size="X-Small" ForeColor="#3399FF">English</asp:LinkButton>
+                          <span class="login_panel_text">|</span>
+                          <asp:LoginStatus ID="LoginStatus1" runat="server" LoginText="Login" 
+                              LogoutText="Logout" Visible="false" Font-Size="X-Small" ForeColor="#3399FF"/>                        
+                          <a href="javascript:PopupArea('divLogin');">
+                                <span class="login_panel_text"><asp:literal ID="loginPopupLink" runat="server" Visible="false" Text="Login"></asp:literal></span>
+                          </a>
+                          </div>
                 </div>
 <%--                <div id="lgw-search-panel">
                     <div class="lgw-search-box">
                         <div style="padding:3px 3px 3px 6px">
-                            <input id="txtKeyword" type="text" onkeypress="return trapEnterKey(this.value,event);" onblur="if (this.value=='') this.value='Nhập vào từ khóa tìm kiếm';" onfocus="if (this.value=='Nhập vào từ khóa tìm kiếm') this.value='';" value="" style="width: 179px; height: 19px;" class="lgw-search-text-box floatLeft" />
+                            <input id="txtKeywords" type="text" onkeypress="return trapEnterKey(this.value,event);" onblur="if (this.value=='') this.value='Nhập vào từ khóa tìm kiếm';" onfocus="if (this.value=='Nhập vào từ khóa tìm kiếm') this.value='';" value="" style="width: 179px; height: 19px;" class="lgw-search-text-box floatLeft" />
                             <a href="javascript:searchEngine();" style="width: 55px; height: 20px; " class=" floatLeft"></a>
                         </div>
                     </div>
@@ -75,7 +84,7 @@
                     </tr>    			
                 </table>
             </div>
-            <div id="divWebpartManager" runat="server">
+                        <div id="divWebpartManager" runat="server">
                  <uc1:WebPartManagerPanel ID="WebPartManagerPanel1" runat="server" />
                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
@@ -91,19 +100,18 @@
                         <td>
                             <asp:CatalogZone ID="CatalogZone1" runat="server" >
                                 <ZoneTemplate>
-                                    <asp:DeclarativeCatalogPart ID="DeclarativeCatalogPart1" runat="server" Title="KIPOS Webparts">
-	                                    <WebPartsTemplate>		
-	                                    			                                				                                            
+                                    <asp:DeclarativeCatalogPart ID="DeclarativeCatalogPart1" runat="server" Title="LEGOWEB Webparts">
+	                                    <WebPartsTemplate>			                                    			                                				                                            
 		                                    <wp001:USERLOGIN id="USERLOGIN1" runat="server"/>
-                                            <wp002:MENUBAR id="MENUBAR1" runat="server"/>
-                                            <wp003:MENULEFT id="MENULEFT1" runat="server"/>
-                                            <wp004:CBTCONTENTBROWSER id="CBTCONTENTBROWSER1" runat="server"/>
-                                            <wp005:PBTCONTENTNAVIGATOR id="PBTCONTENTNAVIGATOR1" runat="server"/>
-                                            <wp006:CBTCONTENTVIEWER id="CBTCONTENTVIEWER1" runat="server"/>
-                                            <wp007:LBTTOP1TEMPLATE id="LBTTOP1TEMPLATE1" runat="server"/>
-                                            <wp008:LBTTOP2TEMPLATE id="LBTTOP2TEMPLATE1" runat="server"/>
-                                            <wp009:LBTMOSTREAD id="LBTMOSTREAD1" runat="server"/>
-                                            <wp010:LBNEWSPOPUP id="LBNEWSPOPUP1" runat="server"/>
+                                            <wp002:MENUBARDROPDOWN id="MENUBARDROPDOWN1" runat="server"/>
+                                            <wp003:MENUFLYOUT id="MENUFLYOUT1" runat="server"/>
+                                            <wp004:CONTENTBROWSER id="CONTENTBROWSER1" runat="server"/>
+                                            <wp005:CONTENTNAVIGATOR2COLUMNS id="CONTENTNAVIGATOR2COLUMNS1" runat="server"/>
+                                            <wp006:CONTENTVIEWER id="CONTENTVIEWER1" runat="server"/>
+                                            <wp007:CONTENTLIST01STYLE id="CONTENTLIST01STYLE1" runat="server"/>
+                                            <wp008:CONTENTLIST02STYLES id="CONTENTLIST02STYLES1" runat="server"/>
+                                            <wp009:CONTENTLISTTOPHIT id="CONTENTLISTTOPHIT1" runat="server"/>
+                                            <wp010:CONTENTLISTTOPNEWS id="CONTENTLISTTOPNEWS1" runat="server"/>
                                             <wp011:PHOTOSLIDER id="PHOTOSLIDER1" runat="server"/>
                                             <wp012:POLL id="POLL1" runat="server"/>
                                             <wp013:IFRAMEBOX id="IFRAMEBOX1" runat="server"/>
@@ -111,8 +119,12 @@
                                             <wp015:GGVNEXPSECURITIES id="GGVNEXPSECURITIES1" runat="server"/>
                                             <wp016:GGVNEXPWEATHER id="GGVNEXPWEATHER1" runat="server"/>
                                             <wp017:GGRSSNEWSFEED id="GGRSSNEWSFEED1" runat="server"/>
-			                                			                                
-	                                        </WebPartsTemplate>
+                                            <wp018:CONTENTTAB02STYLES id="CONTENTTAB02STYLES" runat="server"/>       
+                                            <wp019:WEBSEARCHBOX id="WEBSEARCHBOX" runat="server"/>  
+                                            <wp020:WEBSEARCHRESULT id="WEBSEARCHRESULT" runat="server"/>       
+                                            <wp021:CONTENTNAVIGATORFLOAT id="CONTENTNAVIGATORFLOAT1" runat="server"/>
+                                            <wp022:CONTENTHORIZONTALCROLLER id="CONTENTHORIZONTALCROLLER1" runat="server"/>
+	                                     </WebPartsTemplate>
                                         </asp:DeclarativeCatalogPart>
                                     <asp:PageCatalogPart ID="PageCatalogPart1" runat="server" Title="Local Page Catalog"/>
                                 </ZoneTemplate>
@@ -121,18 +133,18 @@
                     </tr>
                  </table>
              </div>
+            
                <div style="clear:both"></div>   
                
                <div class="lgw-menubar">
-                <asp:WebPartZone ID="WebPartZone0" runat="server" Width="100%"  PartChromeType="none" Padding="0" PartStyle-CssClass="NoPadding"> 
-                    <PartStyle CssClass="Nopadding"></PartStyle>
+                <asp:WebPartZone ID="WebPartZone0" runat="server" Width="100%" PartChromeType="none" Padding="2" PartStyle-CssClass="NoPaddingAndTransparent"  
+                       PartStyle-BackColor="Transparent" BackColor="Transparent" PartChromeStyle-BackColor="Transparent">  
+                       <PartStyle BackColor="Transparent" CssClass="NoPaddingAndTransparent"></PartStyle> 
+
                     <CloseVerb Visible="false" />
                     <MinimizeVerb Visible="false" />
                         <ZoneTemplate> 
-
                             
-                            <wp002:MENUBAR ID="MENUBAR1" runat="server" />
-
                             
                         </ZoneTemplate>
                     </asp:WebPartZone>
@@ -147,15 +159,6 @@
               
            <div style="clear:both"></div>
            <div id="lgw-footer">
-                 <div>
-                     <a id="lgw-map-checkmail" target="_blank" href="http://webmail.ntu.edu.vn"><span>Check
-                         Mail</span></a>
-                 </div>
-                 <div>
-                     <span><a id="lgw-map-send-request" target="_self" href="SendRequest.aspx">
-                     <%=Resources.strings.Send%>
-                      </a></span>
-                 </div>
                  <div id="lgw-footer-info">
                      <span class="footer-title"><%=LegoWebSite.Buslgic.CommonParameters.get_COMMON_PARAMETER_VALUE("ORGANIZATION_NAME")%></asp:Label></span>
                      <br />
@@ -167,7 +170,7 @@
                             Email:<a href="mailto:<%=LegoWebSite.Buslgic.CommonParameters.get_COMMON_PARAMETER_VALUE("ORGANIZATION_EMAIL")%>"><%=LegoWebSite.Buslgic.CommonParameters.get_COMMON_PARAMETER_VALUE("ORGANIZATION_EMAIL")%></a>    
                       </span>
                   </div>
-                  <div style="float:right; padding-bottom:1px; padding-right:10px"><span style="font-size:x-small; font-style:oblique; color:#666666"> Power by &reg;LEGOWEB 1.0 <a href="http://www.legoweb.org">&copy LEGOWEB.ORG</a></span></div>
+                  <div id="lgw-copyright-info"><span style="font-size:x-small; font-style:oblique; color:#666666"> Power by &reg;LEGOWEB 1.5 <a href="http://www.legoweb.org">&copy LEGOWEB.ORG</a></span></div>
             </div>
         </div>
 

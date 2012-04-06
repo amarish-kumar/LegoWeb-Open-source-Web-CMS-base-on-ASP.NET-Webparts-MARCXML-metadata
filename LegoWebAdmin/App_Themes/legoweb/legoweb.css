@@ -389,7 +389,6 @@ table.adminform {
 	border-collapse: collapse;
 	margin: 8px 0 10px 0;
 	margin-bottom: 15px;
-	width: 100%;
 }
 table.adminform.nospace { margin-bottom: 0; }
 table.adminform tr.row0 { background-color: #f9f9f9; }

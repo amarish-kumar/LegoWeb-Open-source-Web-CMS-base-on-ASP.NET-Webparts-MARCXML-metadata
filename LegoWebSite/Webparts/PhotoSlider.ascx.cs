@@ -13,7 +13,7 @@ using MarcXmlParserEx;
 
 public partial class Webparts_PHOTOSLIDER: WebPartBase
 {
-    private int _meta_content_id = 0;
+    private int _content_id = 0;
     private int _category_id = 0;    
     private string _box_css_name = null;//mean no box around
 
@@ -47,17 +47,17 @@ public partial class Webparts_PHOTOSLIDER: WebPartBase
     [WebDisplayName("2.Meta content id:")]
     [WebDescription("Set meta content id to display, if not select top one of category set below.")]
     /// <summary>
-    /// meta_content_id: id of metat content record, if set display specified record
+    /// content_id: id of metat content record, if set display specified record
     /// </summary>
-    public int p2_meta_content_id
+    public int p2_content_id
     {
         get
         {
-            return _meta_content_id;
+            return _content_id;
         }
         set
         {
-            _meta_content_id = value;
+            _content_id = value;
         }
     }
 
@@ -66,7 +66,7 @@ public partial class Webparts_PHOTOSLIDER: WebPartBase
     [WebDisplayName("3.Category id:")]
     [WebDescription("Select the category to get top 1 content record of.")]
     /// <summary>
-    /// category_id: if meta_content_id not set, auto detech 1 last update meta content record in category_id
+    /// category_id: if content_id not set, auto detech 1 last update meta content record in category_id
     /// </summary>
     public int p3_category_id
     {
@@ -117,6 +117,9 @@ public partial class Webparts_PHOTOSLIDER: WebPartBase
                      
                     function slideShow() {
                      
+	                    //Resize the heigh of the div according to the image heigh
+	                    $('#gallery').css({height: $('#gallery a').find('img').css('height')});
+
 	                    //Set the opacity of all images to 0
 	                    $('#gallery a').css({opacity: 0.0});
                     	
@@ -162,7 +165,7 @@ public partial class Webparts_PHOTOSLIDER: WebPartBase
 	                    $('#gallery .caption').animate({opacity: 0.0}, { queue:false, duration:0 }).animate({height: '1px'}, { queue:true, duration:300 });	
                     	
 	                    //Animate the caption, opacity to 0.7 and heigth to 100px, a slide up effect
-	                    $('#gallery .caption').animate({opacity: 0.7},100 ).animate({height: '100px'},500 );
+	                    $('#gallery .caption').animate({opacity: 0.7},100 ).animate({height: '65px'},500 );
                     	
 	                    //Display the content
 	                    $('#gallery .content').html(caption);                    	                    	
@@ -182,6 +185,7 @@ public partial class Webparts_PHOTOSLIDER: WebPartBase
             CRecord myRec = new CRecord();
             string sMetaXml = LegoWebSite.Buslgic.MetaContents.get_META_CONTENT_MARCXML(contentid,0);
             myRec.load_Xml(sMetaXml);
+            myRec.Sort();
 
             string sdefaultHeight = myRec.Datafields.Datafield("300").Subfields.Subfield("h").Value;
             string sdefaultWidth = myRec.Datafields.Datafield("300").Subfields.Subfield("w").Value;
@@ -224,38 +228,46 @@ public partial class Webparts_PHOTOSLIDER: WebPartBase
         int contentid = 0;
         int categoryid = 0;
         int menuid = 0;
-        if (_meta_content_id == 0)
+        
+        if (_content_id == 0)
         {
-            if (_category_id == 0)
+            if (CommonUtility.GetInitialValue("contentid", null) != null)
             {
-                if (CommonUtility.GetInitialValue("catid", null) != null)
-                {
-                    categoryid = int.Parse(CommonUtility.GetInitialValue("catid", null).ToString());
-                }
-                else if (CommonUtility.GetInitialValue("mnuid", null) != null)
-                {
-                    menuid = int.Parse(CommonUtility.GetInitialValue("mnuid", 0).ToString());
-                    categoryid = LegoWebSite.Buslgic.Categories.get_CATEGORY_ID_BY_MENU_ID(menuid);
-                }
+                contentid = int.Parse(CommonUtility.GetInitialValue("contentid", null).ToString());
             }
-            else
+            if (contentid == 0)
             {
-                categoryid = _category_id;
-            }
+                if (_category_id == 0)
+                {
+                    if (CommonUtility.GetInitialValue("catid", null) != null)
+                    {
+                        categoryid = int.Parse(CommonUtility.GetInitialValue("catid", null).ToString());
+                    }
+                    else if (CommonUtility.GetInitialValue("mnuid", null) != null)
+                    {
+                        menuid = int.Parse(CommonUtility.GetInitialValue("mnuid", 0).ToString());
+                        categoryid = LegoWebSite.Buslgic.Categories.get_CATEGORY_ID_BY_MENU_ID(menuid);
+                    }
+                }
+                else
+                {
+                    categoryid = _category_id;
+                }
 
-            //try to discover contentid            
-            if (categoryid > 0)
-            {
-                DataTable top1Data = LegoWebSite.Buslgic.MetaContents.get_TOP_CONTENTS_OF_CATEGORY(categoryid, 1,null, null);
-                if (top1Data.Rows.Count > 0)
+                //try to discover contentid            
+                if (categoryid > 0)
                 {
-                    contentid = (int)top1Data.Rows[0]["META_CONTENT_ID"];
+                    DataTable top1Data = LegoWebSite.Buslgic.MetaContents.get_TOP_CONTENTS_OF_CATEGORY(categoryid, 1, null);
+                    if (top1Data.Rows.Count > 0)
+                    {
+                        contentid = (int)top1Data.Rows[0]["META_CONTENT_ID"];
+                    }
                 }
             }
         }
         else
         {
-            contentid = _meta_content_id;
+            contentid = _content_id;
         }
         return contentid;
     }

@@ -1,0 +1,68 @@
+﻿/*---------- Webpart -----------*/
+
+.NoPadding
+{
+	padding: 2px !important;
+	background-color:Transparent !important;
+}
+.WebPartTitle SPAN, .WebPartTitle a, .WebPartTitle a:visited, .WebPartTitle a:link, .WebPartTitle a:hover, .WebPartTitle a:active
+{
+	font-size: 9pt;
+	font-weight: bold;
+	padding-left: 0px;
+}
+table 
+{ 
+    background-color:transparent !important; 
+}
+td.WebPartTitle
+{
+	height: 26px;
+	color: #333537;
+	padding-top: 0px;
+	background: url(images/WebpartTitle_bg.png) #ebf2f6 repeat-x top right;
+}
+
+.PartTitleStyle
+{
+	background-color: #C1D4E3;
+	height: 25px;
+	font-size: 8px;
+	padding: 0px;
+	background-image: url(img/boxHeaderTopLeft.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+.PartTitleStyle table
+{
+	background-image: url(img/boxHeaderTopRight.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+.PartTitleStyle table tr td span
+{
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #C1D4E3;
+}
+.PartStyle
+{
+	background-color:Transparent;
+	/*background-color: #F8F8f0;*/
+	border: solid 1px #DDDDDD;
+}
+.PartStyle table tr td span
+{
+	background-color:Transparent !important;
+}
+ 
+.PartZone
+{
+	border: dashed 1px #DDDDDD;
+	background-color:Transparent !important;
+}
+.PartZoneHeader
+{
+	height: 0px;
+	display: none;
+}

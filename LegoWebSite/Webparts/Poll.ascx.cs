@@ -234,7 +234,7 @@ public partial class Webparts_POLL:WebPartBase
             //try to discover contentid            
             if (categoryid > 0)
             {
-                DataTable top1Data = LegoWebSite.Buslgic.MetaContents.get_TOP_CONTENTS_OF_CATEGORY(categoryid, 1,null, null);
+                DataTable top1Data = LegoWebSite.Buslgic.MetaContents.get_TOP_CONTENTS_OF_CATEGORY(categoryid, 1,null);
                 if (top1Data.Rows.Count > 0)
                 {
                     contentid = (int)top1Data.Rows[0]["META_CONTENT_ID"];

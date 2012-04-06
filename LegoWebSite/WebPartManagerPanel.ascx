@@ -30,6 +30,8 @@
       qua nguy hiem neu de nut nay
 --%>		
     </td>
+        <td style="width:130px">
+        </td>
   </tr>
   <tr>
 		<td align="right" >	
@@ -39,7 +41,8 @@
 			<%=Resources.strings.Scope%>="<b><%= WebPartManagerMain.Personalization.Scope.ToString()%></b>"
 			
 	  </td>
+      <td style="width:130px">
+      </td>
   </tr>
-
 </table>
 </div>

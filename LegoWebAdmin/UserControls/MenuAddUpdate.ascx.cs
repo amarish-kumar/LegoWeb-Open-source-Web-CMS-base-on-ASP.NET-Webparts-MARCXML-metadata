@@ -96,7 +96,7 @@ public partial class LgwUserControls_MenuAddUpdate : System.Web.UI.UserControl
         //only avoid some case round parent-child relation not completely
         if (this.txtMenuID.Text != "")
         {
-            for (int i = 0; i < catData.Rows.Count - 1; i++)
+            for (int i = 0; i < catData.Rows.Count; i++)
             {
                 if (catData.Rows[i]["MENU_ID"].ToString() == this.txtMenuID.Text || catData.Rows[i]["PARENT_MENU_ID"].ToString() == this.txtMenuID.Text)
                 {

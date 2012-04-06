@@ -70,15 +70,15 @@
 
     function searchEngine() 
     {
-         var url = "Search.aspx?SearchValue=";
-        if (document.getElementById("txtKeyword").value == '') 
+         var url = "WebSearch.aspx?s_searchvalue=";
+        if (document.getElementById("txtKeywords").value == '') 
         {
             alert('Bạn chưa gõ từ khóa tìm kiếm');
             return;
         }
         else
         {
-            url +=Url.encode(document.getElementById("txtKeyword").value);
+            url +=Url.encode(document.getElementById("txtKeywords").value);
             window.open(url, "_self", "", "");
         }
     }
@@ -113,7 +113,7 @@
             // endcode
             q = Url.encode(q);
             
-                var urltto = "Search.aspx?SearchValue=" + q;
+                var urltto = "WebSearch.aspx?s_searchvalue=" + q;
                 window.open(urltto, "_self", "", "");   
             
             event.keyCode = 0;

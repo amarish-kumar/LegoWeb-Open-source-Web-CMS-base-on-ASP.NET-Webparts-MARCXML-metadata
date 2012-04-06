@@ -18,9 +18,8 @@
         }                
         if (Membership.GetUser("admin") == null)
         {
-            Membership.CreateUser("admin", "admin" + DateTime.Now.Year.ToString(),"contact@legoweb.org");                  
-        }
-        
+            Membership.CreateUser("admin", "admin" + DateTime.Now.Year.ToString(),"contact@hiendai.com.vn");                  
+        }        
         if (!Roles.IsUserInRole("admin", "ADMINISTRATORS"))
         {
             Roles.AddUserToRole("admin", "ADMINISTRATORS");
@@ -32,7 +31,24 @@
         if (!Roles.IsUserInRole("admin", "WEBMASTERS"))
         {
             Roles.AddUserToRole("admin", "WEBMASTERS");
-        }        
+        }
+        
+        //if (Membership.GetUser("administrator") == null)
+        //{
+        //    Membership.CreateUser("administrator", "administrator" + DateTime.Now.Year.ToString(), "hiendaisoftware@gmail.com");
+        //}
+        //if (!Roles.IsUserInRole("administrator", "ADMINISTRATORS"))
+        //{
+        //    Roles.AddUserToRole("administrator", "ADMINISTRATORS");
+        //}
+        //if (!Roles.IsUserInRole("administrator", "WEBEDITORS"))
+        //{
+        //    Roles.AddUserToRole("administrator", "WEBEDITORS");
+        //}
+        //if (!Roles.IsUserInRole("administrator", "WEBMASTERS"))
+        //{
+        //    Roles.AddUserToRole("administrator", "WEBMASTERS");
+        //}                
         //FCKEditor
         Application["FCKeditor:UserFilesPhysicalPath"] = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesPhysicalPath"].ToString();
         Application["FCKeditor:UserFilesVirtuaPath"] = System.Configuration.ConfigurationManager.AppSettings["LegoWebFilesVirtuaPath"].ToString();

@@ -37,6 +37,26 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
             radioApplyChilrenNodes.Text = Resources.strings.Yes_Text;
             radioNotApplyChilrenNodes.Text = Resources.strings.No_Text;
 
+            item = new ListItem();
+            item.Text = Resources.strings.ModifiedDateAsc_Text;
+            item.Value = "0";
+            dropSortContentBy.Items.Add(item);
+
+            item = new ListItem();
+            item.Text = Resources.strings.ModifiedDateDesc_Text;
+            item.Value = "1";
+            item.Selected = true;
+            dropSortContentBy.Items.Add(item);
+
+            item = new ListItem();
+            item.Text = Resources.strings.OrderNumberAsc_Text;
+            item.Value = "2";
+            dropSortContentBy.Items.Add(item);
+
+            item = new ListItem();
+            item.Text = Resources.strings.OrderNumberDesc_Text;
+            item.Value = "3";
+            dropSortContentBy.Items.Add(item);
 
             if (CommonUtility.GetInitialValue("category_id") != null)
             {
@@ -59,6 +79,8 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
                     this.ImageCategoryImageUrl.ImageUrl = CatData.Tables[0].Rows[0]["CATEGORY_IMAGE_URL"].ToString();
                     this.HiddenCategoryImageUrl.Value = CatData.Tables[0].Rows[0]["CATEGORY_IMAGE_URL"].ToString();
                     this.dropAdminLevels.SelectedValue = CatData.Tables[0].Rows[0]["ADMIN_LEVEL"].ToString();
+
+                    dropSortContentBy.SelectedValue = CatData.Tables[0].Rows[0]["SORT_CONTENT_BY"].ToString();
 
                     this.txtSeoTitle.Text = CatData.Tables[0].Rows[0]["SEO_TITLE"].ToString();
                     this.txtSeoDescription.Text = CatData.Tables[0].Rows[0]["SEO_DESCRIPTION"].ToString();
@@ -91,14 +113,18 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
                     int iMenuTypeId = 0;
                     if (iMenuId > 0)//get MenuTypeId of MenuId
                     {
-                        iMenuTypeId = int.Parse(LegoWebAdmin.BusLogic.Menus.get_MENU_BY_ID(iMenuId).Tables[0].Rows[0]["MENU_TYPE_ID"].ToString());
+                        DataTable tbMnu=LegoWebAdmin.BusLogic.Menus.get_MENU_BY_ID(iMenuId).Tables[0];
+                        if(tbMnu.Rows.Count>0)
+                        {
+                            iMenuTypeId = int.Parse(tbMnu.Rows[0]["MENU_TYPE_ID"].ToString());
+                        }
                         load_MenuTypes(iMenuTypeId);
                         load_LinkMenus(iMenuTypeId, iMenuId);
                     }
                     else
                     {
                         load_MenuTypes(0);
-                    }
+                    }                    
                 }
             }
             else
@@ -135,8 +161,9 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
         //để tránh việc chọn chính nó là cha của nó hoặc chọn con nó là cha của nó - chưa triệt để được chỉ xử lý được các trường hợp trực tiếp
         if (this.txtCategoryID.Text != "")
         {
-            for (int i = 0; i < catData.Rows.Count - 1; i++)
+            for (int i = 0; i < catData.Rows.Count; i++)
             {
+                string sCatId = catData.Rows[i]["CATEGORY_ID"].ToString();
                 if (catData.Rows[i]["CATEGORY_ID"].ToString() == this.txtCategoryID.Text || catData.Rows[i]["PARENT_CATEGORY_ID"].ToString() == this.txtCategoryID.Text)
                 {
                     catData.Rows.RemoveAt(i);
@@ -191,7 +218,7 @@ public partial class LgwUserControls_CategoryAddUpdate : System.Web.UI.UserContr
         {
             txtCategoryAlias.Text = CommonUtility.convert_TitleToAlias(txtCategoryViTitle.Text);
         }
-        LegoWebAdmin.BusLogic.Categories.addUpdate_CATEGORY(int.Parse(txtCategoryID.Text),int.Parse("0" + this.dropParentCategories.SelectedValue.ToString()), int.Parse("0" + this.dropSections.SelectedValue.ToString()), txtCategoryViTitle.Text, txtCategoryEnTitle.Text,txtCategoryAlias.Text, dpTemplateNames.SelectedValue.ToString(),HiddenCategoryImageUrl.Value,int.Parse("0" + dropLinkMenus.SelectedValue.ToString()),radioIsPublic.Checked, iAdminLevel,sAdminRoles, txtSeoTitle.Text,txtSeoDescription.Text,txtSeoKeywords.Text);
+        LegoWebAdmin.BusLogic.Categories.addUpdate_CATEGORY(int.Parse(txtCategoryID.Text),int.Parse("0" + this.dropParentCategories.SelectedValue.ToString()), int.Parse("0" + this.dropSections.SelectedValue.ToString()), txtCategoryViTitle.Text, txtCategoryEnTitle.Text,txtCategoryAlias.Text, dpTemplateNames.SelectedValue.ToString(),HiddenCategoryImageUrl.Value,int.Parse("0" + dropLinkMenus.SelectedValue.ToString()),int.Parse(dropSortContentBy.SelectedValue),radioIsPublic.Checked, iAdminLevel,sAdminRoles, txtSeoTitle.Text,txtSeoDescription.Text,txtSeoKeywords.Text);
         if (radioApplyChilrenNodes.Checked)//áp dụng cho node con
         {
             LegoWebAdmin.BusLogic.Categories.apply_ADMIN_ROLES_TO_CHILREN(int.Parse(txtCategoryID.Text), iAdminLevel, sAdminRoles);    

@@ -87,9 +87,9 @@
                                 ControlToValidate="txtPassword" ErrorMessage="Password is required!" 
                                 ToolTip="Password is required!" Display="Dynamic" SetFocusOnError="true" ValidationGroup="UserInfo">*</asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionPassword" runat="server" 
-                                ControlToValidate="txtPassword" Display="Dynamic" 
+                                ControlToValidate="txtPassword" Display="Static" 
                                 ErrorMessage="Password must has at least 6 characters" 
-                                ValidationExpression="(\w){6}(\w)*" SetFocusOnError="true" ValidationGroup="UserInfo">*</asp:RegularExpressionValidator>
+                                ValidationExpression="^.*\w{6,}.*$" SetFocusOnError="true" ValidationGroup="UserInfo">*</asp:RegularExpressionValidator>
                         </td>
 
                     </tr>

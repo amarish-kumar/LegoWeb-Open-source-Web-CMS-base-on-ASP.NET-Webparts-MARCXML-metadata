@@ -6,8 +6,8 @@
 
                                 <img alt="" src="http://vnexpress.net/Images/search.gif" style="float:left"/>
 
-<%--                                <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
-                                    <ContentTemplate>--%>
+                                <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
+                                    <ContentTemplate>
                                         <asp:DropDownList ID="dropCities" runat="server" AutoPostBack="True" 
                                             OnSelectedIndexChanged="dropCities_SelectedIndexChanged" Font-Names="Tahoma" 
                                             Font-Size="11px" Width="112px" Height="22px">
